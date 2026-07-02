@@ -14,7 +14,7 @@ import tailwind from '@astrojs/tailwind';
 //          base: '/'                (or delete the `base` line entirely)
 // ─────────────────────────────────────────────────────────────────────────────
 
-const GITHUB_USERNAME = 'YOUR_USERNAME'; // TODO: change me
+const GITHUB_USERNAME = 'TubeStorm';
 const REPO_NAME = 'favour-ai-product-portfolio';
 
 export default defineConfig({
