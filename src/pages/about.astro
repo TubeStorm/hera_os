@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import Button from '../components/Button.astro';
+import { capabilities, site } from '../data/site';
+---
+
+<BaseLayout title="About" description="About Favour Diokpo — AI product systems designer.">
+  <section class="section">
+    <div class="container-page grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+      <div class="reveal">
+        <p class="eyebrow mb-5">About</p>
+        <h1 class="text-h1 font-semibold tracking-tight">
+          I design the parts of AI products people are supposed to trust.
+        </h1>
+        <div class="prose-hera mt-6">
+          <p>
+            I&rsquo;m {site.name}, a UX and product systems designer. My work sits where AI behavior meets
+            human understanding — <strong>agentic AI UX, workflow automation, and internal tools</strong>.
+          </p>
+          <p>
+            I&rsquo;m most useful when a product is powerful but fragile: agents that act invisibly,
+            permissions that interrupt, memory and files that quietly disappear. I turn that mess into
+            <strong>interfaces people can read, control, and rely on</strong>.
+          </p>
+          <p>
+            Before AI-native software, I spent years inside enterprise internal tools — planning,
+            staffing, and governance systems used by more than a thousand people. That taught me how to
+            make dense, high-stakes software feel calm and trustworthy. I bring the same discipline to
+            AI.
+          </p>
+        </div>
+
+        <div class="mt-9 flex flex-wrap gap-3">
+          <Button href="work/" variant="primary">See my work</Button>
+          <Button href="contact/" variant="ghost">Get in touch</Button>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:80ms">
+        <ImagePlaceholder label="Portrait — Favour Diokpo" ratio="tall" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section class="section border-t border-line">
+    <div class="container-page">
+      <p class="eyebrow reveal mb-4">How I think</p>
+      <h2 class="reveal text-h2 font-semibold tracking-tight">A few things I believe about AI UX.</h2>
+      <div class="mt-10 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        {
+          capabilities.map((c, i) => (
+            <div class="reveal bg-[color:var(--surface)] p-7" style={`transition-delay:${i * 40}ms`}>
+              <h3 class="text-base font-semibold tracking-tight">{c.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{c.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

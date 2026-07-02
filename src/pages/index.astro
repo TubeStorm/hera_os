@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ImagePlaceholder from '../components/ImagePlaceholder.astro';
+import Button from '../components/Button.astro';
+import { projects, capabilities, howIWork } from '../data/site';
+---
+
+<BaseLayout>
+  <Hero />
+
+  <!-- Selected work -->
+  <section id="work" class="section border-t border-line">
+    <div class="container-page">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <SectionHeader
+          eyebrow="Selected work"
+          title="Systems, not screens."
+          description="Two deep case studies on making complex, AI-driven and enterprise software understandable at scale."
+        />
+        <Button href="work/" variant="ghost" class="reveal">All work</Button>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {projects.map((p, i) => <ProjectCard project={p} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- What I design -->
+  <section class="section border-t border-line">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="What I design"
+        title="Six things I get called in for."
+        description="The recurring problems where messy AI and enterprise behavior needs to become something a person can actually hold."
+      />
+      <div class="mt-12 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        {
+          capabilities.map((c, i) => (
+            <div class="reveal bg-[color:var(--surface)] p-7" style={`transition-delay:${i * 50}ms`}>
+              <div class="mb-4 grid h-9 w-9 place-items-center rounded-lg border border-line text-sm font-semibold text-muted">
+                {String(i + 1).padStart(2, '0')}
+              </div>
+              <h3 class="text-base font-semibold tracking-tight">{c.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{c.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- HERA preview -->
+  <section class="section border-t border-line">
+    <div class="container-page grid items-center gap-12 lg:grid-cols-2">
+      <div class="reveal">
+        <p class="eyebrow mb-5">Case study — HERA OS</p>
+        <h2 class="text-h2 font-semibold tracking-tight">
+          Making AI work feel visible, controllable, and understandable.
+        </h2>
+        <p class="mt-5 text-lead text-muted">
+          HERA is an AI-native workspace for non-technical builders. I designed the systems that keep
+          agents legible — memory, files, tasks, permissions, and a global assistant that never leaves
+          users guessing what just happened.
+        </p>
+        <ul class="mt-7 space-y-3 text-sm text-muted">
+          {['Global assistant + room workspaces', 'Memory blocks & file-aware chat', 'Visible, reversible agent actions'].map((item) => (
+            <li class="flex items-center gap-3">
+              <span class="grid h-5 w-5 place-items-center rounded-full border border-line text-[color:var(--accent)]">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <div class="mt-8">
+          <Button href="work/hera/" variant="primary">Read the HERA case study</Button>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:80ms">
+        <ImagePlaceholder label="HERA — Global Iris + Life OS" ratio="tall" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise preview -->
+  <section class="section border-t border-line">
+    <div class="container-page grid items-center gap-12 lg:grid-cols-2">
+      <div class="order-2 reveal lg:order-1" style="transition-delay:80ms">
+        <ImagePlaceholder label="Enterprise — planning & governance console" ratio="tall" />
+      </div>
+      <div class="order-1 reveal lg:order-2">
+        <p class="eyebrow mb-5">Case study — Enterprise tools</p>
+        <h2 class="text-h2 font-semibold tracking-tight">
+          Rebuilding trust in planning systems used by 1,000+ people.
+        </h2>
+        <p class="mt-5 text-lead text-muted">
+          Complex staffing, quota, and governance workflows had drifted into 40+ inconsistent modals.
+          I led the audit and redesign that made approvals, quotas, and performance data legible again.
+        </p>
+        <div class="mt-8">
+          <Button href="work/enterprise-tools/" variant="primary">Read the enterprise case study</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How I work -->
+  <section class="section border-t border-line">
+    <div class="container-page">
+      <SectionHeader eyebrow="How I work" title="Quiet process, hard-to-break results." />
+      <div class="mt-12 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        {
+          howIWork.map((s, i) => (
+            <div class="reveal flex flex-col bg-[color:var(--surface)] p-7" style={`transition-delay:${i * 50}ms`}>
+              <span class="text-sm font-semibold text-[color:var(--accent)]">{s.n}</span>
+              <h3 class="mt-3 text-base font-semibold tracking-tight">{s.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="section border-t border-line">
+    <div class="container-page">
+      <div
+        class="reveal relative overflow-hidden rounded-card border border-line px-8 py-16 text-center sm:px-16 sm:py-24"
+        style="background: radial-gradient(80% 120% at 50% 0%, color-mix(in srgb, var(--accent) 9%, var(--surface)) 0%, var(--surface) 70%);"
+      >
+        <p class="eyebrow mx-auto mb-6 w-fit">Let&rsquo;s talk</p>
+        <h2 class="mx-auto max-w-3xl text-h1 font-semibold tracking-tight">
+          Have an AI product that&rsquo;s powerful but hard to trust?
+        </h2>
+        <p class="mx-auto mt-5 max-w-xl text-lead text-muted">
+          That&rsquo;s exactly the work I do. Let&rsquo;s make it visible, controllable, and usable.
+        </p>
+        <div class="mt-9 flex flex-wrap justify-center gap-3">
+          <Button href="contact/" variant="primary">Start a conversation</Button>
+          <Button href="about/" variant="ghost">More about me</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

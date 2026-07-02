@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   Design tokens — Apple-crisp / Linear-clean systems portfolio.
+   Light by default, tasteful dark via prefers-color-scheme.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --paper: #fbfbf9; /* page background, off-white */
+  --surface: #ffffff; /* raised cards */
+  --ink: #0b0b0c; /* primary text */
+  --muted: #62636a; /* secondary text */
+  --faint: #9a9ba2; /* tertiary / captions */
+  --line: #e7e7e1; /* hairline borders */
+  --accent: #2563eb; /* used sparingly, never as fill floods */
+  --accent-soft: #eef2ff;
+
+  --shadow-card: 0 1px 2px rgba(11, 11, 12, 0.04), 0 12px 30px -18px rgba(11, 11, 12, 0.16);
+  --shadow-lift: 0 1px 2px rgba(11, 11, 12, 0.05), 0 26px 50px -24px rgba(11, 11, 12, 0.22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #08080a;
+    --surface: #101013;
+    --ink: #f4f4f2;
+    --muted: #a2a3ab;
+    --faint: #6d6e77;
+    --line: #24242a;
+    --accent: #6f9bff;
+    --accent-soft: #14203a;
+
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.5), 0 16px 40px -20px rgba(0, 0, 0, 0.7);
+    --shadow-lift: 0 1px 2px rgba(0, 0, 0, 0.6), 0 30px 60px -24px rgba(0, 0, 0, 0.8);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* Layout ------------------------------------------------------ */
+  .container-page {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8;
+  }
+  .container-prose {
+    @apply mx-auto w-full max-w-prose px-6 sm:px-8;
+  }
+  .section {
+    @apply py-20 sm:py-28;
+  }
+
+  /* Eyebrow / small caps label --------------------------------- */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.14em] text-muted;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply inline-block h-1.5 w-1.5 rounded-full;
+    background: var(--accent);
+  }
+
+  /* Buttons ---------------------------------------------------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill px-5 py-2.5 text-sm font-medium transition duration-300 ease-smooth;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lift);
+  }
+  .btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: var(--ink);
+  }
+
+  /* Card ------------------------------------------------------- */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    @apply rounded-card;
+  }
+  .card-hover {
+    @apply transition duration-500 ease-smooth;
+  }
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+    border-color: color-mix(in srgb, var(--ink) 22%, var(--line));
+  }
+
+  /* Stat chip -------------------------------------------------- */
+  .chip {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    @apply inline-flex items-center gap-2 rounded-pill px-3.5 py-1.5 text-sm text-muted;
+  }
+
+  /* Hairline divider ------------------------------------------- */
+  .hairline {
+    border-color: var(--line);
+  }
+
+  /* Prose (case-study / resume body) --------------------------- */
+  .prose-hera {
+    @apply text-[1.02rem] leading-relaxed text-muted;
+  }
+  .prose-hera p {
+    @apply mb-5;
+  }
+  .prose-hera strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .prose-hera ul {
+    @apply mb-5 space-y-2.5;
+  }
+  .prose-hera li {
+    @apply relative pl-5;
+  }
+  .prose-hera li::before {
+    content: '';
+    @apply absolute left-0 top-[0.62em] h-1.5 w-1.5 rounded-full;
+    background: var(--accent);
+  }
+}
+
+/* Scroll-reveal motion -------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-rise {
+    animation: none !important;
+  }
+}

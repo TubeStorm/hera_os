@@ -1,0 +1,51 @@
+---
+import { site, nav, withBase } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-8 border-t border-line">
+  <div class="container-page py-16">
+    <div class="flex flex-col justify-between gap-10 md:flex-row">
+      <div class="max-w-sm">
+        <p class="text-h3 font-semibold tracking-tight">{site.tagline}</p>
+        <p class="mt-3 text-sm text-muted">{site.location}</p>
+        <a
+          href={`mailto:${site.email}`}
+          class="mt-4 inline-block text-sm text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
+        >
+          {site.email}
+        </a>
+      </div>
+
+      <div class="flex gap-16">
+        <div>
+          <p class="eyebrow mb-4">Pages</p>
+          <ul class="space-y-2.5 text-sm text-muted">
+            {nav.map((item) => (
+              <li>
+                <a href={withBase(item.href)} class="transition-colors hover:text-ink">{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p class="eyebrow mb-4">Elsewhere</p>
+          <ul class="space-y-2.5 text-sm text-muted">
+            {site.socials.map((s) => (
+              <li>
+                <a href={s.href} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-ink">
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col items-start justify-between gap-3 border-t border-line pt-6 text-xs text-faint sm:flex-row sm:items-center">
+      <p>© {year} {site.name}. All rights reserved.</p>
+      <p>{site.role}</p>
+    </div>
+  </div>
+</footer>

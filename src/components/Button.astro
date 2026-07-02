@@ -1,0 +1,23 @@
+---
+import { withBase } from '../data/site';
+
+interface Props {
+  href: string;
+  variant?: 'primary' | 'ghost';
+  external?: boolean;
+  download?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'primary', external = false, download = false, class: cls = '' } = Astro.props;
+const resolved = external || href.startsWith('http') || href.startsWith('mailto:') ? href : withBase(href);
+---
+
+<a
+  href={resolved}
+  class:list={['btn', variant === 'primary' ? 'btn-primary' : 'btn-ghost', cls]}
+  {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+  {...download ? { download: '' } : {}}
+>
+  <slot />
+</a>

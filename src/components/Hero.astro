@@ -1,0 +1,42 @@
+---
+import { site } from '../data/site';
+import Button from './Button.astro';
+---
+
+<section class="relative overflow-hidden">
+  <!-- soft ambient wash, restrained -->
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px]"
+    style="background: radial-gradient(60% 60% at 50% -10%, color-mix(in srgb, var(--accent) 10%, transparent) 0%, transparent 70%);"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-page pb-16 pt-20 sm:pb-24 sm:pt-28">
+    <p class="eyebrow animate-rise">{site.role}</p>
+
+    <h1 class="mt-6 max-w-4xl text-display font-semibold text-ink animate-rise" style="animation-delay:60ms">
+      {site.tagline}
+    </h1>
+
+    <p class="mt-7 max-w-2xl text-lead text-muted animate-rise" style="animation-delay:120ms">
+      I&rsquo;m a UX / product systems designer focused on agentic AI, workflow automation, and internal
+      tools. I turn messy AI behavior — permissions, memory, files, tasks, and user intent — into
+      interfaces people can understand.
+    </p>
+
+    <div class="mt-9 flex flex-wrap items-center gap-3 animate-rise" style="animation-delay:180ms">
+      <Button href="work/" variant="primary">View work</Button>
+      <Button href={site.resumePdf} variant="ghost" download>Download resume</Button>
+    </div>
+
+    <div class="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-faint animate-rise" style="animation-delay:240ms">
+      {site.roles.map((r) => (
+        <span class="inline-flex items-center gap-2">
+          <span class="h-1 w-1 rounded-full bg-[color:var(--faint)]"></span>
+          {r}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>

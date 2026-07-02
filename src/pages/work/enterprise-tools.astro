@@ -1,0 +1,138 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
+import StatChip from '../../components/StatChip.astro';
+import Callout from '../../components/Callout.astro';
+
+const meta = [
+  { label: 'Role', value: 'UX designer — internal tools' },
+  { label: 'Context', value: 'Ubisoft' },
+  { label: 'Timeline', value: '2021 — 2024' },
+  { label: 'Scale', value: '1,000+ users' },
+];
+---
+
+<CaseStudyLayout
+  title="Enterprise Internal Tools"
+  eyebrow="Case study — Enterprise tools"
+  heading="Enterprise Internal Tools — Rebuilding trust in complex planning systems"
+  subtitle="Planning, staffing, and governance tools used by 1,000+ people had drifted into inconsistency. I led the audit and redesign that made approvals, quotas, and performance data legible again."
+  heroLabel="Enterprise — planning & governance console"
+  meta={meta}
+  seoDescription="Enterprise internal tools case study — rebuilding trust in planning, staffing, and governance workflows used by 1,000+ people."
+>
+  <section class="reveal">
+    <h2 class="text-h2 font-semibold tracking-tight">Context</h2>
+    <div class="prose-hera mt-4">
+      <p>
+        At <strong>Ubisoft</strong>, planning and staffing decisions ran through internal tools used by
+        more than <strong>1,000 people</strong> across production. Over years of incremental additions,
+        the surfaces had fragmented — dozens of one-off modals, inconsistent approval flows, and quota
+        rules that were hard to see and easy to misread.
+      </p>
+    </div>
+  </section>
+
+  <section class="reveal mt-8">
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <StatChip value="1,000+" label="Users across teams" />
+      <StatChip value="40+" label="Modals audited" />
+      <StatChip value="1" label="Coherent system" />
+      <StatChip value="3" label="Workflow domains" />
+    </div>
+  </section>
+
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">Problem</h2>
+    <div class="prose-hera mt-4">
+      <p>
+        The tools worked, but people didn&rsquo;t trust them. Approvals felt opaque, quota visibility
+        was buried, and performance-aware data was scattered across surfaces that behaved differently.
+        When a system that governs staffing feels unpredictable, people route around it — and
+        governance quietly breaks.
+      </p>
+    </div>
+  </section>
+
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">My role</h2>
+    <div class="prose-hera mt-4">
+      <p>
+        <strong>UX designer for internal tools</strong>, leading the audit and redesign in partnership
+        with product, engineering, and operations. I owned the research, the systemization, and the
+        governance/workflow improvements — from messy inventory to a coherent interaction model.
+      </p>
+    </div>
+  </section>
+
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">Research</h2>
+    <div class="prose-hera mt-4">
+      <ul>
+        <li>Inventoried and mapped <strong>40+ modals</strong> to expose duplication and inconsistency.</li>
+        <li>Traced real approval and quota workflows to find where trust broke down.</li>
+        <li>Interviewed cross-functional users to separate policy problems from interface problems.</li>
+      </ul>
+    </div>
+    <div class="mt-8">
+      <ImagePlaceholder label="Enterprise — 40+ modal audit map" ratio="video" />
+    </div>
+  </section>
+
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">Design systems & process</h2>
+    <div class="prose-hera mt-4">
+      <ul>
+        <li>Consolidated one-off modals into consistent, reusable patterns.</li>
+        <li>Made quota visibility a first-class part of the interface, not a buried number.</li>
+        <li>Designed approval flows with clear status, ownership, and next steps.</li>
+        <li>Built performance-aware data interfaces that stayed readable under real density.</li>
+      </ul>
+    </div>
+    <div class="mt-8">
+      <Callout kind="quote">
+        In enterprise tools, trust is a feature. If people can&rsquo;t see why a decision happened,
+        they stop believing the system.
+      </Callout>
+    </div>
+  </section>
+
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">Governance & workflow improvements</h2>
+    <div class="prose-hera mt-4">
+      <p>
+        By aligning the interface with how governance actually needed to work, approvals became
+        traceable, quotas became visible at the point of decision, and the same rules read the same way
+        everywhere. Cross-functional alignment turned a pile of modals into a system people could
+        reason about.
+      </p>
+    </div>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2">
+      <ImagePlaceholder label="Enterprise — approval flow" ratio="video" />
+      <ImagePlaceholder label="Enterprise — quota visibility" ratio="video" />
+    </div>
+  </section>
+
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">Impact</h2>
+    <div class="prose-hera mt-4">
+      <ul>
+        <li>A fragmented tool set became one coherent, trustworthy system.</li>
+        <li>Approval and quota workflows became legible to the people who depend on them.</li>
+        <li>Consistency reduced confusion and the workarounds that erode governance.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">What this demonstrates</h2>
+    <div class="prose-hera mt-4">
+      <ul>
+        <li>Taming complex, high-stakes enterprise UX at real scale.</li>
+        <li>Systemizing chaos — turning 40+ modals into one coherent model.</li>
+        <li>Designing for governance, approvals, and performance-aware data.</li>
+        <li>Driving cross-functional alignment across product, engineering, and operations.</li>
+      </ul>
+    </div>
+  </section>
+</CaseStudyLayout>

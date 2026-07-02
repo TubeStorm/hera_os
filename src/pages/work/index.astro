@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/site';
+---
+
+<BaseLayout
+  title="Work"
+  description="Selected case studies by Favour Diokpo — agentic AI UX and enterprise internal tools."
+>
+  <section class="section">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Work"
+        title="Case studies in making complex software legible."
+        description="Redacted, honest case studies focused on the systems and hard UX problems — not vanity screenshots."
+      />
+
+      <div class="mt-14 grid gap-6 md:grid-cols-2">
+        {projects.map((p, i) => <ProjectCard project={p} index={i} />)}
+      </div>
+
+      <div class="reveal mt-16 rounded-card border border-dashed border-line p-8 text-center">
+        <p class="text-sm text-muted">
+          More work available on request — including internal tools and workflow explorations under NDA.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

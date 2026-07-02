@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import { resume, site } from '../data/site';
+---
+
+<BaseLayout title="Resume" description={resume.headline}>
+  <section class="section">
+    <div class="container-prose">
+      <!-- Header -->
+      <div class="reveal flex flex-col gap-6 border-b border-line pb-10 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="eyebrow mb-4">Resume</p>
+          <h1 class="text-h1 font-semibold tracking-tight">{site.name}</h1>
+          <p class="mt-3 text-lead text-muted">{resume.headline}</p>
+        </div>
+        <Button href={site.resumePdf} variant="primary" download class="shrink-0">Download PDF</Button>
+      </div>
+
+      <!-- Summary -->
+      <section class="reveal mt-12">
+        <h2 class="text-xs uppercase tracking-[0.14em] text-faint">Summary</h2>
+        <p class="prose-hera mt-4">{resume.summary}</p>
+      </section>
+
+      <!-- Experience -->
+      <section class="reveal mt-12">
+        <h2 class="text-xs uppercase tracking-[0.14em] text-faint">Experience</h2>
+        <div class="mt-6 space-y-8">
+          {
+            resume.experience.map((job) => (
+              <div class="border-t border-line pt-6">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="text-h3 font-semibold tracking-tight">{job.role}</h3>
+                  <span class="text-sm text-faint">{job.period}</span>
+                </div>
+                <p class="mt-1 text-sm font-medium text-[color:var(--accent)]">{job.org}</p>
+                <ul class="prose-hera mt-4">
+                  {job.points.map((pt) => <li>{pt}</li>)}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Selected projects -->
+      <section class="reveal mt-12">
+        <h2 class="text-xs uppercase tracking-[0.14em] text-faint">Selected projects</h2>
+        <ul class="prose-hera mt-4">
+          {resume.selectedProjects.map((p) => <li>{p}</li>)}
+        </ul>
+      </section>
+
+      <!-- Skills -->
+      <section class="reveal mt-12">
+        <h2 class="text-xs uppercase tracking-[0.14em] text-faint">Skills</h2>
+        <div class="mt-4 flex flex-wrap gap-2">
+          {resume.skills.map((s) => <span class="chip">{s}</span>)}
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="reveal mt-12">
+        <h2 class="text-xs uppercase tracking-[0.14em] text-faint">Education</h2>
+        <div class="mt-4 space-y-3">
+          {
+            resume.education.map((e) => (
+              <div class="flex flex-wrap items-baseline justify-between gap-2 border-t border-line pt-3">
+                <p class="text-sm font-medium text-ink">{e.title}</p>
+                <span class="text-sm text-faint">{e.org} {e.period}</span>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <div class="reveal mt-14 rounded-card border border-dashed border-line p-6 text-center text-sm text-muted">
+        Prefer the PDF? <a href={site.resumePdf} class="text-ink underline decoration-line underline-offset-4 hover:decoration-ink">Download the full resume</a>.
+      </div>
+    </div>
+  </section>
+</BaseLayout>
