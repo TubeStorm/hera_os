@@ -5,8 +5,10 @@ Built with **Astro + TypeScript + Tailwind CSS**, deployed free to **GitHub Page
 
 > Core message: *"I make AI systems easier to trust, control, and actually use."*
 
-- **Live URL (after deploy):** `https://YOUR_USERNAME.github.io/favour-ai-product-portfolio/`
+- **Live URL (after deploy):** `https://TubeStorm.github.io/favour-ai-product-portfolio/`
 - **Design blueprint:** see [`DESIGN.md`](./DESIGN.md)
+- **Revision audit:** see [`docs/portfolio/PORTFOLIO_REVISION_AUDIT.md`](./docs/portfolio/PORTFOLIO_REVISION_AUDIT.md)
+- **Assets still needed:** see [`ASSETS_NEEDED.md`](./ASSETS_NEEDED.md)
 
 ---
 
@@ -40,18 +42,19 @@ npm run check    # (optional) Astro + TypeScript diagnostics
 
 ## ⚙️ Required setup before deploying
 
-### 1. Set your GitHub username
+### 1. GitHub username — already set
 
-Open [`astro.config.mjs`](./astro.config.mjs) and replace `YOUR_USERNAME`:
+[`astro.config.mjs`](./astro.config.mjs) is configured with the real username:
 
 ```js
-const GITHUB_USERNAME = 'YOUR_USERNAME'; // TODO: change me
+const GITHUB_USERNAME = 'TubeStorm';
+const REPO_NAME = 'favour-ai-product-portfolio';
 ```
 
-- **Project repo** (default): keep `REPO_NAME = 'favour-ai-product-portfolio'`.
-  Site publishes to `https://YOUR_USERNAME.github.io/favour-ai-product-portfolio/`.
-- **User site** (cleaner URL): rename the repo to `YOUR_USERNAME.github.io`, then set
-  `site: 'https://YOUR_USERNAME.github.io'` and `base: '/'` (or remove the `base` line).
+- **Project repo** (default): site publishes to
+  `https://TubeStorm.github.io/favour-ai-product-portfolio/`.
+- **User site** (cleaner URL): rename the repo to `TubeStorm.github.io`, then set
+  `site: 'https://TubeStorm.github.io'` and `base: '/'` (or remove the `base` line).
 
 ### 2. Enable GitHub Pages via Actions
 
@@ -75,10 +78,10 @@ Uses: `actions/checkout`, `actions/setup-node`, `actions/configure-pages`,
 ### First-time publish (exact steps)
 
 1. Create the repo and push (see **Create the GitHub repo** below).
-2. Edit `astro.config.mjs` → set `GITHUB_USERNAME`. Commit + push.
+2. `astro.config.mjs` already targets `TubeStorm` — no edit needed unless the username changes.
 3. GitHub → **Settings → Pages → Source → GitHub Actions**.
 4. Wait for the **Deploy to GitHub Pages** workflow (Actions tab) to finish green.
-5. Visit `https://YOUR_USERNAME.github.io/favour-ai-product-portfolio/`.
+5. Visit `https://TubeStorm.github.io/favour-ai-product-portfolio/`.
 
 ---
 
@@ -103,7 +106,7 @@ gh repo create favour-ai-product-portfolio --public --source=. --remote=origin -
    git add .
    git commit -m "Initial commit: portfolio site"
    git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/favour-ai-product-portfolio.git
+   git remote add origin https://github.com/TubeStorm/favour-ai-product-portfolio.git
    git push -u origin main
    ```
 3. Then follow **First-time publish** above.
@@ -114,48 +117,64 @@ gh repo create favour-ai-product-portfolio --public --source=. --remote=origin -
 
 | What | Where |
 |------|-------|
-| Name, role, tagline, email, socials | [`src/data/site.ts`](./src/data/site.ts) → `site` |
+| Name, role, tagline, location | [`src/data/site.ts`](./src/data/site.ts) → `site` |
+| Contact links (GitHub / email / LinkedIn) + `confirmed` gating | `src/data/site.ts` → `contact` |
+| Resume PDF availability flag | `src/data/site.ts` → `resumeAsset` |
 | Nav links | `src/data/site.ts` → `nav` |
-| Project cards + case-study meta | `src/data/site.ts` → `projects` |
+| Project cards (category, status, problem/designed/proves) | `src/data/site.ts` → `projects` |
+| Homepage "Why me" proof strip | `src/data/site.ts` → `strengths` |
 | "What I design" / "How I work" | `src/data/site.ts` → `capabilities`, `howIWork` |
-| Resume content | `src/data/site.ts` → `resume` |
+| About "How I think" grid | `src/data/site.ts` → `principles` |
+| Resume content (grouped skills + tools) | `src/data/site.ts` → `resume` |
 | HERA case study | [`src/pages/work/hera.astro`](./src/pages/work/hera.astro) |
 | Enterprise case study | [`src/pages/work/enterprise-tools.astro`](./src/pages/work/enterprise-tools.astro) |
+| Designed diagrams / visuals | [`src/components/diagrams/`](./src/components/diagrams/) + [`src/components/figure/Figure.astro`](./src/components/figure/Figure.astro) |
 | Colors / type / spacing | [`src/styles/global.css`](./src/styles/global.css) + [`tailwind.config.mjs`](./tailwind.config.mjs) |
+
+### Contact links (no fake links ship)
+
+Each link in `contact` (in `src/data/site.ts`) has a `confirmed` flag. **Only confirmed links
+render** on the Contact page and footer. GitHub is confirmed real; email and LinkedIn are `false`
+until you set a real value and flip `confirmed: true`. See [`ASSETS_NEEDED.md`](./ASSETS_NEEDED.md).
 
 ### Add your resume PDF
 
-Drop `Favour-Diokpo-Resume.pdf` into [`public/resume/`](./public/resume/).
-Different filename? Update `resumePdf` in `src/data/site.ts`.
+1. Drop `Favour-Diokpo-Resume.pdf` into [`public/resume/`](./public/resume/).
+2. Set `resumeAsset.available = true` in `src/data/site.ts`.
 
-### Add real screenshots
+Until then the site shows a **"PDF on request"** link (no broken 404). Different filename? Update
+`resumeAsset.path`.
 
-1. Put images in `public/images/case-studies/`.
-2. Replace the `<ImagePlaceholder label="…" />` blocks in the relevant page with an `<img>`:
+### Add real screenshots (optional — diagrams already fill every slot)
+
+Every visual is a designed diagram/annotated card, so there are **no empty placeholders** to
+replace. To swap in a real screenshot:
+
+1. Put images in `public/images/hera/` or `public/images/enterprise/`.
+2. Replace the relevant `<Figure> … </Figure>` diagram block in the page with an `<img>`:
 
    ```astro
-   <img src={withBase('images/case-studies/hera-iris.png')} alt="HERA Global Iris" class="w-full rounded-card border border-line" />
+   <img src={withBase('images/hera/iris.png')} alt="HERA Global Iris" class="w-full rounded-card border border-line" />
    ```
 
    (Import `withBase` from `../data/site` so the path respects the GitHub Pages base.)
-
-### Wire up the contact form (optional)
-
-The contact form currently opens the visitor's email client (`mailto:`). For inline submission,
-point the `<form action>` at [Formspree](https://formspree.io) or [Web3Forms](https://web3forms.com)
-and remove the `enctype="text/plain"` mailto fallback in [`src/pages/contact.astro`](./src/pages/contact.astro).
+   See [`ASSETS_NEEDED.md`](./ASSETS_NEEDED.md) for the full drop-in map.
 
 ---
 
-## Content status (placeholders to replace)
+## Content status
 
-- 🔲 `astro.config.mjs` — set `GITHUB_USERNAME`.
-- 🔲 `public/resume/Favour-Diokpo-Resume.pdf` — add the real PDF.
-- 🔲 All `ImagePlaceholder` blocks — swap for real screenshots when available.
-- 🔲 `site.email` / `site.socials` in `src/data/site.ts` — set real contact + LinkedIn.
-- 🔲 `resume.education` — add real education details.
-- 🔲 Contact form handler — optional Formspree/Web3Forms wiring.
+- ✅ `astro.config.mjs` — `GITHUB_USERNAME` set to `TubeStorm`.
+- ✅ All screenshot placeholders replaced with designed diagrams / annotated cards.
+- ✅ No fake contact links (only confirmed GitHub is published).
+- ✅ No broken resume/PDF links (gated behind `resumeAsset.available`).
+- ✅ No placeholder education, no lorem ipsum.
+- 🔲 `public/resume/Favour-Diokpo-Resume.pdf` — add the real PDF, then flip `resumeAsset.available`.
+- 🔲 Portrait/headshot — add `public/images/portrait.jpg`, swap `<MonogramPortrait />` in About.
+- 🔲 `contact.email` / `contact.linkedin` in `src/data/site.ts` — set real values + `confirmed: true`.
+- 🔲 Optional: real product screenshots to sit alongside the diagrams.
 
+See [`ASSETS_NEEDED.md`](./ASSETS_NEEDED.md) for the full list and drop-in locations.
 All prose is real copy written for this portfolio — no lorem ipsum.
 
 ---

@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
-import { resume, site } from '../data/site';
+import { resume, resumeAsset, site, withBase } from '../data/site';
+
+const pdfHref = withBase(resumeAsset.path);
 ---
 
 <BaseLayout title="Resume" description={resume.headline}>
@@ -14,7 +16,13 @@ import { resume, site } from '../data/site';
           <h1 class="text-h1 font-semibold tracking-tight">{site.name}</h1>
           <p class="mt-3 text-lead text-muted">{resume.headline}</p>
         </div>
-        <Button href={site.resumePdf} variant="primary" download class="shrink-0">Download PDF</Button>
+        {
+          resumeAsset.available ? (
+            <Button href={resumeAsset.path} variant="primary" download class="shrink-0">Download PDF</Button>
+          ) : (
+            <Button href="contact/" variant="ghost" class="shrink-0">PDF on request</Button>
+          )
+        }
       </div>
 
       <!-- Summary -->
@@ -52,31 +60,75 @@ import { resume, site } from '../data/site';
         </ul>
       </section>
 
-      <!-- Skills -->
+      <!-- Skills (grouped) -->
       <section class="reveal mt-12">
         <h2 class="text-xs uppercase tracking-[0.14em] text-faint">Skills</h2>
-        <div class="mt-4 flex flex-wrap gap-2">
-          {resume.skills.map((s) => <span class="chip">{s}</span>)}
-        </div>
-      </section>
-
-      <!-- Education -->
-      <section class="reveal mt-12">
-        <h2 class="text-xs uppercase tracking-[0.14em] text-faint">Education</h2>
-        <div class="mt-4 space-y-3">
+        <div class="mt-6 grid gap-6 sm:grid-cols-3">
           {
-            resume.education.map((e) => (
-              <div class="flex flex-wrap items-baseline justify-between gap-2 border-t border-line pt-3">
-                <p class="text-sm font-medium text-ink">{e.title}</p>
-                <span class="text-sm text-faint">{e.org} {e.period}</span>
+            resume.skillGroups.map((g) => (
+              <div>
+                <h3 class="text-sm font-semibold tracking-tight text-ink">{g.group}</h3>
+                <ul class="mt-3 space-y-1.5">
+                  {g.items.map((s) => (
+                    <li class="text-sm text-muted">{s}</li>
+                  ))}
+                </ul>
               </div>
             ))
           }
         </div>
       </section>
 
+      <!-- Tools -->
+      <section class="reveal mt-12">
+        <h2 class="text-xs uppercase tracking-[0.14em] text-faint">Tools</h2>
+        <div class="mt-4 flex flex-wrap gap-2">
+          {resume.tools.map((t) => <span class="chip">{t}</span>)}
+        </div>
+      </section>
+
+      <!-- Education + Certifications -->
+      <div class="mt-12 grid gap-12 sm:grid-cols-2">
+        <section class="reveal">
+          <h2 class="text-xs uppercase tracking-[0.14em] text-faint">Education</h2>
+          <ul class="mt-6 space-y-5">
+            {
+              resume.education.map((e) => (
+                <li class="border-t border-line pt-4">
+                  <p class="text-sm font-medium text-ink">{e.school}</p>
+                  <p class="mt-1 text-sm text-faint">{e.period}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="reveal">
+          <h2 class="text-xs uppercase tracking-[0.14em] text-faint">Certifications</h2>
+          <ul class="mt-6 space-y-3">
+            {
+              resume.certifications.map((c) => (
+                <li class="flex items-start gap-3 text-sm text-muted">
+                  <span class="mt-1.5 grid h-4 w-4 shrink-0 place-items-center rounded-full border border-line text-[color:var(--accent)]">
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  </span>
+                  {c}
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+      </div>
+
+      <!-- Footer note: honest about the PDF -->
       <div class="reveal mt-14 rounded-card border border-dashed border-line p-6 text-center text-sm text-muted">
-        Prefer the PDF? <a href={site.resumePdf} class="text-ink underline decoration-line underline-offset-4 hover:decoration-ink">Download the full resume</a>.
+        {
+          resumeAsset.available ? (
+            <span>Prefer the PDF? <a href={pdfHref} download class="text-ink underline decoration-line underline-offset-4 hover:decoration-ink">Download the full resume</a>.</span>
+          ) : (
+            <span>A formatted PDF and full CV (including education) are available on request — <a href="contact/" class="text-ink underline decoration-line underline-offset-4 hover:decoration-ink">get in touch</a>.</span>
+          )
+        }
       </div>
     </div>
   </section>

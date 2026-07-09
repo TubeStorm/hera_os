@@ -2,16 +2,16 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// GitHub Pages configuration
+// GitHub Pages configuration — already set to the real account.
 //
-// TODO: Replace YOUR_USERNAME with your GitHub username before deploying.
+//   Project repo URL:
+//     https://TubeStorm.github.io/favour-ai-product-portfolio/
 //
-//   Project repo URL will be:
-//     https://YOUR_USERNAME.github.io/favour-ai-product-portfolio/
-//
-//   If you later rename the repo to `YOUR_USERNAME.github.io` (a "user site"),
-//   set:   site: 'https://YOUR_USERNAME.github.io'
+//   If the repo is later renamed to `TubeStorm.github.io` (a "user site"),
+//   set:   site: 'https://TubeStorm.github.io'
 //          base: '/'                (or delete the `base` line entirely)
+//
+//   Only change GITHUB_USERNAME below if the GitHub account changes.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const GITHUB_USERNAME = 'TubeStorm';

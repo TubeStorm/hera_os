@@ -1,0 +1,78 @@
+Skip to content
+F
+Favour Diokpo
+Work
+HERA
+Resume
+About
+Contact
+Get in touch
+
+ABOUT
+
+I’m interested in the part of AI that breaks after the demo.
+
+I’m Favour Diokpo, a product designer. The impressive part of an AI product is easy to show. I care about what comes next — context, memory, files, cost, permissions, handoff, and failure — the unglamorous layer that quietly decides whether anyone keeps using it.
+
+My thesis is simple: AI should not feel like invisible magic. It should feel like a place you can understand, enter, and direct. That belief turned into HERA — a local-first AI workspace where agents are characters in rooms, memory is readable, and every action has a receipt and a price. I designed it and I’m building it myself, which is why I can argue about backend event ledgers and sprite sheets in the same conversation.
+
+By day I’m a Senior UX Specialist at Ubisoft, working on the internal platforms studios use to plan work, request hires, and make approvals — tools at the intersection of money, people, and game development, used by more than a thousand people. That work taught me how dense, high-stakes software earns belief, and what happens when it doesn’t: people route around it.
+
+Work should not feel like wrestling with a machine. Good tools make people want to work. That’s the standard I hold my own product to.
+
+See HERA
+Get in touch
+FD
+Favour Diokpo
+Portrait coming — headshot pending
+
+HOW I THINK
+
+Six things I actually believe.
+I care about the part that breaks after the demo
+
+Context, memory, files, cost, permissions, handoff, failure. The demo is easy. The week after the demo is the product.
+
+AI should feel like a place
+
+Not invisible magic — a place you can understand, enter, and direct. In HERA that’s literal: rooms, agents at desks, work you can watch.
+
+If the system acted, show it
+
+If the AI read a file, changed a task, saved a memory, spent money, or failed, the user should be able to see it. Anything less is lying by omission.
+
+The game layer is a language
+
+Rooms show where work lives. Agents show who is acting. Logs show what changed. Play is how complicated systems explain themselves.
+
+Density can be calm
+
+Ubisoft taught me that dense, high-stakes software can still read clearly — if the hierarchy is honest and the rules are visible.
+
+Good tools make people want to work
+
+Work should not feel like wrestling with a machine. If the tool feels dead, people route around it — I’ve watched it happen at enterprise scale.
+
+I design systems that make complicated work visible.
+
+Available for select work — remote & hybrid
+
+Get in touch
+
+PAGES
+
+Work
+HERA
+Resume
+About
+Contact
+
+ELSEWHERE
+
+GitHub
+Email
+LinkedIn
+
+© 2026 Favour Diokpo. All rights reserved.
+
+Product Designer — AI systems & internal tools

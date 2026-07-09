@@ -1,7 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import Button from '../components/Button.astro';
+import Figure from '../components/figure/Figure.astro';
 
 interface MetaItem {
   label: string;
@@ -13,12 +13,12 @@ interface Props {
   eyebrow: string;
   heading: string;
   subtitle: string;
-  heroLabel: string;
+  heroCaption: string; // caption under the hero visual
   meta: MetaItem[];
   seoDescription?: string;
 }
 
-const { title, eyebrow, heading, subtitle, heroLabel, meta, seoDescription } = Astro.props;
+const { title, eyebrow, heading, subtitle, heroCaption, meta, seoDescription } = Astro.props;
 ---
 
 <BaseLayout title={title} description={seoDescription ?? subtitle}>
@@ -51,9 +51,11 @@ const { title, eyebrow, heading, subtitle, heroLabel, meta, seoDescription } = A
       </dl>
     </header>
 
-    <!-- Hero image -->
+    <!-- Hero visual (designed diagram, passed via the "hero" slot) -->
     <div class="container-page">
-      <ImagePlaceholder label={heroLabel} ratio="wide" />
+      <Figure label={heroCaption} tag="System map" ratio="wide">
+        <slot name="hero" />
+      </Figure>
     </div>
 
     <!-- Body -->

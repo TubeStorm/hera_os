@@ -1,44 +1,54 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ImagePlaceholder from '../components/ImagePlaceholder.astro';
 import Button from '../components/Button.astro';
-import { capabilities, site } from '../data/site';
+import MonogramPortrait from '../components/diagrams/MonogramPortrait.astro';
+import { principles } from '../data/site';
 ---
 
-<BaseLayout title="About" description="About Favour Diokpo — AI product systems designer.">
+<BaseLayout title="About" description="About Favour Diokpo — product designer for AI systems and internal tools.">
   <section class="section">
     <div class="container-page grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
       <div class="reveal">
         <p class="eyebrow mb-5">About</p>
         <h1 class="text-h1 font-semibold tracking-tight">
-          I design the parts of AI products people are supposed to trust.
+          I&rsquo;m interested in the part of AI that breaks after the demo.
         </h1>
         <div class="prose-hera mt-6">
           <p>
-            I&rsquo;m {site.name}, a UX and product systems designer. My work sits where AI behavior meets
-            human understanding — <strong>agentic AI UX, workflow automation, and internal tools</strong>.
+            I&rsquo;m Favour Diokpo, a product designer. The impressive part of an AI product is easy
+            to show. I care about what comes next — <strong>context, memory, files, cost, permissions,
+            handoff, and failure</strong> — the unglamorous layer that quietly decides whether anyone
+            keeps using it.
           </p>
           <p>
-            I&rsquo;m most useful when a product is powerful but fragile: agents that act invisibly,
-            permissions that interrupt, memory and files that quietly disappear. I turn that mess into
-            <strong>interfaces people can read, control, and rely on</strong>.
+            My thesis is simple: AI should not feel like invisible magic. It should feel like a place
+            you can understand, enter, and direct. That belief turned into <strong>HERA</strong> — a
+            local-first AI workspace where agents are characters in rooms, memory is readable, and
+            every action has a receipt and a price. I designed it and I&rsquo;m building it myself,
+            which is why I can argue about backend event ledgers and sprite sheets in the same
+            conversation.
           </p>
           <p>
-            Before AI-native software, I spent years inside enterprise internal tools — planning,
-            staffing, and governance systems used by more than a thousand people. That taught me how to
-            make dense, high-stakes software feel calm and trustworthy. I bring the same discipline to
-            AI.
+            By day I&rsquo;m a Senior UX Specialist at Ubisoft, working on the internal platforms
+            studios use to plan work, request hires, and make approvals — tools at the intersection of
+            <strong>money, people, and game development</strong>, used by more than a thousand people.
+            That work taught me how dense, high-stakes software earns belief, and what happens when it
+            doesn&rsquo;t: people route around it.
+          </p>
+          <p>
+            Work should not feel like wrestling with a machine. Good tools make people want to work.
+            That&rsquo;s the standard I hold my own product to.
           </p>
         </div>
 
         <div class="mt-9 flex flex-wrap gap-3">
-          <Button href="work/" variant="primary">See my work</Button>
+          <Button href="work/hera/" variant="primary">See HERA</Button>
           <Button href="contact/" variant="ghost">Get in touch</Button>
         </div>
       </div>
 
       <div class="reveal" style="transition-delay:80ms">
-        <ImagePlaceholder label="Portrait — Favour Diokpo" ratio="tall" />
+        <MonogramPortrait />
       </div>
     </div>
   </section>
@@ -47,13 +57,13 @@ import { capabilities, site } from '../data/site';
   <section class="section border-t border-line">
     <div class="container-page">
       <p class="eyebrow reveal mb-4">How I think</p>
-      <h2 class="reveal text-h2 font-semibold tracking-tight">A few things I believe about AI UX.</h2>
+      <h2 class="reveal text-h2 font-semibold tracking-tight">Six things I actually believe.</h2>
       <div class="mt-10 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
         {
-          capabilities.map((c, i) => (
+          principles.map((p, i) => (
             <div class="reveal bg-[color:var(--surface)] p-7" style={`transition-delay:${i * 40}ms`}>
-              <h3 class="text-base font-semibold tracking-tight">{c.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-muted">{c.body}</p>
+              <h3 class="text-base font-semibold tracking-tight">{p.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{p.body}</p>
             </div>
           ))
         }

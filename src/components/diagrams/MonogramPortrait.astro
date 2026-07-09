@@ -1,0 +1,30 @@
+---
+// Editorial stand-in for a headshot until a real portrait is supplied
+// (see ASSETS_NEEDED.md). A systems-motif monogram — deliberate, not a blank box.
+import { site } from '../../data/site';
+const initials = site.name
+  .split(' ')
+  .map((w) => w[0])
+  .join('')
+  .slice(0, 2)
+  .toUpperCase();
+---
+
+<div class="relative aspect-[4/5] w-full overflow-hidden rounded-card border border-line" style="background: radial-gradient(120% 120% at 30% 10%, color-mix(in srgb, var(--accent) 12%, var(--surface)) 0%, var(--surface) 60%); box-shadow: var(--shadow-card);">
+  <!-- systems grid motif -->
+  <svg class="absolute inset-0 h-full w-full opacity-[0.5]" viewBox="0 0 200 250" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+    <g stroke="var(--line)" stroke-width="1">
+      <path d="M40 60h50v40H40zM110 60h50v40h-50zM40 150h50v40H40zM110 150h50v40h-50z" />
+      <path d="M65 100v50M135 100v50M90 80h20M90 170h20" />
+    </g>
+    <g fill="var(--accent)">
+      <circle cx="65" cy="60" r="3" /><circle cx="135" cy="60" r="3" />
+      <circle cx="65" cy="190" r="3" /><circle cx="135" cy="190" r="3" />
+    </g>
+  </svg>
+  <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center">
+    <span class="grid h-16 w-16 place-items-center rounded-2xl bg-ink text-xl font-bold tracking-tight text-paper">{initials}</span>
+    <span class="text-sm font-medium text-ink">{site.name}</span>
+    <span class="rounded-pill border border-line bg-[color:var(--surface)] px-2.5 py-1 text-[11px] text-faint">Portrait coming — headshot pending</span>
+  </div>
+</div>

@@ -1,102 +1,161 @@
 ---
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
-import ImagePlaceholder from '../../components/ImagePlaceholder.astro';
 import Callout from '../../components/Callout.astro';
+import Figure from '../../components/figure/Figure.astro';
+import IrisScopeMap from '../../components/diagrams/IrisScopeMap.astro';
+import GhostBeforeAfter from '../../components/diagrams/GhostBeforeAfter.astro';
+import { withBase } from '../../data/site';
 
 const meta = [
-  { label: 'Role', value: 'Product architect & UX systems' },
-  { label: 'Type', value: 'AI-native workspace' },
+  { label: 'Role', value: 'Founder — design & build' },
+  { label: 'Type', value: 'Local-first desktop AI OS' },
   { label: 'Timeline', value: '2025 — Present' },
-  { label: 'Focus', value: 'Agentic AI UX' },
+  { label: 'Status', value: 'In development, unreleased' },
 ];
 
-const keySystems = [
-  ['Global Iris assistant', 'A persistent assistant that follows the user across the OS without hijacking the workspace.'],
-  ['Rooms / workspaces', 'Scoped spaces where work, files, and agents live together with clear boundaries.'],
-  ['Composer', 'The core input surface — messages, attachments, and agent actions in one honest flow.'],
-  ['Memory blocks', 'Human-readable memory the user can see, edit, and trust instead of a black box.'],
-  ['Life OS', 'A higher-level view of goals, tasks, and activity across the whole system.'],
-  ['Tasks & goals', 'Turning agent work into trackable, resumable units of progress.'],
-  ['Skills & tools catalog', 'A discoverable surface for what agents can actually do.'],
-  ['Permissions', 'Interaction models that keep users in control without constant interruption.'],
-  ['File-aware chat', 'Chat that knows about real files — no phantom attachments, no lost context.'],
-  ['Surface actions', 'Making agent actions visible and reversible at the point they happen.'],
+// The product systems I designed — each one exists for a reason.
+const systems = [
+  ['The visible OS', 'The Void, rooms, pixel agents, Life OS. Work happens in places you can see, done by characters you can watch — not in an invisible backend.'],
+  ['The assistant model', 'Global Iris is an OS-level rail that follows you everywhere. Rooms hold scoped work. Iris used to be a room — that was wrong, and fixing it defined the whole model.'],
+  ['The work model', 'Goals, tasks, subtasks, review gates, blockers. An agent cannot advance past a step until the user accepts it. Structured work, not vibes.'],
+  ['The trust model', 'A typed event ledger, action receipts in chat, one canonical transcript, files that actually exist. The code emits the proof — never the model’s word.'],
+  ['The context model', 'Memory blocks you can read and edit, pinned room truth, rolling summaries, real attachments. You can see what the AI thinks it knows.'],
+  ['The cost model', 'Per-turn burn in Life OS, budgets per task and room, cheap models for heavy lifting. Unknown cost renders as “—”, never as $0.00.'],
+  ['The capability model', 'Agents, skills, and tools in a searchable catalog with permission modes — “approve safe actions” instead of nagging on every step.'],
 ];
 
-const hardProblems = [
-  'Ghost chat states — turns that appeared stuck, empty, or half-finished.',
-  'Duplicate assistant messages breaking the sense of a single, trustworthy voice.',
-  'Attachment truth — making the files a user attached actually real to the system.',
-  'Permission modes that protect users without interrupting real work.',
-  'Global assistant vs. room assistant — one identity, two contexts, no confusion.',
-  'User trust in agentic actions — showing cause, effect, and a way back.',
-  'Making AI actions visible instead of happening invisibly in the background.',
+// Proof modules — the product language, one card per system worth naming.
+const modules = [
+  ['Global Iris', 'The assistant as an OS layer — a right-side rail, not a chat room.'],
+  ['Rooms & agents', 'Work is spatial: a room per project, agents with jobs, desks, and states.'],
+  ['Composer', 'Where messages, files, and agent actions meet — attachments become real files.'],
+  ['Life OS', 'The ledger: every event logged, costed, and filterable. Burn has its own tab.'],
+  ['Chat integrity', 'One truthful transcript — no ghost turns, no duplicates, live equals reload.'],
+  ['Goals & tasks', 'Structured execution with review gates, resumable runs, and visible blockers.'],
+  ['Skills & tools', 'A capability catalog agents search at runtime instead of bloated prompts.'],
+];
+
+// What broke — honest, specific, and what each failure taught.
+const failures = [
+  ['Iris was a room', 'The assistant lived in the same list as project rooms, and her scope stopped making sense. Fix: Iris became a global OS rail. The failure defined the assistant model.'],
+  ['The assistant blocked the app', 'The first Global Iris was a centered modal that blurred the workspace she was supposed to help control. Fix: a right rail that pushes work aside instead of covering it.'],
+  ['Ghost chat states', 'The live transcript and the reloaded transcript could disagree — turns half-finished, replies duplicated. Fix: the transcript became a system of record with integrity rules.'],
+  ['Phantom attachments', 'Files looked attached but never reached the model. Fix: attachments became real room files on disk, with visible chips — or they don’t claim to exist.'],
+  ['Context got expensive', 'Injecting everything made every turn slow and costly. Fix: memory blocks, compaction, and a catalog agents query instead of carrying every tool description.'],
+  ['Permissions became nagging', 'Confirming every safe action trained people to click through. Fix: permission modes — safe read-only tools run free, destructive actions still ask.'],
+  ['Cost was invisible', 'Money left quietly. Fix: burn tracking with one honest rule — if the cost is unknown, show “—”, never $0.00.'],
+];
+
+const proves = [
+  'I can spot structural UX problems in a technology before the industry has stable patterns for it.',
+  'I can design a product model — objects, states, and rules — not just screens.',
+  'I can turn invisible AI behavior into visible system states people can act on.',
+  'I can think across frontend, backend, data, cost, memory, and permissions, because I built all of it.',
+  'I can design for non-technical users without dumbing the system down.',
+  'I can make a technical system feel human — and honestly fun to be in.',
 ];
 ---
 
 <CaseStudyLayout
   title="HERA OS"
-  eyebrow="Case study — AI-native workspace"
-  heading="HERA OS — Designing an AI-native workspace for non-technical builders"
-  subtitle="AI tools are powerful but fragile. Context disappears, files vanish, agents hallucinate, and users can’t see what’s happening. HERA explores what it takes to make AI work feel visible, controllable, and understandable."
-  heroLabel="HERA — Global Iris assistant"
+  eyebrow="Flagship — independent AI product"
+  heading="HERA OS — an operating system where AI work is visible"
+  subtitle="HERA is a local-first, game-inspired AI workspace where agents, tasks, memory, files, and cost are visible parts of an operating system instead of hidden chat behavior. I designed it and I’m building it — backend, frontend, and the pixel world."
+  heroCaption="The Void — HERA's home. Rooms, agents, and a telemetry bar that shows server health and today's spend. Real screenshot, development build."
   meta={meta}
-  seoDescription="HERA OS case study — designing an AI-native workspace: agent UX, memory, files, tasks, and permissions made visible and controllable."
+  seoDescription="HERA OS — a local-first, game-inspired AI workspace by Favour Diokpo. Rooms, visible agents, readable memory, an event ledger, and honest cost."
 >
+  <img
+    slot="hero"
+    src={withBase('images/hera/hera-void-home.png')}
+    alt="HERA's Void: a pixel-art world of rooms with agents inside them, a Create Agent button, and a status bar showing server, SSE, agents, and today's burn"
+    class="w-full rounded-lg border border-line"
+  />
+
   <p class="text-xs uppercase tracking-[0.14em] text-faint">
-    Redacted design & product case study — no proprietary code, prompts, file paths, or business
-    model is shown.
+    Real screenshots from the development build, July 2026. Redacted where needed — no source code,
+    prompts, file paths, or private logs.
   </p>
 
+  <!-- 1. Why I built it -->
   <section class="reveal mt-10">
-    <h2 class="text-h2 font-semibold tracking-tight">Problem</h2>
+    <h2 class="text-h2 font-semibold tracking-tight">Why I built it</h2>
     <div class="prose-hera mt-4">
       <p>
-        AI tools promise leverage but often deliver <strong>fragility</strong>. Context disappears
-        between sessions. Files a user swears they attached quietly vanish. Agents hallucinate,
-        permissions interrupt work at the worst moment, and — worst of all — users can&rsquo;t
-        <strong>see what is happening</strong>. The result is software that&rsquo;s powerful in demos
-        and untrustworthy in daily use.
+        Most AI tools still feel like text boxes attached to invisible machinery. You type, wait, and
+        hope. You can’t see what the AI knows, what it’s doing, what it saved, what it forgot, or why
+        it failed. If it spent your money, you find out on the bill.
       </p>
       <p>
-        HERA started from one question: what would it take to make working with AI feel visible,
-        controllable, and understandable — for people who don&rsquo;t write code?
+        I think that’s why AI still feels too complicated for most people — not just non-developers.
+        The jargon is hostile, the state is hidden, and the interface is a scroll of text pretending
+        to be a workspace.
       </p>
-    </div>
-  </section>
-
-  <section class="reveal mt-14">
-    <h2 class="text-h2 font-semibold tracking-tight">My role</h2>
-    <div class="prose-hera mt-4">
       <p>
-        <strong>Product architect, UX systems designer, agent workflow designer, spec writer, and QA
-        lead.</strong> I owned the underlying model — the objects, states, and edge cases — as much as
-        the surfaces. That meant defining how memory, files, tasks, and permissions behave before any
-        screen was polished, then pressure-testing the flows that most teams ship broken by accident.
+        HERA started from a different belief: <strong>AI should feel like a place you can enter.</strong>
+        A workspace with rooms, visible agents, task boards, readable memory, real files, logs, and
+        cost. Not magic. Not a black box. A system you can see and direct — and one that’s actually
+        fun to be in.
       </p>
     </div>
   </section>
 
+  <!-- 2. The product idea -->
   <section class="reveal mt-14">
-    <h2 class="text-h2 font-semibold tracking-tight">Product model</h2>
+    <h2 class="text-h2 font-semibold tracking-tight">The product idea</h2>
     <div class="prose-hera mt-4">
       <p>
-        HERA treats the assistant, the workspace, and the user&rsquo;s intent as one connected system.
-        A global assistant travels with the user; rooms hold scoped work; the composer is the honest
-        single surface where messages, files, and agent actions meet. Everything an agent does is meant
-        to be legible — with a visible cause and a reversible path.
+        HERA is built like a simulation game because AI systems and game systems have the same shape:
+        states, actions, rules, costs, consequences, progress. Game design spent decades making that
+        shape intuitive. Nobody had applied it to AI.
+      </p>
+      <p>
+        So in HERA, an agent running a research task isn’t an invisible process — it’s a character at
+        a desk, in a room that belongs to your project, with the task pinned to a board and the cost
+        landing in a ledger. Same underlying operation as any agent framework. Completely different
+        level of understanding for the person watching.
+      </p>
+      <p>
+        <strong>The game layer is not decoration. It is how the system explains itself.</strong>
       </p>
     </div>
     <div class="mt-8">
-      <ImagePlaceholder label="HERA — Composer with file-aware chat" ratio="video" />
+      <Figure label="A room's War Room: chat with a specific agent on the left, workspace in the middle, goals and files on the right, live room preview top-right." tag="Real screenshot">
+        <img
+          src={withBase('images/hera/hera-warroom.png')}
+          alt="HERA War Room with chat messages addressed to the agent Forge, a workspace panel, a goals and files rail, and a live pixel preview of the room"
+          class="w-full rounded-lg border border-line"
+          loading="lazy"
+        />
+      </Figure>
     </div>
   </section>
 
+  <!-- 3. What makes it different -->
   <section class="reveal mt-14">
-    <h2 class="text-h2 font-semibold tracking-tight">Key systems designed</h2>
+    <h2 class="text-h2 font-semibold tracking-tight">What makes it different</h2>
+    <div class="prose-hera mt-4">
+      <ul>
+        <li><strong>Chat is not a workspace.</strong> A room has a team, a task board, memory, files, and a cost history. The chat is one surface inside it — not the room itself.</li>
+        <li><strong>The AI’s actions must be visible.</strong> Tool runs, file writes, task changes — each lands in chat and in the ledger as a receipt.</li>
+        <li><strong>Code emits the proof, not the model.</strong> HERA assumes the model will claim things it didn’t do. Every receipt is generated by code the model can’t fake.</li>
+        <li><strong>Local-first is the trust architecture.</strong> Rooms, files, memory, and chats stay on your machine. AI calls go straight to your chosen provider. A breach of HERA’s servers would expose your email, not your ideas.</li>
+        <li><strong>Memory should admit uncertainty.</strong> Memory blocks are readable and editable. The goal is an assistant that says “I don’t see that in what I have” instead of guessing.</li>
+        <li><strong>Cost should be visible.</strong> Every turn is costed. Unknown cost shows as “—”. Never a comforting fake zero.</li>
+        <li><strong>Tasks are structured work, not vibes.</strong> Status lifecycle, review gates, budgets, and a spend history per task.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. What I actually designed -->
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">What I actually designed</h2>
+    <div class="prose-hera mt-4">
+      <p>Seven product systems. Each exists because something specific went wrong without it.</p>
+    </div>
     <div class="mt-6 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2">
       {
-        keySystems.map(([title, body]) => (
+        systems.map(([title, body]) => (
           <div class="bg-[color:var(--surface)] p-5">
             <h3 class="text-sm font-semibold tracking-tight">{title}</h3>
             <p class="mt-1.5 text-sm leading-relaxed text-muted">{body}</p>
@@ -104,53 +163,147 @@ const hardProblems = [
         ))
       }
     </div>
+
+    <div class="mt-8 grid gap-8">
+      <Figure label="Global Iris as a right rail — the workspace shifts left instead of being covered. 'Approve safe actions' is the default permission mode." tag="Real screenshot">
+        <img
+          src={withBase('images/hera/hera-global-iris-rail.png')}
+          alt="HERA with the Iris assistant rail open on the right side; the pixel world remains visible and usable on the left"
+          class="w-full rounded-lg border border-line"
+          loading="lazy"
+        />
+      </Figure>
+      <Figure label="One assistant identity, two contexts — global reach without losing where work lives." tag="System map">
+        <IrisScopeMap />
+      </Figure>
+      <Figure label="Life OS events — 'Every action across your OS, logged and costed.' Failures included." tag="Real screenshot">
+        <img
+          src={withBase('images/hera/hera-lifeos-events.png')}
+          alt="HERA Life OS event ledger showing dated rows of agent actions with status, token counts, and per-event burn"
+          class="w-full rounded-lg border border-line"
+          loading="lazy"
+        />
+      </Figure>
+      <Figure label="Burn — total spend, per-call costs, and an honest 'unknown burn' count. Today's unknown burn shows as a dash, not $0.00." tag="Real screenshot">
+        <img
+          src={withBase('images/hera/hera-lifeos-burn.png')}
+          alt="HERA burn dashboard with total burn, monthly burn, token totals, failed and unknown cost rows, and a filterable table of model calls"
+          class="w-full rounded-lg border border-line"
+          loading="lazy"
+        />
+      </Figure>
+    </div>
   </section>
 
+  <!-- 5. The product language (proof modules) -->
   <section class="reveal mt-14">
-    <h2 class="text-h2 font-semibold tracking-tight">Hard UX problems</h2>
+    <h2 class="text-h2 font-semibold tracking-tight">The product language</h2>
+    <div class="prose-hera mt-4">
+      <p>
+        These aren’t features on a list — they’re named parts of one system, and each one earned its
+        name by solving a real problem.
+      </p>
+    </div>
+    <div class="mt-6 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+      {
+        modules.map(([title, body]) => (
+          <div class="bg-[color:var(--surface)] p-5">
+            <h3 class="text-sm font-semibold tracking-tight">{title}</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-muted">{body}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="mt-8 grid gap-8">
+      <Figure label="The Armory — agents with jobs, states, and honest failure text on their cards ('Run failed — Action Runner error')." tag="Real screenshot">
+        <img
+          src={withBase('images/hera/hera-armory.png')}
+          alt="HERA Armory showing Iris and custom agent cards, each with a pixel avatar, role, room, and last-run status including failures"
+          class="w-full rounded-lg border border-line"
+          loading="lazy"
+        />
+      </Figure>
+      <Figure label="Goals — structured work with status, progress, per-goal burn, and Play/Resume controls." tag="Real screenshot">
+        <img
+          src={withBase('images/hera/hera-goals.png')}
+          alt="HERA Goals dashboard listing goals with blocked, in-progress, and draft statuses, task counts, progress bars, and burn per goal"
+          class="w-full rounded-lg border border-line"
+          loading="lazy"
+        />
+      </Figure>
+    </div>
+  </section>
+
+  <!-- 6. Scenarios -->
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">What using it looks like</h2>
     <div class="prose-hera mt-4">
       <ul>
-        {hardProblems.map((p) => <li>{p}</li>)}
+        <li>A creator with an idea starts a room and asks Iris to help structure the work. Iris can propose agents and tasks — the person approves them; nothing deploys itself.</li>
+        <li>A user attaches files and can verify the AI actually saw them, because attachments become real files in the room, not decorative chips.</li>
+        <li>An agent runs a task. The user sees what changed, what it cost, and what failed — in chat, on the task, and in the ledger.</li>
+        <li>Someone checks memory blocks before a big ask, because they want to know what the AI thinks it knows — and they can correct it.</li>
       </ul>
+    </div>
+  </section>
+
+  <!-- 7. What broke — and what it taught me -->
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">What broke — and what it taught me</h2>
+    <div class="prose-hera mt-4">
+      <p>
+        HERA’s model wasn’t designed in advance and executed cleanly. It was corrected into shape by
+        failures. These are the ones that mattered:
+      </p>
+    </div>
+    <div class="mt-6 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2">
+      {
+        failures.map(([title, body]) => (
+          <div class="bg-[color:var(--surface)] p-5">
+            <h3 class="text-sm font-semibold tracking-tight">{title}</h3>
+            <p class="mt-1.5 text-sm leading-relaxed text-muted">{body}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="mt-8">
+      <Figure label="A stuck, silent turn (before) vs. a visible system state with cause, cost, and undo (after)." tag="Before / after">
+        <GhostBeforeAfter />
+      </Figure>
     </div>
     <div class="mt-8">
       <Callout>
-        The hardest part of agentic UX isn&rsquo;t the agent — it&rsquo;s convincing the user they can
-        trust what they can&rsquo;t see.
+        Every one of these failures sharpened the same rule: the system must tell the truth about its
+        own state. Not the model — the system.
       </Callout>
     </div>
   </section>
 
+  <!-- 8. Why it matters for AI products -->
   <section class="reveal mt-14">
-    <h2 class="text-h2 font-semibold tracking-tight">Selected screens</h2>
-    <div class="mt-6 grid gap-6 sm:grid-cols-2">
-      <ImagePlaceholder label="HERA — Global Iris right rail" ratio="tall" />
-      <ImagePlaceholder label="HERA — Life OS overview" ratio="tall" />
-      <ImagePlaceholder label="HERA — Memory blocks" ratio="video" />
-      <ImagePlaceholder label="HERA — Permissions / run confirm" ratio="video" />
-    </div>
-  </section>
-
-  <section class="reveal mt-14">
-    <h2 class="text-h2 font-semibold tracking-tight">What this demonstrates</h2>
-    <div class="prose-hera mt-4">
-      <ul>
-        <li>Architecting a product&rsquo;s invisible model — objects, states, and edge cases — end to end.</li>
-        <li>Designing agentic AI UX that keeps users oriented and in control.</li>
-        <li>Turning trust into concrete interface decisions, not vibes.</li>
-        <li>Shipping and QA&rsquo;ing the fragile states most AI products leak.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="reveal mt-14">
-    <h2 class="text-h2 font-semibold tracking-tight">What I&rsquo;d improve next</h2>
+    <h2 class="text-h2 font-semibold tracking-tight">Why it matters for AI products</h2>
     <div class="prose-hera mt-4">
       <p>
-        Deeper onboarding for first-run trust, tighter feedback when long agent tasks are running, and
-        a more opinionated default for how much autonomy an agent should take before checking in. The
-        goal stays the same: quiet, confident surfaces that are hard to break and easy to trust.
+        Chat apps have no project persistence and no cost visibility. Code agents are for developers
+        only. Agent frameworks require programming. Workflow tools have no memory. Almost everything
+        popular today still hides what the AI knows, what it did, what it cost, what changed, what
+        failed, and where the work lives.
       </p>
+      <p>
+        HERA is a bet on the layer between the user and the model — the part providers can’t own:
+        making AI work legible, spatial, and accountable for people who don’t write code. Models get
+        cheaper every quarter. The interface that makes them usable is the durable problem.
+      </p>
+    </div>
+  </section>
+
+  <!-- 9. What this proves -->
+  <section class="reveal mt-14">
+    <h2 class="text-h2 font-semibold tracking-tight">What this proves about me</h2>
+    <div class="prose-hera mt-4">
+      <ul>
+        {proves.map((p) => <li>{p}</li>)}
+      </ul>
     </div>
   </section>
 </CaseStudyLayout>

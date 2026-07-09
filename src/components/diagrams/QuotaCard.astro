@@ -1,0 +1,41 @@
+---
+// Quota visibility as a first-class, dense-but-legible data surface —
+// not a number buried three modals deep.
+const rows = [
+  { team: 'Animation', used: 82, cap: 90 },
+  { team: 'Level design', used: 61, cap: 75 },
+  { team: 'QA', used: 44, cap: 40 }, // over cap → flagged
+];
+---
+
+<div class="mx-auto w-full max-w-lg">
+  <div class="rounded-2xl border border-line bg-[color:var(--surface)] p-4" style="box-shadow: var(--shadow-card);">
+    <div class="flex items-center justify-between">
+      <p class="text-sm font-semibold tracking-tight">Staffing quota — Q3</p>
+      <span class="text-[11px] text-faint">visible at the point of decision</span>
+    </div>
+    <div class="mt-3 space-y-3">
+      {rows.map((r) => {
+        const over = r.used > r.cap;
+        const pct = Math.min(100, Math.round((r.used / r.cap) * 100));
+        return (
+          <div>
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-medium text-ink">{r.team}</span>
+              <span class:list={[over ? 'font-semibold' : 'text-faint']} style={over ? 'color: var(--accent)' : ''}>
+                {r.used}/{r.cap} {over ? '· over cap' : ''}
+              </span>
+            </div>
+            <div class="mt-1 h-2 w-full overflow-hidden rounded-full bg-[color:var(--line)]">
+              <div
+                class="h-full rounded-full"
+                style={`width:${pct}%; background:${over ? 'var(--accent)' : 'color-mix(in srgb, var(--ink) 55%, var(--line))'}`}
+              ></div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+    <p class="mt-3 text-[11px] text-faint">Over-cap teams surface immediately — governance you can act on, not audit after.</p>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+---
+// Compact, on-brand cover for a project card — a small system motif per project
+// instead of an empty screenshot box. Switches on slug.
+interface Props {
+  slug: string;
+  category: string;
+}
+const { slug, category } = Astro.props;
+---
+
+<div
+  class="relative aspect-[16/8] w-full overflow-hidden rounded-xl border border-line"
+  style="background: radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--accent) 7%, var(--surface)) 0%, var(--surface) 62%);"
+  role="img"
+  aria-label={`${category} — system motif`}
+>
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.3]"
+    style="background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 20px 20px;"
+    aria-hidden="true"
+  >
+  </div>
+
+  {slug === 'hera' && (
+    <div class="absolute inset-0 flex items-center justify-center gap-2.5 px-6" aria-hidden="true">
+      <span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-ink text-[12px] font-bold text-paper">I</span>
+      <svg width="26" height="14" viewBox="0 0 26 14" fill="none" stroke="var(--faint)" stroke-width="1.4"><path d="M1 7h18M15 2l5 5-5 5" /></svg>
+      <div class="flex gap-1.5">
+        {['Saw', 'Did', 'Saved', 'Cost'].map((k) => (
+          <span class="rounded-md border border-line bg-[color:var(--paper)] px-2 py-1 text-[10px] font-medium text-muted">{k}</span>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {slug === 'enterprise-tools' && (
+    <div class="absolute inset-0 flex items-center justify-center gap-3 px-6" aria-hidden="true">
+      <div class="grid grid-cols-4 gap-1">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <span
+            class="block h-2.5 w-2.5 rounded-[3px] border border-line bg-[color:var(--paper)]"
+            style={`transform: rotate(${((i % 5) - 2) * 3}deg); opacity:${0.5 + (i % 3) * 0.2}`}
+          ></span>
+        ))}
+      </div>
+      <svg width="26" height="14" viewBox="0 0 26 14" fill="none" stroke="var(--faint)" stroke-width="1.4"><path d="M1 7h18M15 2l5 5-5 5" /></svg>
+      <span class="rounded-md border px-2.5 py-1.5 text-[10px] font-semibold" style="color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); background: var(--accent-soft)">1 system</span>
+    </div>
+  )}
+
+  <span class="absolute bottom-2.5 left-3 rounded-pill border border-line bg-[color:var(--surface)]/80 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.1em] text-muted backdrop-blur">
+    {category}
+  </span>
+</div>

@@ -1,30 +1,111 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
-import { projects } from '../../data/site';
+import Button from '../../components/Button.astro';
+import Figure from '../../components/figure/Figure.astro';
+import { flagship, ubisoftProjects, withBase } from '../../data/site';
 ---
 
 <BaseLayout
   title="Work"
-  description="Selected case studies by Favour Diokpo — agentic AI UX and enterprise internal tools."
+  description="Selected work by Favour Diokpo — HERA OS (flagship AI product) and three enterprise workstreams at Ubisoft."
 >
   <section class="section">
     <div class="container-page">
       <SectionHeader
         eyebrow="Work"
-        title="Case studies in making complex software legible."
-        description="Redacted, honest case studies focused on the systems and hard UX problems — not vanity screenshots."
+        title="One flagship product. Three enterprise workstreams."
+        description="HERA is the product I designed and built. The Ubisoft projects are separate workstreams — planning, approvals, and governance — grouped on one page because they share an environment, not because they're one project."
       />
 
-      <div class="mt-14 grid gap-6 md:grid-cols-2">
-        {projects.map((p, i) => <ProjectCard project={p} index={i} />)}
+      <!-- Flagship: HERA -->
+      <a
+        href={withBase(flagship.href)}
+        class="card card-hover reveal group mt-12 block overflow-hidden rounded-card"
+      >
+        <div class="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
+          <div class="p-3">
+            <Figure label="The Void — real screenshot, development build." tag="Real screenshot" class="h-full">
+              <img
+                src={withBase('images/hera/hera-void-home.png')}
+                alt="HERA's Void view — pixel rooms with agents and a live telemetry bar"
+                class="w-full rounded-lg border border-line"
+                loading="lazy"
+              />
+            </Figure>
+          </div>
+          <div class="flex flex-col gap-5 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <p class="eyebrow">{flagship.eyebrow}</p>
+              <span class="rounded-pill border border-line px-2.5 py-0.5 text-[11px] font-medium text-faint">{flagship.status}</span>
+            </div>
+            <div>
+              <h3 class="text-h2 font-semibold tracking-tight">{flagship.title}</h3>
+              <p class="mt-2 text-[0.98rem] leading-relaxed text-muted">{flagship.summary}</p>
+            </div>
+            <dl class="grid gap-4 border-t border-line pt-5">
+              <div>
+                <dt class="text-[11px] uppercase tracking-[0.1em] text-faint">The problem</dt>
+                <dd class="mt-1.5 text-sm leading-relaxed text-muted">{flagship.problem}</dd>
+              </div>
+              <div>
+                <dt class="text-[11px] uppercase tracking-[0.1em] text-faint">What I designed</dt>
+                <dd class="mt-1.5 text-sm leading-relaxed text-muted">{flagship.designed}</dd>
+              </div>
+            </dl>
+            <span class="inline-flex items-center gap-1.5 text-sm font-medium text-ink">
+              See the full product story
+              <svg class="transition-transform duration-300 ease-smooth group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Ubisoft workstreams -->
+      <div class="mt-16">
+        <SectionHeader
+          eyebrow="Enterprise systems at Ubisoft"
+          title="Three workstreams, clearly separated."
+          description="Each is its own project with its own problem, research, and design. They live on one grouped page."
+        />
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          {
+            ubisoftProjects.map((p, i) => (
+              <a
+                href={withBase(p.href)}
+                class="card card-hover reveal group flex flex-col gap-3 rounded-card p-6"
+                style={`transition-delay:${i * 60}ms`}
+              >
+                <div class="flex items-center justify-between gap-3">
+                  <span class="rounded-pill border border-line px-2.5 py-0.5 text-[11px] font-medium text-faint">{p.year}</span>
+                  <span class="text-[11px] uppercase tracking-[0.1em] text-faint">{p.category}</span>
+                </div>
+                <h3 class="text-h3 font-semibold tracking-tight">{p.title}</h3>
+                <dl class="grid gap-3 border-t border-line pt-4">
+                  <div>
+                    <dt class="text-[11px] uppercase tracking-[0.1em] text-faint">The problem</dt>
+                    <dd class="mt-1 text-sm leading-relaxed text-muted">{p.problem}</dd>
+                  </div>
+                  <div>
+                    <dt class="text-[11px] uppercase tracking-[0.1em] text-faint">What I designed</dt>
+                    <dd class="mt-1 text-sm leading-relaxed text-muted">{p.designed}</dd>
+                  </div>
+                </dl>
+                <span class="mt-auto inline-flex items-center gap-1.5 pt-2 text-sm font-medium text-ink">
+                  Read the workstream
+                  <svg class="transition-transform duration-300 ease-smooth group-hover:translate-x-1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                </span>
+              </a>
+            ))
+          }
+        </div>
       </div>
 
-      <div class="reveal mt-16 rounded-card border border-dashed border-line p-8 text-center">
-        <p class="text-sm text-muted">
-          More work available on request — including internal tools and workflow explorations under NDA.
+      <div class="reveal mt-14 flex flex-col items-start justify-between gap-6 rounded-card border border-dashed border-line p-8 sm:flex-row sm:items-center">
+        <p class="max-w-xl text-sm text-muted">
+          More can be shared in redacted form on request — including a live HERA walkthrough.
         </p>
+        <Button href="contact/" variant="ghost" class="shrink-0">Request a walkthrough</Button>
       </div>
     </div>
   </section>

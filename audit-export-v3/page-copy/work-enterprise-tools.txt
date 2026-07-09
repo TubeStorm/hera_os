@@ -1,0 +1,183 @@
+Skip to content
+F
+Favour Diokpo
+Work
+HERA
+Resume
+About
+Contact
+Get in touch
+All work 
+
+GROUPED PAGE — THREE SEPARATE WORKSTREAMS
+
+Enterprise Systems at Ubisoft — three workstreams in planning, approvals, and governance
+
+These are three distinct projects, not one. They share an environment — internal tools used by 1,000+ people, where staffing, remote-work, and hiring decisions actually happen — and they share a failure mode: systems people had stopped believing. Each got its own research, its own design, and its own fix.
+
+ROLE
+Senior UX Specialist — internal tools
+CONTEXT
+Ubisoft, Montréal
+TIMELINE
+May 2021 — Present
+SCALE
+1,000+ users
+
+BEFORE — 40+ ONE-OFF MODALS
+
+Inconsistent approvals, buried quotas, rules that read differently everywhere.
+
+AFTER — ONE COHERENT PATTERN
+
+Approval
+consistent
+
+Same status, ownership, and next steps — everywhere they appear.
+
+SYSTEM MAP
+RPM: 40+ one-off modals collapse into one consistent, reusable pattern.
+
+UBISOFT UI IS UNDER NDA — THIS PAGE USES REDACTED DIAGRAMS INSTEAD OF SCREENSHOTS. EVERY NUMBER COMES FROM THE SOURCE RESEARCH DOCUMENTS.
+
+The environment
+
+At Ubisoft, planning and staffing decisions run through internal tools used by more than 1,000 people across production. Years of incremental additions had fragmented the surfaces: dozens of one-off modals, approval flows that only knew two answers, and quota rules nobody could see until they broke them. People didn’t stop working — they started routing around the tools. That’s the quiet failure mode of enterprise software.
+
+1,000+
+
+Users across teams
+
+40+
+
+Modals audited
+
+101
+
+Survey responses
+
+5
+
+Approval flows defined
+
+WORKSTREAM 1
+
+RPM — modal & ribbon revamp
+
+The problem. RPM is Ubisoft’s main staffing platform. A prior redesign had changed the UI and workflows with no UX research, and 1,000+ users were living with the result. Complaints were constant, but nobody had mapped the causes.
+
+My role. Sole UX designer. I owned the research, the audit, and the redesign.
+
+What the research found. Rather than guess, I ran a global satisfaction survey — 101 responses — followed by interviews. It overturned the obvious assumptions:
+
+Seniority didn’t help. Long-time and frequent users were the most frustrated — time with the tool bred friction, not fluency.
+Project Managers were the largest user group (38%) and among the least satisfied (3.3/5), so I ran deeper usability sessions with them.
+Overall satisfaction sat at 3.5/5 — but the tool scored 2.16/5 on saving people time, despite 62% of users being in it several times a week.
+Three themes repeated: too many steps for positions and requests, features people couldn’t find, and UI behavior so inconsistent the data itself looked wrong.
+
+What I designed. A 40+ modal audit collapsed into consistent, reusable patterns; a rebuilt navigation ribbon; and a focused redesign of the three core modals — Position, Request, and the Advanced Date Editor. I worked with Ubisoft’s shared design-system team (EGG) so developers shipped the exact components from design.
+
+What it demonstrates. I can walk into a tool people resent, replace opinions with evidence, and fix the system instead of repainting the screens.
+
+WORKSTREAM 2
+
+Work Arrangement — five structured approval flows
+
+The problem. The tool employees use to formally request long-term remote work supported exactly two outcomes: approve or reject. Escalations, corrections, and sending a request back for revision happened over email — or not at all. What looked like a UI cleanup was a broken conversation between roles.
+
+My role. Sole UX designer, and in practice the product strategist — I framed the problem, set priorities, and sequenced the phased delivery without a formal PO title. I researched across four organizational levels: employees, direct managers, other managers, and the directors/HR committee.
+
+What I designed. Five explicit flows, each with clear ownership:
+
+“Did you speak with the employee?” — a required checkpoint before any decision publishes, so a human conversation happens before the automation does.
+Manager as final approver — the default path, with a templated, human notification instead of a silent status flip.
+Send back to employee — a revision loop that replaced “cancel and resubmit.”
+Escalate to committee and escalated-then-returned — separating who decides from who publishes.
+
+HR policy constrained what managers could write, so free-text comments became legally-vetted templated messaging — clear for employees without exposing the company. The constraint didn’t kill the human solution; it reshaped it.
+
+What it demonstrates. I can design decision flows inside hard policy and legal constraints — and treat those constraints as material, not obstacles.
+
+Submitted
+
+owner · Producer
+
+In review
+
+owner · Team lead
+
+Approved
+
+owner · Ops
+
+Every approval shows where it is, who owns it, and what happens next — no black-box sign-off.
+
+FLOW
+Approval flow with visible status and ownership at each stage.
+
+WORKSTREAM 3
+
+Capacity Governance — warning-only quota visibility
+
+The problem. Quota rules that decide hiring were buried modals deep and easy to misread across studios. Rules that govern real money and real headcount were effectively invisible until someone tripped over them.
+
+What I designed. A warning-only quota model — used, buffer, threshold, time scope — surfaced at the point of decision. Over-cap teams are flagged in place, in dense grids that stay readable at real data volumes. The model informs; it never blocks. People route around walls, but they act on clear signals.
+
+What it demonstrates. I can make dense, high-stakes data legible, and I know when governance should be a warning instead of a wall.
+
+Staffing quota — Q3
+
+visible at the point of decision
+Animation
+82/90
+Level design
+61/75
+QA
+44/40 · over cap
+
+Over-cap teams surface immediately — governance you can act on, not audit after.
+
+ANNOTATED UI
+Quota visibility as a dense-but-legible surface — over-cap teams flagged in place.
+What the three had in common
+
+Each tool “worked” — the screens rendered, the buttons clicked. The real failures were underneath: nobody could see why a decision happened, who owned the next step, or which rule they were about to break. Research made those failures visible; systemization fixed them.
+
+The same instinct now runs through HERA: make the system tell the truth about its own state, and people stop routing around it.
+
+What this proves
+I can run research at enterprise scale — a 101-response survey, interviews across four organizational levels — and turn it into a phased roadmap.
+I can systemize sprawl: 40+ one-off modals into reusable patterns a design-system team could ship.
+I can design approvals and governance under real HR and legal constraints.
+I can drive product decisions without a formal PO title — framing, priorities, and sequencing across product, engineering, HR, and operations.
+
+Want the full walkthrough?
+
+Happy to talk through the decisions, trade-offs, and what I’d do next.
+
+Get in touch
+More work
+
+I design systems that make complicated work visible.
+
+Available for select work — remote & hybrid
+
+Get in touch
+
+PAGES
+
+Work
+HERA
+Resume
+About
+Contact
+
+ELSEWHERE
+
+GitHub
+Email
+LinkedIn
+
+© 2026 Favour Diokpo. All rights reserved.
+
+Product Designer — AI systems & internal tools

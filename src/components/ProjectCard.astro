@@ -1,7 +1,7 @@
 ---
 import type { Project } from '../data/site';
 import { withBase } from '../data/site';
-import ImagePlaceholder from './ImagePlaceholder.astro';
+import ProjectThumb from './ProjectThumb.astro';
 
 interface Props {
   project: Project;
@@ -16,12 +16,12 @@ const { project, index = 0 } = Astro.props;
   style={`transition-delay:${index * 60}ms`}
 >
   <div class="p-3">
-    <ImagePlaceholder label={project.accentImage} ratio="wide" class="border-line" />
+    <ProjectThumb slug={project.slug} category={project.category} />
   </div>
   <div class="flex flex-col gap-4 p-6 pt-3 sm:p-7 sm:pt-4">
     <div class="flex items-center justify-between gap-4">
       <p class="eyebrow">{project.eyebrow}</p>
-      <span class="text-xs text-faint">{project.year}</span>
+      <span class="rounded-pill border border-line px-2.5 py-0.5 text-[11px] font-medium text-faint">{project.status}</span>
     </div>
     <div>
       <h3 class="text-h3 font-semibold tracking-tight">{project.title}</h3>
