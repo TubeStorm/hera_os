@@ -217,4 +217,4 @@ The pricing research file exists but is intentionally empty — designed to accu
 
 ---
 
-*All analysis grounded in repository contents at `D:\Documents\Hermes_Agent`. No market data invented — competitive positioning is based on documented product decisions and the observable state of existing AI products as of 2026.*
+*All analysis grounded in the HERA repository contents. No market data invented — competitive positioning is based on documented product decisions and the observable state of existing AI products as of 2026.*

@@ -1,53 +1,156 @@
 ---
-import { site, nav, confirmedContacts, withBase } from '../data/site';
+// Not a footer. A strip of HERA's pixel agents out on a walk — Iris among
+// them. Try to catch her; she's faster than you. The only text is the © line.
+import { site } from '../data/site';
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-8 border-t border-line">
-  <div class="container-page py-16">
-    <div class="flex flex-col justify-between gap-10 md:flex-row">
-      <div class="max-w-sm">
-        <p class="text-h3 font-semibold tracking-tight">{site.tagline}</p>
-        <p class="mt-3 text-sm text-muted">{site.location}</p>
-        <a
-          href={withBase('contact/')}
-          class="mt-4 inline-block text-sm text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
-        >
-          Get in touch
-        </a>
-      </div>
-
-      <div class="flex gap-16">
-        <div>
-          <p class="eyebrow mb-4">Pages</p>
-          <ul class="space-y-2.5 text-sm text-muted">
-            {nav.map((item) => (
-              <li>
-                <a href={withBase(item.href)} class="transition-colors hover:text-ink">{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        {confirmedContacts.length > 0 && (
-          <div>
-            <p class="eyebrow mb-4">Elsewhere</p>
-            <ul class="space-y-2.5 text-sm text-muted">
-              {confirmedContacts.map((c) => (
-                <li>
-                  <a href={c.href} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-ink">
-                    {c.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    </div>
-
-    <div class="mt-14 flex flex-col items-start justify-between gap-3 border-t border-line pt-6 text-xs text-faint sm:flex-row sm:items-center">
-      <p>© {year} {site.name}. All rights reserved.</p>
-      <p>{site.role}</p>
-    </div>
+<footer class="mt-16 border-t border-line">
+  <div class="relative">
+    <canvas id="agent-walk" class="block h-[88px] w-full" aria-hidden="true"></canvas>
+    <p class="pointer-events-none absolute bottom-2 right-4 text-[11px] text-faint">
+      © {year} {site.name}
+    </p>
   </div>
 </footer>
+
+<script>
+  const canvas = document.getElementById('agent-walk') as HTMLCanvasElement | null;
+  if (canvas) {
+    const ctx = canvas.getContext('2d')!;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 8×10 pixel sprite. B body · H hair · S face · L legs (two frames).
+    const TORSO = ['..HHHH..', '.HHHHHH.', '.HSSSSH.', '..SSSS..', '..BBBB..', '.BBBBBB.', '.BBBBBB.'];
+    const LEGS = [
+      ['..B..B..', '..B..B..', '..B..B..'],
+      ['..B.B...', '.B...B..', '.B...B..'],
+    ];
+    const SCALE = 3;
+    const SPRITE_W = 8 * SCALE;
+
+    type Agent = {
+      x: number;
+      dir: 1 | -1;
+      speed: number;
+      body: string;
+      hair: string;
+      skin: string;
+      iris: boolean;
+      phase: number;
+    };
+
+    const css = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+    const others = [
+      { body: '#7c6f64', hair: '#3a3a3f' },
+      { body: '#5b6b52', hair: '#20221e' },
+      { body: '#6b5b73', hair: '#2b2430' },
+      { body: '#4f6272', hair: '#1d262e' },
+    ];
+
+    let agents: Agent[] = [];
+    const initAgents = () => {
+      const w = canvas.clientWidth;
+      agents = others.map((c, i) => ({
+        x: ((i + 1) * w) / 6,
+        dir: (i % 2 === 0 ? 1 : -1) as 1 | -1,
+        speed: 14 + Math.random() * 10,
+        body: c.body,
+        hair: c.hair,
+        skin: '#d9b99b',
+        iris: false,
+        phase: Math.random() * 10,
+      }));
+      agents.push({
+        x: w / 2,
+        dir: 1,
+        speed: 20,
+        body: css('--accent') || '#2563eb',
+        hair: '#e8e4f4',
+        skin: '#d9b99b',
+        iris: true,
+        phase: 0,
+      });
+    };
+
+    let mouseX = -9999;
+    let mouseInside = false;
+    canvas.addEventListener('pointermove', (e) => {
+      const r = canvas.getBoundingClientRect();
+      mouseX = e.clientX - r.left;
+      mouseInside = true;
+    });
+    canvas.addEventListener('pointerleave', () => (mouseInside = false));
+    // She notices the attempt.
+    canvas.addEventListener('pointerdown', () => {
+      const iris = agents.find((a) => a.iris);
+      if (iris) iris.speed = 160;
+    });
+
+    const resize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvas.clientWidth * dpr;
+      canvas.height = canvas.clientHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const drawAgent = (a: Agent, t: number) => {
+      const groundY = canvas.clientHeight - 14;
+      const frame = reduced ? 0 : Math.floor((t / 180 + a.phase) % 2);
+      const rows = [...TORSO, ...LEGS[frame]];
+      const bob = reduced ? 0 : Math.sin(t / 180 + a.phase) * 1.2;
+      const colors: Record<string, string> = { B: a.body, H: a.hair, S: a.skin };
+      rows.forEach((row, ry) => {
+        for (let rx = 0; rx < row.length; rx++) {
+          const ch = row[rx];
+          if (ch === '.') continue;
+          const px = a.dir === 1 ? rx : row.length - 1 - rx;
+          ctx.fillStyle = colors[ch] === undefined ? a.body : colors[ch];
+          ctx.fillRect(Math.round(a.x) + px * SCALE, Math.round(groundY - (rows.length - ry) * SCALE + bob), SCALE, SCALE);
+        }
+      });
+    };
+
+    let last = performance.now();
+    const tick = (t: number) => {
+      const dt = Math.min((t - last) / 1000, 0.05);
+      last = t;
+      const w = canvas.clientWidth;
+      ctx.clearRect(0, 0, w, canvas.clientHeight);
+      // ground line
+      ctx.fillStyle = css('--line') || '#e7e7e1';
+      ctx.fillRect(0, canvas.clientHeight - 12, w, 1);
+
+      for (const a of agents) {
+        if (!reduced) {
+          if (a.iris) {
+            // Iris keeps her distance from the cursor — always faster than you.
+            if (mouseInside && Math.abs(mouseX - (a.x + SPRITE_W / 2)) < 130) {
+              a.dir = mouseX > a.x + SPRITE_W / 2 ? -1 : 1;
+              a.speed = Math.min(a.speed + 300 * dt, 220);
+            } else {
+              a.speed = Math.max(a.speed - 120 * dt, 20);
+            }
+          }
+          a.x += a.dir * a.speed * dt;
+          if (a.x > w + SPRITE_W) a.x = -SPRITE_W;
+          if (a.x < -SPRITE_W * 2) a.x = w + SPRITE_W / 2;
+        }
+        drawAgent(a, t);
+      }
+      if (!reduced) requestAnimationFrame(tick);
+    };
+
+    const start = () => {
+      resize();
+      initAgents();
+      last = performance.now();
+      requestAnimationFrame(tick);
+    };
+    window.addEventListener('resize', () => {
+      resize();
+    });
+    start();
+  }
+</script>

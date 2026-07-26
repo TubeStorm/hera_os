@@ -284,4 +284,4 @@ If Favour needs to select specific artifacts for a portfolio presentation, these
 
 ---
 
-*Analysis grounded entirely in the HERA repository at `D:\Documents\Hermes_Agent`. No capabilities invented. All claims traceable to specific files. Honest gaps documented alongside strengths.*
+*Analysis grounded entirely in the HERA repository. No capabilities invented. All claims traceable to specific files. Honest gaps documented alongside strengths.*

@@ -27,7 +27,7 @@ That's 7 modular routers using a factory pattern with dependency injection (chos
 
 Three SQLite databases in `%APPDATA%\HERA\db\`:
 
-1. **`hermes_mission_control.db`** — 30+ tables covering:
+1. **`hera_mission_control.db`** — 30+ tables covering:
    - `chat_missions` — rooms/projects
    - `chat_messages` — full chat history with pagination
    - `agent_roster` — agent profiles with personality, wellness, inventory, model tier
@@ -38,11 +38,11 @@ Three SQLite databases in `%APPDATA%\HERA\db\`:
    - `tools_ledger`, `skills` — tool/skill registry
    - `room_tools`, `room_skills` — per-room tool/skill bindings
    - `memory_blocks` — persistent memory with compaction
-   - `hermes_settings` — key-value configuration store
+   - `hera_settings` — key-value configuration store
 
-2. **`hermes_ledger.db`** — Usage/cost audit ledger tracking every API call's cost
+2. **`hera_ledger.db`** — Usage/cost audit ledger tracking every API call's cost
 
-3. **`hermes_context_index.db`** — Vault/project context index for file searching
+3. **HERA context index** — Vault/project context index for file searching
 
 The migration system (`_migrate_schema()` in server.py) handles schema evolution incrementally. Column additions use `_ensure_column()` which safely adds columns only if they don't exist.
 
@@ -127,7 +127,7 @@ The UI is built in React/TypeScript with Vite:
 | `TheVoid.tsx` | Global view — Phaser game world with all rooms rendered |
 | `LifeOS.tsx` | Event ledger with filters, date range, event types — two-tab design (Events / Curator) |
 | `TheArmory.tsx` (~1,998 lines) | Skills and tools management — create, edit, configure |
-| `HermesComposer.tsx` | Gemini-style chat input with `@` mention autocomplete |
+| `HeraComposer.tsx` | Gemini-style chat input with `@` mention autocomplete |
 | `RoomChatPanel.tsx` (~1,197 lines) | Chat stream with tool chips, thinking spinners, timestamps |
 | `TaskDetailDrawer.tsx` (~1,256 lines) | Full task detail — status, assignee, guardrails, activity log |
 | `PhaserVoid.tsx` | Phaser.js game scene — renders rooms, floors, furniture, agent sprites |
@@ -198,11 +198,11 @@ The scanline halftone pipeline is notable: it applies a custom pixel-art aesthet
 ## Infrastructure and Packaging
 
 ### Desktop Shell
-- `hermes.pyw` (~46,385 bytes) — pywebview wrapper
-- `HermesOS.spec` — PyInstaller config for building a Windows .exe
-- Windows Start Menu launcher ("Hermes OS")
+- `hera.pyw` — pywebview wrapper
+- `HERAOS.spec` — PyInstaller config for building a Windows .exe
+- Windows Start Menu launcher ("HERA OS")
 - System tray icon with right-click menu (Restart Server, Terminate)
-- `hermes-ports.json` — configurable Chrome tabs opened on launch
+- `hera-ports.json` — configurable Chrome tabs opened on launch
 
 ### AppData Migration (Sprint S)
 - All runtime data lives in `%APPDATA%\HERA\` — survives app reinstalls
@@ -212,10 +212,10 @@ The scanline halftone pipeline is notable: it applies a custom pixel-art aesthet
 - Zero path env vars needed — sensible defaults for everything
 
 ### Build Process
-- `build_hermes.ps1` — PowerShell build script
+- `build_hera.ps1` — PowerShell build script
 - `check_assets.mjs` — Asset verification
 - `playwright.config.ts` — E2E test configuration
-- GitHub integration: private repo at `TubeStorm/hermes-agent`, Projects board
+- GitHub integration: private HERA OS repository and Projects board
 
 ### Scripts and Tooling
 - `scripts/research_runner.py` — Tavily + OpenRouter batch research (zero Claude tokens)
@@ -239,4 +239,4 @@ The scanline halftone pipeline is notable: it applies a custom pixel-art aesthet
 
 ---
 
-*All line counts and file references verified against the repository at `D:\Documents\Hermes_Agent` as of 2026-07-02.*
+*All line counts and file references verified against the HERA repository as of 2026-07-02.*

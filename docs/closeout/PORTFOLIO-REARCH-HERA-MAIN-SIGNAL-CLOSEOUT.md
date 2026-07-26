@@ -37,7 +37,7 @@ Reframed as **grouped workstreams, not one project**. Page retitled "Enterprise 
 
 ## Evidence Result
 
-- Strong (source-doc-backed): all Ubisoft numbers (101 survey, 40+ modals, 1,000+ users, five flows, four org levels), all HERA mechanics (each failure card traces to a real closeout in the Hermes repo), the solo build claim.
+- Strong (source-doc-backed): all Ubisoft numbers (101 survey, 40+ modals, 1,000+ users, five flows, four org levels), all HERA mechanics (each failure card traces to a real closeout in the HERA repo), the solo build claim.
 - Positioning (clearly presented as belief): "AI should feel like a place…", "Good tools make people want to work."
 - Softened/avoided: no user counts, no revenue, no release date, no absolute "nobody else does this," HERA labeled "In development, unreleased." Full table: `docs/portfolio/EVIDENCE_MAP.md`.
 
@@ -57,7 +57,7 @@ New: `hera-void-home`, `hera-warroom`, `hera-global-iris-rail`, `hera-lifeos-eve
 
 ## Source Use
 
-`HERA_VISION_2026_07_02.md`; vision-deep-dives `01/02/03`; `Case study 1.md` (Work Arrangement); `Case study 2.md` (RPM); `Favour_Diokpo_Resume_2026.pdf`; `about me old.pdf` voice cues; `REFERENCE_INGESTION_NOTES.md`; Hermes-repo closeouts for failure-story accuracy (Iris rail, TSP-06/08D.x, BURN P0). NDA rule held: no Ubisoft screenshots, redacted diagrams only.
+`HERA_VISION_2026_07_02.md`; vision-deep-dives `01/02/03`; `Case study 1.md` (Work Arrangement); `Case study 2.md` (RPM); `Favour_Diokpo_Resume_2026.pdf`; `about me old.pdf` voice cues; `REFERENCE_INGESTION_NOTES.md`; HERA-repo closeouts for failure-story accuracy (Iris rail, TSP-06/08D.x, BURN P0). NDA rule held: no Ubisoft screenshots, redacted diagrams only.
 
 ## Build / Preview Result
 

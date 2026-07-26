@@ -20,7 +20,7 @@ The stack is real and substantial:
 - **Backend:** Python/FastAPI with 40+ endpoints, modular router architecture (`server.py` at ~7100 lines, `routers/chat.py` at ~6200 lines), SQLite for all persistent state
 - **Frontend:** React/TypeScript/Vite with a component tree spanning chat, task management, agent configuration, a full Life OS event ledger, and a Phaser-rendered game world ("The Void")
 - **Desktop shell:** pywebview wrapping the full web app into a native Windows application
-- **Agent system:** 6 seeded agents (Hermes, Forge, Scout, Scribe, Cartographer, Sentinel) with distinct roles, personalities, memory systems, and tool access
+- **Agent system:** Iris is the only default visible agent, with room-scoped memory and tool access
 - **Game world:** Phaser.js rendering rooms with floor tiles, furniture, animated agent sprites, all driven by a curated asset catalog of 73+ commercial pixel art assets
 
 HERA runs on the user's machine. Data never leaves their computer. AI calls go directly from their machine to their chosen provider. HERA-the-company would never see a user's rooms, chats, or files.
@@ -236,4 +236,4 @@ For the full deep dives, see the [`vision-deep-dives/`](./vision-deep-dives/) su
 
 ---
 
-*This document is grounded entirely in the contents of the HERA repository at `D:\Documents\Hermes_Agent`. Nothing has been invented. All claims can be traced to specific files, commits, and documents in the codebase.*
+*This document is grounded entirely in the contents of the HERA repository. Nothing has been invented. All claims can be traced to specific files, commits, and documents in the codebase.*

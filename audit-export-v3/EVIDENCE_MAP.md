@@ -9,9 +9,9 @@ Every major public claim, its source, confidence, and publish-safety. Confidence
 | HERA is game-inspired; Phaser pixel world; agents as characters in rooms | HERA, Home | Vision doc + real screenshots (hera-void-home.png) | strong | yes |
 | Event ledger — every action logged and costed | HERA, Home | Life OS screenshots ("Every action across your OS, logged and costed"); vision doc event bus section | strong | yes |
 | Unknown cost renders as "—", never $0.00 | HERA, Home | BURN P0 implementation + hera-lifeos-burn.png (visible dash) | strong | yes |
-| "Designed and built solo: FastAPI backend, React frontend, Phaser pixel world" | HERA, Resume, About | Vision doc technical table; repo at D:\Documents\Hermes_Agent | strong | yes |
+| "Designed and built solo: FastAPI backend, React frontend, Phaser pixel world" | HERA, Resume, About | Vision doc technical table; HERA repository | strong | yes |
 | Review gates: agent can't advance past a step without user acceptance | HERA | Vision doc "Tasks Are Not Checklists" | strong | yes |
-| Iris was a room → became a global OS rail | HERA (failure card) | Iris Right Rail closeout (Hermes repo docs/closeout/IRIS-RIGHT-RAIL-CLOSEOUT.md) | strong | yes |
+| Iris was a room → became a global OS rail | HERA (failure card) | Iris Right Rail closeout (HERA repo docs/closeout/IRIS-RIGHT-RAIL-CLOSEOUT.md) | strong | yes |
 | Centered Iris modal blocked the app | HERA (failure card) | Same closeout — rail replaced centered blur modal | strong | yes |
 | Ghost chat states / live-vs-reload mismatch fixed | HERA (failure card) | TSP-08D.1/08D.2.1 closeouts (chat integrity, compact cleanup) | strong | yes |
 | Phantom attachments → attachments became real room files | HERA (failure card) | TSP-08D.2 closeout (real composer attachment persistence) | strong | yes |

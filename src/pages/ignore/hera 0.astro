@@ -1,0 +1,245 @@
+---
+// Deep Dive — HERA dissected. A narrative of decisions, not a feature tour.
+// Claims follow YC-FOUNDER-EVIDENCE-LEDGER: nothing unverified is stated as current.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MediaFrame from '../../components/MediaFrame.astro';
+import { withBase } from '../../data/site';
+import { heraMedia } from '../../data/lineage';
+
+const shifts = [
+  ['Create a room first', 'arrive messy in the Void — structure is earned'],
+  ['A project setup form', 'a conversation, interpreted into an Objective'],
+  ['A static generated plan', 'a living roadmap that advances from finished work'],
+  ['A generic task list', 'parallel task lanes with real runs and states'],
+  ['Model output in a chat', 'a versioned artifact with a review state'],
+  ['Activity-log theatre', 'an honest “Worked for” — silence over fiction'],
+  ['A modal for every feature', 'one composer that transforms around the moment'],
+];
+
+const workingToday = [
+  'Void intake with real model runs and surveys',
+  'Void → room migration that preserves the conversation',
+  'The Objective, and roadmap generation and acceptance',
+  'Task execution with durable, versioned artifacts',
+  'Two-tier review: approve, request changes, revert',
+  'The task → goal → roadmap cascade, surviving restarts',
+  'Honest “Worked for” narration, gated by real events',
+];
+
+const inProgress = [
+  'Memory: readable and editable today; injection into runs is being wired',
+  'Room auto-naming and objective interpretation',
+  'Reconciling the two review surfaces into one',
+  'Roadmap re-planning from completed work',
+];
+
+const notYet = ['External users — moderated founder tests are being scheduled', 'macOS build', 'Released binaries'];
+---
+
+<BaseLayout
+  title="Deep Dive"
+  description="HERA, dissected — the wrong first version, the three discoveries that came from it, and exactly what runs today."
+>
+  <!-- The observation -->
+  <section class="section">
+    <div class="container-prose reveal">
+      <p class="eyebrow">Deep Dive</p>
+      <h1 class="mt-6 text-h1 font-semibold tracking-tight">How HERA actually works<br /><span class="font-normal">and how I found it.</span></h1>
+      <div class="prose-hera mt-8">
+        <p>
+          I build HERA by directing AI coding agents. That’s how I hit the real problem: generating work stopped
+          being the bottleneck. The project <em>around</em> the generation was. Context re-explained in every chat.
+          Outputs with no review state. Plans that never learned from finished work.
+        </p>
+        <p>
+          Chat products organize conversations. Project tools assume you already know the plan.
+          <strong>HERA creates and executes the plan from the conversation.</strong> Many of its capabilities exist
+          somewhere; what’s new is composing them into one continuous experience a person can actually read.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The first mistake -->
+  <section class="section border-t border-line">
+    <div class="container-prose reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">The first version was wrong</h2>
+      <div class="prose-hera mt-6">
+        <p>
+          The first HERA had rooms you created up front, forms to fill, a “War Room” chat, and project-management
+          ritual dressed in a game world. It looked alive. It was the industry’s mistake in a costume:
+          <strong>it made the human translate themselves into software.</strong> The exact thing I had spent years
+          building against.
+        </p>
+        <p>Recognizing that produced the product. Everything below came out of tearing this version down.</p>
+      </div>
+    </div>
+    <div class="container-page mt-10 grid gap-6 sm:grid-cols-2">
+      {
+        heraMedia.oldVersion.map((shot) => (
+          <MediaFrame image={shot.image} caption={shot.caption} class="reveal" />
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- The shifts -->
+  <section class="section border-t border-line">
+    <div class="container-prose reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">What changed</h2>
+      <p class="prose-hera mt-6">
+        One rule drives every change: the system decides what your input should become — its form, destination,
+        state, and next step — instead of making you perform that translation.
+      </p>
+      <div class="mt-8 space-y-0 rounded-card border border-line bg-surface">
+        {
+          shifts.map(([before, after], i) => (
+            <div
+              class:list={['flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-baseline sm:gap-4', i > 0 && 'border-t border-line']}
+            >
+              <span class="text-sm text-faint line-through decoration-faint/60 sm:w-56 sm:shrink-0">{before}</span>
+              <span class="text-sm font-medium text-ink">{after}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Discovery 1: The Void -->
+  <section id="void" class="section border-t border-line scroll-mt-24">
+    <div class="container-prose reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">The Void — persistence became a moment</h2>
+      <div class="prose-hera mt-6">
+        <p>
+          Every tool makes you decide up front whether something is temporary or permanent. New chat or new project?
+          Nobody knows at the start of a thought — that’s what the thought is for.
+        </p>
+        <p>
+          In HERA you arrive in the Void and just talk. If the thought proves real, it migrates into a room —
+          atomically, with live runs re-parented and the conversation and scroll preserved. You never feel
+          transferred. <strong>A conversation begins disposable and earns its structure.</strong>
+        </p>
+        <p>
+          An early audit caught that my Void was still the old game surface pretending to be this. It was rebuilt as
+          a real, server-backed chat. The migration mechanics are verified working; room auto-naming is still weak,
+          and I say so instead of demoing around it.
+        </p>
+      </div>
+      <MediaFrame missing={heraMedia.migrationRecording.missing} class="reveal mt-8" />
+    </div>
+  </section>
+
+  <!-- Discovery 2: The composer -->
+  <section id="composer" class="section border-t border-line scroll-mt-24">
+    <div class="container-prose reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">The composer — a cockpit, not an input box</h2>
+      <div class="prose-hera mt-6">
+        <p>
+          Early on, every feature was growing its own modal. The fix was a grammar: chat is immutable history, the
+          workspace is persistent truth, and the composer owns whatever is <em>unresolved right now</em>. So there
+          is one composer, and it transforms — into a question, a survey, a goal, a review — as the moment demands.
+        </p>
+        <p>
+          It failed before it worked: the survey once appeared before Iris asked her question, and the timing
+          destroyed the context. I diagnosed it in writing (“repair question–survey timing”), fixed it, and cut the
+          composer catalogue down instead of growing it. Subtraction is most of this design.
+        </p>
+      </div>
+      <MediaFrame missing={heraMedia.composerStrip.missing} class="reveal mt-8" />
+    </div>
+  </section>
+
+  <!-- Discovery 3: The living roadmap -->
+  <section id="roadmap" class="section border-t border-line scroll-mt-24">
+    <div class="container-prose reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">The living roadmap — plans that move because work happened</h2>
+      <div class="prose-hera mt-6">
+        <p>
+          A generated plan that never changes is a screenshot of a plan. The roadmap had to be alive: approve a
+          task and the goal advances, the wave unblocks, the roadmap moves — without anyone updating a document.
+        </p>
+        <p>
+          My own July readiness audit named this as the product’s biggest fiction at the time: completed tasks did
+          not advance anything. The cascade was specified, built, and proven the same day — 29 offline tests, a live
+          API proof that survives a backend restart, and browser-level verification of the roadmap advancing without
+          a reload. The spec even defines what Revert, Reject, Stopped, and Cancelled honestly mean.
+        </p>
+        <p>
+          That loop — audit finds the fiction, spec adjudicates it, build closes it — is HERA’s own workflow. I run
+          my company on the thing I’m building.
+        </p>
+      </div>
+      <MediaFrame missing={heraMedia.roadmapRecording.missing} class="reveal mt-8" />
+    </div>
+  </section>
+
+  <!-- Honesty as architecture -->
+  <section class="section border-t border-line">
+    <div class="container-prose reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">Honesty is enforced by code</h2>
+      <div class="prose-hera mt-6">
+        <p>
+          During a test, a run error told me to “send the prompt again” — while the output showed the work had
+          already happened. That’s not an error message; that’s the system not knowing its own truth.
+        </p>
+        <p>
+          Now narration renders only when backed by real events, and deliberation renders only when the model
+          genuinely deliberated. Otherwise: silence. No thinking theatre.
+          <strong>The code emits the proof — never the model’s word.</strong>
+        </p>
+      </div>
+      <MediaFrame missing={heraMedia.workedForShot.missing} class="reveal mt-8 aspect-[2/1]" />
+    </div>
+  </section>
+
+  <!-- Current truth -->
+  <section class="section border-t border-line">
+    <div class="container-prose reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">Where it honestly stands</h2>
+      <p class="prose-hera mt-6">
+        Knowing the exact boundary of your product beats pretending it’s finished.
+      </p>
+      <div class="mt-8 grid gap-8 sm:grid-cols-3">
+        <div>
+          <p class="text-sm font-semibold text-ink">Runs today, verified</p>
+          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted">
+            {workingToday.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-ink">Being wired</p>
+          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted">
+            {inProgress.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-ink">Not yet</p>
+          <ul class="mt-3 space-y-2 text-sm leading-relaxed text-muted">
+            {notYet.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why me -->
+  <section class="section border-t border-line">
+    <div class="container-prose reveal">
+      <div class="prose-hera">
+        <p>
+          Four of HERA’s load-bearing systems existed as independent products before HERA had a name — an
+          interface that lives where you are, orchestration by rules, intervention where intention drifts, and
+          context that survives stopping. I built each one for myself, years apart, and audited my way to the
+          product that unifies them.
+        </p>
+      </div>
+      <a
+        href={withBase('work/lineage/')}
+        class="mt-6 inline-block text-sm text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
+      >
+        See the systems that led here →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

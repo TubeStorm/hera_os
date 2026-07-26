@@ -1,0 +1,153 @@
+---
+// Lineage — "The Long Build". Reverse lineage, not chronology: HERA's most
+// direct ancestors first, then the supporting systems, then the early range.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LineageEntry from '../../components/LineageEntry.astro';
+import MediaFrame from '../../components/MediaFrame.astro';
+import { withBase } from '../../data/site';
+import { featured, ancestors, experiments, range, convergence } from '../../data/lineage';
+---
+
+<BaseLayout
+  title="The Long Build"
+  description="HERA was not a sudden idea. It is where years of building systems for interfaces, orchestration, behavior, and context finally converged."
+>
+  <!-- Opening -->
+  <section class="section">
+    <div class="container-prose reveal">
+      <p class="eyebrow">Lineage</p>
+      <h1 class="mt-6 text-h1 font-semibold tracking-tight">The Long Build</h1>
+      <div class="prose-hera mt-8">
+        <p>
+          I built these tools because I needed them. No customers waiting, no investors watching, no public
+          identity to maintain. I saw friction, designed a system around it, built the product, and used it.
+          HERA is not the beginning of that behavior — it is the largest expression of it.
+        </p>
+      </div>
+      <p class="mt-6 text-sm text-faint">
+        Ordered by how directly each one leads to HERA. Dates mark when each was built — the sequence traces the
+        ideas that converged.
+      </p>
+    </div>
+  </section>
+
+  <!-- The three that lead straight to HERA -->
+  <section class="border-t border-line">
+    <div class="container-page">
+      <div class="divide-y divide-line">
+        {featured.map((p) => <div class="section"><LineageEntry project={p} /></div>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Supporting ancestors + experiments -->
+  <section class="border-t border-line">
+    <div class="container-page">
+      <div class="divide-y divide-line">
+        {[...ancestors, ...experiments].map((p) => <div class="py-16 sm:py-20"><LineageEntry project={p} /></div>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Earlier Works — collapsible drawer (experiments + range) -->
+  <section class="border-t border-line">
+    <div class="container-page">
+      <!-- Drawer toggle -->
+      <button
+        id="earlier-works-toggle"
+        aria-expanded="false"
+        aria-controls="earlier-works-panel"
+        class="group flex w-full items-center justify-between py-8 text-left"
+      >
+        <h2 class="text-h2 font-semibold tracking-tight">Earlier Works</h2>
+        <span
+          id="earlier-works-chevron"
+          class="ml-4 shrink-0 text-muted transition-transform duration-300"
+          aria-hidden="true"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </span>
+      </button>
+
+      <!-- Drawer panel (hidden by default) -->
+      <div
+        id="earlier-works-panel"
+        hidden
+        class="pb-16"
+      >
+        <!-- Experiments: ClockIt, CollageWhiz, CourseMate, GalleryGrouper -->
+        <div class="divide-y divide-line">
+          {experiments.map((p) => <div class="py-16 sm:py-20"><LineageEntry project={p} /></div>)}
+        </div>
+
+        <!-- Range grid: StickyTabs, TotalTally, Aurora, Fitbit, LifeStream -->
+        <div class="mt-10 grid gap-10 md:grid-cols-3">
+          {
+            range.map((p) => (
+              <div class="reveal">
+                <div class="flex items-center gap-3">
+                  <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-ink text-sm font-bold text-paper">
+                    {p.mark}
+                  </span>
+                  <h3 class="text-h3 font-semibold">{p.title}</h3>
+                </div>
+                <p class="mt-2 text-sm text-muted">
+                  {p.date} · {p.meta}
+                </p>
+                <p class="mt-3 text-sm leading-relaxed text-muted">{p.built}</p>
+                <MediaFrame video={p.video} image={p.image} missing={p.missing} class="mt-4" />
+                <p class="mt-2 text-xs text-faint">{p.status}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Convergence -->
+  <section class="section border-t border-line">
+    <div class="container-prose">
+      <div class="space-y-5">
+        {
+          convergence.map((t) => (
+            <div class="reveal flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+              <span class="text-sm font-semibold text-ink sm:w-32 sm:shrink-0">{t.from}</span>
+              <span class="text-sm text-muted">{t.lesson}</span>
+              <span class="hidden text-faint sm:inline" aria-hidden="true">→</span>
+              <span class="text-sm text-ink">{t.into}</span>
+            </div>
+          ))
+        }
+      </div>
+      <div class="reveal mt-14 flex flex-col items-center text-center">
+        <span class="h-14 w-px bg-line" aria-hidden="true"></span>
+        <p class="mt-8 text-h2 font-semibold tracking-tight">HERA is where these four became one.</p>
+        <a
+          href={withBase('work/hera/')}
+          class="mt-5 text-sm text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
+        >
+          The deep dive →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const toggle = document.getElementById('earlier-works-toggle');
+  const panel = document.getElementById('earlier-works-panel');
+  const chevron = document.getElementById('earlier-works-chevron');
+
+  if (toggle && panel && chevron) {
+    toggle.addEventListener('click', () => {
+      const isOpen = !panel.hidden;
+      panel.hidden = isOpen;
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+  }
+</script>
+

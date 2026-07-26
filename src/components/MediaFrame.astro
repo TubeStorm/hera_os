@@ -1,0 +1,91 @@
+---
+// One component for every piece of evidence media on the site.
+//  - video   → inline player, click for normal fullscreen playback
+//  - image   → click to zoom on a black backdrop, ✕ (or Esc) to close
+//  - missing → a static blank frame naming the asset that belongs here
+// Captions never render statically — hover only (per design law).
+import { withBase } from '../data/site';
+
+interface Props {
+  video?: string;
+  image?: string;
+  missing?: string;
+  caption?: string;
+  /** tailwind aspect class; default 16:9 */
+  aspect?: string;
+  class?: string;
+}
+const { video, image, missing, caption, aspect = 'aspect-video', class: className = '' } = Astro.props;
+---
+
+<figure class:list={['media-frame group relative overflow-hidden rounded-card border border-line bg-surface', aspect, className]}>
+  {
+    video ? (
+      <video
+        class="h-full w-full cursor-pointer object-contain"
+        src={withBase(video)}
+        preload="metadata"
+        controls
+        playsinline
+        data-media-video
+      />
+    ) : image ? (
+      <img
+        class="h-full w-full cursor-zoom-in object-cover"
+        src={withBase(image)}
+        alt={caption ?? ''}
+        loading="lazy"
+        data-media-zoom
+        data-caption={caption ?? ''}
+      />
+    ) : (
+      <div class="grid h-full w-full place-items-center p-6">
+        <p class="max-w-md text-center text-sm text-faint">{missing}</p>
+      </div>
+    )
+  }
+  {caption && (video || image) && (
+    <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/70 to-transparent px-4 pb-3 pt-10 text-sm text-white opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+      {caption}
+    </figcaption>
+  )}
+</figure>
+
+<script>
+  // Shared lightbox for zoomable images — created once per page.
+  function ensureLightbox(): HTMLElement {
+    let box = document.getElementById('media-lightbox');
+    if (box) return box;
+    box = document.createElement('div');
+    box.id = 'media-lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.style.cssText =
+      'position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;background:#000;padding:2.5rem;';
+    box.innerHTML =
+      '<button aria-label="Close" style="position:absolute;top:1rem;right:1.25rem;font-size:1.6rem;line-height:1;color:#fff;background:none;border:none;cursor:pointer;padding:.5rem;">&times;</button><img style="max-width:100%;max-height:100%;object-fit:contain;" alt="" />';
+    const close = () => {
+      box!.style.display = 'none';
+      document.body.style.overflow = '';
+    };
+    box.addEventListener('click', (e) => {
+      if (e.target === box || (e.target as HTMLElement).tagName === 'BUTTON') close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+    document.body.appendChild(box);
+    return box;
+  }
+
+  document.querySelectorAll<HTMLImageElement>('[data-media-zoom]').forEach((img) => {
+    img.addEventListener('click', () => {
+      const box = ensureLightbox();
+      const big = box.querySelector('img')!;
+      big.src = img.src;
+      big.alt = img.alt;
+      box.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+</script>

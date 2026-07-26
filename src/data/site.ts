@@ -52,11 +52,11 @@ export const contact: {
     display: 'github.com/TubeStorm',
     confirmed: true,
   },
-  // Confirmed from Favour_Diokpo_Resume_2026.pdf (public contact block).
+  // YC application email (per YC Website Shipping Mode brief).
   email: {
     label: 'Email',
-    href: 'mailto:favourdiokpo@icloud.com',
-    display: 'favourdiokpo@icloud.com',
+    href: 'mailto:favourdiokpo@gmail.com',
+    display: 'favourdiokpo@gmail.com',
     confirmed: true,
   },
   // Confirmed from Favour_Diokpo_Resume_2026.pdf (public contact block).
@@ -81,11 +81,12 @@ export const resumeAsset = {
   path: 'resume/Favour-Diokpo-Resume.pdf',
 };
 
+// Live navigation. Old pages (work index, resume, about, enterprise-tools)
+// are disconnected — files kept in the repo, no longer linked anywhere.
 export const nav = [
-  { label: 'Work', href: 'work/' },
-  { label: 'HERA', href: 'work/hera/' },
-  { label: 'Resume', href: 'resume/' },
-  { label: 'About', href: 'about/' },
+  { label: 'HERA OS', href: '' },
+  { label: 'Deep Dive', href: 'work/hera/' },
+  { label: 'Lineage', href: 'work/lineage/' },
   { label: 'Contact', href: 'contact/' },
 ];
 

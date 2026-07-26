@@ -21,7 +21,7 @@ See VOICE_AND_PERSONA_NOTES.md for the full list. Headliners: "making agentic AI
 One grouped page (environment + shared stats), three clearly-labeled workstream sections, each with problem / role / designed / proof / what-it-demonstrates. Work page and resume list them as three separate projects that link into the grouped page.
 
 ## What claims are source-supported
-All published metrics trace to the 2026 resume PDF and the two case-study source docs; all HERA mechanics trace to the vision docs, the closeout records in the Hermes repo, or the screenshots themselves. Full table in EVIDENCE_MAP.md. No invented business metrics; HERA labeled "In development, unreleased."
+All published metrics trace to the 2026 resume PDF and the two case-study source docs; all HERA mechanics trace to the vision docs, the closeout records in the HERA repo, or the screenshots themselves. Full table in EVIDENCE_MAP.md. No invented business metrics; HERA labeled "In development, unreleased."
 
 ## What still needs real screenshots
 - **Competitor halves of the comparison figures** — bucket list with exact filenames waiting for Favour in `docs/References/competitors/SCREENSHOT_BUCKET_LIST.md` (ChatGPT manage-memories panel, usage dashboards, Codex task list, etc.).

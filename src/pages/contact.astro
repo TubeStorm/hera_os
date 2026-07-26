@@ -1,86 +1,40 @@
 ---
+// Contact — the nav already said what this page is. Just the channels.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/Button.astro';
-import { confirmedContacts, contact, resumeAsset, site, withBase } from '../data/site';
+import { contact, resumeAsset, withBase } from '../data/site';
 
-// Publish ONLY confirmed contact links. Email + LinkedIn stay hidden until real
-// values are set in src/data/site.ts (see ASSETS_NEEDED.md). No fake links ship.
-const pendingChannels = [contact.email, contact.linkedin].filter((c) => !c.confirmed);
+const channels = [
+  { label: 'Email', href: contact.email.href, display: contact.email.display, external: false },
+  { label: 'LinkedIn', href: contact.linkedin.href, display: contact.linkedin.display, external: true },
+  { label: 'GitHub', href: contact.github.href, display: contact.github.display, external: true },
+];
 ---
 
-<BaseLayout title="Contact" description="Get in touch with Favour Diokpo.">
+<BaseLayout title="Contact" description="Reach Favour Diokpo.">
   <section class="section">
-    <div class="container-page grid gap-14 lg:grid-cols-2 lg:gap-20">
-      <!-- Left: pitch -->
-      <div class="reveal">
-        <p class="eyebrow mb-5">Contact</p>
-        <h1 class="text-h1 font-semibold tracking-tight">Tell me what your users can&rsquo;t see.</h1>
-        <p class="prose-hera mt-6">
-          Whether you&rsquo;re building an AI product, untangling a workflow, or rebuilding an
-          internal tool people avoid — I&rsquo;d like to hear about it. The best first message is one
-          sentence about the part that breaks after the demo.
-        </p>
-        <p class="mt-4 text-sm text-muted">
-          Selected work — including HERA screens and internal-tools explorations — can be shared in
-          <strong class="font-medium text-ink">redacted form on request</strong>.
-        </p>
-      </div>
-
-      <!-- Right: real channels only -->
-      <div class="reveal" style="transition-delay:80ms">
-        <div class="space-y-4">
-          {
-            confirmedContacts.map((c) => (
-              <a
-                href={c.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="card card-hover flex items-center justify-between gap-4 rounded-card p-5"
-              >
-                <span>
-                  <span class="block text-xs uppercase tracking-[0.12em] text-faint">{c.label}</span>
-                  <span class="mt-0.5 block text-sm font-medium text-ink">{c.display}</span>
-                </span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="text-muted" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-              </a>
-            ))
-          }
-
-          {
-            resumeAsset.available && (
-              <a
-                href={withBase(resumeAsset.path)}
-                download
-                class="card card-hover flex items-center justify-between gap-4 rounded-card p-5"
-              >
-                <span>
-                  <span class="block text-xs uppercase tracking-[0.12em] text-faint">Resume</span>
-                  <span class="mt-0.5 block text-sm font-medium text-ink">Download PDF</span>
-                </span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="text-muted" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg>
-              </a>
-            )
-          }
-
-          <!-- Honest note about channels not yet published -->
-          {
-            pendingChannels.length > 0 && (
-              <div class="rounded-card border border-dashed border-line p-5 text-sm text-muted">
-                <p class="font-medium text-ink">Direct email & LinkedIn coming soon.</p>
-                <p class="mt-1.5 text-faint">
-                  I only publish contact links I&rsquo;ve confirmed. For now, reach me via GitHub — a
-                  direct address and profile will be added here shortly.
-                </p>
-              </div>
-            )
-          }
-        </div>
-
-        <p class="mt-6 text-sm text-faint">{site.location}</p>
-
-        <div class="mt-8">
-          <Button href="work/" variant="ghost">See the work first</Button>
-        </div>
+    <div class="container-prose">
+      <div class="divide-y divide-line">
+        {
+          channels.map((c) => (
+            <a
+              href={c.href}
+              target={c.external ? '_blank' : undefined}
+              rel={c.external ? 'noopener noreferrer' : undefined}
+              class="group flex items-baseline justify-between gap-6 py-6"
+            >
+              <span class="text-xs uppercase tracking-[0.14em] text-faint">{c.label}</span>
+              <span class="text-lead font-medium text-ink transition-colors group-hover:text-muted">{c.display}</span>
+            </a>
+          ))
+        }
+        {
+          resumeAsset.available && (
+            <a href={withBase(resumeAsset.path)} download class="group flex items-baseline justify-between gap-6 py-6">
+              <span class="text-xs uppercase tracking-[0.14em] text-faint">Resume</span>
+              <span class="text-lead font-medium text-ink transition-colors group-hover:text-muted">Download PDF</span>
+            </a>
+          )
+        }
       </div>
     </div>
   </section>

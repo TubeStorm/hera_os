@@ -1,7 +1,11 @@
 ---
 import { nav, site, withBase } from '../data/site';
-const current = Astro.url.pathname;
-const isActive = (href: string) => current.replace(/\/$/, '').endsWith(href.replace(/\/$/, ''));
+const current = Astro.url.pathname.replace(/\/$/, '');
+const isActive = (href: string) => {
+  const target = withBase(href).replace(/\/$/, '');
+  // Home ('') must match exactly; inner pages match by suffix.
+  return href === '' ? current === target : current === target;
+};
 ---
 
 <header class="sticky top-0 z-50">
@@ -30,12 +34,6 @@ const isActive = (href: string) => current.replace(/\/$/, '').endsWith(href.repl
             </a>
           ))
         }
-        <a
-          href={withBase('contact/')}
-          class="ml-1 hidden rounded-pill bg-ink px-4 py-1.5 text-sm font-medium text-paper transition-transform duration-300 ease-smooth hover:-translate-y-px sm:inline-block"
-        >
-          Get in touch
-        </a>
       </div>
     </nav>
   </div>
