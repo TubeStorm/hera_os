@@ -15,7 +15,7 @@ import tailwind from '@astrojs/tailwind';
 // ─────────────────────────────────────────────────────────────────────────────
 
 const GITHUB_USERNAME = 'TubeStorm';
-const REPO_NAME = 'hera-os';
+const REPO_NAME = 'hera_os';
 
 export default defineConfig({
   site: `https://${GITHUB_USERNAME}.github.io`,
