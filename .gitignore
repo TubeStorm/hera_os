@@ -22,3 +22,5 @@ Thumbs.db
 .idea/
 *.zip
 
+# scratch & backups
+ignore_backup/

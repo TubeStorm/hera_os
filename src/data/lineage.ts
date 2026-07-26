@@ -392,22 +392,22 @@ export const convergence = [
   },
 ];
 
-// ── HERA media used on Home + Deep Dive (same replace-here rule) ─────────────
+// ── HERA media used on Home + Deep Dive ───────────────────────────────────────
 export const heraMedia = {
   heroRecording: {
-    missing: 'HERA — current build recording: a messy thought in the Void becoming a room with a roadmap',
+    video: 'videos/hera-demo.mp4',
   },
   migrationRecording: {
-    missing: 'HERA — recording: Void conversation migrating into a room, chat preserved',
+    video: 'videos/hera-void-to-room.mp4',
   },
   roadmapRecording: {
-    missing: 'HERA — recording: a task approved, the goal and roadmap advancing',
+    video: 'videos/hera-task-orchestration.mp4',
   },
   workedForShot: {
-    missing: 'HERA — screenshot: an honest “Worked for” thread under a real run',
+    video: 'videos/hera-worked-for.mp4',
   },
   composerStrip: {
-    missing: 'HERA — stills: the one composer transforming (chat → survey → review)',
+    video: 'videos/hera-composer-transform.mp4',
   },
   oldVersion: [
     { image: 'images/hera/hera-warroom.png', caption: 'HERA, first version — the War Room' },
