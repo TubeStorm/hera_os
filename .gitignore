@@ -24,3 +24,5 @@ Thumbs.db
 
 # scratch & backups
 ignore_backup/
+.agents/
+.claude/
