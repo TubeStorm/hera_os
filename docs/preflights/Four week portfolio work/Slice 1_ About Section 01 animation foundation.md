@@ -1,3 +1,5 @@
+**STATUS: DONE 8/7/20206: NEEDS IMPROVMENT**
+**NEXT -> "D:\Documents\favour-ai-product-portfolio\docs\preflights\Four week portfolio work\Slice 1_ About Section 01 animation foundation - edit.md"**
 Use the attached `about-section-01-foundation.zip`.
 
 "D:\Documents\favour-ai-product-portfolio\docs\UI\about-section-01-foundation"
