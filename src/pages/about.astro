@@ -5,197 +5,419 @@ import { withBase } from '../data/site';
 
 <BaseLayout
   title="About Favour Diokpo"
-  description="How Favour turns unclear ideas into coherent product systems."
+  description="How Favour finds the real problem, defines product behaviour, and designs AI systems people can trust."
 >
-  <!-- Section 1 — Hero / Positioning -->
   <section class="section">
     <div class="container-prose reveal">
       <p class="eyebrow">About</p>
-        <h1 class="mt-6 text-h1 font-semibold tracking-tight">
-          I design systems that turn unclear ideas into coherent, operating software.
-        </h1>
-        <div class="prose-hera mt-6">
+      <h1 class="mt-6 text-h1 font-semibold tracking-tight">
+        I turn messy product problems into systems people can actually trust.
+      </h1>
+      <div class="prose-hera mt-6">
+        <p>
+          I am a Senior UX Specialist at Ubisoft, and I am building HERA OS.
+          The work I enjoy most usually starts before the screen: figuring out
+          what is actually broken, what the system should own, what the AI should
+          decide, and where a human still needs to stay in control.
+        </p>
+        <p>
+          I do not think good AI product design is about adding a smarter model
+          to an old workflow. I think it is about deciding what has to be true
+          around that model so a person can trust the work without carrying the
+          whole system in their head.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section border-t border-line">
+    <div class="container-page reveal">
+      <p class="eyebrow">01</p>
+      <h2 class="mt-4 text-h2 font-semibold tracking-tight">
+        How do you find the real problem?
+      </h2>
+
+      <div class="prose-hera mt-6 max-w-[48rem]">
+        <p>
+          I usually start by asking one thing:
+          <strong>what is the user carrying that the product should be carrying instead?</strong>
+        </p>
+      </div>
+
+      <div class="mt-10 card p-6 sm:p-8">
+        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.4fr]">
+          <div>
+            <p class="eyebrow">The HERA story</p>
+            <h3 class="mt-3 text-xl font-semibold tracking-tight">
+              I thought the problem was managing agents.
+              It turned out the problem was everything I had to remember for them.
+            </h3>
+
+            <div class="prose-hera mt-5">
+              <p>
+                AI agents could already ask questions, use tools, and work for long periods.
+                But I was still remembering which file was current, what I had already decided,
+                what another agent had learned, which version had been reviewed, and whether
+                I had answered the same question before.
+              </p>
+              <p>
+                HERA started because I kept feeling that exact problem while working with AI.
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-8">
+            <div>
+              <p class="text-sm font-semibold text-ink">1 — What I questioned</p>
+              <p class="text-sm text-muted mt-2">
+                Why should an intelligent product keep asking me to act as its memory?
+                If I already told a friend I went to Ibiza, I expect the next useful question
+                to be “who did you go with?”, not “where did you travel?”
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm font-semibold text-ink">2 — What I realized</p>
+              <p class="text-sm text-muted mt-2">
+                The bottleneck was not simply model intelligence. It was trust.
+                I needed to know that when the AI interrupted me, it had already checked
+                the information I had given it and genuinely needed something only I could decide.
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm font-semibold text-ink">3 — The product decision</p>
+              <p class="text-sm text-muted mt-2">
+                Make context part of the product, not something hidden inside a prompt.
+                Decisions, files, previous work, accepted results and ongoing tasks should have
+                stable places the system can inspect and the human can audit.
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm font-semibold text-ink">4 — What that changed</p>
+              <p class="text-sm text-muted mt-2">
+                HERA became less about “a better chat” and more about an operating environment
+                for work: the person can arrive with rough intent, the system turns it into
+                structured work, and interruptions only happen when the human genuinely matters.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose-hera mt-8 max-w-[48rem]">
+        <p>
+          That is usually how I work: I follow the friction until I can describe the burden
+          the user should never have been carrying in the first place.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section border-t border-line">
+    <div class="container-page reveal">
+      <p class="eyebrow">02</p>
+      <h2 class="mt-4 text-h2 font-semibold tracking-tight">
+        How do you decide what the AI should do — and what the product should enforce?
+      </h2>
+
+      <div class="prose-hera mt-6 max-w-[48rem]">
+        <p>
+          I separate three things that AI products often blur together:
+          <strong>software rules, AI judgment, and human judgment.</strong>
+        </p>
+        <p>
+          If a rule can be guaranteed cheaply in code, I do not want to spend model intelligence
+          hoping the AI remembers it. If the answer requires interpretation, research, or synthesis,
+          that is where the model is useful. If two valid answers depend on what the human actually
+          wants, the product should come back to the human.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-3">
+        <div class="card p-6">
+          <p class="eyebrow">The product guarantees</p>
+          <h3 class="mt-3 text-base font-semibold tracking-tight">
+            Things that should not depend on the AI “remembering”
+          </h3>
+          <ul class="mt-5 text-sm text-muted space-y-3">
+            <li>Which piece of work is active.</li>
+            <li>What the AI is allowed to access.</li>
+            <li>Whether an answer has already been submitted.</li>
+            <li>Whether the current result is still waiting for review.</li>
+            <li>How a known capability is found and loaded.</li>
+          </ul>
+        </div>
+
+        <div class="card p-6">
+          <p class="eyebrow">The AI decides</p>
+          <h3 class="mt-3 text-base font-semibold tracking-tight">
+            Things that genuinely benefit from intelligence
+          </h3>
+          <ul class="mt-5 text-sm text-muted space-y-3">
+            <li>Which context is relevant to inspect.</li>
+            <li>What needs research before work can continue.</li>
+            <li>How to break a large outcome into bounded work.</li>
+            <li>Which specialist or tool is appropriate for the job.</li>
+            <li>Whether a low-risk assumption is safe enough to make.</li>
+          </ul>
+        </div>
+
+        <div class="card p-6">
+          <p class="eyebrow">The human decides</p>
+          <h3 class="mt-3 text-base font-semibold tracking-tight">
+            Things the system should never quietly invent
+          </h3>
+          <ul class="mt-5 text-sm text-muted space-y-3">
+            <li>What outcome actually matters.</li>
+            <li>Preferences that materially change the result.</li>
+            <li>Whether a risky action is allowed.</li>
+            <li>Whether a result is acceptable.</li>
+            <li>When the direction itself needs to change.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-8 card p-6 sm:p-8">
+        <p class="eyebrow">A very unglamorous example</p>
+        <h3 class="mt-3 text-xl font-semibold tracking-tight">
+          More AI was not the fix.
+        </h3>
+        <div class="prose-hera mt-5 max-w-[52rem]">
           <p>
-            Most software asks humans to adapt themselves to the machine's structure. I build systems where intent comes first, deterministic rules execute the work, and human judgment stays where it belongs. I design systems that make you trust complicated tools.
+            During HERA development, two parallel builders exposed a naming mismatch:
+            one part of the system stored a Skill name with spaces while another looked
+            for the same name with underscores. Digging further showed that the problem
+            was not one broken Skill — the entire capability family could silently exist
+            without ever being found.
           </p>
           <p>
-            Too often, the technology can perform the action, but the human is still forced to carry the workflow. I have spent almost five years at Ubisoft designing internal operational tools — 8 enterprise platforms, scaled to over 1,000+ users and 16 independent software tools, culminating in HERA OS.
+            I did not solve that by telling the model to “try harder.” I moved the guarantee
+            into deterministic lookup so the product checks safe aliases automatically.
+            The AI should spend intelligence on the work, not on guessing how a filename was formatted.
           </p>
         </div>
+      </div>
     </div>
   </section>
 
-  <!-- Section 2 — How I find the real problem -->
   <section class="section border-t border-line">
     <div class="container-page reveal">
-      <h2 class="text-h2 font-semibold tracking-tight">How I find the real problem</h2>
-      <div class="prose-hera mt-6 max-w-[46rem]">
+      <p class="eyebrow">03</p>
+      <h2 class="mt-4 text-h2 font-semibold tracking-tight">
+        How do you know an AI system actually works?
+      </h2>
+
+      <div class="prose-hera mt-6 max-w-[48rem]">
         <p>
-          The visible friction is rarely the root cause. Software breaks when it forces humans to perform filing, context tracking, and state management the system should own.
+          I learned the annoying way that <strong>“it exists”</strong> is not the same as <strong>“a user can reach it.”</strong>
         </p>
       </div>
 
-      <div class="mt-10 grid gap-6 sm:grid-cols-3">
-        <!-- Card 1 -->
-        <div class="card p-6">
-          <h3 class="text-base font-semibold tracking-tight mb-3">Questioning inherited conventions</h3>
-          <p class="text-sm text-muted mb-4">Exposing policy flaws and UI defaults others accepted.</p>
-          <ul class="text-sm text-ink space-y-3 list-disc ml-4">
-            <li><strong>Employee Credits Platform:</strong> Proved Ubisoft's 3-hour credit length was caused by single-column formatting, not multi-role crediting — reversed a long-standing HQ France policy.</li>
-            <li><strong>Resource Management Platform:</strong> Discovered users were manually overwriting end-dates to close requests. No explicit close action existed. The workaround was corrupting HR logs and Finance budgets.</li>
-            <li><strong>WallPlanner / HERA:</strong> Rejected the assumption that a planner must be a separate application window.</li>
-          </ul>
-        </div>
-        
-        <!-- Card 2 -->
-        <div class="card p-6">
-          <h3 class="text-base font-semibold tracking-tight mb-3">Finding the real bottleneck through forensic audit</h3>
-          <p class="text-sm text-muted mb-4">Auditing under real organizational pressure before proposing solutions.</p>
-          <ul class="text-sm text-ink space-y-3 list-disc ml-4">
-            <li>101-person global study on the Resource Management Platform when frequent users rated time-saved only 2.16/5.</li>
-            <li>Audited 40+ inconsistent modals before recommending any redesign.</li>
-            <li>Mapped 25+ silent workflow flaws — none of which appeared in the original problem brief.</li>
-          </ul>
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        <div class="card p-6 sm:p-8">
+          <p class="eyebrow">Failure 01</p>
+          <h3 class="mt-3 text-lg font-semibold tracking-tight">
+            Green tests. Zero real permission requests.
+          </h3>
+          <div class="prose-hera mt-5">
+            <p>
+              HERA's permission work looked healthy in automated testing. Then I forced the team
+              to test it through the real product using an actual task a person might want done.
+            </p>
+            <p>
+              The permission engine was never reached. The “real” test had only described the
+              behaviour instead of actually exercising it.
+            </p>
+            <p>
+              That changed my definition of proof: real task, real model, real runtime,
+              real frontend, and a result a human can actually inspect.
+            </p>
+          </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="card p-6">
-          <h3 class="text-base font-semibold tracking-tight mb-3">Letting intent arrive rough</h3>
-          <p class="text-sm text-muted mb-4">Human-centered intake that earns structure rather than forcing it.</p>
-          <ul class="text-sm text-ink space-y-3 list-disc ml-4">
-            <li><strong>The Void in HERA:</strong> founders arrive with messy thinking; the system converts it to an Objective without forcing form-filling.</li>
-            <li><strong>Hybrid Workplace Platform:</strong> discovered employees feared rejection before speaking to their manager; designed a mandatory "Did you speak with your employee?" accountability step rather than a rigid form gate.</li>
-          </ul>
+        <div class="card p-6 sm:p-8">
+          <p class="eyebrow">Failure 02</p>
+          <h3 class="mt-3 text-lg font-semibold tracking-tight">
+            More than twenty Skills existed. None had ever run.
+          </h3>
+          <div class="prose-hera mt-5">
+            <p>
+              The files were there. The instructions were there. The system still could not find them
+              because of a tiny naming mismatch.
+            </p>
+            <p>
+              That failure reinforced a rule I now use constantly:
+              <strong>reachability is part of the product.</strong>
+              Context, tools, permissions, Skills and previous work do not matter merely because they exist.
+              They matter when the right thing can be found at the moment the work needs it.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 3 — How I define system behaviour -->
   <section class="section border-t border-line">
     <div class="container-page reveal">
-      <h2 class="text-h2 font-semibold tracking-tight">How I define system behaviour</h2>
-      <div class="prose-hera mt-6 max-w-[46rem]">
+      <p class="eyebrow">04</p>
+      <h2 class="mt-4 text-h2 font-semibold tracking-tight">
+        How do you actually use AI in your own work?
+      </h2>
+
+      <div class="prose-hera mt-6 max-w-[48rem]">
         <p>
-          Product design is not screen layout. It is object design, state machines, and system invariants specified before code is written. 
+          I do not use AI to outsource product judgment. I use it to compress the work around that judgment.
         </p>
-        <p class="text-sm mt-4 text-muted bg-line/30 p-4 rounded-lg">
-          The same behaviour-specification discipline produced the 5 explicit approval flows in the Hybrid Workplace Platform, the formal Close Request state machine in the Resource Management Platform, and the 29-test deterministic verification suite for HERA's roadmap cascade engine.
+        <p>
+          My goal is to make the instruction smaller because the system around the instruction is better.
+          In the extreme, I want a user to be able to say something as simple as “build the About page”
+          and have the surrounding product already know the relevant decisions, context, permissions,
+          workflow, acceptance criteria and review rules. "I know, crazy!"
         </p>
       </div>
 
-      <div class="mt-10 grid gap-6 sm:grid-cols-2">
-        <div class="card p-6">
-          <h3 class="text-base font-semibold tracking-tight mb-2">1. The Void (Intake)</h3>
-          <p class="text-sm text-muted">Unstructured intent converted into an Objective without context loss. Founder arrives messy; system earns the structure.</p>
+      <div class="mt-10 grid gap-8 lg:grid-cols-2">
+        <div class="card p-6 sm:p-8">
+          <p class="eyebrow">What stays with me</p>
+          <h3 class="mt-3 text-lg font-semibold tracking-tight">
+            Product judgment
+          </h3>
+          <ul class="mt-5 text-sm text-muted space-y-3">
+            <li>Finding the real problem.</li>
+            <li>Deciding the outcome worth pursuing.</li>
+            <li>Defining how the system should behave.</li>
+            <li>Choosing what must remain human.</li>
+            <li>Making the important trade-offs.</li>
+            <li>Accepting or rejecting the final result.</li>
+          </ul>
         </div>
-        <div class="card p-6">
-          <h3 class="text-base font-semibold tracking-tight mb-2">2. The Transforming Composer (Interaction)</h3>
-          <p class="text-sm text-muted">One morphing input surface replacing modal sprawl. Chat, Survey, Goal, Task, and Review states morph in-place.</p>
+
+        <div class="card p-6 sm:p-8">
+          <p class="eyebrow">What I let AI accelerate</p>
+          <h3 class="mt-3 text-lg font-semibold tracking-tight">
+            The work around the judgment
+          </h3>
+          <ul class="mt-5 text-sm text-muted space-y-3">
+            <li>Repository and evidence research.</li>
+            <li>Exploring multiple approaches quickly.</li>
+            <li>Implementation from a bounded specification.</li>
+            <li>Adversarial critique of a proposed solution.</li>
+            <li>Independent verification.</li>
+            <li>Repetitive execution and documentation.</li>
+          </ul>
         </div>
-        <div class="card p-6">
-          <h3 class="text-base font-semibold tracking-tight mb-2">3. The Living Roadmap (Orchestration)</h3>
-          <p class="text-sm text-muted">Plans that advance automatically when real work passes review gates. Not a static task list.</p>
-        </div>
-        <div class="card p-6">
-          <h3 class="text-base font-semibold tracking-tight mb-2">4. Versioned Artifacts & Review Gates (Deliverables)</h3>
-          <p class="text-sm text-muted">Disk-backed output with provenance, timestamps, and mandatory human approval before promotion.</p>
-        </div>
+      </div>
+
+      <div class="prose-hera mt-8 max-w-[48rem]">
+        <p>
+          The surprising thing I learned is that getting an agent to build is often the easy part.
+          The difficult part is everything that has to be true <em>before</em> you press Send:
+          the context, the rules, the handoffs, the permissions, the evidence, and the definition of done.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Section 4 — Human authority / AI leverage -->
   <section class="section border-t border-line">
     <div class="container-page reveal">
-      <h2 class="text-h2 font-semibold tracking-tight">Human authority, AI leverage</h2>
-      <div class="prose-hera mt-6 max-w-[46rem]">
+      <p class="eyebrow">05</p>
+      <h2 class="mt-4 text-h2 font-semibold tracking-tight">
+        Is this way of thinking specific to AI?
+      </h2>
+
+      <div class="prose-hera mt-6 max-w-[48rem]">
         <p>
-          I run AI agents as researchers, builders, and critics against my own specifications — without outsourcing product judgment.
-        </p>
-        <p class="text-sm mt-4 text-muted">
-          <strong>Verification discipline:</strong> Work is verified by an independent agent that did not implement it. HERA's narration ("Worked for 37s") renders only when backed by real runtime events — not simulated. The operating system that built this portfolio follows the same rules.
+          No. HERA made the pattern easier to name, but I had been doing versions of the same work
+          inside enterprise products for years.
         </p>
       </div>
 
-      <div class="mt-10 grid gap-10 sm:grid-cols-2">
-        <div>
-          <h3 class="text-base font-semibold tracking-tight mb-4 border-b border-line pb-2">What I own:</h3>
-          <ul class="text-sm text-ink space-y-2 list-disc ml-4">
-            <li>Identifying the real problem</li>
-            <li>Product invention and object design</li>
-            <li>Mental models and system primitives</li>
-            <li>Rules, state machines, and system invariants</li>
-            <li>Human-vs-AI authority boundaries</li>
-            <li>Acceptance criteria</li>
-            <li>Final judgment</li>
-          </ul>
+      <div class="mt-10 card p-6 sm:p-8">
+        <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <p class="eyebrow">Ubisoft</p>
+            <h3 class="mt-3 text-xl font-semibold tracking-tight">
+              The systems changed. The questions did not.
+            </h3>
+          </div>
+
+          <div class="space-y-7">
+            <div>
+              <p class="text-sm font-semibold text-ink">Resource planning</p>
+              <p class="text-sm text-muted mt-2">
+                I led research across 1,000+ users, then audited 40+ modal patterns before proposing
+                changes. The job was not “make the interface cleaner.” It was understanding why people
+                did not trust a system they had to use every day.
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm font-semibold text-ink">Hybrid workplace approvals</p>
+              <p class="text-sm text-muted mt-2">
+                I translated an ambiguous multi-role process into five explicit approval flows,
+                with clearer accountability and decision messaging under HR and legal constraints.
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm font-semibold text-ink">Capacity governance</p>
+              <p class="text-sm text-muted mt-2">
+                I chose warning-based decision support over hard blocking so the product could surface
+                risk without pretending policy should replace human judgment.
+              </p>
+            </div>
+          </div>
         </div>
-        <div>
-          <h3 class="text-base font-semibold tracking-tight mb-4 border-b border-line pb-2">What AI can accelerate:</h3>
-          <ul class="text-sm text-ink space-y-2 list-disc ml-4">
-            <li>Bounded research and repository investigation</li>
-            <li>Variant exploration against approved specifications</li>
-            <li>Implementation against a bounded work packet</li>
-            <li>Adversarial critique of my own reasoning</li>
-            <li>Independent verification (agent checking work it did not write)</li>
-            <li>Repetitive execution</li>
-          </ul>
-        </div>
+      </div>
+
+      <div class="prose-hera mt-8 max-w-[48rem]">
+        <p>
+          That is the through-line in my work: find the burden hiding underneath the interface,
+          make the rules understandable, and put the right responsibility back into the system.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Section 5 — The connection: Ubisoft → HERA -->
   <section class="section border-t border-line">
     <div class="container-page reveal">
-      <h2 class="text-h2 font-semibold tracking-tight">From enterprise platforms to HERA OS</h2>
-      <div class="prose-hera mt-6 max-w-[46rem]">
-        <p>
-          5 years designing internal tools for 1,000+ people at Ubisoft. One solo-built AI operating system. The same method — applied to very different scales.
-        </p>
-      </div>
+      <p class="eyebrow">What I want to work on next</p>
+      <h2 class="mt-4 text-h2 font-semibold tracking-tight">
+        Products where behaviour is the hard part.
+      </h2>
 
-      <div class="mt-10 grid gap-6 sm:grid-cols-2">
-        <div class="card p-6">
-          <h3 class="text-base font-semibold tracking-tight mb-4">Ubisoft Enterprise Systems</h3>
-          <ul class="text-sm text-muted space-y-3">
-            <li>8 internal platforms across resource planning, governance, credits, and production</li>
-            <li>1,000+ daily users across studios</li>
-            <li>Multi-level stakeholder research, legal constraints, policy alignment</li>
-            <li>Same method: diagnose, model, specify, verify</li>
-          </ul>
-        </div>
-        <div class="card p-6">
-          <h3 class="text-base font-semibold tracking-tight mb-4">HERA OS</h3>
-          <ul class="text-sm text-muted space-y-3">
-            <li>1 unified AI operating system</li>
-            <li>Built and operated solo</li>
-            <li>Product specification, system design, and implementation</li>
-            <li>Same method: diagnose, model, specify, verify</li>
-          </ul>
-        </div>
+      <div class="prose-hera mt-6 max-w-[48rem]">
+        <p>
+          I am most interested in 0→1 AI products, agentic systems, human–AI workflows,
+          and complex software where trust, context, autonomy and control matter more
+          than adding another screen.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Section 6 — Explore the work / CTA -->
   <section class="section border-t border-line pb-20">
     <div class="container-page reveal">
       <h2 class="text-h2 font-semibold tracking-tight">Explore the work</h2>
+
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <a href={withBase('work/hera/')} class="card card-hover flex flex-col justify-between p-6">
-          <span class="text-base font-medium tracking-tight text-ink">HERA OS Deep Dive</span>
-          <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">Read more &rarr;</span>
+          <span class="text-base font-medium tracking-tight text-ink">HERA OS</span>
+          <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">See the product &rarr;</span>
         </a>
+
         <a href={withBase('work/enterprise-tools/')} class="card card-hover flex flex-col justify-between p-6">
           <span class="text-base font-medium tracking-tight text-ink">Ubisoft Work</span>
-          <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">Read more &rarr;</span>
+          <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">See the systems &rarr;</span>
         </a>
+
         <a href={withBase('work/lineage/')} class="card card-hover flex flex-col justify-between p-6">
-          <span class="text-base font-medium tracking-tight text-ink">The Long Build: Lineage</span>
-          <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">Read more &rarr;</span>
+          <span class="text-base font-medium tracking-tight text-ink">Lineage</span>
+          <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">See the progression &rarr;</span>
         </a>
+
         <a href={withBase('contact/')} class="card card-hover flex flex-col justify-between p-6">
           <span class="text-base font-medium tracking-tight text-ink">Get in touch</span>
           <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">Contact &rarr;</span>

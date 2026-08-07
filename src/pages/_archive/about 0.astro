@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../data/site';
+---
+
+<BaseLayout
+  title="About Favour Diokpo"
+  description="How Favour turns unclear ideas into coherent product systems."
+>
+  <!-- Section 1 — Hero / Positioning -->
+  <section class="section">
+    <div class="container-prose reveal">
+      <p class="eyebrow">About</p>
+        <h1 class="mt-6 text-h1 font-semibold tracking-tight">
+          I design systems that turn unclear ideas into coherent, operating software.
+        </h1>
+        <div class="prose-hera mt-6">
+          <p>
+            Most software asks humans to adapt themselves to the machine's structure. I build systems where intent comes first, deterministic rules execute the work, and human judgment stays where it belongs. I design systems that make you trust complicated tools.
+          </p>
+          <p>
+            Too often, the technology can perform the action, but the human is still forced to carry the workflow. I have spent almost five years at Ubisoft designing internal operational tools — 8 enterprise platforms, scaled to over 1,000+ users and 16 independent software tools, culminating in HERA OS.
+          </p>
+        </div>
+    </div>
+  </section>
+
+  <!-- Section 2 — How I find the real problem -->
+  <section class="section border-t border-line">
+    <div class="container-page reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">How I find the real problem</h2>
+      <div class="prose-hera mt-6 max-w-[46rem]">
+        <p>
+          The visible friction is rarely the root cause. Software breaks when it forces humans to perform filing, context tracking, and state management the system should own.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-3">
+        <!-- Card 1 -->
+        <div class="card p-6">
+          <h3 class="text-base font-semibold tracking-tight mb-3">Questioning inherited conventions</h3>
+          <p class="text-sm text-muted mb-4">Exposing policy flaws and UI defaults others accepted.</p>
+          <ul class="text-sm text-ink space-y-3 list-disc ml-4">
+            <li><strong>Employee Credits Platform:</strong> Proved Ubisoft's 3-hour credit length was caused by single-column formatting, not multi-role crediting — reversed a long-standing HQ France policy.</li>
+            <li><strong>Resource Management Platform:</strong> Discovered users were manually overwriting end-dates to close requests. No explicit close action existed. The workaround was corrupting HR logs and Finance budgets.</li>
+            <li><strong>WallPlanner / HERA:</strong> Rejected the assumption that a planner must be a separate application window.</li>
+          </ul>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="card p-6">
+          <h3 class="text-base font-semibold tracking-tight mb-3">Finding the real bottleneck through forensic audit</h3>
+          <p class="text-sm text-muted mb-4">Auditing under real organizational pressure before proposing solutions.</p>
+          <ul class="text-sm text-ink space-y-3 list-disc ml-4">
+            <li>101-person global study on the Resource Management Platform when frequent users rated time-saved only 2.16/5.</li>
+            <li>Audited 40+ inconsistent modals before recommending any redesign.</li>
+            <li>Mapped 25+ silent workflow flaws — none of which appeared in the original problem brief.</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card p-6">
+          <h3 class="text-base font-semibold tracking-tight mb-3">Letting intent arrive rough</h3>
+          <p class="text-sm text-muted mb-4">Human-centered intake that earns structure rather than forcing it.</p>
+          <ul class="text-sm text-ink space-y-3 list-disc ml-4">
+            <li><strong>The Void in HERA:</strong> founders arrive with messy thinking; the system converts it to an Objective without forcing form-filling.</li>
+            <li><strong>Hybrid Workplace Platform:</strong> discovered employees feared rejection before speaking to their manager; designed a mandatory "Did you speak with your employee?" accountability step rather than a rigid form gate.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 — How I define system behaviour -->
+  <section class="section border-t border-line">
+    <div class="container-page reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">How I define system behaviour</h2>
+      <div class="prose-hera mt-6 max-w-[46rem]">
+        <p>
+          Product design is not screen layout. It is object design, state machines, and system invariants specified before code is written. 
+        </p>
+        <p class="text-sm mt-4 text-muted bg-line/30 p-4 rounded-lg">
+          The same behaviour-specification discipline produced the 5 explicit approval flows in the Hybrid Workplace Platform, the formal Close Request state machine in the Resource Management Platform, and the 29-test deterministic verification suite for HERA's roadmap cascade engine.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2">
+        <div class="card p-6">
+          <h3 class="text-base font-semibold tracking-tight mb-2">1. The Void (Intake)</h3>
+          <p class="text-sm text-muted">Unstructured intent converted into an Objective without context loss. Founder arrives messy; system earns the structure.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-base font-semibold tracking-tight mb-2">2. The Transforming Composer (Interaction)</h3>
+          <p class="text-sm text-muted">One morphing input surface replacing modal sprawl. Chat, Survey, Goal, Task, and Review states morph in-place.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-base font-semibold tracking-tight mb-2">3. The Living Roadmap (Orchestration)</h3>
+          <p class="text-sm text-muted">Plans that advance automatically when real work passes review gates. Not a static task list.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-base font-semibold tracking-tight mb-2">4. Versioned Artifacts & Review Gates (Deliverables)</h3>
+          <p class="text-sm text-muted">Disk-backed output with provenance, timestamps, and mandatory human approval before promotion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 — Human authority / AI leverage -->
+  <section class="section border-t border-line">
+    <div class="container-page reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">Human authority, AI leverage</h2>
+      <div class="prose-hera mt-6 max-w-[46rem]">
+        <p>
+          I run AI agents as researchers, builders, and critics against my own specifications — without outsourcing product judgment.
+        </p>
+        <p class="text-sm mt-4 text-muted">
+          <strong>Verification discipline:</strong> Work is verified by an independent agent that did not implement it. HERA's narration ("Worked for 37s") renders only when backed by real runtime events — not simulated. The operating system that built this portfolio follows the same rules.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-10 sm:grid-cols-2">
+        <div>
+          <h3 class="text-base font-semibold tracking-tight mb-4 border-b border-line pb-2">What I own:</h3>
+          <ul class="text-sm text-ink space-y-2 list-disc ml-4">
+            <li>Identifying the real problem</li>
+            <li>Product invention and object design</li>
+            <li>Mental models and system primitives</li>
+            <li>Rules, state machines, and system invariants</li>
+            <li>Human-vs-AI authority boundaries</li>
+            <li>Acceptance criteria</li>
+            <li>Final judgment</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-base font-semibold tracking-tight mb-4 border-b border-line pb-2">What AI can accelerate:</h3>
+          <ul class="text-sm text-ink space-y-2 list-disc ml-4">
+            <li>Bounded research and repository investigation</li>
+            <li>Variant exploration against approved specifications</li>
+            <li>Implementation against a bounded work packet</li>
+            <li>Adversarial critique of my own reasoning</li>
+            <li>Independent verification (agent checking work it did not write)</li>
+            <li>Repetitive execution</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5 — The connection: Ubisoft → HERA -->
+  <section class="section border-t border-line">
+    <div class="container-page reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">From enterprise platforms to HERA OS</h2>
+      <div class="prose-hera mt-6 max-w-[46rem]">
+        <p>
+          5 years designing internal tools for 1,000+ people at Ubisoft. One solo-built AI operating system. The same method — applied to very different scales.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2">
+        <div class="card p-6">
+          <h3 class="text-base font-semibold tracking-tight mb-4">Ubisoft Enterprise Systems</h3>
+          <ul class="text-sm text-muted space-y-3">
+            <li>8 internal platforms across resource planning, governance, credits, and production</li>
+            <li>1,000+ daily users across studios</li>
+            <li>Multi-level stakeholder research, legal constraints, policy alignment</li>
+            <li>Same method: diagnose, model, specify, verify</li>
+          </ul>
+        </div>
+        <div class="card p-6">
+          <h3 class="text-base font-semibold tracking-tight mb-4">HERA OS</h3>
+          <ul class="text-sm text-muted space-y-3">
+            <li>1 unified AI operating system</li>
+            <li>Built and operated solo</li>
+            <li>Product specification, system design, and implementation</li>
+            <li>Same method: diagnose, model, specify, verify</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6 — Explore the work / CTA -->
+  <section class="section border-t border-line pb-20">
+    <div class="container-page reveal">
+      <h2 class="text-h2 font-semibold tracking-tight">Explore the work</h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <a href={withBase('work/hera/')} class="card card-hover flex flex-col justify-between p-6">
+          <span class="text-base font-medium tracking-tight text-ink">HERA OS Deep Dive</span>
+          <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">Read more &rarr;</span>
+        </a>
+        <a href={withBase('work/enterprise-tools/')} class="card card-hover flex flex-col justify-between p-6">
+          <span class="text-base font-medium tracking-tight text-ink">Ubisoft Work</span>
+          <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">Read more &rarr;</span>
+        </a>
+        <a href={withBase('work/lineage/')} class="card card-hover flex flex-col justify-between p-6">
+          <span class="text-base font-medium tracking-tight text-ink">The Long Build: Lineage</span>
+          <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">Read more &rarr;</span>
+        </a>
+        <a href={withBase('contact/')} class="card card-hover flex flex-col justify-between p-6">
+          <span class="text-base font-medium tracking-tight text-ink">Get in touch</span>
+          <span class="text-sm text-muted mt-4 inline-flex items-center gap-1">Contact &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
