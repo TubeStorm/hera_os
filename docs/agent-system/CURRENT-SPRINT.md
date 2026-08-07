@@ -1,7 +1,11 @@
 # CURRENT-SPRINT.md — Live Sprint State
 
-> **Living document.** Every coordinator that materially changes sprint truth must update this file.
+> **Living document. Human master map.** Every coordinator that materially changes sprint truth must update this file.
 > Do not record aspirational states as complete. Do not omit blockers.
+> Do not dump implementation detail here — this is a human-readable map.
+>
+> **Status vocabulary:**
+> ⬜ NOT STARTED | 🟡 IN PROGRESS | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR | ✅ FAVOUR ACCEPTED / CLOSED | ❌ FAILED / REQUIRES REPAIR
 
 ---
 
@@ -18,68 +22,72 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 | # | Step | Status |
 |---|---|---|
-| 1 | Install and prove persistent agent operating system | ✅ **COMPLETE** |
-| 2 | Audit portfolio-relevant repository and content truth (Expanded Vault Search) | ✅ **COMPLETE** |
-| 3 | Define About page architecture | ✅ **COMPLETE** |
-| 4 | Define Ubisoft Work architecture | ✅ **COMPLETE** |
-| 5 | Activate Navigation & Reconnect Routes (Slice 1) | ✅ **COMPLETE** |
-| 6 | Build About page (Slice 2) | ✅ **COMPLETE** — verified 19/19 criteria |
-| 7 | Polish Ubisoft Work page (Slice 3) | 🟡 **READY FOR BUILD** |
-| 8 | Verify all pages & build output (Slice 4) | ⬜ Pending Slice 3 |
-| 9 | Favour review, merge to main and publish (Slice 5) | ⬜ Pending approval |
+| 1 | Install and prove persistent agent operating system | ✅ FAVOUR ACCEPTED / CLOSED |
+| 2 | Audit portfolio-relevant repository and content truth | ✅ FAVOUR ACCEPTED / CLOSED |
+| 3 | Define About page architecture | ✅ FAVOUR ACCEPTED / CLOSED |
+| 4 | Define Ubisoft Work architecture | ✅ FAVOUR ACCEPTED / CLOSED |
+| 5 | Activate Navigation & Reconnect Routes (Slice 1) | ✅ FAVOUR ACCEPTED / CLOSED |
+| 6 | Build About page (Slice 2) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
+| 7 | Polish Ubisoft Work page (Slice 3) | ⬜ NOT STARTED — blocked by Slice 2 Favour review |
+| 8 | Verify all pages & build output (Slice 4) | ⬜ NOT STARTED |
+| 9 | Favour review, merge to main and publish (Slice 5) | ⬜ NOT STARTED |
 
 ---
 
-## Active work (Preflight & Expanded Evidence Search Complete — Ready for Implementation Slices)
+## Current active work
 
-**Task:** Week 1 Preflight Analysis, Expanded Vault Evidence Audit, & Confirmed Decisions Integrated
+**Workflow repair** (2026-08-07) — this file is being updated as part of that repair.
 
-**Verified Deliverables Created & Updated:**
-- `docs/agent-system/WEEK1-PREFLIGHT-OUTPUT.md` — 13-section master preflight synthesis artifact updated with Favour's confirmed decisions (Brand = "Ubisoft", Tool Titles = Generic), 8 discovered internal tool platforms, expanded 4-tier evidence breakdown, 6 problem stories (3 approved originals + 3 shortlisted additionals), and About page evidence hooks (YC quotes, 101 survey, 40+ modals, 5 approval flows, UX-to-PO templates, Career Autopsy).
-- `docs/agent-system/PROJECT-TRUTH.md` — Updated with verified vault facts (8 internal platforms, 6 problem stories, 74 archive files, UX-to-PO templates, confirmed human decisions).
-- `docs/agent-system/research-requests/20260806-ai-designer-operating-model-benchmarks.md` — Bounded external research prompt for AI designer portfolios.
-- `docs/agent-system/research-requests/20260806-nda-gaming-enterprise-case-studies.md` — Bounded external research prompt for NDA gaming/enterprise case studies.
-- Updated `docs/agent-system/CURRENT-SPRINT.md` (this document).
-
-**Working branch:** `portfolio-week1` (primary repository directory at `d:\Documents\favour-ai-product-portfolio`)
-
-**Acceptance criteria for Preflight & Expanded Audit:**
-- [x] All operating system files created and internally consistent
-- [x] No paths pointing to nonexistent files
-- [x] Build still passes (`npm run build`) — 8 pages, 0 errors
-- [x] No production website files modified outside file lane
-- [x] Slice 1: Navigation activated — 6-item nav committed (2026-08-06)
-- [x] Slice 2: About page rebuilt — 19/19 acceptance criteria verified (2026-08-06)
-- [ ] Slice 3: Ubisoft Work page polish — NEXT
-- [ ] Slice 4: Full verification pass
-- [ ] Slice 5: Favour review and approval
+No implementation slice is currently being built.
 
 ---
 
-## Next Recommended Step (First Build Slice After Approval)
+## Most recent closed work
 
-**Slice 3: Ubisoft Work Page Polish (`src/pages/work/enterprise-tools.astro`)**
-- Add explicit NDA disclaimer at the top
-- Update page with the approved 3 deep-story problem headers and generic tool names
-- Breadth layer showing all 8 platform categories
-- Reuse existing SVG diagram components (ApprovalFlow, ModalAuditBeforeAfter, QuotaCard)
-- Do not rebuild from scratch — enhance the existing page within its current structure
+**Slice 2: About page** — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW
 
----
+An agent built the About page and an independent agent verified it (19/19 acceptance criteria, via source and build inspection). The build passes. All links resolve. The content follows the approved six-section architecture.
 
-## Open questions (Favour's Confirmed Decisions — RESOLVED)
+**Favour has not seen this page yet.** No human has opened it in a browser.
 
-- Brand Name: ✅ **RESOLVED (CONFIRMED BY FAVOUR 2026-08-06)** — Use "Ubisoft" explicitly.
-- Tool Title Anonymization Preference: ✅ **RESOLVED (CONFIRMED BY FAVOUR 2026-08-06)** — Use generic domain descriptors (e.g. "Resource Management Platform", "Hybrid Workplace Platform").
-- Confirmation of Selected Problem Stories: ✅ **RESOLVED (CONFIRMED BY FAVOUR 2026-08-06)** — 3 original approved + 3 additional shortlisted approved (Total 6 problem stories).
+The page must not be recorded as accepted until Favour reviews it.
+
+Closeout: `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md`
 
 ---
 
-## Blockers
+## Immediate next step
 
-None currently.
+**Favour reviews the About page.**
+
+When you are ready, tell us — the Chief will start the portfolio and give you a ready link to click. You will not need to run any commands.
+
+Read through the six sections. Check it on your phone. Tell us: does the content, tone, and layout feel right? Are you satisfied with how the page represents you?
+
+Once you confirm the About page is accepted:
+- Its status advances to ✅ FAVOUR ACCEPTED / CLOSED
+- Slice 3 (Ubisoft Work page polish) becomes the active build
+
+We will not start Slice 3 until you have reviewed Slice 2.
 
 ---
 
-*Last updated: 2026-08-06 — Slice 1 (nav) and Slice 2 (About page) complete and committed. Slice 3 (Ubisoft Work polish) is next.*
+## Blockers / decisions required from Favour
 
+**1. About page visual review** — Required before Slice 3 begins.
+See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check and what to tell us.
+
+**2. Ubisoft Work (Slice 3)** — No additional decisions needed from Favour before build begins, but the Slice 2 review is the gate.
+
+---
+
+## Technical record
+
+**Working branch:** `portfolio-week1`
+**Repository:** `D:\Documents\favour-ai-product-portfolio`
+**Last meaningful commits:**
+- Slice 1 (nav): committed 2026-08-06
+- Slice 2 (About page): committed 2026-08-06 (hash `374017c`)
+- Workflow repair (this update): 2026-08-07
+
+*Last updated: 2026-08-07 — workflow repair. Slice 2 status corrected from "COMPLETE" to "BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW". New workflow rules installed in OPERATING-CONTRACT.md.*

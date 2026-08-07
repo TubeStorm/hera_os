@@ -81,11 +81,14 @@ export const resumeAsset = {
   path: 'resume/Favour-Diokpo-Resume.pdf',
 };
 
-// Live navigation. Old pages (work index, resume, about, enterprise-tools)
-// are disconnected — files kept in the repo, no longer linked anywhere.
+// Live navigation — 6-item portfolio nav activated 2026-08-06 (portfolio-week1).
+// All routes are verified Astro pages. "About" and "Ubisoft Work" were
+// previously disconnected stubs; they are now linked without page changes.
 export const nav = [
-  { label: 'HERA OS', href: '' },
-  { label: 'Deep Dive', href: 'work/hera/' },
+  { label: 'Home', href: '' },
+  { label: 'HERA OS', href: 'work/hera/' },
+  { label: 'Ubisoft Work', href: 'work/enterprise-tools/' },
+  { label: 'About', href: 'about/' },
   { label: 'Lineage', href: 'work/lineage/' },
   { label: 'Contact', href: 'contact/' },
 ];

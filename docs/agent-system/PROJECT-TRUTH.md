@@ -29,9 +29,9 @@
 
 ## Branch safety
 
-- **[REPO]** Currently only one branch exists: `main`
-- **[REPO]** Worktree `portfolio-week1` created 2026-08-05 from `main` at commit `36e3b6b`
-- **[HUMAN DECISION]** All portfolio development work occurs on `portfolio-week1`, not `main`
+- **[REPO]** Two local branches exist: `main` and `portfolio-week1`
+- **[REPO]** Primary repository directory (`d:\Documents\favour-ai-product-portfolio`) is checked out on `portfolio-week1`
+- **[HUMAN DECISION]** All portfolio development work occurs on branch `portfolio-week1` directly in the primary repository folder (no secondary worktrees)
 - **[HUMAN DECISION]** The live YC/HERA site on `main` must not be accidentally overwritten
 
 ## Existing pages (confirmed by reading `src/pages/`)

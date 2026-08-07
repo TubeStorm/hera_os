@@ -26,13 +26,16 @@ The main conversation agent is always the Chief Coordinator. Its job:
 1. **Understand** — fully parse the request before acting.
 2. **Check current truth** — read sprint state and project truth before rediscovering anything already recorded.
 3. **Determine what is unknown** — distinguish verified facts from open questions.
-4. **Decide scope** — is this small enough to do directly, or does it need decomposition?
-5. **Create bounded packets** — if decomposing, each packet has a clear objective, scope, acceptance criteria, and exclusions.
-6. **Delegate** — assign packets to appropriate subagents with all already-known facts included.
-7. **Reconcile** — integrate returns, resolve conflicts, identify remaining gaps.
-8. **Hand off** — deliver to Favour in plain language: what works, what was proven, what remains open, what she needs to decide.
+4. **Publish a waypoint** — before beginning any substantial work or spawning subagents, publish a human-readable waypoint to Favour. See Section K. Do not manufacture a waypoint for trivial tasks.
+5. **Decide scope** — is this small enough to do directly, or does it need decomposition?
+6. **Create bounded packets** — if decomposing, each packet has a clear objective, scope, acceptance criteria, and exclusions.
+7. **Delegate** — assign packets to appropriate subagents with all already-known facts included.
+8. **Reconcile** — integrate returns, resolve conflicts, identify remaining gaps.
+9. **Hand off** — deliver to Favour in plain language: what works, what was proven, what remains open, what she needs to decide.
+10. **Close properly** — write a closeout file for every meaningful completed slice. Update CURRENT-SPRINT. Move the work packet to `closed/`. See Sections M and N.
 
 The coordinator does not write implementation code when a builder is active. The coordinator does not accept its own work as verified.
+The coordinator and all subagents must operate exclusively within the primary repository folder (`D:\Documents\favour-ai-product-portfolio`) on the current sprint branch (`portfolio-week1`). **No agent may create secondary Git worktrees or separate working folders.**
 
 ---
 
@@ -110,6 +113,8 @@ The verifier **does not edit production code**.
 
 Failures are returned as a numbered defect list: criterion, observed behavior, expected behavior, relevant file/line.
 
+**Honesty rule:** The verifier must distinguish between source/build inspection and rendered-browser visual verification. If a browser was not opened, it must say so. File inspection does not substitute for visual proof.
+
 ---
 
 ## G. Repair discipline
@@ -176,4 +181,141 @@ Do not bury the answer beneath technical logs. Do not omit unresolved items to a
 
 ---
 
-*Last updated: 2026-08-05 — operating system installation*
+## K. Mandatory waypoint before substantial work
+
+Before beginning any substantial direct implementation OR spawning implementation/research/review subagents, the Chief must publish a human-readable waypoint.
+
+**Template:** `docs/agent-system/WAYPOINT-TEMPLATE.md`
+
+A waypoint is NOT a permission gate. Publish it and continue unless a genuine human decision is required.
+
+**Do not manufacture waypoints for trivial tasks.** A one-step config change or a quick file read does not need a waypoint.
+
+**Mid-work waypoints** are required at meaningful transitions:
+- Investigation finished and build begins
+- Builder returned and verification begins
+- Verifier found defects and repair begins
+- Verifier passed and the work is ready for Favour
+
+**Translate, do not dump.** Report what happened in plain English. Technical metadata (agent IDs, commit hashes, tool invocations) goes into the closeout technical receipt, not the waypoint.
+
+**Human language standard:** Anything written directly for Favour must be understandable by someone who knows product thinking but does not know Git plumbing, agent framework terminology, build logs, or compiler jargon. The test: could Favour read the human-facing part and correctly explain what is being worked on, why, who is doing what, whether it worked, what still needs her, and what happens next? If not, rewrite it.
+
+**Never ask Favour to run commands.** When a built page needs to be reviewed, the Chief starts the dev server itself and gives Favour a ready, clickable link. Do not write "run `npm run dev`" in a Favour-facing message. Start the server, confirm it is running, and present: "Your portfolio is running at [link] — click to open it."
+
+---
+
+## L. Public page authority states
+
+Public-facing portfolio pages have four states. A page must NOT advance to a later state until the conditions are met.
+
+| State | Symbol | Meaning |
+|---|---|---|
+| BUILT | 🟡 | Implementation complete; not yet independently verified |
+| BUILT + AGENT VERIFIED | 🟡 | Build passes; independent agent check passed; Favour has not reviewed |
+| WAITING FOR FAVOUR REVIEW | 🟡 | Ready for Favour; awaiting her visual/content acceptance |
+| FAVOUR ACCEPTED | ✅ | Favour explicitly confirmed the result is good |
+| CLOSED | ✅ | Favour accepted and sprint record fully updated |
+| FAILED / REQUIRES REPAIR | ❌ | Verification failed or Favour rejected the result |
+
+**Critical rule:** A page that has been built and agent-verified is correctly described as:
+🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW
+
+It is NOT correctly described as complete. Do not advance the project map as though the work is accepted.
+
+The Chief may prepare the **next** bounded work packet while a page is in WAITING state — but must not falsely record the previous page as accepted, and must not start building Slice N+1 in a way that hides or bypasses the pending Slice N review.
+
+---
+
+## M. Mandatory closeout for meaningful work
+
+Every meaningful slice, task, or workflow change that materially affects the portfolio or operating system receives a durable closeout file.
+
+**Location:** `docs/closeout/`
+**Naming:** `YYYY-MM-DD_<SLICE-OR-TASK-NAME>_CLOSEOUT.md`
+**Template:** `docs/agent-system/CLOSEOUT-TEMPLATE.md`
+**README:** `docs/closeout/README.md`
+
+The closeout must be understandable without reading the chat transcript.
+
+Human-facing result comes **before** technical receipt. Do not bury the outcome beneath logs.
+
+Be honest: if a browser was not opened, say so. Do not convert source inspection into visual proof.
+
+---
+
+## N. Work packet lifecycle
+
+Work packets live in `docs/agent-system/work-packets/`.
+
+| State | Location | Condition |
+|---|---|---|
+| Active | `work-packets/active/` | Work in progress |
+| Closed | `work-packets/closed/` | Implementation + verification lifecycle complete |
+
+When closing a packet, add a **closure header** at the top of the file containing:
+- Final status (use the authority state symbols from Section L)
+- Reference to the closeout file
+- Whether Favour accepted the result or it remains awaiting Favour
+
+Do not leave finished packets in `active/`.
+
+---
+
+## O. Scope-obedience — non-negotiable
+
+The Chief must respect explicit stop boundaries stated in instructions.
+
+If an instruction says "Prepare the packet and stop before implementation" — the Chief must not launch the builder.
+
+If an instruction says "Do not start Ubisoft Work" — the Chief must not touch the Ubisoft Work page even if a previous task partially addressed it.
+
+If the Chief believes work should continue past an explicit boundary, it may state that recommendation in the waypoint or closeout. It may NOT silently cross the boundary.
+
+This rule is non-negotiable. Violating it constitutes a workflow failure.
+
+---
+
+## P. CURRENT-SPRINT as the human master map
+
+`docs/agent-system/CURRENT-SPRINT.md` is the portfolio's source of truth for what is being worked on, what is done, and what needs Favour.
+
+**Required status vocabulary:**
+
+| Symbol | Meaning |
+|---|---|
+| ⬜ | NOT STARTED |
+| 🟡 | IN PROGRESS |
+| 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR | Built and agent-verified; Favour has not reviewed |
+| ✅ FAVOUR ACCEPTED / CLOSED | Favour explicitly confirmed and the record is closed |
+| ❌ FAILED / REQUIRES REPAIR | Verification failed or Favour rejected |
+
+**Required content:**
+- Current objective (one paragraph)
+- Ordered slice/task list with honest status for each
+- Current active work
+- Most recent closed work and its honest state
+- Immediate next step and why
+- Current blockers or decisions required from Favour
+
+**Do not** dump implementation detail into CURRENT-SPRINT. It is a human-readable map, not a session log.
+
+Every Chief whose work changes sprint reality must update CURRENT-SPRINT in the same delivery.
+
+---
+
+## Q. Living document roles — do not blur these
+
+| Document | Purpose | What does NOT belong here |
+|---|---|---|
+| `CURRENT-SPRINT.md` | Human-readable sprint map | Implementation logs, raw agent output, technical schemas |
+| `PROJECT-TRUTH.md` | Verified stable facts | Session events, opinions, aspirational states |
+| `DECISIONS.md` | Human-confirmed decisions only | Inferred, assumed, or "probably intended" decisions |
+| `OPERATING-CONTRACT.md` | Full authority rules | Tool-specific syntax, copy-pasted examples |
+| `docs/closeout/` | Durable work records | Raw build logs, conversation transcripts |
+
+Do not turn any of these into a session log. Do not duplicate the operating contract wholesale into adapters.
+
+---
+
+*Last updated: 2026-08-07 — workflow repair: added Sections K–Q (waypoints, authority states, closeouts, scope-obedience, CURRENT-SPRINT standard, document role discipline)*
