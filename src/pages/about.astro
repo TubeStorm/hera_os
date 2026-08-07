@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { withBase } from '../data/site';
+import ProblemFindingStory from '../components/about/ProblemFindingStory.astro';
 ---
 
 <BaseLayout
@@ -30,90 +31,7 @@ import { withBase } from '../data/site';
     </div>
   </section>
 
-  <section class="section border-t border-line">
-    <div class="container-page reveal">
-      <p class="eyebrow">01</p>
-      <h2 class="mt-4 text-h2 font-semibold tracking-tight">
-        How do you find the real problem?
-      </h2>
-
-      <div class="prose-hera mt-6 max-w-[48rem]">
-        <p>
-          I usually start by asking one thing:
-          <strong>what is the user carrying that the product should be carrying instead?</strong>
-        </p>
-      </div>
-
-      <div class="mt-10 card p-6 sm:p-8">
-        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.4fr]">
-          <div>
-            <p class="eyebrow">The HERA story</p>
-            <h3 class="mt-3 text-xl font-semibold tracking-tight">
-              I thought the problem was managing agents.
-              It turned out the problem was everything I had to remember for them.
-            </h3>
-
-            <div class="prose-hera mt-5">
-              <p>
-                AI agents could already ask questions, use tools, and work for long periods.
-                But I was still remembering which file was current, what I had already decided,
-                what another agent had learned, which version had been reviewed, and whether
-                I had answered the same question before.
-              </p>
-              <p>
-                HERA started because I kept feeling that exact problem while working with AI.
-              </p>
-            </div>
-          </div>
-
-          <div class="space-y-8">
-            <div>
-              <p class="text-sm font-semibold text-ink">1 — What I questioned</p>
-              <p class="text-sm text-muted mt-2">
-                Why should an intelligent product keep asking me to act as its memory?
-                If I already told a friend I went to Ibiza, I expect the next useful question
-                to be “who did you go with?”, not “where did you travel?”
-              </p>
-            </div>
-
-            <div>
-              <p class="text-sm font-semibold text-ink">2 — What I realized</p>
-              <p class="text-sm text-muted mt-2">
-                The bottleneck was not simply model intelligence. It was trust.
-                I needed to know that when the AI interrupted me, it had already checked
-                the information I had given it and genuinely needed something only I could decide.
-              </p>
-            </div>
-
-            <div>
-              <p class="text-sm font-semibold text-ink">3 — The product decision</p>
-              <p class="text-sm text-muted mt-2">
-                Make context part of the product, not something hidden inside a prompt.
-                Decisions, files, previous work, accepted results and ongoing tasks should have
-                stable places the system can inspect and the human can audit.
-              </p>
-            </div>
-
-            <div>
-              <p class="text-sm font-semibold text-ink">4 — What that changed</p>
-              <p class="text-sm text-muted mt-2">
-                HERA became less about “a better chat” and more about an operating environment
-                for work: the person can arrive with rough intent, the system turns it into
-                structured work, and interruptions only happen when the human genuinely matters.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="prose-hera mt-8 max-w-[48rem]">
-        <p>
-          That is usually how I work: I follow the friction until I can describe the burden
-          the user should never have been carrying in the first place.
-        </p>
-      </div>
-    </div>
-  </section>
+  <ProblemFindingStory />
 
   <section class="section border-t border-line">
     <div class="container-page reveal">
