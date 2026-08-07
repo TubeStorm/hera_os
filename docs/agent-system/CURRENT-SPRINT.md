@@ -28,6 +28,7 @@ Scope is deliberately narrow: install the operating system, define the two new p
 | 4 | Define Ubisoft Work architecture | ✅ FAVOUR ACCEPTED / CLOSED |
 | 5 | Activate Navigation & Reconnect Routes (Slice 1) | ✅ FAVOUR ACCEPTED / CLOSED |
 | 6 | Build About page (Slice 2) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
+| 6b | About Section 01 animation foundation (preflight) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 7 | Polish Ubisoft Work page (Slice 3) | ⬜ NOT STARTED — blocked by Slice 2 Favour review |
 | 8 | Verify all pages & build output (Slice 4) | ⬜ NOT STARTED |
 | 9 | Favour review, merge to main and publish (Slice 5) | ⬜ NOT STARTED |
@@ -36,39 +37,31 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 ## Current active work
 
-**Workflow repair** (2026-08-07) — this file is being updated as part of that repair.
+**About Section 01 animation foundation** (2026-08-07) — integrated and built. 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
-No implementation slice is currently being built.
+Dev server is running. Favour needs to open /about/ and scroll through Section 01 to give the first visual review.
 
 ---
 
 ## Most recent closed work
 
-**Slice 2: About page** — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW
+**About Section 01 animation foundation** — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW
 
-An agent built the About page and an independent agent verified it (19/19 acceptance criteria, via source and build inspection). The build passes. All links resolve. The content follows the approved six-section architecture.
+The scroll-driven animated component (four scenes: Burden, Ibiza, Trust, Transfer) was integrated into the About page exactly as specified in the handoff. The static Section 01 card is replaced. Normal scrolling is preserved. An independent verifier confirmed 13/13 acceptance criteria from source inspection. Build passes. **No browser has been opened by any agent.**
 
-**Favour has not seen this page yet.** No human has opened it in a browser.
-
-The page must not be recorded as accepted until Favour reviews it.
-
-Closeout: `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md`
+Closeout: `docs/closeout/2026-08-07_SECTION-01-ANIMATION-FOUNDATION_CLOSEOUT.md`
 
 ---
 
 ## Immediate next step
 
-**Favour reviews the About page.**
+**Favour reviews the About page — specifically Section 01.**
 
-When you are ready, tell us — the Chief will start the portfolio and give you a ready link to click. You will not need to run any commands.
+The dev server is running. Open this link: **http://localhost:4321/hera_os/about/**
 
-Read through the six sections. Check it on your phone. Tell us: does the content, tone, and layout feel right? Are you satisfied with how the page represents you?
+Scroll through Section 01. Check that the four animated scenes activate as you scroll, and that reverse scrolling works. Check it on your phone. Then tell us what you see — what works, what feels off (timing, spacing, density, mobile). We will iterate from your first render, not from our assumptions.
 
-Once you confirm the About page is accepted:
-- Its status advances to ✅ FAVOUR ACCEPTED / CLOSED
-- Slice 3 (Ubisoft Work page polish) becomes the active build
-
-We will not start Slice 3 until you have reviewed Slice 2.
+Note: Slice 2 (the full About page) also still awaits your review.
 
 ---
 
