@@ -1,0 +1,112 @@
+Skip to content
+F
+Favour Diokpo
+Work
+HERA
+Resume
+About
+Contact
+Get in touch
+
+RESUME
+
+Favour Diokpo
+
+Product Designer for AI systems, internal tools, and workflow-heavy products
+
+Download PDF
+SUMMARY
+
+I design systems where complicated work becomes visible and manageable. My work spans enterprise internal tools at Ubisoft and HERA, a local-first AI workspace I designed and built that turns agents, memory, files, tasks, and cost into visible product states. I’m strongest where UX, product decisions, and messy operational systems meet.
+
+EXPERIENCE
+Founder & Product Designer
+2025 — Present
+
+HERA OS — independent AI product
+
+Designed and built the product model for a local-first AI workspace where users work with visible agents, rooms, memory, files, tasks, tools, and cost tracking instead of a single hidden chat thread.
+Defined the UX systems for Global Iris (the OS-level assistant), the Composer, Life OS (event ledger and cost), readable memory blocks, task execution with review gates, and the skills/tools catalog.
+Used real product failures — ghost chat states, phantom attachments, permission friction, unclear cost, confusing assistant scope — to refine the system model and interaction rules.
+Built the working app solo: Python/FastAPI backend, React/TypeScript frontend, Phaser pixel world, SQLite event ledger.
+Senior UX Specialist — Internal Tools
+May 2021 — Present
+
+Ubisoft, Montréal
+
+RPM (Resource Planning & Management): ran a 101-response satisfaction survey plus interviews across 1,000+ users to diagnose a trust breakdown in a legacy planning platform.
+Audited and standardized 40+ modals; redesigned the navigation ribbon and the three core modals (Position, Request, Advanced Date Editor).
+Work Arrangement (remote-work requests): researched across four organizational levels and defined five structured approval flows with accountability checkpoints and legally-vetted templated messaging.
+Capacity Governance: defined a warning-only quota model (used / buffer / threshold / time scope) that informs hiring without blocking flexibility, built for large grid datasets.
+Partnered with the shared design-system team (EGG) so developers shipped the exact components from design — fewer inconsistencies, less rework.
+SELECTED PROJECTS
+HERA OS — local-first AI workspace (independent product, designed and built solo)
+Ubisoft RPM — modal + ribbon revamp (40+ modal audit, 101-response survey)
+Ubisoft Work Arrangement — five structured approval flows for policy-constrained requests
+Ubisoft Capacity Governance — warning-only quota visibility for large datasets
+SKILLS
+AI product design
+Agent & assistant UX
+Memory, files & context surfaces
+Cost & permission design
+Failure states & recovery
+Systems & workflow design
+Product models & object design
+Approval & governance flows
+Dense-data interfaces
+Rule tables & decision logs
+Research & delivery
+Surveys & multi-role interviews
+Prototyping & spec writing
+Design-system collaboration
+Cross-functional delivery (Agile/Scrum)
+TOOLS
+Figma
+Miro
+Jira / Confluence
+Tableau / Sheets
+Basic SQL
+Spec writing
+Astro / static sites
+EDUCATION
+
+MIT — Professional Program in Applied Data Science
+
+2022 — 2023
+
+Carleton University — Bachelor of Information Technology
+
+2016 — 2020
+
+Algonquin College — Advanced Diploma, IT & Design
+
+2016 — 2020
+
+CERTIFICATIONS
+IBM AI Product Manager (2026)
+Google Project Management (2026)
+Prefer the PDF? Download the full resume.
+
+I design systems that make complicated work visible.
+
+Available for select work — remote & hybrid
+
+Get in touch
+
+PAGES
+
+Work
+HERA
+Resume
+About
+Contact
+
+ELSEWHERE
+
+GitHub
+Email
+LinkedIn
+
+© 2026 Favour Diokpo. All rights reserved.
+
+Product Designer — AI systems & internal tools

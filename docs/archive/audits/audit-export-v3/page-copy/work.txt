@@ -1,0 +1,90 @@
+Skip to content
+F
+Favour Diokpo
+Work
+HERA
+Resume
+About
+Contact
+Get in touch
+
+WORK
+
+One flagship product. Three enterprise workstreams.
+
+HERA is the product I designed and built. The Ubisoft projects are separate workstreams — planning, approvals, and governance — grouped on one page because they share an environment, not because they're one project.
+
+REAL SCREENSHOT
+The Void — real screenshot, development build.
+
+FLAGSHIP — INDEPENDENT AI PRODUCT
+
+In development — 2025→now
+HERA OS
+
+A local-first, game-inspired AI workspace where agents, tasks, memory, files, and cost are visible parts of an operating system — not hidden chat behavior. Designed and built solo: FastAPI backend, React frontend, Phaser pixel world.
+
+THE PROBLEM
+Most AI tools are text boxes attached to invisible machinery. You can’t see what the AI knows, did, spent, or broke.
+WHAT I DESIGNED
+The whole product model: rooms and agents, a global assistant, goals and tasks, readable memory, an event ledger, and per-turn cost.
+See the full product story
+
+ENTERPRISE SYSTEMS AT UBISOFT
+
+Three workstreams, clearly separated.
+
+Each is its own project with its own problem, research, and design. They live on one grouped page.
+
+2021—Now
+ENTERPRISE PLANNING TOOLS
+RPM — Modal & Ribbon Revamp
+THE PROBLEM
+A prior redesign shipped with no UX research; 1,000+ users were frustrated and the heaviest users trusted the tool least.
+WHAT I DESIGNED
+A 40+ modal audit collapsed into consistent patterns, plus a rebuilt ribbon and the three core modals.
+Read the workstream
+2021—Now
+APPROVAL WORKFLOWS
+Work Arrangement — Approval Flows
+THE PROBLEM
+Approve/reject was the only path the tool knew; escalations, corrections, and send-backs lived in email or nowhere.
+WHAT I DESIGNED
+Five explicit flows, a required “did you speak with the employee?” checkpoint, and legally-vetted templated messaging.
+Read the workstream
+2021—Now
+GOVERNANCE & DATA
+Capacity Governance — Quota Visibility
+THE PROBLEM
+Rules that governed hiring were invisible until someone broke them.
+WHAT I DESIGNED
+A used/buffer/threshold/time-scope quota model that warns instead of blocks, built for large grid datasets.
+Read the workstream
+
+More can be shared in redacted form on request — including a live HERA walkthrough.
+
+Request a walkthrough
+
+I design systems that make complicated work visible.
+
+Available for select work — remote & hybrid
+
+Get in touch
+
+PAGES
+
+Work
+HERA
+Resume
+About
+Contact
+
+ELSEWHERE
+
+GitHub
+Email
+LinkedIn
+
+© 2026 Favour Diokpo. All rights reserved.
+
+Product Designer — AI systems & internal tools

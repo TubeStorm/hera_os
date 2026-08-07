@@ -1,0 +1,173 @@
+Skip to content
+F
+Favour Diokpo
+Work
+HERA
+Resume
+About
+Contact
+Get in touch
+
+PRODUCT DESIGNER — AI SYSTEMS & INTERNAL TOOLS
+
+I design systems that make complicated work visible.
+
+I’m a product designer focused on AI workspaces, internal tools, and workflow-heavy products. My current work, HERA, explores what AI could feel like if it were less like a chatbot and more like a visible operating system for real work.
+
+View HERA
+Selected work
+Resume
+AI Product Designer
+Product Designer, Internal Tools
+Builder of HERA OS
+
+IN TEN SECONDS
+
+What you should take away.
+
+One flagship AI product, enterprise systems at real scale, and a point of view that connects them.
+
+FLAGSHIP PRODUCT
+
+HERA OS
+
+A local-first AI workspace I designed and built — rooms, agents, tasks, memory, files, and cost as visible parts of one operating system.
+
+Explore
+
+ENTERPRISE SCALE
+
+Ubisoft internal tools
+
+Three workstreams in planning, approvals, and governance for 1,000+ people — diagnosed with a 101-response survey, fixed with systemization.
+
+Explore
+
+POINT OF VIEW
+
+Make the work visible
+
+AI should not feel like invisible magic. It should feel like a place you can understand, enter, and direct.
+
+Explore
+
+FLAGSHIP — HERA OS
+
+What if AI felt less like a chatbot and more like a place?
+
+HERA is a local-first AI workspace I designed and built. Agents are characters in rooms. Tasks live on boards. Memory is readable. Every action lands in an event ledger with its real cost. The pixel world is not decoration — it is how the system explains itself.
+
+Rooms instead of endless chat threads
+An event ledger — every action logged and costed
+Burn tracking that never pretends unknown cost is $0.00
+See HERA
+REAL SCREENSHOT
+The Void — HERA's home view. Real screenshot from the development build.
+
+BEFORE — 40+ ONE-OFF MODALS
+
+Inconsistent approvals, buried quotas, rules that read differently everywhere.
+
+AFTER — ONE COHERENT PATTERN
+
+Approval
+consistent
+
+Same status, ownership, and next steps — everywhere they appear.
+
+BEFORE / AFTER
+40+ inconsistent modals systemized into one coherent pattern.
+
+UBISOFT — ENTERPRISE SYSTEMS
+
+Three workstreams in planning, approvals, and governance.
+
+Staffing, remote-work, and hiring-capacity tools used by 1,000+ people. I ran the research — a 101-response survey plus interviews — and redesigned the flows people had learned to route around: an RPM modal and ribbon revamp, five structured approval flows, and warning-only quota visibility.
+
+See the three workstreams
+
+SELECTED WORK
+
+The project map.
+
+HERA is the flagship. The three Ubisoft workstreams are separate projects under one enterprise systems umbrella.
+
+All work
+I
+Saw
+Did
+Saved
+Cost
+AI OPERATING SYSTEM
+
+FLAGSHIP — INDEPENDENT AI PRODUCT
+
+In development — 2025→now
+HERA OS
+
+A local-first, game-inspired AI workspace where agents, tasks, memory, files, and cost are visible parts of an operating system — not hidden chat behavior. Designed and built solo: FastAPI backend, React frontend, Phaser pixel world.
+
+AI product vision
+Game-inspired UX
+Local-first
+Read case study
+
+UBISOFT — ENTERPRISE SYSTEMS
+
+2021—Now
+RPM — Modal & Ribbon Revamp
+
+A prior redesign shipped with no UX research; 1,000+ users were frustrated and the heaviest users trusted the tool least.
+
+Read the workstream
+
+UBISOFT — ENTERPRISE SYSTEMS
+
+2021—Now
+Work Arrangement — Approval Flows
+
+Approve/reject was the only path the tool knew; escalations, corrections, and send-backs lived in email or nowhere.
+
+Read the workstream
+
+UBISOFT — ENTERPRISE SYSTEMS
+
+2021—Now
+Capacity Governance — Quota Visibility
+
+Rules that governed hiring were invisible until someone broke them.
+
+Read the workstream
+
+LET’S TALK
+
+Building an AI product that has to survive real use?
+
+I work on the layer most demos skip — memory, files, cost, permissions, failure. That layer is where products are won.
+
+Start a conversation
+More about me
+
+I design systems that make complicated work visible.
+
+Available for select work — remote & hybrid
+
+Get in touch
+
+PAGES
+
+Work
+HERA
+Resume
+About
+Contact
+
+ELSEWHERE
+
+GitHub
+Email
+LinkedIn
+
+© 2026 Favour Diokpo. All rights reserved.
+
+Product Designer — AI systems & internal tools
