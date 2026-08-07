@@ -22,10 +22,10 @@ Scope is deliberately narrow: install the operating system, define the two new p
 | 2 | Audit portfolio-relevant repository and content truth (Expanded Vault Search) | ✅ **COMPLETE** |
 | 3 | Define About page architecture | ✅ **COMPLETE** |
 | 4 | Define Ubisoft Work architecture | ✅ **COMPLETE** |
-| 5 | Activate Navigation & Reconnect Routes (Slice 1) | 🟡 **READY FOR BUILD** |
-| 6 | Build About page (Slice 2) | ⬜ Pending Slice 1 |
-| 7 | Polish Ubisoft Work page (Slice 3) | ⬜ Pending Slice 2 |
-| 8 | Verify all pages & build output (Slice 4) | ⬜ Pending build |
+| 5 | Activate Navigation & Reconnect Routes (Slice 1) | ✅ **COMPLETE** |
+| 6 | Build About page (Slice 2) | ✅ **COMPLETE** — verified 19/19 criteria |
+| 7 | Polish Ubisoft Work page (Slice 3) | 🟡 **READY FOR BUILD** |
+| 8 | Verify all pages & build output (Slice 4) | ⬜ Pending Slice 3 |
 | 9 | Favour review, merge to main and publish (Slice 5) | ⬜ Pending approval |
 
 ---
@@ -41,27 +41,29 @@ Scope is deliberately narrow: install the operating system, define the two new p
 - `docs/agent-system/research-requests/20260806-nda-gaming-enterprise-case-studies.md` — Bounded external research prompt for NDA gaming/enterprise case studies.
 - Updated `docs/agent-system/CURRENT-SPRINT.md` (this document).
 
-**Working branch:** `portfolio-week1` (worktree at `d:\Documents\favour-ai-product-portfolio-week1`)
+**Working branch:** `portfolio-week1` (primary repository directory at `d:\Documents\favour-ai-product-portfolio`)
 
 **Acceptance criteria for Preflight & Expanded Audit:**
-- [x] All 13 deliverable sections in `WEEK1-PREFLIGHT-OUTPUT.md` present and fully populated
-- [x] No pages built or modified during preflight phase
-- [x] No production files on `main` branch altered
-- [x] All routes and navigation mapped
-- [x] Expanded vault investigation complete (`YC answers` + 74 files in `portfolio building archives`)
-- [x] 8 internal tool platforms identified and categorized
-- [x] 6 problem story candidates defined (3 approved originals + 3 shortlisted additionals)
-- [x] 4-tier Ubisoft evidence audit complete and updated
-- [x] Minimal gap inventory ranked into 3 tiers (Tier 1 items confirmed by Favour)
-- [x] `PROJECT-TRUTH.md` and `CURRENT-SPRINT.md` updated with verified facts
+- [x] All operating system files created and internally consistent
+- [x] No paths pointing to nonexistent files
+- [x] Build still passes (`npm run build`) — 8 pages, 0 errors
+- [x] No production website files modified outside file lane
+- [x] Slice 1: Navigation activated — 6-item nav committed (2026-08-06)
+- [x] Slice 2: About page rebuilt — 19/19 acceptance criteria verified (2026-08-06)
+- [ ] Slice 3: Ubisoft Work page polish — NEXT
+- [ ] Slice 4: Full verification pass
+- [ ] Slice 5: Favour review and approval
 
 ---
 
 ## Next Recommended Step (First Build Slice After Approval)
 
-**Slice 1: Activate Navigation & Reconnect Routes (`src/data/site.ts`)**
-- Update `nav` in `src/data/site.ts` to include `Ubisoft Work` (`work/enterprise-tools/`) and `About` (`about/`).
-- Instantly connects 4+ years of senior enterprise experience and the About stub to the main header navigation.
+**Slice 3: Ubisoft Work Page Polish (`src/pages/work/enterprise-tools.astro`)**
+- Add explicit NDA disclaimer at the top
+- Update page with the approved 3 deep-story problem headers and generic tool names
+- Breadth layer showing all 8 platform categories
+- Reuse existing SVG diagram components (ApprovalFlow, ModalAuditBeforeAfter, QuotaCard)
+- Do not rebuild from scratch — enhance the existing page within its current structure
 
 ---
 
@@ -79,5 +81,5 @@ None currently.
 
 ---
 
-*Last updated: 2026-08-06 — Expanded vault evidence audit complete, decisions confirmed, ready for Slice 1 build*
+*Last updated: 2026-08-06 — Slice 1 (nav) and Slice 2 (About page) complete and committed. Slice 3 (Ubisoft Work polish) is next.*
 
