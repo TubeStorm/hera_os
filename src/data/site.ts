@@ -85,8 +85,8 @@ export const resumeAsset = {
 // All routes are verified Astro pages. "About" and "Ubisoft Work" were
 // previously disconnected stubs; they are now linked without page changes.
 export const nav = [
-  { label: 'Home', href: '' },
-  { label: 'HERA OS', href: 'work/hera/' },
+  { label: 'HERA OS', href: '' },
+  { label: 'Deep Dive', href: 'work/hera/' },
   { label: 'Ubisoft Work', href: 'work/enterprise-tools/' },
   { label: 'About', href: 'about/' },
   { label: 'Lineage', href: 'work/lineage/' },
