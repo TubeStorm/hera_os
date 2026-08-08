@@ -28,7 +28,7 @@ Scope is deliberately narrow: install the operating system, define the two new p
 | 4 | Define Ubisoft Work architecture | ✅ FAVOUR ACCEPTED / CLOSED |
 | 5 | Activate Navigation & Reconnect Routes (Slice 1) | ✅ FAVOUR ACCEPTED / CLOSED |
 | 6 | Build About page (Slice 2) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
-| 6b | About Section 01 animation foundation (preflight) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
+| 6b | About Section 01 Slide 1 visual rework | 🟡 BUILT — WAITING FOR FAVOUR VISUAL REVIEW |
 | 7 | Polish Ubisoft Work page (Slice 3) | ⬜ NOT STARTED — blocked by Slice 2 Favour review |
 | 8 | Verify all pages & build output (Slice 4) | ⬜ NOT STARTED |
 | 9 | Favour review, merge to main and publish (Slice 5) | ⬜ NOT STARTED |
@@ -37,9 +37,9 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 ## Current active work
 
-**About Section 01 animation foundation** (2026-08-07) — integrated and built. 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
+**About Section 01 — Slide 1 visual rework** (2026-08-07) — 🟡 BUILT — WAITING FOR FAVOUR VISUAL REVIEW.
 
-Dev server is running. Favour needs to open /about/ and scroll through Section 01 to give the first visual review.
+Dev server is running at **http://localhost:4323/hera_os/about/** (port may vary — check task log if unavailable). Scroll to Section 01.
 
 ---
 
@@ -47,21 +47,32 @@ Dev server is running. Favour needs to open /about/ and scroll through Section 0
 
 **About Section 01 animation foundation** — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW
 
-The scroll-driven animated component (four scenes: Burden, Ibiza, Trust, Transfer) was integrated into the About page exactly as specified in the handoff. The static Section 01 card is replaced. Normal scrolling is preserved. An independent verifier confirmed 13/13 acceptance criteria from source inspection. Build passes. **No browser has been opened by any agent.**
+The scroll-driven animated component (four scenes: Burden, Ibiza, Trust, Transfer) was integrated into the About page exactly as specified in the handoff. The static Section 01 card is replaced. Normal scrolling is preserved. An independent verifier confirmed 13/13 acceptance criteria from source inspection. Build passes.
 
 Closeout: `docs/closeout/2026-08-07_SECTION-01-ANIMATION-FOUNDATION_CLOSEOUT.md`
+
+**About Section 01 — Slide 1 visual rework** — built per preflight spec. Slide 1 now shows:
+- Correct 42/58 left-right layout (copy left, canvas right), side-by-side on desktop, stacking on mobile
+- Left copy: "THE HERA STORY" eyebrow, bold paragraph (~22px), body text (~16px). Exact verbatim copy from spec.
+- Right canvas: black (#0c0c0d), no border, no caption, no internal header. Lucide Brain SVG with slow pulse + warm stress glow. 6 floating thought fragments arranged around the brain.
+- All other slides (2–4) and carousel mechanics untouched.
 
 ---
 
 ## Immediate next step
 
-**Favour reviews the About page — specifically Section 01.**
+**Favour reviews Slide 1 on the About page.**
 
-The dev server is running. Open this link: **http://localhost:4321/hera_os/about/**
+Dev server is ready. Open: **http://localhost:4323/hera_os/about/** and scroll to Section 01.
 
-Scroll through Section 01. Check that the four animated scenes activate as you scroll, and that reverse scrolling works. Check it on your phone. Then tell us what you see — what works, what feels off (timing, spacing, density, mobile). We will iterate from your first render, not from our assumptions.
+Check:
+1. The parent "How do you find the real problem?" heading is visually dominant
+2. The slide copy hierarchy looks right (small kicker, bold paragraph, body text — no headings inside the slide)
+3. The black canvas: brain with glow, 6 floating thought chips
+4. Nothing overlaps, no borders visible on the canvas
+5. Click the → arrow to confirm slides 2–4 still work
 
-Note: Slice 2 (the full About page) also still awaits your review.
+Tell us what you see. Once Slide 1 is approved we build Slides 2–5 using the same shell.
 
 ---
 

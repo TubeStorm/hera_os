@@ -21,35 +21,40 @@
       <div class="slides" aria-live="polite">
 
         <article class="slide active" data-slide="0" aria-hidden="false">
-          <div class="copy">
-            <p class="kicker">The HERA story</p>
-            <h3>I thought the problem was managing agents.</h3>
-            <p>
-              It turned out the problem was everything I had to remember for them.
-              AI could already ask questions, use tools, and work for long periods.
-              I was still carrying the workflow in my own head.
-            </p>
-          </div>
+          <div class="slide1-layout">
+            <div class="slide1-copy">
+              <p class="kicker">The HERA story</p>
+              <p class="slide1-bold">
+                I thought the problem was managing agents. It turned out the problem was everything I had to remember for them.
+              </p>
+              <p class="slide1-body">
+                AI agents could already ask questions, use tools, and work for long periods. But I was still remembering which file was current, what I had already decided, what another agent had learned, which version had been reviewed, and whether I had answered the same question before.
+              </p>
+              <p class="slide1-body">
+                HERA started because I kept feeling that exact problem while working with AI.
+              </p>
+            </div>
 
-          <div class="stage burden-stage">
-            <p class="stage-label">What the workflow felt like</p>
-            <div class="two-col">
-              <div class="side">
-                <div class="who"><span class="human-dot"></span><div><small>ME</small><strong>Keeping the work coherent</strong></div></div>
-                <div class="chip-list">
-                  <span style="--i:0">CURRENT FILE</span>
-                  <span style="--i:1">DECISION</span>
-                  <span style="--i:2">WHAT AGENT A LEARNED</span>
-                  <span style="--i:3">REVIEWED VERSION</span>
-                  <span style="--i:4">DID I ANSWER THIS?</span>
-                </div>
-                <div class="total"><b>5</b><span>things I still had to carry</span></div>
+            <div class="brain-canvas" aria-hidden="true">
+              <div class="brain-glow"></div>
+              <div class="brain-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 18V5" />
+                  <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
+                  <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" />
+                  <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" />
+                  <path d="M18 18a4 4 0 0 0 2-7.464" />
+                  <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" />
+                  <path d="M6 18a4 4 0 0 1-2-7.464" />
+                  <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" />
+                </svg>
               </div>
-
-              <div class="side ai-side">
-                <div class="who ai-who"><span class="ai-dot">✦</span><div><small>AI</small><strong>Working</strong></div></div>
-                <div class="working"><i></i><span>running the task</span></div>
-              </div>
+              <div class="thought t-top-left">What sprint are we on?</div>
+              <div class="thought t-top-center">Which subagent owns that slice?</div>
+              <div class="thought t-mid-right">What context is still missing?</div>
+              <div class="thought t-bot-center">Did I already share the last build closeout?</div>
+              <div class="thought t-bot-left">What did the verifier approve?</div>
+              <div class="thought t-mid-left">Which file is the current version?</div>
             </div>
           </div>
         </article>
@@ -180,8 +185,122 @@
   .slide{display:none}.slide.active{display:block;animation:slideIn .32s cubic-bezier(.2,.82,.2,1)}
   @keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-  .copy{max-width:720px;margin-bottom:26px}
+  /* Shared kicker style (used across all slides) */
   .kicker{margin:0 0 9px;color:var(--muted);font-size:.76rem;font-weight:700;letter-spacing:.085em;text-transform:uppercase}
+
+  /* ── SLIDE 1 LAYOUT ──────────────────────────────────────── */
+  .slide1-layout{
+    display:grid;
+    grid-template-columns:42% 58%;
+    gap:clamp(32px,5vw,64px);
+    align-items:center;
+    min-height:440px;
+  }
+  .slide1-copy{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    padding:clamp(12px,2vw,24px) 0;
+  }
+  .slide1-bold{
+    margin:10px 0 0;
+    color:var(--ink);
+    font-size:clamp(1.1rem,1.6vw,1.35rem);
+    line-height:1.45;
+    font-weight:700;
+    letter-spacing:-.02em;
+  }
+  .slide1-body{
+    margin:14px 0 0;
+    color:var(--muted);
+    font-size:1rem;
+    line-height:1.7;
+  }
+
+  /* ── BRAIN CANVAS ────────────────────────────────────────── */
+  .brain-canvas{
+    position:relative;
+    min-height:460px;
+    border-radius:24px;
+    background:#0c0c0d;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* Warm stress glow behind the brain */
+  .brain-glow{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+  }
+  .brain-glow::after{
+    content:'';
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(220,80,50,.28) 0%,rgba(220,80,50,.08) 45%,transparent 70%);
+    animation:glowPulse 3.6s ease-in-out infinite;
+  }
+  @keyframes glowPulse{
+    0%,100%{transform:scale(1);opacity:.7}
+    50%{transform:scale(1.28);opacity:1}
+  }
+
+  /* Brain icon */
+  .brain-icon{
+    position:relative;
+    z-index:2;
+    width:96px;
+    height:96px;
+    color:rgba(255,255,255,.82);
+    animation:brainPulse 3.6s ease-in-out infinite;
+    flex:none;
+  }
+  .brain-icon svg{width:100%;height:100%}
+  @keyframes brainPulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.055)}
+  }
+
+  /* Floating thought chips */
+  .thought{
+    position:absolute;
+    z-index:3;
+    padding:7px 14px;
+    border-radius:999px;
+    background:rgba(255,255,255,.065);
+    color:rgba(255,255,255,.5);
+    font-size:.71rem;
+    line-height:1.3;
+    white-space:nowrap;
+    opacity:0;
+  }
+  .slide.active .thought{
+    opacity:1;
+    transition:opacity .5s ease .3s;
+  }
+  /* Individual thought positions + drift animations */
+  .t-top-left   { top:13%;  left:6%;  animation:drift1 11s ease-in-out 0s    infinite alternate; }
+  .t-top-center { top:10%;  left:50%; transform:translateX(-50%); animation:drift2 13s ease-in-out -3.5s  infinite alternate; }
+  .t-mid-right  { top:46%;  right:5%; animation:drift3 14s ease-in-out -7s   infinite alternate; white-space:normal; max-width:160px; }
+  .t-bot-center { bottom:12%; left:50%; transform:translateX(-50%); animation:drift4 12s ease-in-out -2s   infinite alternate; white-space:normal; max-width:200px; }
+  .t-bot-left   { bottom:14%; left:5%; animation:drift5 15s ease-in-out -9s   infinite alternate; }
+  .t-mid-left   { top:46%;  left:5%; animation:drift6 10s ease-in-out -5s   infinite alternate; }
+  @keyframes drift1{ 0%{transform:translate(0,0)} 50%{transform:translate(5px,-7px)} 100%{transform:translate(-4px,5px)} }
+  @keyframes drift2{ 0%{transform:translateX(-50%) translate(0,0)} 50%{transform:translateX(-50%) translate(5px,6px)} 100%{transform:translateX(-50%) translate(-6px,-4px)} }
+  @keyframes drift3{ 0%{transform:translate(0,0)} 50%{transform:translate(-4px,8px)} 100%{transform:translate(5px,-6px)} }
+  @keyframes drift4{ 0%{transform:translateX(-50%) translate(0,0)} 50%{transform:translateX(-50%) translate(-5px,-6px)} 100%{transform:translateX(-50%) translate(4px,4px)} }
+  @keyframes drift5{ 0%{transform:translate(0,0)} 50%{transform:translate(6px,-5px)} 100%{transform:translate(-3px,7px)} }
+  @keyframes drift6{ 0%{transform:translate(0,0)} 50%{transform:translate(-6px,6px)} 100%{transform:translate(5px,-4px)} }
+
+  /* ── SHARED (slides 2-4 unchanged) ──────────────────────── */
+  /* Legacy copy/stage styles kept for slides 2-4 */
+  .copy{max-width:720px;margin-bottom:26px}
   .copy h3{margin:0;color:var(--ink);font-size:clamp(1.7rem,3vw,2.65rem);line-height:1.06;letter-spacing:-.04em;font-weight:620}
   .copy>p:last-child{max-width:650px;margin:16px 0 0;color:var(--muted);font-size:1rem;line-height:1.65}
 
@@ -229,15 +348,23 @@
   .outro{max-width:56rem;margin-top:clamp(46px,7vw,80px)}.outro p{margin:0;color:var(--muted);font-size:clamp(1.16rem,2vw,1.6rem);line-height:1.5;letter-spacing:-.02em}.outro strong{color:var(--ink);font-weight:620}
   @keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}@keyframes fade{to{opacity:1}}
 
+  /* ── RESPONSIVE ──────────────────────────────────────────── */
   @media(max-width:820px){
     .story-carousel{padding:0}.nav-arrow{top:auto;bottom:0}.footer{min-height:44px;padding:0 56px}.stage{min-height:460px}.two-col{padding:28px}.checks{grid-template-columns:repeat(3,1fr)}
+    /* Slide 1 responsive */
+    .slide1-layout{grid-template-columns:1fr;gap:32px;min-height:auto}
+    .brain-canvas{min-height:320px}
   }
   @media(max-width:620px){
     .copy h3{font-size:clamp(1.5rem,7vw,2rem)}.two-col,.transfer{grid-template-columns:1fr;gap:24px}.ai-side{text-align:left}.ai-who{justify-content:flex-start}.memory{margin-left:0}.transfer-card{min-height:auto}.move{width:1px;height:26px;margin:auto}.move span{width:1px;height:100%;background:linear-gradient(var(--line),#d8bd6f);transform-origin:top;transform:scaleY(0)}.slide.active .move span{animation:grow .35s ease .35s forwards}.move b{right:-7px;top:17px;transform:rotate(90deg)}.stage{min-height:520px}
+    /* Slide 1 mobile thought chips — allow wrap */
+    .thought{white-space:normal;max-width:140px;text-align:center;font-size:.67rem}
   }
   @media(prefers-reduced-motion:reduce){
     .slide.active,.chip-list span,.total,.memory,.wrong,.divider,.right,.line,.checks span,.checks b,.gate,.human-arrival,.product-list span,.move span,.move b,.return{animation:none!important;transition:none!important}
     .chip-list span,.total,.memory,.wrong,.divider,.right,.checks span,.checks b,.gate,.human-arrival,.product-list span,.move b,.return{opacity:1!important;transform:none!important}.line,.move span{transform:none!important}.working i{animation:none!important}
+    .brain-glow::after,.brain-icon,.thought{animation:none!important}
+    .slide.active .thought{opacity:1!important;transition:none!important}
   }
 </style>
 
