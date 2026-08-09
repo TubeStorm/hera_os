@@ -28,7 +28,7 @@ Scope is deliberately narrow: install the operating system, define the two new p
 | 4 | Define Ubisoft Work architecture | ✅ FAVOUR ACCEPTED / CLOSED |
 | 5 | Activate Navigation & Reconnect Routes (Slice 1) | ✅ FAVOUR ACCEPTED / CLOSED |
 | 6 | Build About page (Slice 2) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
-| 6b | About Section 01 Slide 1 visual rework | 🟡 BUILT — WAITING FOR FAVOUR VISUAL REVIEW |
+| 6b | About Section 01 Slide 1 visual rework and carousel interaction polish | 🟡 BUILT — WAITING FOR FAVOUR VISUAL REVIEW |
 | 7 | Polish Ubisoft Work page (Slice 3) | ⬜ NOT STARTED — blocked by Slice 2 Favour review |
 | 8 | Verify all pages & build output (Slice 4) | ⬜ NOT STARTED |
 | 9 | Favour review, merge to main and publish (Slice 5) | ⬜ NOT STARTED |
@@ -37,7 +37,7 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 ## Current active work
 
-**About Section 01 — Slide 1 visual rework** (2026-08-07) — 🟡 BUILT — WAITING FOR FAVOUR VISUAL REVIEW.
+**About Section 01 — Slide 1 visual rework and carousel interaction polish** (updated 2026-08-09) — 🟡 BUILT — WAITING FOR FAVOUR VISUAL REVIEW.
 
 Dev server is running at **http://localhost:4323/hera_os/about/** (port may vary — check task log if unavailable). Scroll to Section 01.
 
@@ -56,6 +56,8 @@ Closeout: `docs/closeout/2026-08-07_SECTION-01-ANIMATION-FOUNDATION_CLOSEOUT.md`
 - Left copy: "THE HERA STORY" eyebrow, bold paragraph (~22px), body text (~16px). Exact verbatim copy from spec.
 - Right canvas: black (#0c0c0d), no border, no caption, no internal header. Lucide Brain SVG with slow pulse + warm stress glow. 6 floating thought fragments arranged around the brain.
 - All other slides (2–4) and carousel mechanics untouched.
+
+**Carousel interaction polish (2026-08-09):** The first next arrow now sits beside the animation, has no border, and nudges right. The animation canvas is exact black. All four progress marks are clickable with hover/focus feedback, and the closing statement animates in only on slide 4. The real desktop route and a 390px viewport were checked; the build passes. Closeout: `docs/closeout/2026-08-09_ABOUT-CAROUSEL-INTERACTION-POLISH_CLOSEOUT.md`.
 
 ---
 
@@ -94,4 +96,4 @@ See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check 
 - Slice 2 (About page): committed 2026-08-06 (hash `374017c`)
 - Workflow repair (this update): 2026-08-07
 
-*Last updated: 2026-08-07 — workflow repair. Slice 2 status corrected from "COMPLETE" to "BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW". New workflow rules installed in OPERATING-CONTRACT.md.*
+*Last updated: 2026-08-09 — About Section 01 carousel interaction polish built and browser-checked; still waiting for Favour visual review.*
