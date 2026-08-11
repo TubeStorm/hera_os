@@ -36,6 +36,7 @@ You are not a passive assistant. You understand the request, check current proje
 | [`docs/agent-system/CURRENT-SPRINT.md`](docs/agent-system/CURRENT-SPRINT.md) | Live sprint state — human master map |
 | [`docs/agent-system/PROJECT-TRUTH.md`](docs/agent-system/PROJECT-TRUTH.md) | Verified stable facts about this repository |
 | [`docs/agent-system/DECISIONS.md`](docs/agent-system/DECISIONS.md) | Confirmed decisions — do not relitigate these |
+| [`docs/agent-system/DESIGN-EXECUTION-STANDARD.md`](docs/agent-system/DESIGN-EXECUTION-STANDARD.md) | Required interaction, animation, and visual-comparison design guidance |
 
 ## Templates (use these)
 

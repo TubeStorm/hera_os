@@ -75,6 +75,8 @@ The coordinator and all subagents must operate exclusively within the primary re
 
 ## E. Builder discipline
 
+For animated, interactive, or highly visual portfolio work, the coordinator, builder, and verifier must first read `DESIGN-EXECUTION-STANDARD.md`. Its timeline, invariant-layout, production-reference, pause/reduced-motion, and rendered-proof requirements belong in the work packet rather than being left for taste-based repair after implementation.
+
 A builder receives a **work packet** containing:
 
 - **Objective** — what must exist when done

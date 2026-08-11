@@ -29,6 +29,7 @@ Scope is deliberately narrow: install the operating system, define the two new p
 | 5 | Activate Navigation & Reconnect Routes (Slice 1) | ✅ FAVOUR ACCEPTED / CLOSED |
 | 6 | Build About page (Slice 2) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 6b | About Section 01 Slide 1 visual rework and carousel interaction polish | 🟡 BUILT — WAITING FOR FAVOUR VISUAL REVIEW |
+| 6c | About Section 01 Slide 2 context-story and design-workflow repair | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 7 | Polish Ubisoft Work page (Slice 3) | ⬜ NOT STARTED — blocked by Slice 2 Favour review |
 | 8 | Verify all pages & build output (Slice 4) | ⬜ NOT STARTED |
 | 9 | Favour review, merge to main and publish (Slice 5) | ⬜ NOT STARTED |
@@ -37,9 +38,9 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 ## Current active work
 
-**About Section 01 — Slide 1 visual rework and carousel interaction polish** (updated 2026-08-09) — 🟡 BUILT — WAITING FOR FAVOUR VISUAL REVIEW.
+**About Section 01 — Slide 2 context-story and design-workflow repair** (updated 2026-08-10) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
-Dev server is running at **http://localhost:4323/hera_os/about/** (port may vary — check task log if unavailable). Scroll to Section 01.
+Slide 2 now keeps the conversation fixed while the persistent cursor switches between HERA-style context tabs. Iris thinks, checks a visible memory note, and reveals the red failure or green context-aware answer on a readable timeline. The animation can be paused. The shared `DESIGN-EXECUTION-STANDARD.md` is now mandatory for Codex and Antigravity visual work. Dev server: **http://localhost:4321/hera_os/about/** — scroll to Section 01 and choose the second progress mark.
 
 ---
 
@@ -96,4 +97,4 @@ See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check 
 - Slice 2 (About page): committed 2026-08-06 (hash `374017c`)
 - Workflow repair (this update): 2026-08-07
 
-*Last updated: 2026-08-09 — About Section 01 carousel interaction polish built and browser-checked; still waiting for Favour visual review.*
+*Last updated: 2026-08-10 — Slide 2 context story and shared design-execution workflow built and browser-checked; waiting for Favour visual review.*

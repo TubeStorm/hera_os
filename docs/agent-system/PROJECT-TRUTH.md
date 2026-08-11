@@ -109,6 +109,8 @@
 - **[REPO]** Real Subject: *"How Favour turns unclear ideas into coherent product systems."*
 - **[REPO]** All 11 core About page topics are fully supported by verifiable in-repository code, blueprints, YC application answers, and archival test suites.
 - **[REPO]** About page structure codified as 6 sections: Hero & Thesis (with verbatim YC quotes), Problem Diagnosis (Famous credit policy, RPM end-date hack, WallPlanner), Systems Primitives & State Machines (Work Arrangement 5 approval flows, RPM Spatial Footprint Matrix), Human vs. AI Authority & Verification (UX-to-PO template suite, Career Autopsy Matrix), Enterprise Scale & HERA Convergence (8 enterprise platforms vs HERA OS), and Action Cards.
+- **[HUMAN DECISION]** Animated comparisons must preserve shared content and geometry, explain causality through a timed establish → think → inspect/resolve → reveal → hold sequence, keep orientation cues visible, and provide pause/play when text must be read. Canonical detail: `docs/agent-system/DESIGN-EXECUTION-STANDARD.md`.
+- **[REPO]** The Section 01 carousel currently contains four slide articles even though the in-progress Slide 2 preflight and progress markup describe five. Slide 2 repair does not invent or alter the missing fifth slide; reconcile this in a separately approved carousel-content slice.
 
 ## HERA Career Evidence Map Truth
 
