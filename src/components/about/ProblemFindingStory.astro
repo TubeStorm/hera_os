@@ -210,52 +210,41 @@ import robotAi from '../../assets/about/robot_ai.webp';
                 </div>
               </div>
               
-              <!-- Right 58% - Product Structure -->
+              <!-- Right 65% - Product Structure -->
               <div class="s4-product-side">
                 <div class="s4-robot-wrap">
                   <img src={robotAi.src} alt="AI can inspect this information" class="s4-robot" />
                 </div>
                 
-                <div class="s4-context-structure">
-                  <div class="s4-drawer">
+                <div class="s4-notes-cluster">
+                  <div class="s4-note s4-note-bg1">
                     <span class="s4-drawer-label">DECISION</span>
-                    <div class="s4-drawer-note">
-                      <small>Destination</small>
-                      <strong>Ibiza</strong>
-                      <div class="s4-tucked-note">
-                        <small>Travelling with</small>
-                        <strong>Mum</strong>
-                      </div>
-                    </div>
+                    <strong>Ibiza</strong>
                   </div>
                   
-                  <div class="s4-drawer">
+                  <div class="s4-note s4-note-file s4-note-lift">
                     <span class="s4-drawer-label">FILE</span>
-                    <div class="s4-drawer-note s4-note-lift">
-                      <strong>Flight shortlist.pdf</strong>
-                    </div>
+                    <strong>Flight shortlist.pdf</strong>
                   </div>
                   
-                  <div class="s4-drawer">
+                  <div class="s4-note s4-note-bg2">
                     <span class="s4-drawer-label">PREVIOUS WORK</span>
-                    <div class="s4-drawer-note">
-                      <strong>Hotel research</strong>
-                    </div>
+                    <strong>Hotel research</strong>
                   </div>
                   
-                  <div class="s4-drawer">
+                  <div class="s4-note s4-note-bg3">
                     <span class="s4-drawer-label">ACCEPTED RESULT</span>
-                    <div class="s4-drawer-note">
-                      <small>Budget</small>
-                      <strong>$2,500</strong>
-                    </div>
+                    <strong>Budget · $2,500</strong>
                   </div>
                   
-                  <div class="s4-drawer">
+                  <div class="s4-note s4-note-bg4">
                     <span class="s4-drawer-label">ONGOING TASK</span>
-                    <div class="s4-drawer-note">
-                      <strong>Compare September flights</strong>
-                    </div>
+                    <strong>Compare flights</strong>
+                  </div>
+                  
+                  <div class="s4-note s4-note-blue">
+                    <span class="s4-drawer-label">TRAVELLING WITH</span>
+                    <strong>Mum</strong>
                   </div>
                 </div>
               </div>
@@ -301,7 +290,7 @@ import robotAi from '../../assets/about/robot_ai.webp';
 
 <style>
   .story-carousel{position:relative;margin-top:clamp(54px,8vw,92px);padding:0 clamp(0px,4vw,56px);outline:none}
-  .slides{max-width:980px;margin:auto}
+  .slides{max-width:1140px;margin:auto}
   .slide{display:none}.slide.active{display:block;animation:slideIn .32s cubic-bezier(.2,.82,.2,1)}
   @keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
@@ -316,7 +305,7 @@ import robotAi from '../../assets/about/robot_ai.webp';
   /* ── SLIDE 1 LAYOUT ──────────────────────────────────────── */
   .slide1-layout{
     display:grid;
-    grid-template-columns:minmax(0,42fr) minmax(0,58fr);
+    grid-template-columns:minmax(0,38fr) minmax(0,62fr);
     gap:clamp(32px,5vw,64px);
     align-items:center;
     min-height:440px;
@@ -519,7 +508,7 @@ import robotAi from '../../assets/about/robot_ai.webp';
   @keyframes tDrift9{ 0%{transform:translate(0,0)} 50%{transform:translate(6px,-4px)} 100%{transform:translate(-5px,6px)} }
 
   /* ── SLIDE 2 — Context story ───────────────────────────── */
-  .s2-layout{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);gap:clamp(32px,5vw,64px);align-items:center;min-height:440px}
+  .s2-layout{display:grid;grid-template-columns:minmax(0,38fr) minmax(0,62fr);gap:clamp(32px,5vw,64px);align-items:center;min-height:440px}
   .s2-copy{display:flex;flex-direction:column;padding:clamp(12px,2vw,24px) 0}
   .s2-bold{margin:10px 0 0;color:var(--ink);font-size:clamp(1.1rem,1.6vw,1.35rem);line-height:1.45;font-weight:700;letter-spacing:-.02em}
   .s2-body{margin:14px 0 0;color:var(--muted);font-size:1rem;line-height:1.7}
@@ -579,7 +568,7 @@ import robotAi from '../../assets/about/robot_ai.webp';
   @media(prefers-reduced-motion:reduce){.s2-cursor,.s2-context-col,.s2-result,.s2-note strong::after{transition:none!important}.s2-thinking span,.s2-note.is-reading::before{animation:none!important}.s2-thinking{display:none}.s2-result{opacity:1;transform:none}}
 
   /* ── SLIDE 3 — Context drawer ───────────────────────────── */
-  .s3-layout{display:grid;grid-template-columns:minmax(0,42fr) minmax(0,58fr);gap:clamp(32px,5vw,64px);align-items:center;min-height:440px}
+  .s3-layout{display:grid;grid-template-columns:minmax(0,38fr) minmax(0,62fr);gap:clamp(32px,5vw,64px);align-items:center;min-height:440px}
   .s3-copy{display:flex;flex-direction:column;padding:clamp(12px,2vw,24px) 0}
   .s3-bold{margin:10px 0 0;color:var(--ink);font-size:clamp(1.1rem,1.6vw,1.35rem);line-height:1.45;font-weight:700;letter-spacing:-.02em}
   .s3-canvas{position:relative;min-height:500px;border-radius:24px;background:#000;overflow:hidden;display:flex;flex-direction:column;padding:32px}
@@ -643,7 +632,7 @@ import robotAi from '../../assets/about/robot_ai.webp';
 
   .nav-arrow{position:absolute;top:55%;z-index:5;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);font-size:1.2rem;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.07)}
   .prev{left:0}.next{right:0}.nav-arrow[hidden]{display:none}
-  .footer{max-width:980px;margin:16px auto 0;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:.72rem}
+  .footer{max-width:1140px;margin:16px auto 0;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:.72rem}
   .dots{display:flex;align-items:center;gap:7px}.dots button{width:18px;height:10px;padding:0;border:0;border-radius:99px;background:transparent;cursor:pointer;position:relative;transition:width .25s ease,transform .2s ease}.dots button::after{content:'';position:absolute;inset:4px 0;border-radius:99px;background:var(--line);transition:background .2s ease,box-shadow .2s ease,transform .2s ease}.dots button:hover,.dots button:focus-visible{transform:translateY(-2px)}.dots button:hover::after,.dots button:focus-visible::after{background:color-mix(in srgb,var(--ink) 65%,var(--line));box-shadow:0 0 0 4px color-mix(in srgb,var(--ink) 8%,transparent);transform:scaleY(1.5)}.dots button:focus-visible{outline:2px solid var(--ink);outline-offset:4px}.dots button.active{width:30px}.dots button.active::after{background:var(--ink)}
 
   .two-col{min-height:388px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,6vw,74px);padding:clamp(32px,5vw,54px);align-items:center}
@@ -685,7 +674,7 @@ import robotAi from '../../assets/about/robot_ai.webp';
   /* ── SLIDE 4 ─────────────────────────────────────────────── */
   .s4-layout {
     display: grid;
-    grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+    grid-template-columns: minmax(0, 35fr) minmax(0, 65fr);
     gap: clamp(32px, 5vw, 64px);
     align-items: center;
     min-height: 440px;
@@ -716,13 +705,16 @@ import robotAi from '../../assets/about/robot_ai.webp';
     border-radius: 24px;
     background: #000;
     overflow: hidden;
-    display: grid;
-    grid-template-columns: 42% 58%;
   }
 
-  /* Left 42% - Brain */
+  /* Left ~30% - Brain */
   .s4-human-side {
-    position: relative;
+    position: absolute;
+    left: 28%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 260px;
+    height: 260px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -792,21 +784,25 @@ import robotAi from '../../assets/about/robot_ai.webp';
     100% { transform: translateY(-8px) translateX(4px); }
   }
 
-  /* Right 58% - Product */
+  /* Right ~72% - Product */
   .s4-product-side {
-    position: relative;
+    position: absolute;
+    left: 72%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 32px 16px;
-    gap: 16px;
-    background: rgba(255,255,255,0.02);
+    width: 320px;
+    height: 380px;
   }
 
   .s4-robot-wrap {
     animation: s4Float 6s ease-in-out infinite alternate;
-    position: relative;
+    position: absolute;
+    top: -20px;
+    z-index: 10;
   }
   .s4-robot-wrap::after {
     content: "";
@@ -823,97 +819,123 @@ import robotAi from '../../assets/about/robot_ai.webp';
     display: block;
   }
 
-  .s4-context-structure {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    max-width: 260px;
+  .s4-notes-cluster {
+    position: relative;
+    width: 260px;
+    height: 280px;
+    margin-top: 40px;
   }
 
-  .s4-drawer {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px;
-    padding: 10px 14px;
-    position: relative;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  .s4-note {
+    position: absolute;
+    width: 150px;
+    min-height: 80px;
+    padding: 12px 14px;
+    border-radius: 4px 4px 10px 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    font-family: "Segoe Print", "Bradley Hand", cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    background: #d8bd6f;
+    color: #282114;
+    transition: transform 0.5s ease;
+    animation: s4Float 9s ease-in-out infinite alternate;
   }
   
   .s4-drawer-label {
     display: block;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.4);
+    font-size: 0.55rem;
+    font-weight: 800;
+    color: rgba(40,33,20,0.6);
     letter-spacing: 0.05em;
-    margin-bottom: 6px;
+    text-transform: uppercase;
+    font-family: system-ui, -apple-system, sans-serif;
   }
 
-  .s4-drawer-note {
-    background: rgba(255,255,255,0.95);
-    border-radius: 6px;
-    padding: 8px 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    color: var(--ink);
-    position: relative;
-    transition: transform 0.3s ease;
-  }
-  
-  .s4-drawer-note small {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--muted);
-    margin-bottom: 2px;
-  }
-  
-  .s4-drawer-note strong {
-    display: block;
+  .s4-note strong {
     font-size: 0.85rem;
-    font-weight: 600;
+    line-height: 1.15;
+    font-weight: 700;
   }
 
+  /* Note specific styling and positions */
+  .s4-note-bg1 {
+    top: 20px; left: 0px;
+    background: #cfb56a;
+    transform: rotate(-6deg);
+    z-index: 1;
+    animation-delay: -1s;
+  }
+  .s4-note-bg2 {
+    top: 50px; right: 0px;
+    background: #c8ae65;
+    transform: rotate(8deg);
+    z-index: 2;
+    animation-delay: -3s;
+  }
+  .s4-note-file {
+    top: 100px; left: 10px;
+    background: #f8fafc;
+    color: #0f172a;
+    transform: rotate(-3deg);
+    z-index: 3;
+    animation-delay: -2s;
+  }
+  .s4-note-file .s4-drawer-label { color: #64748b; }
+  .s4-note-bg3 {
+    top: 140px; right: 10px;
+    background: #d8bd6f;
+    transform: rotate(5deg);
+    z-index: 4;
+    animation-delay: -4s;
+  }
+  .s4-note-bg4 {
+    bottom: 20px; left: 20px;
+    background: #cfb56a;
+    transform: rotate(-4deg);
+    z-index: 5;
+    animation-delay: -5s;
+  }
+  .s4-note-blue {
+    bottom: 0px; right: -10px;
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+    transform: rotate(10deg);
+    z-index: 6;
+    animation-delay: -1.5s;
+  }
+  .s4-note-blue .s4-drawer-label { color: #0284c7; }
+  
   .s4-note-lift {
     animation: s4NoteLift 12s ease-in-out infinite;
   }
   @keyframes s4NoteLift {
     0%, 100%, 80% { transform: translateY(0); }
-    85%, 95% { transform: translateY(-4px); }
+    85%, 95% { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0,0,0,0.4); }
   }
-  
-  /* A restrained highlight scanner */
-  .s4-note-lift::after {
+
+  .s4-note-file::after {
     content: "";
     position: absolute;
     top: 0; left: -100%; right: 100%; bottom: 0;
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(16,185,129,0.1) 50%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(16,185,129,0.2) 50%, rgba(255,255,255,0) 100%);
     animation: s4Scan 12s linear infinite;
     pointer-events: none;
-    border-radius: 6px;
+    border-radius: 4px 4px 10px 6px;
   }
   @keyframes s4Scan {
     0%, 75% { left: -100%; right: 100%; }
     90%, 100% { left: 100%; right: -100%; }
   }
-
-  .s4-tucked-note {
-    position: absolute;
-    bottom: -12px;
-    right: -12px;
-    background: #e0f2fe;
-    border: 1px solid #bae6fd;
-    border-radius: 4px;
-    padding: 6px 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transform: rotate(3deg);
-    z-index: 2;
-  }
-  .s4-tucked-note small { color: #0284c7; }
-  .s4-tucked-note strong { color: #0369a1; }
   
   @media (max-width: 900px) {
     .s4-layout { grid-template-columns: 1fr; min-height: auto; gap: 32px; }
-    .s4-canvas { grid-template-columns: 1fr; grid-template-rows: auto auto; min-height: auto; }
-    .s4-human-side { height: 320px; }
+    .s4-canvas { display: flex; flex-direction: column; min-height: 760px; }
+    .s4-human-side { position: relative; left: auto; top: auto; transform: none; margin: 40px auto; }
+    .s4-product-side { position: relative; left: auto; top: auto; transform: none; margin: 0 auto 40px; }
   }
 
   /* ── RESPONSIVE ──────────────────────────────────────────── */
