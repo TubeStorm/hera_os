@@ -248,14 +248,21 @@ Be honest: if a browser was not opened, say so. Do not convert source inspection
 
 ## N. Work packet lifecycle
 
-Work packets live in `docs/agent-system/work-packets/`.
+Work packets live in `docs/agent-system/work-packets/` (or occasionally as preflight documents in `docs/preflights/`).
 
 | State | Location | Condition |
 |---|---|---|
 | Active | `work-packets/active/` | Work in progress |
 | Closed | `work-packets/closed/` | Implementation + verification lifecycle complete |
 
-When closing a packet, add a **closure header** at the top of the file containing:
+When the Chief Coordinator is done working on a task document (before providing closeout), they must add a **status block at the very top of the task document** containing:
+1. Status (e.g., DONE, INCOMPLETE, FAILED, WAITING FOR REVIEW)
+2. Date
+3. Reason (brief explanation for the status)
+
+This ensures that anyone opening a past task document immediately sees its automatic status.
+
+Additionally, when closing a packet in the `work-packets/` lifecycle, add a **closure header** at the top of the file containing:
 - Final status (use the authority state symbols from Section L)
 - Reference to the closeout file
 - Whether Favour accepted the result or it remains awaiting Favour
