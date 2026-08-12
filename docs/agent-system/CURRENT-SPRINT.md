@@ -30,6 +30,7 @@ Scope is deliberately narrow: install the operating system, define the two new p
 | 6 | Build About page (Slice 2) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 6b | About Section 01 Slide 1 visual rework and carousel interaction polish | 🟡 BUILT — WAITING FOR FAVOUR VISUAL REVIEW |
 | 6c | About Section 01 Slide 2 context-story and design-workflow repair | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
+| 6d | About Section 01 Slide 5 visual implementation and review repair | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 7 | Polish Ubisoft Work page (Slice 3) | ⬜ NOT STARTED — blocked by Slice 2 Favour review |
 | 8 | Verify all pages & build output (Slice 4) | ⬜ NOT STARTED |
 | 9 | Favour review, merge to main and publish (Slice 5) | ⬜ NOT STARTED |
@@ -38,9 +39,9 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 ## Current active work
 
-**About Section 01 — Slide 2 context-story and design-workflow repair** (updated 2026-08-10) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
+**About Section 01 — Slide 5 review repair** (updated 2026-08-11) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
-Slide 2 now keeps the conversation fixed while the persistent cursor switches between HERA-style context tabs. Iris thinks, checks a visible memory note, and reveals the red failure or green context-aware answer on a readable timeline. The animation can be paused. The shared `DESIGN-EXECUTION-STANDARD.md` is now mandatory for Codex and Antigravity visual work. Dev server: **http://localhost:4321/hera_os/about/** — scroll to Section 01 and choose the second progress mark.
+Slide 5 now shows a sparse user task entering HERA's saved context and returning as an Agent response with a compact itinerary artifact. The approved HERA object remains intact; portraits and robot art are removed; the return arrow, Agent thinking, work completion, and reply animate as one sequence. Slide 2 also uses the Agent name and its playback control is bottom-centred. Dev server: **http://localhost:4321/hera_os/about/** — scroll to Section 01 and choose the final progress mark.
 
 ---
 

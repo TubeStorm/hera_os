@@ -255,7 +255,12 @@ Work packets live in `docs/agent-system/work-packets/` (or occasionally as prefl
 | Active | `work-packets/active/` | Work in progress |
 | Closed | `work-packets/closed/` | Implementation + verification lifecycle complete |
 
-When the Chief Coordinator is done working on a task document (before providing closeout), they must add a **status block at the very top of the task document** containing:
+When the Chief Coordinator begins working on a task document, they must immediately add or update a **status block at the very top of the task document** containing:
+1. Status (e.g., IN PROGRESS)
+2. Date
+3. Reason (e.g., Starting implementation)
+
+When the Chief Coordinator is done working on a task document (before providing closeout), they must update the status block at the very top of the task document containing:
 1. Status (e.g., DONE, INCOMPLETE, FAILED, WAITING FOR REVIEW)
 2. Date
 3. Reason (brief explanation for the status)
