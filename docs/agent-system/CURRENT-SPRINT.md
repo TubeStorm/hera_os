@@ -22,6 +22,7 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 | # | Step | Status |
 |---|---|---|
+| 0 | **Public release split** — hide Ubisoft work, new resume, deploy to main | ✅ CLOSED 2026-08-19 |
 | 1 | Install and prove persistent agent operating system | ✅ FAVOUR ACCEPTED / CLOSED |
 | 2 | Audit portfolio-relevant repository and content truth | ✅ FAVOUR ACCEPTED / CLOSED |
 | 3 | Define About page architecture | ✅ FAVOUR ACCEPTED / CLOSED |
