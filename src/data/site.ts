@@ -77,17 +77,18 @@ export const confirmedContacts: ContactLink[] = Object.values(contact).filter(
 // Resume PDF — availability gate.
 // ─────────────────────────────────────────────────────────────────────────────
 export const resumeAsset = {
-  available: true, // Favour-Diokpo-Resume.pdf (2026) is present in /public/resume/
+  // NOTE (release/public-portfolio-2026-08-19): set to false until new resume PDF is supplied.
+  // Restore to true once the final PDF is dropped into /public/resume/ and renamed accordingly.
+  available: false,
   path: 'resume/Favour-Diokpo-Resume.pdf',
 };
 
-// Live navigation — 6-item portfolio nav activated 2026-08-06 (portfolio-week1).
-// All routes are verified Astro pages. "About" and "Ubisoft Work" were
-// previously disconnected stubs; they are now linked without page changes.
+// Navigation for release/public-portfolio-2026-08-19:
+// "Ubisoft Work" hidden — case study not ready for public release.
+// Restore the Ubisoft Work entry when portfolio-week1 work is approved and merged.
 export const nav = [
   { label: 'HERA OS', href: '' },
   { label: 'Deep Dive', href: 'work/hera/' },
-  { label: 'Ubisoft Work', href: 'work/enterprise-tools/' },
   { label: 'About', href: 'about/' },
   { label: 'Lineage', href: 'work/lineage/' },
   { label: 'Contact', href: 'contact/' },
@@ -199,7 +200,8 @@ export const strengths: Strength[] = [
     label: 'Enterprise scale',
     title: 'Ubisoft internal tools',
     body: 'Three workstreams in planning, approvals, and governance for 1,000+ people — diagnosed with a 101-response survey, fixed with systemization.',
-    href: 'work/enterprise-tools/',
+    // release/public-portfolio-2026-08-19: route to about/ until case study is ready
+    href: 'about/',
   },
   {
     label: 'Point of view',
