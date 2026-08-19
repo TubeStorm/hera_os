@@ -77,9 +77,9 @@ export const confirmedContacts: ContactLink[] = Object.values(contact).filter(
 // Resume PDF — availability gate.
 // ─────────────────────────────────────────────────────────────────────────────
 export const resumeAsset = {
-  // NOTE (release/public-portfolio-2026-08-19): set to false until new resume PDF is supplied.
-  // Restore to true once the final PDF is dropped into /public/resume/ and renamed accordingly.
-  available: false,
+  // New resume supplied 2026-08-19: Favour_Diokpo_AI_Product_Designer_Resume.pdf
+  // Copied to public/resume/Favour-Diokpo-Resume.pdf for the release branch.
+  available: true,
   path: 'resume/Favour-Diokpo-Resume.pdf',
 };
 
