@@ -1,0 +1,342 @@
+<!-- REPLACE CURRENT ABOUT SECTIONS 02 THROUGH 05 WITH THIS BLOCK -->
+
+<!-- 02 -->
+<section class="section border-t border-line">
+  <div class="container-page reveal">
+    <p class="eyebrow">02</p>
+    <h2 class="mt-4 text-h2 font-semibold tracking-tight">
+      How do you decide what the AI should do — and what the product should enforce?
+    </h2>
+
+    <div class="prose-hera mt-6 max-w-[48rem]">
+      <p>
+        I separate three things that AI products often blur together:
+        <strong>software rules, AI judgment, and human judgment.</strong>
+      </p>
+      <p>
+        If a rule can be guaranteed cheaply in code, I do not want to spend model intelligence
+        hoping the AI remembers it. If the answer requires interpretation, research, or synthesis,
+        that is where the model is useful. If two valid answers depend on what the human actually
+        wants, the product should come back to the human.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-3">
+      <div class="card p-6">
+        <p class="eyebrow">Software rules</p>
+        <h3 class="mt-3 text-base font-semibold tracking-tight">
+          Things that should not depend on the AI “remembering”
+        </h3>
+        <ul class="mt-5 text-sm text-muted space-y-3">
+          <li>Which piece of work is active.</li>
+          <li>What the AI is allowed to access.</li>
+          <li>Whether an answer has already been submitted.</li>
+          <li>Whether the current result is still waiting for review.</li>
+          <li>How a known capability is found and loaded.</li>
+        </ul>
+      </div>
+
+      <div class="card p-6">
+        <p class="eyebrow">AI judgment</p>
+        <h3 class="mt-3 text-base font-semibold tracking-tight">
+          Things that genuinely benefit from intelligence
+        </h3>
+        <ul class="mt-5 text-sm text-muted space-y-3">
+          <li>Which context is relevant to inspect.</li>
+          <li>What needs research before work can continue.</li>
+          <li>How to break a large outcome into bounded work.</li>
+          <li>Which specialist or tool is appropriate for the job.</li>
+          <li>Whether a low-risk assumption is safe enough to make.</li>
+        </ul>
+      </div>
+
+      <div class="card p-6">
+        <p class="eyebrow">Human judgment</p>
+        <h3 class="mt-3 text-base font-semibold tracking-tight">
+          Things the system should never quietly invent
+        </h3>
+        <ul class="mt-5 text-sm text-muted space-y-3">
+          <li>What outcome actually matters.</li>
+          <li>Preferences that materially change the result.</li>
+          <li>Whether a risky action is allowed.</li>
+          <li>Whether a result is acceptable.</li>
+          <li>When the direction itself needs to change.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="section border-t border-line">
+  <div class="container-page reveal">
+    <p class="eyebrow">03</p>
+    <h2 class="mt-4 text-h2 font-semibold tracking-tight">
+      How do you know an AI system actually works?
+    </h2>
+
+    <div class="prose-hera mt-6 max-w-[52rem]">
+      <p>
+        I do not count an AI system as working because the answer looks good.
+        I try to find the case where it can look competent while crossing a boundary it was never supposed to cross.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-10 lg:grid-cols-[0.92fr_1.08fr] items-start">
+      <div>
+        <p class="eyebrow">The failure</p>
+        <p class="mt-4 text-xl sm:text-2xl font-semibold tracking-tight text-ink leading-snug">
+          HERA produced plausible wholesale prices by quietly making a business decision the owner had not made.
+        </p>
+
+        <div class="prose-hera mt-5">
+          <p>
+            The business was still deciding between fewer, higher-value stockists with stronger margins
+            and broader café distribution at a thinner margin. Iris had enough information to generate
+            convincing prices, so it chose a strategy itself and buried that choice inside finished-looking work.
+          </p>
+          <p>
+            That was more dangerous than an obviously bad answer. The result looked competent enough to approve.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <p class="eyebrow">What changed</p>
+          <p class="mt-3 text-lg font-semibold tracking-tight text-ink">
+            Assignment is execution authority, not decision authority.
+          </p>
+          <p class="mt-3 text-sm sm:text-base text-muted leading-relaxed">
+            I stopped treating “is the model uncertain?” as the boundary. HERA now checks what the result materially
+            depends on, who owns that decision, and whether the system is actually authorized to resolve it before
+            ordinary generation continues.
+          </p>
+        </div>
+
+        <div class="mt-8">
+          <p class="eyebrow">How I proved it</p>
+          <p class="mt-3 text-sm sm:text-base text-muted leading-relaxed">
+            I tested the same architecture in two deliberately different domains: wholesale pricing and B2B studio
+            positioning. In both clean real-product journeys, HERA surfaced one governing human decision instead of
+            interrogating the user about every downstream consequence, while harmless implementation choices stayed autonomous.
+          </p>
+
+          <div class="mt-5 flex flex-wrap gap-3 text-xs sm:text-sm text-muted">
+            <span class="about-proof-chip">1 human-owned root question per task</span>
+            <span class="about-proof-chip">0 duplicate consequence questions</span>
+            <span class="about-proof-chip">Same run resumed after the answer</span>
+            <span class="about-proof-chip">Restart preserved decision identity</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="section border-t border-line about-ai-work">
+  <div class="container-page reveal">
+    <div class="about-number-plain" aria-label="Section 04">
+      <span class="about-number-dot" aria-hidden="true"></span>
+      <span>04</span>
+    </div>
+
+    <h2 class="mt-4 text-h2 font-semibold tracking-tight">
+      How do you actually use AI in your own work?
+    </h2>
+
+    <div class="prose-hera mt-6 max-w-[54rem]">
+      <p>
+        I do not use AI to outsource product judgment. I use it to compress the work around that judgment.
+      </p>
+      <p>
+        My goal is to make the instruction smaller because the system around the instruction is better.
+        In the extreme, I want to be able to say something as simple as “build the About page” and have the
+        surrounding system already know the relevant decisions, context, permissions, workflow, acceptance
+        criteria and review rules.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-12 lg:grid-cols-2 about-ai-split">
+      <div class="about-ai-column">
+        <p class="eyebrow">What stays with me</p>
+        <h3 class="mt-3 text-xl font-semibold tracking-tight">Product judgment</h3>
+
+        <ul class="mt-7 space-y-4 text-muted">
+          <li><strong class="text-ink">Find</strong> the real problem.</li>
+          <li><strong class="text-ink">Decide</strong> the outcome worth pursuing.</li>
+          <li><strong class="text-ink">Define</strong> how the system should behave.</li>
+          <li><strong class="text-ink">Choose</strong> what must remain human.</li>
+          <li><strong class="text-ink">Make</strong> the important trade-offs.</li>
+          <li><strong class="text-ink">Accept or reject</strong> the final result.</li>
+        </ul>
+      </div>
+
+      <div class="about-ai-column">
+        <p class="eyebrow">What I let AI accelerate</p>
+        <h3 class="mt-3 text-xl font-semibold tracking-tight">The work around the judgment</h3>
+
+        <ul class="mt-7 space-y-4 text-muted">
+          <li>Repository and evidence research.</li>
+          <li>Exploring multiple approaches quickly.</li>
+          <li>Implementation from a bounded specification.</li>
+          <li>Adversarial critique of a proposed solution.</li>
+          <li>Independent verification.</li>
+          <li>Repetitive execution and documentation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prose-hera mt-12 max-w-[54rem]">
+      <p>
+        The surprising thing I learned is that getting an agent to build is often the easy part.
+        The difficult part is everything that has to be true <em>before</em> you press Send:
+        the context, the rules, the handoffs, the permissions, the evidence, and the definition of done.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="section border-t border-line">
+  <div class="container-page reveal">
+    <p class="eyebrow">05</p>
+    <h2 class="mt-4 text-h2 font-semibold tracking-tight">
+      Is this way of thinking specific to AI?
+    </h2>
+
+    <div class="prose-hera mt-6 max-w-[52rem]">
+      <p>
+        No. HERA made the pattern easier to name, but I had been asking versions of the same systems questions
+        inside enterprise products for years.
+      </p>
+    </div>
+
+    <div class="mt-12 space-y-12">
+      <article class="grid gap-5 lg:grid-cols-[0.34fr_0.66fr]">
+        <div>
+          <p class="eyebrow">Ubisoft</p>
+          <h3 class="mt-3 text-xl font-semibold tracking-tight">
+            Staffing &amp; resource planning platform
+          </h3>
+        </div>
+
+        <div>
+          <p class="text-base text-muted leading-relaxed">
+            Producers used the tool to understand who was staffed on which project, when people were joining or
+            leaving, and where future resource needs existed. The important design problem was not one screen:
+            it was making a changing staffing system understandable enough that different roles could act on the same reality.
+          </p>
+          <p class="mt-4 text-sm text-muted leading-relaxed">
+            <strong class="text-ink">Same systems question:</strong>
+            What burden is the person carrying because the product itself has not made the workflow and state clear?
+          </p>
+        </div>
+      </article>
+
+      <article class="grid gap-5 lg:grid-cols-[0.34fr_0.66fr]">
+        <div>
+          <p class="eyebrow">Ubisoft</p>
+          <h3 class="mt-3 text-xl font-semibold tracking-tight">
+            Company-wide remote-work approval platform
+          </h3>
+        </div>
+
+        <div>
+          <p class="text-base text-muted leading-relaxed">
+            What looked like an approval-form problem was really a decision-rights problem across employees,
+            managers, directors, HR and governance. I translated that ambiguity into five explicit approval flows
+            with clearer accountability and decision messaging under HR and legal constraints.
+          </p>
+          <p class="mt-4 text-sm text-muted leading-relaxed">
+            <strong class="text-ink">Same systems question:</strong>
+            Who owns this decision, what should the product enforce, and what must remain human?
+          </p>
+        </div>
+      </article>
+
+      <article class="grid gap-5 lg:grid-cols-[0.34fr_0.66fr]">
+        <div>
+          <p class="eyebrow">Ubisoft</p>
+          <h3 class="mt-3 text-xl font-semibold tracking-tight">
+            Hiring capacity decision support
+          </h3>
+        </div>
+
+        <div>
+          <p class="text-base text-muted leading-relaxed">
+            The obvious product response to capacity limits was to hard-block decisions once a threshold was reached.
+            I chose warning-based decision support instead, so the system could surface risk and policy limits without
+            pretending software should make the staffing decision for the person.
+          </p>
+          <p class="mt-4 text-sm text-muted leading-relaxed">
+            <strong class="text-ink">Same systems question:</strong>
+            When should software enforce a boundary, and when should it inform a human decision?
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <div class="prose-hera mt-12 max-w-[58rem]">
+      <p>
+        The products changed. The questions did not:
+        <strong>where should responsibility live, what should the system know, and when should it act, warn, or ask?</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-ai-work {
+    background: #000;
+  }
+
+  .about-number-plain {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .about-number-dot {
+    width: 0.38rem;
+    height: 0.38rem;
+    border-radius: 999px;
+    background: #6697ff;
+    flex: none;
+  }
+
+  .about-ai-column ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .about-proof-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 86%, transparent);
+  }
+
+  @media (max-width: 760px) {
+    .about-proof-chip {
+      border-radius: 0.75rem;
+    }
+  }
+</style>
+
+<!-- END REPLACEMENT BLOCK -->

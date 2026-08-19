@@ -1,0 +1,283 @@
+---
+/* Manual carousel. No scroll-driven state. */
+---
+
+<section id="problem-finding-story" class="section border-t border-line">
+  <div class="container-page">
+    <div class="reveal max-w-[62rem]">
+      <p class="eyebrow">01</p>
+      <h2 class="mt-4 text-h2 font-semibold tracking-tight">How do you find the real problem?</h2>
+      <div class="prose-hera mt-6 max-w-[50rem]">
+        <p>
+          I usually start by asking one thing:
+          <strong>what is the user carrying that the product should be carrying instead?</strong>
+        </p>
+      </div>
+    </div>
+
+    <div class="story-carousel reveal" data-story-carousel tabindex="0">
+      <button class="nav-arrow prev" type="button" data-prev aria-label="Previous idea" hidden>←</button>
+
+      <div class="slides" aria-live="polite">
+
+        <article class="slide active" data-slide="0" aria-hidden="false">
+          <div class="copy">
+            <p class="kicker">The HERA story</p>
+            <h3>I thought the problem was managing agents.</h3>
+            <p>
+              It turned out the problem was everything I had to remember for them.
+              AI could already ask questions, use tools, and work for long periods.
+              I was still carrying the workflow in my own head.
+            </p>
+          </div>
+
+          <div class="stage burden-stage">
+            <p class="stage-label">What the workflow felt like</p>
+            <div class="two-col">
+              <div class="side">
+                <div class="who"><span class="human-dot"></span><div><small>ME</small><strong>Keeping the work coherent</strong></div></div>
+                <div class="chip-list">
+                  <span style="--i:0">CURRENT FILE</span>
+                  <span style="--i:1">DECISION</span>
+                  <span style="--i:2">WHAT AGENT A LEARNED</span>
+                  <span style="--i:3">REVIEWED VERSION</span>
+                  <span style="--i:4">DID I ANSWER THIS?</span>
+                </div>
+                <div class="total"><b>5</b><span>things I still had to carry</span></div>
+              </div>
+
+              <div class="side ai-side">
+                <div class="who ai-who"><span class="ai-dot">✦</span><div><small>AI</small><strong>Working</strong></div></div>
+                <div class="working"><i></i><span>running the task</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" data-slide="1" aria-hidden="true">
+          <div class="copy">
+            <p class="kicker">What I questioned</p>
+            <h3>Why should an intelligent product keep asking me to act as its memory?</h3>
+            <p>
+              If I already told a friend I went to Ibiza, I expect the next useful question
+              to be “who did you go with?”, not “where did you travel?”
+            </p>
+          </div>
+
+          <div class="stage ibiza-stage">
+            <p class="stage-label">A simple trust test</p>
+            <div class="two-col">
+              <div class="side">
+                <small class="time">EARLIER</small>
+                <div class="bubble"><small>YOU</small><p>I just got back from Ibiza.</p></div>
+                <div class="memory"><div><small>TRIP</small><strong>Ibiza</strong></div><b>✓</b></div>
+              </div>
+
+              <div class="side">
+                <small class="time">LATER</small>
+                <div class="bubble wrong"><small>AI</small><p>Where did you travel?</p><em>already known</em></div>
+                <div class="divider"><span></span><small>context checked</small><span></span></div>
+                <div class="bubble right"><small>AI</small><p>Who did you travel with?</p><em>not found → ask</em></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" data-slide="2" aria-hidden="true">
+          <div class="copy">
+            <p class="kicker">What I realized</p>
+            <h3>The bottleneck was not simply model intelligence. It was trust.</h3>
+            <p>
+              If the AI interrupts me, I need to trust that it checked what I already gave it first.
+              An interruption should earn the right to interrupt me.
+            </p>
+          </div>
+
+          <div class="stage trust-stage">
+            <p class="stage-label">Before a question reaches me</p>
+            <div class="trust-flow">
+              <div class="question"><span>?</span><strong>Need an answer</strong></div>
+              <div class="line"></div>
+
+              <div class="checks">
+                <span style="--i:0">DECISIONS <b>✓</b></span>
+                <span style="--i:1">FILES <b>✓</b></span>
+                <span style="--i:2">PREVIOUS WORK <b>✓</b></span>
+                <span style="--i:3">CONVERSATION <b>✓</b></span>
+                <span style="--i:4">ACCEPTED RESULT <b>✓</b></span>
+              </div>
+
+              <div class="line"></div>
+
+              <div class="gate">
+                <small>CAN THE SYSTEM RESOLVE THIS?</small>
+                <div><span class="yes"><b>YES</b> continue working</span><span class="no"><b>NO</b> human meaning required</span></div>
+              </div>
+
+              <div class="human-arrival"><span class="human-dot"></span><div><small>YOU</small><strong>Only when the answer is genuinely yours</strong></div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="slide" data-slide="3" aria-hidden="true">
+          <div class="copy">
+            <p class="kicker">The product decision</p>
+            <h3>Make context part of the product, not something hidden inside a prompt.</h3>
+            <p>
+              The person should provide meaning and judgment. The product should carry the context,
+              state, history, work, and evidence around it.
+            </p>
+          </div>
+
+          <div class="stage transfer-stage">
+            <p class="stage-label">Move the burden into the product</p>
+            <div class="transfer">
+              <div class="transfer-card">
+                <div class="who"><span class="human-dot"></span><div><small>HUMAN</small><strong>Meaning + judgment</strong></div></div>
+                <div class="keep"><span>INTENT</span><span>JUDGMENT</span></div>
+              </div>
+
+              <div class="move"><span></span><b>→</b></div>
+
+              <div class="transfer-card">
+                <div class="who"><span class="ai-dot">✦</span><div><small>PRODUCT</small><strong>Carry the workflow</strong></div></div>
+                <div class="product-list">
+                  <span style="--i:0">CONTEXT</span>
+                  <span style="--i:1">STATE</span>
+                  <span style="--i:2">HISTORY</span>
+                  <span style="--i:3">WORK</span>
+                  <span style="--i:4">EVIDENCE</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="return"><small>only unresolved meaning crosses back</small><strong>What do <em>you</em> want?</strong></div>
+          </div>
+        </article>
+
+      </div>
+
+      <button class="nav-arrow next" type="button" data-next aria-label="Next idea">→</button>
+
+      <div class="footer">
+        <span data-count>1 / 4</span>
+        <div class="dots"><i class="active" data-dot="0"></i><i data-dot="1"></i><i data-dot="2"></i><i data-dot="3"></i></div>
+      </div>
+    </div>
+
+    <div class="outro reveal">
+      <p>
+        That is usually how I work: I follow the friction until I can describe the burden
+        <strong>the user should never have been carrying in the first place.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .story-carousel{position:relative;margin-top:clamp(54px,8vw,92px);padding:0 clamp(0px,4vw,56px);outline:none}
+  .slides{max-width:980px;margin:auto}
+  .slide{display:none}.slide.active{display:block;animation:slideIn .32s cubic-bezier(.2,.82,.2,1)}
+  @keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .copy{max-width:720px;margin-bottom:26px}
+  .kicker{margin:0 0 9px;color:var(--muted);font-size:.76rem;font-weight:700;letter-spacing:.085em;text-transform:uppercase}
+  .copy h3{margin:0;color:var(--ink);font-size:clamp(1.7rem,3vw,2.65rem);line-height:1.06;letter-spacing:-.04em;font-weight:620}
+  .copy>p:last-child{max-width:650px;margin:16px 0 0;color:var(--muted);font-size:1rem;line-height:1.65}
+
+  .stage{min-height:440px;overflow:hidden;border:1px solid var(--line);border-radius:30px;background:radial-gradient(circle at 80% 8%,rgba(216,189,111,.065),transparent 30%),var(--surface);box-shadow:0 24px 70px rgba(0,0,0,.07)}
+  .stage-label{height:52px;margin:0;display:flex;align-items:center;padding:0 22px;border-bottom:1px solid var(--line);color:var(--muted);font-size:.72rem;font-weight:650;letter-spacing:.06em;text-transform:uppercase}
+
+  .nav-arrow{position:absolute;top:55%;z-index:5;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);font-size:1.2rem;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.07)}
+  .prev{left:0}.next{right:0}.nav-arrow[hidden]{display:none}
+  .footer{max-width:980px;margin:16px auto 0;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:.72rem}
+  .dots{display:flex;gap:7px}.dots i{width:18px;height:2px;border-radius:99px;background:var(--line);transition:.25s}.dots i.active{width:30px;background:var(--ink)}
+
+  .two-col{min-height:388px;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,6vw,74px);padding:clamp(32px,5vw,54px);align-items:center}
+  .side{min-width:0}
+  .who{display:flex;align-items:center;gap:12px}.who small{display:block;color:var(--muted);font-size:.56rem;font-weight:750;letter-spacing:.1em}.who strong{display:block;margin-top:2px;color:var(--ink);font-size:.76rem}
+  .human-dot{width:38px;height:38px;display:block;flex:none;border:1px solid color-mix(in srgb,var(--ink) 22%,var(--line));border-radius:50%;background:var(--surface)}
+  .ai-dot{width:38px;height:38px;display:grid;place-items:center;flex:none;border-radius:12px;background:rgba(216,189,111,.15);color:#d8bd6f}
+
+  .chip-list{margin-top:26px;display:grid;gap:8px}.chip-list span{width:max-content;max-width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink);font-size:.6rem;font-weight:700;opacity:0;transform:translateX(-10px)}
+  .slide.active .chip-list span{animation:arrive .35s ease forwards;animation-delay:calc(var(--i)*100ms + 130ms)}
+  @keyframes arrive{to{opacity:1;transform:none}}
+  .total{margin-top:18px;display:flex;align-items:baseline;gap:8px;opacity:0}.slide.active .total{animation:fadeUp .35s ease .75s forwards}.total b{font-size:1.55rem}.total span{color:var(--muted);font-size:.7rem}
+
+  .ai-side{text-align:center}.ai-who{justify-content:center}.working{margin:26px auto 0;max-width:220px;padding:12px;border-radius:13px;background:rgba(216,189,111,.07);color:var(--muted);font-size:.66rem}.working i{display:block;width:38%;height:2px;margin:0 auto 8px;background:#d8bd6f;animation:work 1.6s ease-in-out infinite alternate}
+  @keyframes work{from{transform:translateX(-42%);opacity:.45}to{transform:translateX(42%);opacity:1}}
+
+  .time{display:block;margin-bottom:12px;color:var(--faint);font-size:.56rem;font-weight:750;letter-spacing:.12em}
+  .bubble{padding:13px 15px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}.bubble small{color:var(--muted);font-size:.54rem;font-weight:750;letter-spacing:.09em}.bubble p{margin:5px 0 0;color:var(--ink);font-size:.82rem}.bubble em{display:block;margin-top:7px;color:var(--muted);font-size:.58rem;font-style:normal}
+  .memory{width:150px;margin:17px 0 0 auto;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-radius:13px;background:rgba(174,224,189,.1);opacity:0}.memory small,.memory strong{display:block}.memory small{color:var(--muted);font-size:.5rem}.memory strong{font-size:.7rem}.memory b{color:#aee0bd}.slide.active .memory{animation:fadeUp .35s ease .3s forwards}
+  .wrong{opacity:0}.slide.active .wrong{animation:wrong 1.35s ease .55s forwards}@keyframes wrong{0%{opacity:0;transform:translateY(7px)}30%,70%{opacity:1;transform:none}100%{opacity:.3;text-decoration:line-through}}
+  .divider{margin:12px 0;display:flex;align-items:center;gap:8px;opacity:0}.divider span{height:1px;flex:1;background:var(--line)}.divider small{color:var(--muted);font-size:.5rem}.slide.active .divider{animation:fade .2s ease 1.4s forwards}
+  .right{opacity:0;border-color:rgba(216,189,111,.28)}.slide.active .right{animation:fadeUp .35s ease 1.7s forwards}
+
+  .trust-flow{min-height:388px;padding:28px clamp(24px,5vw,54px);display:flex;flex-direction:column;align-items:center}
+  .question{display:flex;align-items:center;gap:8px;padding:9px 13px;border:1px solid var(--line);border-radius:999px}.question span{width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:rgba(216,189,111,.13)}.question strong{font-size:.66rem}
+  .line{width:1px;height:32px;background:linear-gradient(var(--line),#d8bd6f);transform-origin:top;transform:scaleY(0)}.slide.active .line{animation:grow .3s ease .2s forwards}.slide.active .line:nth-of-type(2){animation-delay:1.2s}@keyframes grow{to{transform:scaleY(1)}}
+  .checks{width:100%;display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.checks span{padding:10px 4px;border:1px solid var(--line);border-radius:11px;text-align:center;color:var(--muted);font-size:.46rem;font-weight:700;opacity:.2}.checks b{display:block;width:17px;height:17px;margin:6px auto 0;border-radius:50%;color:#aee0bd;background:rgba(174,224,189,.1);opacity:0}.slide.active .checks span{animation:wake .28s ease forwards;animation-delay:calc(var(--i)*100ms + .45s)}.slide.active .checks b{animation:fade .2s ease forwards;animation-delay:calc(var(--i)*100ms + .58s)}@keyframes wake{to{opacity:1}}
+  .gate{width:min(500px,100%);opacity:0}.slide.active .gate{animation:fadeUp .3s ease 1.45s forwards}.gate>small{display:block;margin-bottom:7px;text-align:center;color:var(--muted);font-size:.5rem;font-weight:750;letter-spacing:.08em}.gate>div{display:grid;grid-template-columns:1fr 1fr;gap:7px}.gate span{padding:10px;border-radius:10px;font-size:.58rem}.gate b{margin-right:5px}.yes{background:rgba(174,224,189,.09);color:#aee0bd}.no{background:rgba(216,189,111,.09);color:var(--ink)}
+  .human-arrival{margin-top:14px;display:flex;align-items:center;gap:9px;opacity:0}.slide.active .human-arrival{animation:fadeUp .3s ease 1.8s forwards}.human-arrival .human-dot{width:30px;height:30px}.human-arrival small,.human-arrival strong{display:block}.human-arrival small{color:var(--muted);font-size:.5rem}.human-arrival strong{font-size:.62rem}
+
+  .transfer{min-height:330px;display:grid;grid-template-columns:1fr 72px 1fr;gap:14px;align-items:center;padding:clamp(28px,5vw,52px);padding-bottom:16px}.transfer-card{min-height:235px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+  .keep,.product-list{margin-top:20px;display:grid;gap:8px}.keep span,.product-list span{padding:9px 10px;border-radius:9px;font-size:.55rem;font-weight:700;letter-spacing:.05em}.keep span{background:rgba(159,199,255,.08)}.product-list span{background:rgba(216,189,111,.08);opacity:0;transform:translateX(-9px)}.slide.active .product-list span{animation:arrive .3s ease forwards;animation-delay:calc(var(--i)*110ms + .75s)}
+  .move{position:relative;height:1px}.move span{display:block;height:1px;background:linear-gradient(90deg,var(--line),#d8bd6f);transform-origin:left;transform:scaleX(0)}.slide.active .move span{animation:across .42s ease .35s forwards}@keyframes across{to{transform:scaleX(1)}}.move b{position:absolute;right:-2px;top:-11px;color:#d8bd6f;opacity:0}.slide.active .move b{animation:fade .2s ease .72s forwards}
+  .return{max-width:350px;margin:0 auto 24px;padding:10px 13px;text-align:center;border:1px solid rgba(216,189,111,.22);border-radius:12px;opacity:0}.slide.active .return{animation:fadeUp .35s ease 1.55s forwards}.return small,.return strong{display:block}.return small{color:var(--muted);font-size:.5rem}.return strong{margin-top:3px;font-size:.7rem}.return em{font-style:normal;color:#d8bd6f}
+
+  .outro{max-width:56rem;margin-top:clamp(46px,7vw,80px)}.outro p{margin:0;color:var(--muted);font-size:clamp(1.16rem,2vw,1.6rem);line-height:1.5;letter-spacing:-.02em}.outro strong{color:var(--ink);font-weight:620}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}@keyframes fade{to{opacity:1}}
+
+  @media(max-width:820px){
+    .story-carousel{padding:0}.nav-arrow{top:auto;bottom:0}.footer{min-height:44px;padding:0 56px}.stage{min-height:460px}.two-col{padding:28px}.checks{grid-template-columns:repeat(3,1fr)}
+  }
+  @media(max-width:620px){
+    .copy h3{font-size:clamp(1.5rem,7vw,2rem)}.two-col,.transfer{grid-template-columns:1fr;gap:24px}.ai-side{text-align:left}.ai-who{justify-content:flex-start}.memory{margin-left:0}.transfer-card{min-height:auto}.move{width:1px;height:26px;margin:auto}.move span{width:1px;height:100%;background:linear-gradient(var(--line),#d8bd6f);transform-origin:top;transform:scaleY(0)}.slide.active .move span{animation:grow .35s ease .35s forwards}.move b{right:-7px;top:17px;transform:rotate(90deg)}.stage{min-height:520px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .slide.active,.chip-list span,.total,.memory,.wrong,.divider,.right,.line,.checks span,.checks b,.gate,.human-arrival,.product-list span,.move span,.move b,.return{animation:none!important;transition:none!important}
+    .chip-list span,.total,.memory,.wrong,.divider,.right,.checks span,.checks b,.gate,.human-arrival,.product-list span,.move b,.return{opacity:1!important;transform:none!important}.line,.move span{transform:none!important}.working i{animation:none!important}
+  }
+</style>
+
+<script>
+  const carousel = document.querySelector('[data-story-carousel]');
+  if (carousel) {
+    const slides = Array.from(carousel.querySelectorAll('[data-slide]'));
+    const prev = carousel.querySelector('[data-prev]');
+    const next = carousel.querySelector('[data-next]');
+    const count = carousel.querySelector('[data-count]');
+    const dots = Array.from(carousel.querySelectorAll('[data-dot]'));
+    let current = 0;
+
+    const show = (index) => {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+
+      slides.forEach((slide, i) => {
+        const active = i === current;
+        slide.classList.remove('active');
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+        if (active) {
+          void slide.offsetWidth;
+          slide.classList.add('active');
+        }
+      });
+
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+      if (count) count.textContent = `${current + 1} / ${slides.length}`;
+      if (prev) prev.hidden = current === 0;
+      if (next) next.hidden = current === slides.length - 1;
+    };
+
+    prev?.addEventListener('click', () => show(current - 1));
+    next?.addEventListener('click', () => show(current + 1));
+
+    carousel.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft' && current > 0) { event.preventDefault(); show(current - 1); }
+      if (event.key === 'ArrowRight' && current < slides.length - 1) { event.preventDefault(); show(current + 1); }
+    });
+
+    show(0);
+  }
+</script>
