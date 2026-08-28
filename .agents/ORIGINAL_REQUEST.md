@@ -1,376 +1,267 @@
 # Original User Request
 
-## Initial Request — 2026-07-26T00:59:40Z
+## 2026-08-26T20:29:21Z
 
-# Teamwork Project Prompt — Draft
+Ship an enhanced HERA Early Access signup funnel to the public `main` branch of `TubeStorm/hera_os`, adding a discovery-source dropdown, a deterministic HERA alias per signup, an agent preview in the success state, and labeled footer agents — without merging any unfinished Ubisoft portfolio development work into the public site.
 
-> Status: Ready for launch — awaiting user approval
-> Goal: Delegate to teamwork_preview upon approval
-
-Research and rewrite the portfolio copy for 'The Crucible' application to align with the HERA OS founder narrative, utilizing a multi-agent critique and review cycle.
-
-Working directory: ~/teamwork_projects/hera_crucible_copy
-Integrity mode: benchmark
-
-## Requirements
-
-### R1. Multi-Agent Discovery & Writing
-You must coordinate a multi-agent process to write the copy. Your process must include:
-- A **Purpose and evidence researcher** to inspect `D:\Documents\HERA\docs\product\New truth\Y COMBINATOR\reports\YC-FOUNDER-PREVIOUS-WORK-AUDIT.md` and `YC-FOUNDER-PREVIOUS-WORK-EVIDENCE.md` to find the real user problem, the hidden system failure noticed, what existing approaches assumed, what was rejected, what was built, evidence of use, and what HERA inherited.
-- A **Current copy critic** to identify vague claims, AI writing patterns, excessive em dashes, missing cause/effect, and technical jargon in the current Crucible copy.
-- A **Product storyteller** to draft the new copy based on the research and critique using a direct, concrete founder narrative.
-
-### R2. Dual-Reviewer Gate System
-The drafted copy must be evaluated by two distinct reviewing perspectives before it can be finalized:
-- A **YC Reviewer** to evaluate founder ability, independent execution, problem identification, product judgment, and the HERA connection.
-- A **Nontechnical Reader** to evaluate clarity, ensuring no unexplained technical terms are used and the problem/solution is immediately obvious.
-
-### R3. Output Formatting
-The final text must use the following sections:
-- Problem
-- Rejected
-- Built
-- Inherited
-- Status
-
-## Acceptance Criteria
-
-### Execution & Review
-- [ ] The research phase successfully extracts verifiable facts from the audit documents.
-- [ ] The drafted copy contains zero instances of "AI portfolio template" phrasing and uses concrete cause and effect.
-- [ ] The YC Reviewer grades the copy at 8.5/10 or higher.
-- [ ] The Nontechnical Reader grades the copy at 9/10 or higher.
-- [ ] The final accepted copy is returned as the primary deliverable so it can be updated on the live site by the coordinating builder.
-
-## Follow-up — 2026-07-26T01:10:09Z
-
-# Teamwork Project Prompt — Draft
-
-> Status: Ready for launch — awaiting user approval
-> Goal: Delegate to teamwork_preview upon approval
-
-Research and rewrite the portfolio copy for the 'TabSuite' application to align with the HERA OS founder narrative, utilizing a multi-agent critique and review cycle.
-
-Working directory: ~/teamwork_projects/hera_tabsuite_copy
-Integrity mode: benchmark
-
-## Requirements
-
-### R1. Multi-Agent Discovery & Writing
-You must coordinate a multi-agent process to write the copy. Your process must include:
-- A **Purpose and evidence researcher** to inspect `D:\Documents\HERA\docs\product\New truth\Y COMBINATOR\reports\YC-FOUNDER-PREVIOUS-WORK-AUDIT.md` and `YC-FOUNDER-PREVIOUS-WORK-EVIDENCE.md` to find the real user problem, the hidden system failure noticed, what existing approaches assumed, what was rejected, what was built, evidence of use, and what HERA inherited.
-- A **Current copy critic** to identify vague claims, AI writing patterns, excessive em dashes, missing cause/effect, and technical jargon in the current TabSuite copy.
-- A **Product storyteller** to draft the new copy based on the research and critique using a direct, concrete founder narrative.
-
-### R2. Dual-Reviewer Gate System
-The drafted copy must be evaluated by two distinct reviewing perspectives before it can be finalized:
-- A **YC Reviewer** to evaluate founder ability, independent execution, problem identification, product judgment, and the HERA connection.
-- A **Nontechnical Reader** to evaluate clarity, ensuring no unexplained technical terms are used and the problem/solution is immediately obvious.
-
-### R3. Output Formatting
-The final text must use the following sections:
-- Problem
-- Rejected
-- Built
-- Inherited
-- Status
-
-## Acceptance Criteria
-
-### Execution & Review
-- [ ] The research phase successfully extracts verifiable facts from the audit documents.
-- [ ] The drafted copy contains zero instances of "AI portfolio template" phrasing and uses concrete cause and effect.
-- [ ] The YC Reviewer grades the copy at 8.5/10 or higher.
-- [ ] The Nontechnical Reader grades the copy at 9/10 or higher.
-- [ ] The final accepted copy is returned as the primary deliverable so it can be updated on the live site by the coordinating builder.
-
-## Follow-up — 2026-07-26T01:49:32Z
-
-# Teamwork Project Prompt — Draft
-
-> Status: Ready for launch — awaiting user approval
-> Goal: Delegate to teamwork_preview upon approval
-
-Research and rewrite the portfolio copy for the 'Obsidian Companion' application to align with the HERA OS founder narrative, utilizing a multi-agent critique and review cycle.
-
-Working directory: ~/teamwork_projects/hera_obsidian_companion_copy
-Integrity mode: benchmark
-
-## Requirements
-
-### R1. Multi-Agent Discovery & Writing
-You must coordinate a multi-agent process to write the copy. Your process must include:
-- A **Purpose and evidence researcher** to inspect `D:\Documents\HERA\docs\product\New truth\Y COMBINATOR\reports\YC-FOUNDER-PREVIOUS-WORK-AUDIT.md` and `YC-FOUNDER-PREVIOUS-WORK-EVIDENCE.md` to find the real user problem, the hidden system failure noticed, what existing approaches assumed, what was rejected, what was built, evidence of use, and what HERA inherited.
-- A **Current copy critic** to identify vague claims, AI writing patterns, excessive em dashes, missing cause/effect, and technical jargon in the current Obsidian Companion copy.
-- A **Product storyteller** to draft the new copy based on the research and critique using a direct, concrete founder narrative.
-
-### R2. Founder Guidance for HERA Inheritance
-The Product Storyteller MUST incorporate the following explicit guidance from the founder when writing the "Inherited" section:
-> "Obsidian Companion taught me to put the tool where the work lives, and give them the tools they need to do it faster. I put the roadmap right in the workspace, and rather than making goals and tasks arbitrary nodes, I also tied them to the navigation in HERA."
-
-### R3. Dual-Reviewer Gate System
-The drafted copy must be evaluated by two distinct reviewing perspectives before it can be finalized:
-- A **YC Reviewer** to evaluate founder ability, independent execution, problem identification, product judgment, and the HERA connection. (Score must be >= 8.5/10)
-- A **Nontechnical Reader** to evaluate clarity, ensuring no unexplained technical terms are used and the problem/solution is immediately obvious. (Score must be >= 9/10)
-
-### R4. Output Formatting
-The final text must use the following sections:
-- Problem
-- Rejected
-- Built
-- Inherited
-- Status
-
-## Acceptance Criteria
-
-### Execution & Review
-- [ ] The research phase successfully extracts verifiable facts from the audit documents.
-- [ ] The drafted copy integrates the exact founder inheritance logic regarding putting tools where the work lives and tying goals/tasks to HERA's navigation.
-- [ ] The drafted copy contains zero instances of "AI portfolio template" phrasing and uses concrete cause and effect.
-- [ ] The YC Reviewer grades the copy at 8.5/10 or higher.
-- [ ] The Nontechnical Reader grades the copy at 9/10 or higher.
-
-## Follow-up — 2026-07-26T01:56:19Z
-
-# Teamwork Project Prompt
-
-> Status: Launched
-> Goal: Delegate to teamwork_preview
-
-Research and rewrite the portfolio copy for the 'Obsidian Shortcuts' application to align with the HERA OS founder narrative, utilizing a multi-agent critique and review cycle.
-
-Working directory: ~/teamwork_projects/hera_obsidian_shortcuts_copy
-Integrity mode: benchmark
-
-## Requirements
-
-### R1. Multi-Agent Discovery & Writing
-You must coordinate a multi-agent process to write the copy. Your process must include:
-- A **Purpose and evidence researcher** to inspect `D:\Documents\HERA\docs\product\New truth\Y COMBINATOR\reports\YC-FOUNDER-PREVIOUS-WORK-AUDIT.md` and `YC-FOUNDER-PREVIOUS-WORK-EVIDENCE.md` to find the real user problem, the hidden system failure noticed, what existing approaches assumed, what was rejected, what was built, evidence of use, and what HERA inherited.
-- A **Current copy critic** to identify vague claims, AI writing patterns, excessive em dashes, missing cause/effect, and technical jargon in the current Obsidian Shortcuts copy.
-- A **Product storyteller** to draft the new copy based on the research and critique using a direct, concrete founder narrative.
-
-### R2. Founder Guidance for HERA Inheritance
-The Product Storyteller MUST incorporate the following explicit guidance from the founder when writing the "Inherited" section:
-> "Obsidian Shortcuts taught me that something as simple as appending here, appending to bottom, or appending to a symbol is a system. It taught me that if you stack very simple actions one after the other, you eventually have a very complex system. This is how lanes and task parallelism work is built in the backend. When Iris (HERA's planner) plans your project, her job is not just to think of fancy new tasks or guess—she must consider dependencies that will make it impossible for the next task to ever matter to the first task that was executed. In other words, what will break task 5 in column 4 in lane 3, when we press the plan and task 1 in lane 1 of column 1 begins?"
-
-### R3. Dual-Reviewer Gate System
-The drafted copy must be evaluated by two distinct reviewing perspectives before it can be finalized:
-- A **YC Reviewer** to evaluate founder ability, independent execution, problem identification, product judgment, and the HERA connection. (Score must be >= 8.5/10)
-- A **Nontechnical Reader** to evaluate clarity, ensuring no unexplained technical terms are used and the problem/solution is immediately obvious. (Score must be >= 9/10)
-
-### R4. Output Formatting
-The final text must use the following sections:
-- Problem
-- Rejected
-- Built
-- Inherited
-- Status
-
-## Acceptance Criteria
-
-### Execution & Review
-- [ ] The research phase successfully extracts verifiable facts from the audit documents.
-- [ ] The drafted copy integrates the exact founder inheritance logic regarding stacking simple append actions into complex parallel dependency lanes.
-- [ ] The drafted copy contains zero instances of "AI portfolio template" phrasing and uses concrete cause and effect.
-- [ ] The YC Reviewer grades the copy at 8.5/10 or higher.
-- [ ] The Nontechnical Reader grades the copy at 9/10 or higher.
-- [ ] The final accepted copy is returned as the primary deliverable so it can be updated on the live site by the coordinating builder.
-
-## Follow-up — 2026-08-06T10:32:25Z
-
-<USER_REQUEST>
-Run the Week 1 portfolio preflight: determine the strongest, truthful way to extend the existing HERA/YC Astro website into Favour's career portfolio. The output is a structured analysis artifact and updated project truth documents — no pages are built during this task.
-
-Working directory: D:\Documents\favour-ai-product-portfolio-week1
+Working directory: `D:\Documents\favour-ai-product-portfolio`
 Integrity mode: development
 
 ---
 
-## Context
+## Verified Git truth (do not re-investigate)
 
-This repository runs two git workspaces on the same machine:
+```
+main           9656779  [origin/main]           ← public live site
+portfolio-week1 16472c7  [origin/portfolio-week1] ← carries unfinished About/Ubisoft dev
 
-- **Main site (read-only reference):** `D:\Documents\favour-ai-product-portfolio` — current live HERA/YC site on `main` branch
-- **Working branch (read/write):** `D:\Documents\favour-ai-product-portfolio-week1` — `portfolio-week1` branch, one commit ahead of main
+main → portfolio-week1 gap (commits IN main NOT in portfolio-week1):
+  9656779  chore(main): merge public release split 2026-08-19
+  fd64d4b  chore(release): add new resume PDF and restore download gate
+  8734aac  chore(release): hide Ubisoft work and disable resume for public launch
 
-The operating system documents are in `D:\Documents\favour-ai-product-portfolio-week1\docs\agent-system\`. Read these first before doing anything else:
-- `OPERATING-CONTRACT.md`
-- `PROJECT-TRUTH.md`
-- `CURRENT-SPRINT.md`
-- `DECISIONS.md`
+portfolio-week1 → main gap (commits IN portfolio-week1 NOT in main):
+  16472c7  docs(closeout): record public release split 2026-08-19   ← docs only
+  (many more commits = unfinished About page / Ubisoft dev work — DO NOT BRING THESE TO MAIN)
+```
 
-Do not rediscover anything already recorded in those documents.
+**The Early Access work from the previous session is currently UNCOMMITTED working-tree changes on `portfolio-week1`.** The relevant files are:
+
+- `src/components/EarlyAccessSurface.astro` (NEW — untracked)
+- `src/components/Nav.astro` (modified — EA nav link added)
+- `src/layouts/BaseLayout.astro` (modified — EA surface mounted)
+- `src/pages/index.astro` (modified — EA inline line added)
+- `src/components/Footer.astro` (modified — visitor agent session logic added)
+
+Read each of these files from the working tree BEFORE creating the public branch.
+
+---
+
+## Required Git workflow
+
+1. Read the working-tree EA files listed above while still on `portfolio-week1`.
+2. Create branch `early-access-public` FROM `main` (`git checkout -b early-access-public main`).
+3. Apply ONLY the EA-related source files to this new branch — do NOT bring:
+   - Ubisoft case study pages or assets
+   - About page dev work
+   - `.agents/` orchestrator state files
+   - `TEST_INFRA.md`, `TEST_READY.md`, `PROJECT.md`
+   - Any route, screenshot, or copy that was hidden in the public release split
+4. Apply all enhancements described below.
+5. Build and verify.
+6. Merge `early-access-public` into `main` (fast-forward preferred).
+7. Push `main` to origin.
+8. Verify the live GitHub Pages deployment.
+
+Do NOT merge `portfolio-week1` into `main`. Do NOT merge `main` back into `portfolio-week1` during this task.
 
 ---
 
 ## Requirements
 
-### R1. Establish current site truth
+### R1. Preserve and port the existing Early Access surface
 
-Audit the existing HERA/YC website deeply enough to understand: all current routes and navigation; homepage purpose; HERA Deep Dive, Lineage, and Contact pages; shared layouts and components; visual language, typography, and spacing/layout patterns; assets already present; and what must not be touched during this sprint.
+The existing `EarlyAccessSurface.astro` must be ported cleanly to the `early-access-public` branch. All current functionality must remain working:
 
-Identify what professional story the site currently tells and where it reads as a YC/founder pitch rather than a career portfolio.
+- Three entry points: nav `Join early access`, homepage inline one-liner, persistent bottom-right `Early access ✦` launcher
+- Floating panel anchored bottom-right (not a modal, no dark curtain)
+- Panel title: `Want in?`
+- `ⓘ` icon revealing privacy note on interaction only
+- Fields: email (required), name (optional), use-case textarea (optional), early-tester checkbox
+- Submit: `Count me in`
+- States: idle, loading, success, invalid email, backend failure
+- Escape key closes panel; focus trap; focus returns on close
+- `localStorage` persistence: launcher reads `You're on the list ✓` after signup across page refreshes
+- Formspree AJAX POST to `https://formspree.io/f/mwlkevkp` with JSON body and `Accept: application/json` header
+- Zero submitted emails or private credentials in any committed file or build output
 
-### R2. Define the About page content architecture
+### R2. Add discovery-source dropdown
 
-Determine the best content architecture for a page whose real subject is: *"How Favour turns unclear ideas into coherent product systems."*
+Add an optional field to the form:
 
-Evaluate which of the following can be supported by existing repository evidence, and which require Favour's personal input:
-- what problems she naturally notices
-- how she questions inherited assumptions
-- how she finds the real product problem
-- how she creates mental models and product primitives
-- how she defines system behaviour
-- how she thinks about human vs. AI authority
-- how she uses AI agents as researchers/builders/critics without outsourcing product judgment
-- how she plans and slices complicated work
-- how she verifies AI-assisted work
-- what decisions remain human
-- how this working method connects HERA and her professional experience
+**Label:** `How did you find HERA?`
 
-Do not write final copy. Produce a content architecture (sections, signals, evidence hooks).
+Render as a `<select>` (or equivalent native control — use existing site visual language, no custom-styled dropdowns that require heavy CSS or JS). Options, in order:
 
-### R3. Define the Ubisoft Work page content architecture
+- *(blank / placeholder — "Choose one…" or equivalent)*
+- LinkedIn
+- Reddit
+- X / Twitter
+- GitHub
+- Search
+- Friend / word of mouth
+- Article / blog
+- Other
 
-Determine a breadth-first page content architecture that shows the range of systems Favour worked on at Ubisoft, then uses 2–3 focused problem stories to demonstrate her reasoning from unclear problem → investigation → product decision → clearer system.
+When **Other** is selected, reveal a small optional text input below it:
 
-Categorise all Ubisoft evidence found in the repository into:
-- VERIFIED AND PUBLIC-SAFE
-- VERIFIED BUT PUBLIC SAFETY UNKNOWN
-- CLAIM REQUIRES FAVOUR
-- NOT ENOUGH EVIDENCE
+**Label:** `Where did you find HERA?`
 
-Do not assume any internal Ubisoft name, screenshot, metric, or workflow is safe to publish unless it is explicitly public. Recommend only 2–3 problem stories for deeper treatment.
+Hide this text input when Other is not selected. Do not pre-display it.
 
-### R4. Audit HERA as professional evidence
+Submit to Formspree as:
+- `how_heard` — the selected option value (omit if blank/unselected)
+- `how_heard_other` — the free-text value (omit if empty or Other not selected)
 
-Audit the existing public HERA pages for career relevance. Identify the strongest evidence of: product invention, system-behaviour design, human–AI interaction thinking, product leadership, and workflow architecture. Also flag anything on the public HERA pages that may be unnecessarily detailed from an IP perspective. Do not change or hide anything.
+Neither field is required. Do not block form submission if they are empty.
 
-### R5. Produce an evidence gap inventory
+### R3. HERA alias — deterministic, email-derived, no collision claims
 
-Produce the minimal list of things only Favour can provide, ranked as:
-- REQUIRED FOR FIRST VERSION
-- HELPFUL LATER
-- NOT NEEDED THIS WEEK
+Every signup receives a short fictional HERA alias. Requirements:
 
-Do not give her a giant homework list.
+- **Format:** one short word + a small separator (`-`, `_`, or `+`) + a 2-digit number. Total length: short. Examples: `Moss-47`, `Nova_18`, `Kite+03`, `Mica_44`, `Rune-20`, `Pip_81`, `Aster+12`. Never more than a few short words. Avoid slashes or characters problematic in HTML, analytics, or CSV exports.
+- **Deterministic:** the same normalized email must always produce the same alias. Implement using a hash of the lowercase-trimmed email mapped into a word list × number space. The namespace must be large enough that collisions between different emails are extremely unlikely in practice (aim for thousands of distinct aliases minimum).
+- **No raw email derivable:** the alias must not be trivially reversible to the original email.
+- **Honesty:** this site is static. Do not claim or imply global uniqueness checking against Formspree's private submission database. The alias is probabilistically unique due to namespace size, not guaranteed by a live deduplication query.
+- **Persistence:** after successful signup, store the alias in `localStorage`. On subsequent opens of the panel, retrieve and reuse the same alias — do not generate a different one.
+- **Formspree field:** submit the alias as `hera_alias` in the Formspree payload.
+- **Waypoint requirement:** at waypoint, describe the chosen word list, hash function, and namespace size so Favour can understand what was built.
 
-### R6. Decide on external research needs
+### R4. Success state — show the assigned agent visually
 
-Determine whether external research would materially improve either page decision. You may browse the web to pull in current portfolio patterns and competitor references where this helps. If you create research content, save it as bounded `.md` files in `D:\Documents\favour-ai-product-portfolio-week1\docs\agent-system\research-requests\`.
+Remove the phrase `Go catch Iris.` from the success view entirely.
 
-Only research what will affect a real page decision.
+After successful signup, the success state inside the panel must show:
 
-Possible useful areas:
-- current AI product/system designer portfolio patterns
-- how senior/staff AI product designers present systems work
-- strong portfolio methods for NDA-heavy enterprise experience
-- what hiring managers need from an About/process page
+1. `You're in.` (existing — keep)
+2. The visitor's HERA alias, displayed above the agent render
+3. A small visual render of the visitor's pixel agent — the same amber wanderer that will appear in the footer — drawn inline in the confirmation surface. Use a small canvas or equivalent pixel-art rendering consistent with the footer sprite system. It must look like the footer agents, not a generic icon.
+4. Below the agent: `You'll find your agent hanging out with Iris at the bottom of the page.`
 
-### R7. Recommend final site navigation
+Keep this extremely restrained — no additional headings, subheadings, or explanatory stacks.
 
-Recommend the navigation structure after portfolio material is added. Evaluate whether the structure should be something like: `Home / HERA / Ubisoft Work / About / Lineage / Contact` — but do not assume that exact order is correct. Explain the hierarchy and the reasoning.
+The panel then closes automatically (same timing as before). When it closes, that same agent must appear in the footer.
+
+If the user opens Early Access again after already signing up, the form may re-display, but the site must reuse the existing stored alias and not generate a new identity.
+
+### R5. Footer agent labels
+
+Add small name labels above the relevant agents in the footer canvas:
+
+- **Iris:** label `Iris` in the existing site gold/accent color (`--accent` CSS variable). Iris's label may be slightly larger or bolder than visitor aliases. No pill, border, or background behind the label.
+- **Visitor agent (if present in session):** label displays their stored HERA alias. Color: white or subtle light tone. Smaller than Iris's label.
+- Other existing background agents: no label.
+
+Labels must feel native to the tiny pixel world — small, floating just above the sprite's head, rendered on the same canvas. Do not add DOM elements over the canvas. Render the text directly via `ctx.fillText`.
+
+Preserve all existing footer animation, Iris behavior, and other agents exactly. Do not redesign the footer.
+
+### R6. Future-proofing — no fake global crowd
+
+Do not render any count of total signups. Do not pretend the static site can read Formspree's private submission database.
+
+Structure the footer agent system so that the local visitor's agent can later be supplemented by server-provided aliases (e.g., an array of `{alias, colors}` objects) without redesigning the footer rendering loop. A comment in the code noting the extension point is sufficient.
+
+### R7. Design restraint
+
+The existing HERA OS site is the visual authority. Do not add:
+
+- Unnecessary borders on interactive elements
+- Cards around form sections
+- Eyebrow labels
+- Heading + subheading + paragraph stacks
+- Gradients
+- Fake social proof or waitlist counts
+- Generic SaaS UI patterns
+
+The `<select>` for the source dropdown should use the same input class as the existing text inputs. Minimal styling only.
+
+The success agent preview should feel like a natural extension of the HERA world, not a marketing badge.
+
+### R8. Complete Formspree submission
+
+The Formspree payload must contain all of:
+
+- `email` (required)
+- `name` (optional)
+- `use_case` (optional)
+- `early_tester` (boolean)
+- `how_heard` (optional — omit if blank)
+- `how_heard_other` (optional — omit if blank)
+- `hera_alias` (always — the deterministic alias)
+- `_source: "hera-early-access"` (hidden tracking field)
 
 ---
 
-## Deliverables
+## Before coding — required waypoint
 
-Create one preflight artifact (`WEEK1-PREFLIGHT-OUTPUT.md`) in `D:\Documents\favour-ai-product-portfolio-week1\docs\agent-system\` containing:
+Publish a waypoint at `docs/agent-system/WAYPOINT-2026-08-26_EA-V2-PUBLIC.md` covering:
 
-1. Executive finding
-2. Current-site truth
-3. Portfolio positioning gap
-4. About page content architecture
-5. Ubisoft Work content architecture
-6. HERA career-evidence map
-7. Public/confidentiality issues
-8. Evidence inventory
-9. Minimal Favour input required
-10. External research requests created (if any)
-11. Recommended navigation
-12. Recommended implementation slices in dependency order
-13. The single best first build slice after approval
+- Exact Git steps planned (branch name, which files are ported, what is excluded)
+- Confirmation that Ubisoft dev work will not cross into `main`
+- The alias word list, hash approach, and namespace size
+- The inline agent rendering approach for the success state
+- The label rendering approach for the footer canvas
+- Which files will be modified or added
 
-Then update `CURRENT-SPRINT.md` and `PROJECT-TRUTH.md` in `D:\Documents\favour-ai-product-portfolio-week1\docs\agent-system\` where the preflight findings represent new verified truth.
+Do not begin implementation until the waypoint is written.
 
 ---
 
 ## Acceptance Criteria
 
-### Preflight artifact
-- [ ] `WEEK1-PREFLIGHT-OUTPUT.md` exists in `docs/agent-system/`
-- [ ] All 13 deliverable sections are present and populated
-- [ ] No pages have been built or modified
-- [ ] No production files on `main` have been changed
+### Git boundary
+- [ ] `main` after the merge contains NO files from the About page dev work, Ubisoft case study pages, or any route/asset hidden in the public release split
+- [ ] `portfolio-week1` is not touched during this task
+- [ ] The merge commit on `main` is cleanly reachable and the push succeeds to `origin/main`
 
-### Site audit
-- [ ] All current routes and navigation are mapped
-- [ ] Visual language, typography, and component patterns are described with specific file references
-- [ ] What must not be touched is explicitly listed
+### Functional
+- [ ] All three entry points (nav, homepage inline, bottom-right launcher) open the same panel
+- [ ] `How did you find HERA?` dropdown is present and optional
+- [ ] Selecting `Other` reveals the free-text field; deselecting hides it
+- [ ] `how_heard` and `how_heard_other` appear in Formspree submission fields
+- [ ] A HERA alias is generated and displayed in the success state
+- [ ] The same email always produces the same alias (deterministic)
+- [ ] `hera_alias` appears in Formspree submission fields
+- [ ] After reload, the existing alias is retrieved from storage — no new alias is generated
+- [ ] Success state shows: "You're in.", alias, small pixel agent render, footer instruction — no "Go catch Iris."
+- [ ] The visitor's pixel agent appears in the footer after signup in that session
+- [ ] Iris is labeled `Iris` in accent/gold color in the footer
+- [ ] Visitor agent label shows the HERA alias in white/subtle color
+- [ ] All other existing footer agents and Iris behavior remain intact
+- [ ] Escape key closes panel; Tab/focus trap works
+- [ ] Invalid email shows inline error without submitting
+- [ ] Backend failure shows `Something went wrong. Try again?`
+- [ ] Launcher reads `You're on the list ✓` after signup, persists across refresh
 
-### Ubisoft evidence
-- [ ] All Ubisoft-related content in the repository is categorised into the four tiers (VERIFIED PUBLIC-SAFE / PUBLIC SAFETY UNKNOWN / CLAIM REQUIRES FAVOUR / NOT ENOUGH EVIDENCE)
-- [ ] No internal Ubisoft material is marked public-safe without explicit basis
+### Build and security
+- [ ] `npm run build` exits 0 with no errors
+- [ ] No private API credential in any committed file or build output
+- [ ] No submitted email or personal data committed to Git
+- [ ] Grep `dist/` for email address patterns — zero hits for user-submitted data
+- [ ] Grep source files for Formspree endpoint — present (expected, not a secret)
 
-### Evidence gaps
-- [ ] Gap list is ranked into the three priority tiers
-- [ ] List is minimal — not exhaustive
+### Proof — screenshots required (agent must self-inspect before closing)
+- [ ] Nav with `Join early access` visible
+- [ ] Panel open with discovery dropdown visible
+- [ ] Other option selected + free-text field revealed
+- [ ] Success state showing alias + agent render + footer instruction
+- [ ] Footer with Iris label (gold) and visitor alias label (white/subtle)
+- [ ] Launcher in `You're on the list ✓` state
+- [ ] Mobile (≤390px) — panel usable, no overflow
 
-### Operating documents
-- [ ] `CURRENT-SPRINT.md` reflects any new sprint truth from the preflight
-- [ ] `PROJECT-TRUTH.md` reflects verified facts uncovered during the audit
+### Deployment
+- [ ] `main` pushed to `origin/main`
+- [ ] GitHub Pages deployment triggered
+- [ ] Live URL `https://TubeStorm.github.io/hera_os/` loads and shows `Join early access` in nav
+- [ ] A real Formspree submission is made and confirmed visible in the Formspree dashboard
+- [ ] Submission includes `how_heard`, `hera_alias`, and all other required fields
 
-### Final summary
-- [ ] Final response to Favour is short, decision-oriented, and answers: what was learned / what is recommended / what is needed from her / what the first build slice should be
-</USER_REQUEST>
-
-## Follow-up — 2026-08-06T18:32:53Z
-
-Favour has reviewed the preflight findings and provided her decisions. Please continue from where you left off.
+### Closeout
+- [ ] `docs/closeout/2026-08-26_EA-V2-PUBLIC_CLOSEOUT.md` written using the closeout template at `docs/agent-system/CLOSEOUT-TEMPLATE.md`
+- [ ] `docs/agent-system/CURRENT-SPRINT.md` updated
+- [ ] Report includes: public URL, deployed commit hash, Formspree field proof, alias method, pages/viewports checked, Ubisoft exclusion confirmation, anything deferred
 
 ---
 
-## Decisions confirmed by Favour
+## Reference files (read before touching anything)
 
-1. **Brand**: Use "Ubisoft" explicitly — do not anonymise.
-2. **Tool names**: Use generic titles (e.g. "Resource Management Platform", "Hybrid Workplace Platform") — she says generic titles better express the breadth of tools and fields she worked across.
-3. **Story approval**: The 3 recommended Ubisoft problem stories are approved. She also wants additional stories found — see the investigation task below.
-
----
-
-## Additional investigation task
-
-Favour wants more Ubisoft problem stories discovered from two new evidence sources. These are her personal archives. Do NOT ask her to read everything — investigate intelligently with targeted keyword searches. Maximise what you can extract from each file without wasting agent allowance reading irrelevant content.
-
-### Source 1 — YC application answers
-Path: `D:\Documents\Favour's Vault\HERA\YC answers`
-
-Search for anything that credits or references specific internal tools, workflows, or systems work she did at Ubisoft. YC answers often contain candid descriptions of professional work that can surface story candidates not obvious elsewhere. Look for: tool names, problems solved, scale, team size, outcomes, workflow descriptions, before/after situations.
-
-### Source 2 — Portfolio building archives
-Path: `D:\Documents\Favour's Vault\HERA\portfolio building archives`
-
-This is a large, unstructured collection of old resumes, scrap notes, mockups, and past portfolio work. Do NOT read every file. Investigate intelligently:
-- List the directory tree first to understand what's there
-- Use targeted keyword searches for: Ubisoft, tool names, project names, UX, design system, governance, analytics, capacity, staffing, approval, workflow, dashboard, reporting, research, stakeholder
-- Read only files that look like they contain real project descriptions or evidence
-- Extract any Ubisoft problem stories not already captured in the preflight output
-- Note anything that could strengthen the About page evidence (method, process, thinking style)
-
-### What to produce
-
-1. **Update `WEEK1-PREFLIGHT-OUTPUT.md`** with:
-   - Confirmed decisions (brand, tool names, story approval) recorded at the top of the Ubisoft section
-   - Additional Ubisoft problem story candidates discovered from the new sources, categorised using the same four-tier system (VERIFIED PUBLIC-SAFE / PUBLIC SAFETY UNKNOWN / CLAIM REQUIRES FAVOUR / NOT ENOUGH EVIDENCE)
-   - A shortlist of the best 2–3 additional stories to recommend for deeper treatment (beyond the original 3)
-   - Any new About page evidence found (signals about her method, process, or working style)
-
-2. **Update `PROJECT-TRUTH.md`** with any new verified facts from the archives.
-
-3. **Update `CURRENT-SPRINT.md`** to reflect that decisions are confirmed and Step 2 audit is expanded with new evidence.
-
-Do not build any pages. Do not modify public site files.
-
-
-
+- `DESIGN.md` — visual authority
+- `src/styles/global.css` — existing CSS custom properties and tokens
+- `src/components/EarlyAccessSurface.astro` — current working-tree EA component (currently on `portfolio-week1` as an untracked file)
+- `src/components/Footer.astro` — current working-tree footer with session visitor agent logic
+- `src/components/Nav.astro` — current working-tree nav with EA link
+- `src/layouts/BaseLayout.astro` — current layout mounting EA surface
+- `src/pages/index.astro` — homepage with inline EA line
+- `docs/agent-system/CLOSEOUT-TEMPLATE.md` — closeout format
+- `docs/agent-system/WAYPOINT-TEMPLATE.md` — waypoint format

@@ -1,31 +1,44 @@
-# PROJECT PLAN — HERA Obsidian Shortcuts Copy Rewrite
+# Orchestration Plan: Minimal Early-Access Funnel
 
-## Overview
-Research and rewrite the portfolio copy for the 'Obsidian Shortcuts' application to align with the HERA OS founder narrative, incorporating explicit founder guidance for HERA Inheritance, utilizing a multi-agent critique and review cycle.
+## Objective
+Implement a minimal, visually restrained early-access funnel for HERA OS on `portfolio-week1` branch, satisfying all requirements R1-R6, complete automated & functional verification, screenshot capture, operating docs updates, and durable closeout.
 
-## Milestones
+## Phases
 
-| # | Milestone | Scope | Deliverable | Status |
-|---|-----------|-------|-------------|--------|
-| 1 | Research & Critique | Extract facts from YC audit/evidence docs & critique current Obsidian Shortcuts copy | `research_report.md` & `critique_report.md` | DONE |
-| 2 | Drafting (v2 Polish) | Product Storyteller refines draft copy removing em dashes, polishing buzzwords, and tightening Iris dependency narrative | `draft_copy_v2.md` | DONE |
-| 3 | Dual-Review Gate System | YC Reviewer (>=8.5) & Nontechnical Reader (>=9.0) re-evaluate v2 copy | `yc_review_report.md` & `nontech_review_report.md` | DONE |
-| 4 | Integration & Verification | Update `src/data/lineage.ts` with accepted v2 copy, run build & tests, verify integrity | `src/data/lineage.ts` updated & verified | DONE |
-| 5 | Final Packaging & Delivery | Deliver final report, claim completion to Sentinel | `FINAL_OBSIDIAN_SHORTCUTS_COPY.md` | DONE |
+### Phase 0: Survey Phase (Parallel Exploration)
+- **Explorer 1 (Codebase & Component Architecture)**: Inspect `src/components/Nav.astro`, `src/data/site.ts`, `src/pages/index.astro`, `src/components/Footer.astro` to document exact line context, DOM structure, component hierarchy, and footer agent animation mechanics.
+- **Explorer 2 (Visual Language & Design Tokens)**: Inspect `docs/DESIGN.md`, `src/styles/global.css`, existing modals/drawers/tooltips/forms, typography scales, colors, spacing, and interaction patterns to ensure 100% adherence to design tokens and zero visual inflation.
+- **Explorer 3 (Spec, Formspree API, Git State & Waypoint Drafter)**: Check git branch status on `portfolio-week1`, Formspree endpoint details (`https://formspree.io/f/mwlkevkp`), header/body payload format, error handling requirements, privacy/anti-credential constraints, and draft the waypoint following `docs/agent-system/WAYPOINT-TEMPLATE.md`.
 
-## Required Copy Sections
-1. Problem (real user problem, hidden system failure noticed, what existing approaches assumed)
-2. Rejected (what was rejected and why)
-3. Built (what was built, architecture, concrete tech choices)
-4. Inherited (MUST incorporate explicit founder guidance: "Obsidian Shortcuts taught me that something as simple as appending here, appending to bottom, or appending to a symbol is a system. It taught me that if you stack very simple actions one after the other, you eventually have a very complex system. This is how lanes and task parallelism work is built in the backend. When Iris (HERA's planner) plans your project, her job is not just to think of fancy new tasks or guess—she must consider dependencies that will make it impossible for the next task to ever matter to the first task that was executed. In other words, what will break task 5 in column 4 in lane 3, when we press the plan and task 1 in lane 1 of column 1 begins?")
-5. Status (evidence of use, current status)
+### Phase 1: Waypoint Publication & Project Decomposition
+- Synthesize survey findings.
+- Write `PROJECT.md` with Feature Inventory (R1-R6), Architecture, Milestones, Interface Contracts, and Code Layout.
+- Publish `docs/agent-system/WAYPOINT-2026-08-26_EARLY-ACCESS-FUNNEL.md`.
 
-## Gate Criteria Results
-- Factually aligned with YC audit/evidence docs: PASSED
-- Incorporates exact founder guidance for HERA Inheritance: PASSED (100% exact match)
-- Zero AI writing tropes, buzzwords, or vague claims: PASSED
-- Zero em dashes (`—`): PASSED (0 em dashes verified by Auditor v2)
-- Concrete cause-and-effect structure: PASSED
-- YC Reviewer score: **9.5 / 10.0** (Threshold: >= 8.5) — PASSED
-- Nontechnical Reader score: **9.5 / 10.0** (Threshold: >= 9.0) — PASSED
-- Forensic Auditor verdict: **CLEAN** — PASSED
+### Phase 2: Dual Track Execution
+- **Track 1: Implementation Milestones**
+  - M1: Early-Access Surface Component (`EarlyAccessPanel.astro` / client logic, Formspree AJAX adapter, states, focus trap, esc key, tooltip).
+  - M2: Three Entry Points (Nav item in `Nav.astro` / `site.ts`, Homepage inline single line in `index.astro`, Persistent launcher widget).
+  - M3: Footer Success Animation integration in `Footer.astro` (session-based extra pixel agent, preserving existing agents and Iris).
+- **Track 2: E2E Testing Track**
+  - Design test infrastructure and 4-tier opaque-box test suite (`TEST_INFRA.md`).
+  - Publish `TEST_READY.md`.
+
+### Phase 3: Final Milestone, Verification & Forensic Audit
+- Verify 100% pass on Tiers 1-4 tests and build (`npm run build`).
+- Tier 5 Adversarial Coverage Hardening with Challenger.
+- Functional verification: local dev server testing, keyboard nav, error handling, localStorage persistence.
+- Playwright screenshot capture for all 6 required states:
+  1. Nav with `Join early access`
+  2. Panel open state (desktop)
+  3. Panel open state (narrow viewport ≤390px)
+  4. Success state copy visible
+  5. Launcher in `You're on the list ✓` state
+  6. Footer with new agent present
+- Forensic Integrity Audit (`teamwork_preview_auditor`) for clean authentic implementation.
+
+### Phase 4: Closeout & Delivery
+- Update `docs/agent-system/CURRENT-SPRINT.md` to `🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW`.
+- Write durable closeout in `docs/closeout/2026-08-26_HERA-EARLY-ACCESS-FUNNEL_CLOSEOUT.md`.
+- Commit changes on `portfolio-week1`.
+- Report victory to user.

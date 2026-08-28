@@ -22,7 +22,11 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 | # | Step | Status |
 |---|---|---|
+<<<<<<< Updated upstream
 | 0 | **Public release split** — hide Ubisoft work, new resume, deploy to main | ✅ CLOSED 2026-08-19 |
+=======
+| 0 | HERA Early Access Public Release (EA-V2-PUBLIC) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
+>>>>>>> Stashed changes
 | 1 | Install and prove persistent agent operating system | ✅ FAVOUR ACCEPTED / CLOSED |
 | 2 | Audit portfolio-relevant repository and content truth | ✅ FAVOUR ACCEPTED / CLOSED |
 | 3 | Define About page architecture | ✅ FAVOUR ACCEPTED / CLOSED |
@@ -40,9 +44,11 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 ## Current active work
 
-**About Section 01 — Slide 5 review repair** (updated 2026-08-11) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
+**HERA Early Access Public Release (EA-V2-PUBLIC)** (updated 2026-08-26) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
-Slide 5 now shows a sparse user task entering HERA's saved context and returning as an Agent response with a compact itinerary artifact. The approved HERA object remains intact; portraits and robot art are removed; the return arrow, Agent thinking, work completion, and reply animate as one sequence. Slide 2 also uses the Agent name and its playback control is bottom-centred. Dev server: **http://localhost:4321/hera_os/about/** — scroll to Section 01 and choose the final progress mark.
+The enhanced HERA Early Access signup funnel has been released to `main` and verified live on GitHub Pages ([https://TubeStorm.github.io/hera_os/](https://TubeStorm.github.io/hera_os/)). Features include discovery dropdown, deterministic HERA alias generator, inline pixel agent preview on confirmation, and labeled footer agents (`Iris` in gold and visitor alias in subtle white). All changes maintain 100% isolation from WIP Ubisoft and About page materials.
+
+Closeout: `docs/closeout/2026-08-26_EA-V2-PUBLIC_CLOSEOUT.md`
 
 ---
 

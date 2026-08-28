@@ -1,0 +1,144 @@
+{
+  "name": "HERA Early Access E2E Test Suite",
+  "total": 127,
+  "passed": 127,
+  "failed": 0,
+  "skipped": 0,
+  "duration": 1810,
+  "failures": [],
+  "suites": [
+    {
+      "name": "Tier 1 - Feature 1: Nav Entry Point (R1.1)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "duration": 4
+    },
+    {
+      "name": "Tier 1 - Feature 2: Homepage Inline Entry Point (R1.2)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "duration": 1
+    },
+    {
+      "name": "Tier 1 - Feature 3: Persistent Launcher Widget (R1.3)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "duration": 1
+    },
+    {
+      "name": "Tier 1 - Feature 4: Floating Surface & Tooltip (R2)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "duration": 1
+    },
+    {
+      "name": "Tier 1 - Feature 5: Form Fields & Validation (R2, R4)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "duration": 41
+    },
+    {
+      "name": "Tier 1 - Feature 6: State Machine & Success Flow (R2)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "duration": 157
+    },
+    {
+      "name": "Tier 1 - Feature 7: Keyboard Navigation & Focus Trap (R2)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "duration": 1
+    },
+    {
+      "name": "Tier 1 - Feature 8: LocalStorage Persistence (R1.3)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "duration": 125
+    },
+    {
+      "name": "Tier 1 - Feature 9: Footer Pixel Agent Injection (R3)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "duration": 31
+    },
+    {
+      "name": "Tier 1 - Feature 10: Security & Git Hygiene (R4, R6)",
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "duration": 154
+    },
+    {
+      "name": "Tier 2 - Boundary: Email Format Fuzzing",
+      "total": 14,
+      "passed": 14,
+      "failed": 0,
+      "duration": 250
+    },
+    {
+      "name": "Tier 2 - Boundary: Name Field Variations",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "duration": 216
+    },
+    {
+      "name": "Tier 2 - Boundary: Use Case Textarea",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "duration": 218
+    },
+    {
+      "name": "Tier 2 - Boundary: Early Tester Checkbox",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "duration": 126
+    },
+    {
+      "name": "Tier 2 - Boundary: Rapid Interaction & Concurrency",
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "duration": 79
+    },
+    {
+      "name": "Tier 2 - Boundary: Storage Failure & Security Exceptions",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "duration": 61
+    },
+    {
+      "name": "Tier 2 - Boundary: Network & HTTP Status Handling",
+      "total": 9,
+      "passed": 9,
+      "failed": 0,
+      "duration": 32
+    },
+    {
+      "name": "Tier 3 - Cross-Feature Combinations",
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "duration": 187
+    },
+    {
+      "name": "Tier 4 - Real-World Application Scenarios",
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "duration": 125
+    }
+  ]
+}
