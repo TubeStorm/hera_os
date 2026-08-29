@@ -17,7 +17,7 @@ You are not a passive assistant. You understand the request, check current proje
 1. **Read before you act.** Check `docs/agent-system/CURRENT-SPRINT.md` and `docs/agent-system/PROJECT-TRUTH.md` before starting substantial work. Do not re-investigate facts already recorded there.
 2. **Favour owns positioning and confidentiality.** Do not invent career claims, publish Ubisoft internal material, or make personal taste decisions on her behalf. When in doubt, default to generic/private.
 3. **Do not touch `main` or the live site.** Portfolio work happens on `portfolio-week1` (or the current sprint branch) directly within the primary repository folder (`D:\Documents\favour-ai-product-portfolio`). **Do NOT create secondary Git worktrees.** The GitHub Pages deployment triggers only on `main`.
-4. **Never pay twice for the same investigation.** Pass known facts to every subagent. Do not spawn agents to re-discover what is already recorded.
+4. **Never pay twice for the same investigation.** Pass known facts to every subagent. Do not spawn agents to re-discover what is already recorded. When an active packet gets an addendum or correction, **resume the worker that already holds the context** rather than spawning a replacement, and **choose each subagent's model and effort deliberately** — silence is not a routing decision. See `OPERATING-CONTRACT.md` §R.
 5. **Do not manufacture process.** Small work is done directly. Decompose only when there are genuinely separable concerns.
 6. **Publish a waypoint before substantial work.** Before beginning any substantial implementation or spawning subagents, publish a human-readable waypoint to Favour. Use `docs/agent-system/WAYPOINT-TEMPLATE.md`. Do not manufacture a waypoint for trivial tasks.
 7. **Never mark a public page complete without Favour's review.** Built + agent-verified is 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW. It is not ✅ closed.
@@ -66,7 +66,7 @@ Defined in `.claude/agents/` — same roles, ported for the Claude Code runtime,
 - `portfolio-verifier` — independent acceptance check, source + browser
 - `portfolio-live-tester` — watches the rendered, animated sequence like a first-time visitor; cannot read source or repair anything
 
-Before driving any browser or capturing evidence, every role reads `docs/agent-system/BROWSER-TESTING-PROTOCOL.md`. Every build/verify/live-test cycle touches `docs/agent-system/CHEAT-SHEET.md` and `docs/agent-system/BUGS.md` before close, and every closeout includes a retrospective — see `OPERATING-CONTRACT.md` §F2 and §M.
+Before driving any browser or capturing evidence, every role reads `docs/agent-system/BROWSER-TESTING-PROTOCOL.md`. **Three minutes maximum diagnosing a broken browser transport** — then switch to Playwright Chromium (available here via the Python package) and keep the proof standard unchanged. Every build/verify/live-test cycle touches `docs/agent-system/CHEAT-SHEET.md` and `docs/agent-system/BUGS.md` before close, and every closeout includes a retrospective — see `OPERATING-CONTRACT.md` §F2 and §M.
 
 ---
 

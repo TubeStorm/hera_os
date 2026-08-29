@@ -129,7 +129,11 @@ For any animated, interactive, or highly visual public page, verification alone 
 
 The live tester watches the whole sequence over time, not a screenshot of the end state. Pacing, overlap, and timing defects are exactly what this role exists to catch.
 
-**Tooling.** Whenever any role — coordinator, builder, verifier, or live tester — needs to drive a browser or capture screenshots, follow `docs/agent-system/BROWSER-TESTING-PROTOCOL.md` first. In short: if the embedded Claude Browser pane stops actually driving the page, switch transport (Claude in Chrome, then Playwright/other real browser automation) rather than spending the session diagnosing Anthropic's tool or reporting a tooling failure as a product defect. Every screenshot must be opened and actually checked against its claim before being used as evidence — retry up to three times per check, then report the residual honestly and move on.
+**Tooling.** Whenever any role — coordinator, builder, verifier, or live tester — needs to drive a browser or capture screenshots, follow `docs/agent-system/BROWSER-TESTING-PROTOCOL.md` first.
+
+**Browser transport fallback is a workflow law** (added 2026-08-28). Do not spend meaningful build allowance debugging a broken browser tool. Attempt the preferred embedded browser once using the short transport preflight; if it cannot reliably click, scroll, render, or capture the real page, abandon it and move directly to Playwright Chromium (confirmed available in this environment via the Python package) or the next proven real-browser transport; then use that transport for the remainder of the slice. **Maximum time diagnosing a broken transport: 3 minutes.** A browser-tool failure is never a product defect. **Do not lower the proof standard because the transport changed.** For scroll-driven experiences, Playwright is an approved first-class verification method and is preferred over trying to resurrect an unreliable embedded pane.
+
+Every screenshot must be opened and actually checked against its claim before being used as evidence — retry up to three times per check, then report the residual honestly and move on.
 
 ---
 
@@ -155,6 +159,8 @@ Agent allowance (compute, tokens, time) is a finite resource. Protect it.
 - **Never pay twice** for the same investigation. If the coordinator already knows something, pass it to every subagent.
 - **Parallelise only genuinely independent work.** Two agents working on the same concern in parallel is waste.
 - **Do not spawn subagents merely because they are available.** The coordinator is capable of direct work.
+- **Resume, do not replace.** When an active packet gets an addendum or correction, resume the worker that already holds the context. See Section R.
+- **Route models intentionally.** Subagents do not inherit the Chief's model by default. See Section R3.
 - **Stop immediately** when an approved approach is invalidated. Do not continue executing a plan that has been proven wrong.
 - **Prefer one well-scoped capable agent** over several shallow overlapping agents.
 - **External research** goes to cheaper tools (ChatGPT, web browser) unless Favour explicitly authorizes in-session research.
@@ -260,6 +266,20 @@ Be honest: if a browser was not opened, say so. Do not convert source inspection
 
 **A retrospective is required before the closeout is written**, not after. In 3–6 bullet points: what took longer than expected and why, what the packet/waypoint should have said but didn't, any workflow doc (this contract, the cheat sheet, the design standard) that should change as a result, and anything a future Chief should not have to re-learn. This goes in the closeout's Retrospective section — see `CLOSEOUT-TEMPLATE.md`. A closeout without one is incomplete.
 
+**A retrospective must improve the workflow before closeout — it is not documentation for its own sake.** (Added 2026-08-28.) Before final closeout, the Chief reviews the builder's, verifier's, live tester's, repair worker's, and its **own** retrospective findings and asks:
+
+> Did this slice teach us anything that should make the next slice cheaper, safer, faster, or harder to misunderstand?
+
+If yes, **update the owning canonical document before closing the slice** — this contract, the cheat sheet, the browser testing protocol, the design execution standard, or a role definition. Examples of the conversion:
+
+- a recurring misunderstanding → a clearer packet-writing rule;
+- a browser failure → a transport-routing rule;
+- repeated context rereading → a worker-resumption rule;
+- an expensive model used where a cheaper one would have done → changed routing guidance;
+- a verification method that failed to catch something → an improved proof standard.
+
+**Do not leave a useful retrospective insight buried only in a closeout.** The closeout must state which workflow improvement was made as a result, and where.
+
 **Bugs and cheat sheets must both be touched before close.** Confirm `docs/agent-system/BUGS.md` reflects every real defect found this slice (even fixed ones), and `docs/agent-system/CHEAT-SHEET.md` has either a new entry or a dated confirmation that nothing needed adding. Neither file may go stale silently — an unchanged file with no dated confirmation reads as "nobody checked," not as "nothing to report."
 
 ---
@@ -350,4 +370,59 @@ Do not turn any of these into a session log. Do not duplicate the operating cont
 
 ---
 
-*Last updated: 2026-08-07 — workflow repair: added Sections K–Q (waypoints, authority states, closeouts, scope-obedience, CURRENT-SPRINT standard, document role discipline)*
+## R. Delegation economics — do not pay twice
+
+> Added 2026-08-28 (Slice 1 repair). The common law under this whole section: **do not pay twice for knowledge or capability you already have.**
+
+### R1. Addendums resume the existing worker
+
+When Favour adds, corrects, clarifies, or extends an **active** implementation packet, **resume the existing builder / verifier / researcher** whenever that worker is still available and the work remains substantially the same task. Do **not** automatically create a fresh worker.
+
+The existing worker has already paid the context cost of reading the repository, understanding the packet, learning the relevant architecture, discovering implementation constraints, seeing previous feedback, and knowing the current state of the work. Discarding that and spawning a replacement makes the project pay for the same understanding twice.
+
+*Example:* a builder has consumed 115k tokens implementing "Rebuild opening as scroll cinematic" and Favour supplies an addendum correcting the Matrix rain or the scroll behavior. The default action is **resume that builder with the addendum** — not spawn Builder 2 and make it relearn the task.
+
+A **new** worker is justified only when:
+
+- the existing worker genuinely cannot be resumed;
+- the task has changed so fundamentally that its previous context is now more harmful than useful;
+- **role independence requires a different worker** — independent verification must never be done by the builder;
+- the existing worker has failed in a way that requires reassignment.
+
+When replacement is genuinely necessary, preserve the previous worker's findings through its handoff, and **explicitly record why context reuse was impossible.**
+
+### R2. Context reuse is part of cost accounting
+
+Before spawning **any** subagent, the Chief asks: *does an existing worker already know enough to do this?*
+
+- If yes → resume or redirect that worker, where role independence permits.
+- If no → spawn, and the new worker's prompt must carry **all already-known relevant facts** so it does not rediscover them.
+
+Two layers of protection: **reuse the brain when possible, or reuse the knowledge when a new brain is necessary.**
+
+### R3. Model routing must match the work
+
+**Do not inherit the Chief Coordinator's model and effort level for every subagent.** For every delegated task, choose the **least expensive model and effort level that can still perform that specific work very well.**
+
+Weigh: task complexity; ambiguity; architecture depth; consequence of getting it wrong; how much judgment is required; whether the task is implementation, verification, research, visual critique, or mechanical inspection; and whether the worker receives a complete packet or must solve an open problem.
+
+Applying the principle:
+
+- Locating files, checking known paths, straightforward repository inspection, and mechanical validation → **do not** use the most expensive reasoning tier.
+- Bounded implementation with a strong specification → a capable implementation model, **without** automatically escalating to the Chief's model.
+- Genuinely ambiguous product architecture, difficult forensic debugging, high-stakes design judgment, or synthesising conflicting evidence → the expensive tier is justified.
+- Independent verification → enough capability to genuinely challenge the implementation, but **not** an expensive model merely because the builder had one.
+
+Every delegated role gets its model and effort chosen **intentionally**. **Silence is not a routing decision** — if the runtime would otherwise inherit the Chief's expensive configuration, the Chief must explicitly override it.
+
+The optimisation target is **the cheapest worker that will still do this particular job excellently** — not the cheapest possible worker, and not "the expensive tier everywhere because it is already open."
+
+### R4. Prospective application
+
+These rules are **prospective**. Do not terminate or restart agents that are currently working merely to comply with a newly adopted routing policy. Apply them to new workers created after adoption, to resumptions and addendums, to future slices, and to the workflow documents updated before the current slice's closeout.
+
+---
+
+*Last updated: 2026-08-28 — added Section R (delegation economics: worker resumption on addendums, context reuse as cost accounting, intentional model routing) and strengthened Sections F2 and M (browser transport law; retrospectives must produce a workflow change before closeout).*
+
+*Previously: 2026-08-07 — workflow repair: added Sections K–Q (waypoints, authority states, closeouts, scope-obedience, CURRENT-SPRINT standard, document role discipline)*

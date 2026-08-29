@@ -1,561 +1,1070 @@
 ---
-// Homepage opening: an animated failure sequence dramatizing "the AI finished
-// fast, but the work around it is where things actually break," clearing into
-// the first real HERA reveal. Autoplays once per page load; replays on refresh.
-// See docs/agent-system/work-packets/active/SLICE-1-OPENING-FAILURE-SEQUENCE.md.
+// Homepage opening: a scroll-scrubbed cinematic. Scroll progress (0 -> 1 across a
+// tall pinned track) is the ONLY clock — there is no autoplay, no setTimeout
+// choreography, and no timer cycling copy. A visitor lives through a stupidly
+// small AI request producing an absurdly long answer, buried under a Matrix-style
+// ".md" file rain, then a human panic spiral, the punchline, and only then the
+// HERA reveal. See docs/agent-system/work-packets/active/SLICE-1-REPAIR-SCROLL-CINEMATIC.md.
 import { withBase } from '../data/site';
 
 const logoWebp = withBase('images/hera/logo/hera-logo-1254.webp');
 const logoPng = withBase('images/hera/logo/hera-logo-1254.png');
 const mdIcon = withBase('images/ui/md-file-icon.png');
 
-// Phase 2 — filenames + stagger. One is nothing, then another, then suddenly
-// too much shit. Delays accelerate (gaps shrink) to sell the "multiplying" feel.
-const files: { name: string; left: number; top: number; rot: number; delay: number }[] = [
-  { name: 'CURRENT-SPRINT.md', left: 9, top: 20, rot: -6, delay: 1900 },
-  { name: 'handoff.md', left: 79, top: 15, rot: 5, delay: 2700 },
-  { name: 'task-03-notes.md', left: 15, top: 62, rot: 4, delay: 3350 },
-  { name: 'decision-log.md', left: 83, top: 58, rot: -5, delay: 3900 },
-  { name: 'research.md', left: 34, top: 80, rot: -3, delay: 4380 },
-  { name: 'FINAL-final-v2.md', left: 60, top: 82, rot: 6, delay: 4780 },
-  { name: 'handoff-latest-REAL.md', left: 47, top: 11, rot: -4, delay: 5100 },
-  { name: 'fix-notes-final-final.md', left: 25, top: 42, rot: 3, delay: 5360 },
+const MESSAGE = 'Make a small change to the website';
+
+// The long verbose AI answer, reused verbatim from the original build. Kept whole —
+// never clipped, never masked. Split into whitespace-separated words so the client
+// script can reveal it progressively, mapped to scroll position.
+const answerPara1 =
+  'Better - but for a reason worth naming. Your instinct was right and the diagnosis was more literal than a layout preference: clicking a variant did change the answer, but the answer was rendered below the fold behind a collapse, and re-rendering the pane threw away its scroll position, so the screen snapped to the top. Two separate faults producing one feeling of "nothing responded." The scroll reset was a straight bug - panes now keep their own scrollTop across a render, so clicking a tile no longer moves the page at all. That fix alone was worth it.';
+const answerPara2 =
+  'The column is the other half. Selection has to change something at eye level, and it now does: the detail column sits beside the viewer, never scrolls away, never collapses, and fades on change so the swap is visible. The variant grid is where your cursor is; the answer is one glance right of the image it describes.';
+
+const words1: string[] = answerPara1.split(/\s+/);
+const words2: string[] = answerPara2.split(/\s+/);
+const totalWords = words1.length + words2.length;
+// Number of words that make up the first two sentences of paragraph 1 (counted by
+// hand against answerPara1 above) — the reading hold the visitor gets before the
+// rest of the answer keeps unrolling.
+const revealBoundary = 56;
+
+// `.md` rain — 14 columns spanning the full width edge-to-edge (repair note,
+// 2026-08-28: raised from 12 to 14 columns with far more files per column and
+// a tighter vertical pitch, per the Chief's density defect — the previous
+// density read as "a moderate scattering", not a blizzard the response is
+// physically hard to read through). Each column activates at a different
+// scroll threshold (progressive density) and travels at a different speed
+// with a different starting stagger, so the field never reads as a tidy
+// rectangle. Authored, not randomised, so the "uneven bottom edge" is reliable.
+const filenames = [
+  'CURRENT-SPRINT.md',
+  'handoff.md',
+  'task-03-notes.md',
+  'decision-log.md',
+  'research.md',
+  'FINAL-final-v2.md',
+  'context-pack.md',
+  'roadmap-update.md',
+  'verification-notes.md',
+  'handoff-latest-REAL.md',
+  'fix-notes-final-final.md',
+  'source-of-truth.md',
 ];
 
-// Phase 3 — human thoughts fighting for attention over the clutter. Escalating.
-// `essential` lines survive the mobile-adapted (lower-density) layout.
-const thoughts: { text: string; left: number; top: number; delay: number; essential?: boolean; urgent?: boolean }[] = [
-  { text: 'Did I give it the right file?', left: 50, top: 28, delay: 3000, essential: true },
-  { text: 'Where did it save that?', left: 28, top: 50, delay: 3700 },
-  { text: 'Wait. We already did this.', left: 70, top: 47, delay: 4300, essential: true },
-  { text: 'Which task are we on?', left: 50, top: 66, delay: 4800 },
-  { text: 'STOP MAKING NEW BRANCHES.', left: 50, top: 87, delay: 5200, essential: true, urgent: true },
+type RainColumn = { left: number; count: number; speed: number; offset: number; activate: number };
+
+const rainColumns: RainColumn[] = [
+  { left: 1, count: 9, speed: 1.0, offset: 0, activate: 0.33 },
+  { left: 8.5, count: 7, speed: 0.9, offset: -60, activate: 0.337 },
+  { left: 15.9, count: 10, speed: 1.1, offset: 40, activate: 0.343 },
+  { left: 23.4, count: 8, speed: 0.95, offset: -30, activate: 0.35 },
+  { left: 30.8, count: 11, speed: 1.2, offset: 70, activate: 0.357 },
+  { left: 38.2, count: 7, speed: 0.88, offset: -100, activate: 0.363 },
+  { left: 45.7, count: 10, speed: 1.05, offset: 20, activate: 0.37 },
+  { left: 53.1, count: 8, speed: 1.0, offset: -50, activate: 0.377 },
+  { left: 60.6, count: 9, speed: 0.92, offset: 90, activate: 0.383 },
+  { left: 68.0, count: 7, speed: 1.15, offset: -20, activate: 0.39 },
+  { left: 75.4, count: 10, speed: 0.85, offset: 60, activate: 0.397 },
+  { left: 82.9, count: 8, speed: 1.08, offset: -80, activate: 0.403 },
+  { left: 90.3, count: 9, speed: 0.98, offset: 30, activate: 0.41 },
+  { left: 97.7, count: 7, speed: 1.12, offset: -40, activate: 0.417 },
 ];
 
-// Phase 5 — one evolving statement, fixed prefix, cycling suffix.
-const suffixes = [
-  'remembers the project.',
-  'keeps the work moving.',
-  'knows where the work lives.',
-  'keeps decisions attached.',
-  'asks when the decision is yours.',
+const thoughts = [
+  'Did I send the right file?',
+  'Is this source current?',
+  'Where did it save that?',
+  'Wait. What task are we on?',
+  'STOP MAKING NEW BRANCHES.',
+];
+
+const promises = [
+  'You lead. It remembers what you already said.',
+  'You lead. It knows what happens next.',
+  'You lead. It knows where everything went.',
+  'You lead. It keeps the work together.',
+  'You lead. It stops when it actually needs you.',
 ];
 ---
 
-<section id="opening-sequence" class="opening-sequence" data-stage="opening">
+<section id="opening-sequence" class="opening-sequence">
   <p class="sr-only">
-    Animated introduction: an AI finishes a task in three minutes, then documents, half-finished
-    decisions, and questions pile up around it. The sequence resolves on the HERA mark and the line
-    "You lead. HERA keeps up."
+    Scroll-controlled introduction: you send an AI assistant a small request. It answers with a
+    wall of text while ".md" files rain down and bury the answer. A string of panicked thoughts
+    follows, then a plain statement of the cost: the AI finished in three minutes, you spent the
+    next twenty digging through eighteen new ".md" files and begging it to explain itself. The
+    sequence resolves on the HERA mark and the line "Stop managing your AI. Start giving it work."
   </p>
 
-  <div class="opening-stage container-page">
-    <div class="phase-1">
-      <p class="eyebrow justify-center animate-rise">HERA OS</p>
-      <p class="opening-line animate-rise text-display font-semibold tracking-tightest" style="animation-delay:120ms">
-        Your AI finished in 3 minutes.
-      </p>
-
-      <div class="ai-response-card card animate-rise" style="animation-delay:520ms" aria-hidden="true">
-        <p class="ai-role">USER</p>
-        <p class="ai-line ai-user">Make a small website change</p>
-        <p class="ai-role">AGENT</p>
-        <p class="ai-line ai-agent">
-          Better - but for a reason worth naming. Your instinct was right and the diagnosis was more
-          literal than a layout preference: clicking a variant did change the answer, but the answer
-          was rendered below the fold behind a collapse, and re-rendering the pane threw away its
-          scroll position, so the screen snapped to the top. Two separate faults producing one
-          feeling of "nothing responded." The scroll reset was a straight bug - panes now keep their
-          own scrollTop across a render, so clicking a tile no longer moves the page at all. That fix
-          alone was worth it.
-        </p>
-        <p class="ai-line ai-agent">
-          The column is the other half. Selection has to change something at eye level, and it now
-          does: the detail column sits beside the viewer, never scrolls away, never collapses, and
-          fades on change so the swap is visible. The variant grid is where your cursor is; the
-          answer is one glance right of the image it describes.
-        </p>
-        <p class="ai-role">USER</p>
-        <p class="ai-line ai-user">😨 or 🫩</p>
-      </div>
-    </div>
-
-    <div class="clutter-layer" aria-hidden="true">
-      {files.map((file, i) => (
-        <div
-          class="md-file"
-          data-file={i + 1}
-          style={`--x:${file.left}%; --y:${file.top}%; --r:${file.rot}deg; animation-delay:${file.delay}ms;`}
-        >
-          <img src={mdIcon} alt="" loading="eager" />
-          <span>{file.name}</span>
+  <div class="opening-track" id="opening-track">
+    <div class="opening-stage" id="opening-stage" data-scene="empty" aria-hidden="true">
+      <div class="chat-layer" id="chat-layer">
+        <div class="chat-window">
+          <div class="chat-body" id="chat-body">
+            <div class="msg-row" id="msg-user">
+              <p class="user-bubble-mini chat-bubble">{MESSAGE}</p>
+            </div>
+            <div class="thinking-row" id="thinking-row">
+              <span class="thinking-dot"></span><span class="thinking-dot"></span><span class="thinking-dot"></span>
+              <span class="thinking-label">Thinking&hellip;</span>
+            </div>
+            <div class="answer-row" id="answer-row" data-total={totalWords} data-boundary={revealBoundary}>
+              <p class="ai-line ai-agent">
+                {words1.map((w, i) => <><span class="rw" data-i={i}>{w}</span>{' '}</>)}
+              </p>
+              <p class="ai-line ai-agent">
+                {words2.map((w, i) => <><span class="rw" data-i={words1.length + i}>{w}</span>{' '}</>)}
+              </p>
+            </div>
+          </div>
+          <div class="composer">
+            <div class="composer-input" id="composer-input">
+              <span id="composer-typed"></span><span class="composer-caret" id="composer-caret"></span>
+            </div>
+            <div class="composer-send" id="composer-send" tabindex="-1"><span>Send</span></div>
+          </div>
         </div>
-      ))}
-    </div>
+        <div class="fake-cursor" id="fake-cursor"></div>
+      </div>
 
-    <div class="thought-layer" aria-hidden="true">
-      {thoughts.map((thought, i) => (
-        <p
-          class:list={['human-thought', thought.urgent && 'is-urgent']}
-          data-thought={i + 1}
-          data-essential={thought.essential ? 'true' : 'false'}
-          style={`--x:${thought.left}%; --y:${thought.top}%; animation-delay:${thought.delay}ms;`}
-        >
-          {thought.text}
+      <div class="rain-layer" id="rain-layer">
+        {rainColumns.map((col, ci) => (
+          <div class="rain-col" data-activate={col.activate} data-speed={col.speed} data-offset={col.offset} style={`left:${col.left}%;`}>
+            <div class="rain-col-inner" style={`--col-height:${col.count * 82}px;`}>
+              {Array.from({ length: col.count }).map((_, ri) => (
+                <div class="rain-file">
+                  <img src={mdIcon} alt="" loading="eager" width="40" height="40" />
+                  <span>{filenames[(ci + ri) % filenames.length]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="thought-layer" id="thought-layer">
+        <p class="user-bubble-mini thought-bubble" id="thought-bubble">{thoughts[0]}</p>
+      </div>
+
+      <div class="pain-layer" id="pain-layer">
+        <p class="pain-line" id="pain-line-1">Your AI finished in 3 minutes.</p>
+        <p class="pain-line" id="pain-line-2">
+          You spent the next 20 digging through 18 new .md files and begging it to explain itself.
         </p>
-      ))}
-    </div>
+      </div>
 
-    <div class="landing-layer">
-      <picture>
-        <source srcset={logoWebp} type="image/webp" />
-        <img class="hera-logo" src={logoPng} alt="HERA" width="120" height="120" />
-      </picture>
-      <p class="hera-wordmark"># HERA</p>
-      <p class="lead-line text-h2 font-semibold">
-        <span class="lead-prefix">You lead. It</span>{' '}<span id="lead-suffix" class="lead-suffix">{suffixes[0]}</span>
-      </p>
-      <p id="landing-line" class="landing-line text-h2 font-semibold">You lead. HERA keeps up.</p>
+      <div class="hera-layer" id="hera-layer">
+        <p class="hera-eyebrow">Introducing</p>
+        <picture>
+          <source srcset={logoWebp} type="image/webp" />
+          <img class="hera-logo" src={logoPng} alt="" width="120" height="120" />
+        </picture>
+        <p class="hera-word">HERA</p>
+        <p class="hera-promise" id="hera-promise"></p>
+        <p class="hera-final" id="hera-final">Stop managing your AI. Start giving it work.</p>
+      </div>
+
+      <div class="opening-scroll-cue scroll-gate" id="opening-scroll-cue"><span>&darr;</span></div>
     </div>
   </div>
 </section>
 
-<style>
+<style define:vars={{ revealBoundary, totalWords }}>
   .opening-sequence {
     position: relative;
-    overflow: hidden;
+  }
+
+  .opening-track {
+    position: relative;
+    height: 1200vh;
   }
 
   .opening-stage {
-    position: relative;
-    display: flex;
-    min-height: clamp(560px, 92svh, 920px);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .opening-stage::after {
-    content: '';
-    position: absolute;
-    inset: -4%;
-    z-index: 9;
-    pointer-events: none;
-    opacity: 0;
-    background: radial-gradient(ellipse at center, transparent 42%, rgba(0, 0, 0, 0.4) 100%);
-    transition: opacity 0.35s ease;
-  }
-
-  #opening-sequence[data-stage='breaking'] .opening-stage::after {
-    opacity: 1;
-  }
-
-  #opening-sequence[data-stage='breaking'] .opening-stage {
-    animation: openingShake 0.6s ease-in-out;
-  }
-
-  @keyframes openingShake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-3px) rotate(-0.15deg); }
-    40% { transform: translateX(3px) rotate(0.15deg); }
-    60% { transform: translateX(-2px); }
-    80% { transform: translateX(2px); }
-  }
-
-  /* Phase 1 --------------------------------------------------------- */
-  .phase-1 {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(20px, 3vh, 32px);
-  }
-
-  .opening-line {
-    max-width: 18ch;
-  }
-
-  .ai-response-card {
-    width: min(560px, 84vw);
-    max-height: 260px;
+    position: sticky;
+    top: 0;
+    height: 100svh;
     overflow: hidden;
-    padding: 20px 22px;
-    text-align: left;
-    -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+    background: #000;
+    color: #f4f4f2;
   }
 
-  .ai-role {
-    margin-top: 12px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: var(--faint);
-  }
-
-  .ai-role:first-child {
-    margin-top: 0;
-  }
-
-  .ai-line {
-    margin-top: 4px;
-    font-size: 12.5px;
-    line-height: 1.5;
-  }
-
-  .ai-user {
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  .ai-agent {
-    color: var(--muted);
-  }
-
-  /* Phase 2 — the mess ------------------------------------------------ */
-  .clutter-layer {
+  .chat-layer,
+  .rain-layer,
+  .thought-layer,
+  .pain-layer,
+  .hera-layer {
     position: absolute;
     inset: 0;
-    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rain-layer,
+  .thought-layer,
+  .pain-layer,
+  .hera-layer {
+    opacity: 0;
     pointer-events: none;
   }
 
-  .md-file {
-    position: absolute;
-    left: var(--x);
-    top: var(--y);
+  /* Chat window ------------------------------------------------------- */
+  .chat-window {
     display: flex;
-    width: 108px;
     flex-direction: column;
+    width: min(600px, 88vw);
+    height: min(560px, 70svh);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    background: rgba(18, 18, 20, 0.72);
+    overflow: hidden;
+  }
+
+  .chat-body {
+    flex: 1;
+    overflow: hidden;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .msg-row {
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  /* Reused verbatim from the `.user-bubble-mini` geometry in src/pages/index.astro
+     (~line 426). Astro scopes component styles per-file, so that class does not
+     reach into this component's DOM — the values are authored again here rather
+     than imported, per the packet's "reuse the established geometry" instruction. */
+  .user-bubble-mini {
+    padding: 13px 17px;
+    border-radius: 22px 22px 7px 22px;
+    background: rgba(244, 241, 234, 0.96);
+    color: #090909;
+    font-size: 15px;
+    line-height: 1.42;
+    letter-spacing: -0.012em;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
+  }
+
+  .chat-bubble {
+    max-width: 80%;
+  }
+
+  .thinking-row {
+    display: flex;
     align-items: center;
     gap: 6px;
     opacity: 0;
-    transform: translate(-50%, -50%) translateY(-14px) scale(0.9) rotate(var(--r, 0deg));
-    animation: clutterDrop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
-  @keyframes clutterDrop {
-    0% { opacity: 0; transform: translate(-50%, -50%) translateY(-14px) scale(0.9) rotate(var(--r, 0deg)); }
-    60% { opacity: 1; transform: translate(-50%, -50%) translateY(3px) scale(1.04) rotate(var(--r, 0deg)); }
-    100% { opacity: 1; transform: translate(-50%, -50%) translateY(0) scale(1) rotate(var(--r, 0deg)); }
+  .thinking-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(244, 244, 242, 0.6);
+    animation: thinkingPulse 1.1s ease-in-out infinite;
   }
 
-  .md-file img {
-    width: 34px;
-    height: 34px;
-    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+  .thinking-dot:nth-child(2) { animation-delay: 0.15s; }
+  .thinking-dot:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes thinkingPulse {
+    0%, 100% { opacity: 0.35; transform: scale(0.85); }
+    50% { opacity: 1; transform: scale(1); }
   }
 
-  .md-file span {
-    max-width: 100%;
-    overflow: hidden;
-    border-radius: 6px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    padding: 3px 7px;
-    text-overflow: ellipsis;
+  .thinking-label {
+    font-size: 12.5px;
+    color: rgba(244, 244, 242, 0.55);
+    margin-left: 2px;
+  }
+
+  .answer-row {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .ai-line.ai-agent {
+    color: rgba(244, 244, 242, 0.78);
+    margin: 0 0 10px;
+  }
+
+  .rw {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .rw.is-shown {
+    opacity: 1;
+  }
+
+  .composer {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* min-width:0 overrides the flex default of min-width:auto, which was
+     letting this item refuse to shrink below its nowrap text's intrinsic
+     width and visually overlap the Send button at narrow viewports
+     (BUG-006) instead of actually occupying its shrunk flex-basis. */
+  .composer-input {
+    flex: 1;
+    min-width: 0;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13.5px;
+    color: rgba(244, 244, 242, 0.9);
     white-space: nowrap;
-    font-size: 10px;
-    color: var(--muted);
-    box-shadow: var(--shadow-card);
+    overflow: hidden;
   }
 
-  /* Phase 3 — human thoughts ------------------------------------------ */
-  .thought-layer {
-    position: absolute;
-    inset: 0;
-    z-index: 6;
-    pointer-events: none;
-  }
-
-  .human-thought {
-    position: absolute;
-    left: var(--x);
-    top: var(--y);
-    max-width: 30ch;
-    transform: translate(-50%, -50%) translateY(6px) scale(0.92);
+  .composer-caret {
+    display: inline-block;
+    width: 1px;
+    height: 15px;
+    margin-left: 2px;
+    background: rgba(244, 244, 242, 0.85);
     opacity: 0;
-    animation: thoughtPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: caretBlink 1s steps(1) infinite;
+  }
+
+  @keyframes caretBlink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  .composer-send {
+    flex: none;
+    display: grid;
+    place-items: center;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: rgba(244, 244, 242, 0.92);
+    color: #0b0b0c;
+    font-size: 12.5px;
     font-weight: 600;
-    font-size: 15px;
-    color: var(--ink);
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+    transform: scale(1);
+    transition: transform 0.12s ease;
   }
 
-  .human-thought.is-urgent {
-    font-size: 20px;
-    color: #d64545;
+  .composer-send.is-pressed {
+    transform: scale(0.92);
   }
 
-  @keyframes thoughtPop {
-    from { opacity: 0; transform: translate(-50%, -50%) translateY(6px) scale(0.92); }
-    to { opacity: 1; transform: translate(-50%, -50%) translateY(0) scale(1); }
-  }
-
-  /* Phase 4/5 — clearing ------------------------------------------------ */
-  #opening-sequence[data-stage='clearing'] .phase-1,
-  #opening-sequence[data-stage='clearing'] .clutter-layer,
-  #opening-sequence[data-stage='clearing'] .thought-layer,
-  #opening-sequence[data-stage='reveal'] .phase-1,
-  #opening-sequence[data-stage='reveal'] .clutter-layer,
-  #opening-sequence[data-stage='reveal'] .thought-layer,
-  #opening-sequence[data-stage='resolved'] .phase-1,
-  #opening-sequence[data-stage='resolved'] .clutter-layer,
-  #opening-sequence[data-stage='resolved'] .thought-layer {
-    opacity: 0;
-    transform: scale(0.94) translateY(-18px);
-    pointer-events: none;
-    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  /* Phase 5 — HERA reveal ------------------------------------------------ */
-  .landing-layer {
+  /* left/top are written in px at runtime from the Send button's measured
+     bounding box (see measureCursorTargets in the script below) — never
+     hardcoded percentages, so the cursor actually lands on the button at
+     every viewport width. 0/0 here is just a harmless pre-JS default; opacity
+     stays 0 until the cursor scene is active so it never flashes at (0,0). */
+  .fake-cursor {
     position: absolute;
-    inset: 0;
-    z-index: 8;
+    left: 0px;
+    top: 0px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50% 50% 50% 0;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    z-index: 5;
+  }
+
+  /* .md rain ------------------------------------------------------------ */
+  .rain-col {
+    position: absolute;
+    top: 0;
+    z-index: 3;
+  }
+
+  .rain-col-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: var(--col-height);
+    will-change: transform;
+  }
+
+  /* Repair note, 2026-08-28: width raised (96 -> 100) and the label allowed to
+     wrap to two lines instead of clipping. A truncated "CURRENT-SPRINT..." is
+     the exact BUG-003-shaped defect the Chief flagged — every filename must be
+     fully readable, no ellipsis, at any width. */
+  .rain-file {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 18px;
-    opacity: 0;
-    pointer-events: none;
+    gap: 4px;
+    width: 100px;
   }
 
-  #opening-sequence[data-stage='reveal'] .landing-layer,
-  #opening-sequence[data-stage='resolved'] .landing-layer {
-    opacity: 1;
-    pointer-events: auto;
+  .rain-file img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .rain-file span {
+    width: 100px;
+    max-width: 100px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-align: center;
+    font-size: 9px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: rgba(244, 244, 242, 0.85);
+  }
+
+  /* Human thoughts -------------------------------------------------------- */
+  .thought-bubble {
+    max-width: 60ch;
+    text-align: center;
+    transition: color 0.2s ease;
+  }
+
+  .thought-bubble.is-urgent {
+    background: rgba(214, 69, 69, 0.94);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* The pain, named --------------------------------------------------- */
+  .pain-layer {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .pain-line {
+    max-width: 26ch;
+    margin: 0 auto;
+    font-size: clamp(1.5rem, 3.6vw, 2.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  #pain-line-2 {
+    opacity: 0;
+  }
+
+  /* HERA reveal --------------------------------------------------------- */
+  .hera-layer {
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .hera-eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(244, 244, 242, 0.6);
   }
 
   .hera-logo {
-    width: clamp(64px, 9vw, 96px);
+    width: clamp(72px, 9vw, 108px);
     height: auto;
-    opacity: 0;
-  }
-
-  #opening-sequence[data-stage='reveal'] .hera-logo,
-  #opening-sequence[data-stage='resolved'] .hera-logo {
-    animation:
-      logoReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both,
-      hera-logo-pulse 2.4s ease-in-out 0.7s infinite;
+    margin: 4px 0;
+    animation: hera-logo-pulse 2.4s ease-in-out infinite;
   }
 
   @keyframes hera-logo-pulse {
-    0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px rgba(158, 129, 254, 0.58)) drop-shadow(0 0 18px rgba(76, 91, 255, 0.28)); }
-    50% { opacity: 0.78; filter: drop-shadow(0 0 18px rgba(214, 202, 254, 0.88)) drop-shadow(0 0 28px rgba(76, 91, 255, 0.5)); }
+    0%, 100% { filter: drop-shadow(0 0 8px rgba(158, 129, 254, 0.58)) drop-shadow(0 0 18px rgba(76, 91, 255, 0.28)); }
+    50% { filter: drop-shadow(0 0 18px rgba(214, 202, 254, 0.88)) drop-shadow(0 0 28px rgba(76, 91, 255, 0.5)); }
   }
 
-  @keyframes logoReveal {
-    from { opacity: 0; transform: scale(0.75); }
-    to { opacity: 1; transform: scale(1); }
+  .hera-word {
+    font-size: clamp(3.2rem, 11vw, 7rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
   }
 
-  .hera-wordmark {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 15px;
-    letter-spacing: 0.02em;
-    color: var(--muted);
+  .hera-promise,
+  .hera-final {
+    max-width: 32ch;
+    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+    color: rgba(244, 244, 242, 0.85);
+  }
+
+  .hera-final {
     opacity: 0;
+    font-weight: 600;
+    color: #fff;
   }
 
-  #opening-sequence[data-stage='reveal'] .hera-wordmark,
-  #opening-sequence[data-stage='resolved'] .hera-wordmark {
-    animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .lead-line,
-  .landing-line {
+  .opening-scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
     opacity: 0;
+    z-index: 20;
   }
 
-  #opening-sequence[data-stage='reveal'] .lead-line {
-    animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both;
-  }
-
-  #opening-sequence[data-stage='resolved'] .lead-line {
-    display: none;
-  }
-
-  .lead-suffix {
-    display: inline-block;
-    transition: opacity 0.26s ease;
-  }
-
-  .lead-suffix.is-swapping {
-    opacity: 0;
-  }
-
-  .landing-line {
-    display: none;
-  }
-
-  #opening-sequence[data-stage='resolved'] .landing-line {
-    display: block;
-    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  /* Mobile adaptation — authored, not a shrunk desktop layout ---------- */
+  /* Mobile adaptation — same story, simplified density ------------------- */
   @media (max-width: 640px) {
-    .opening-stage {
-      min-height: clamp(600px, 100svh, 760px);
+    .opening-track {
+      height: 1400vh;
     }
 
-    .opening-line {
-      max-width: 14ch;
-      font-size: clamp(1.9rem, 9vw, 2.6rem);
+    .chat-window {
+      width: 92vw;
+      height: 66svh;
     }
 
-    .ai-response-card {
-      width: 90vw;
-      max-height: 200px;
-      padding: 16px 18px;
+    .chat-body {
+      padding: 16px 16px;
     }
 
-    /* Files and thoughts occupy only the empty band above the headline and
-       below the AI card — the card runs edge-to-edge at this width, so
-       there is no clear space beside it, only above and below it. */
-    .md-file {
-      width: 92px;
+    .answer-row {
+      font-size: 12px;
     }
 
-    .md-file img {
-      width: 24px;
-      height: 24px;
+    .rain-file {
+      width: 70px;
     }
 
-    .md-file span {
-      font-size: 9px;
-      line-height: 1.2;
+    .rain-file img {
+      width: 26px;
+      height: 26px;
+    }
+
+    .rain-file span {
+      width: 70px;
+      max-width: 70px;
+      font-size: 7.5px;
       white-space: normal;
-      overflow: visible;
-      text-overflow: clip;
+      overflow-wrap: break-word;
       word-break: break-word;
     }
 
-    .md-file[data-file='1'] { left: 18%; top: 7%; }
-    .md-file[data-file='2'] { left: 80%; top: 6%; }
-    .md-file[data-file='3'] { left: 20%; top: 82%; }
-    .md-file[data-file='4'] { left: 78%; top: 81%; }
-    .md-file[data-file='5'] { left: 50%; top: 13%; }
-    .md-file[data-file='6'],
-    .md-file[data-file='7'],
-    .md-file[data-file='8'] {
+    .rain-col-inner {
+      gap: 10px;
+    }
+
+    /* Fewer active columns on narrow screens so the metaphor still reads
+       instead of collapsing into unreadable overlap. */
+    .rain-col:nth-child(3n + 2) {
       display: none;
     }
 
-    .human-thought {
-      max-width: 20ch;
-      font-size: 13px;
+    .pain-line {
+      font-size: clamp(1.2rem, 6.5vw, 1.7rem);
     }
 
-    .human-thought.is-urgent {
-      font-size: 16px;
+    .hera-word {
+      font-size: clamp(2.6rem, 17vw, 4.5rem);
     }
 
-    .human-thought[data-essential='false'] {
-      display: none;
-    }
-
-    .human-thought[data-thought='1'] { left: 50%; top: 22%; }
-    .human-thought[data-thought='3'] { left: 50%; top: 90%; }
-    .human-thought[data-thought='5'] { left: 50%; top: 95%; }
-
-    .lead-line,
-    .landing-line {
-      font-size: 1.2rem;
-      max-width: 22ch;
+    .hera-promise,
+    .hera-final {
+      font-size: 1rem;
+      max-width: 26ch;
     }
   }
 
-  /* Reduced motion — coherent landing state, no escalation ------------- */
+  /* BUG-006 repair, 2026-08-28: at exactly 375px the fully-typed composer
+     sentence ran into the Send pill. Scoped tightly to <=400px so untouched
+     430px (already clean per the live-tester's own evidence) keeps its
+     original sizing. Shrinking font-size/padding here (rather than wrapping
+     to two lines, which would move the composer's height and desync the
+     chat-window layout other scenes rely on) keeps the single-line composer
+     shape intact while giving the full sentence room to fit before the
+     button. measureCursorTargets() re-measures the Send button's real
+     rect on load/resize, so the cursor still lands correctly here too. */
+  @media (max-width: 400px) {
+    .composer {
+      gap: 6px;
+      padding: 12px 12px;
+    }
+
+    .composer-input {
+      padding: 0 10px;
+      font-size: 10.5px;
+    }
+
+    .composer-send {
+      padding: 8px 12px;
+      font-size: 11px;
+    }
+  }
+
+  /* Reduced motion — discrete scroll-controlled states, no falling motion,
+     no parallax. Scoped entirely to this media query so it never competes
+     with the continuous inline-style updates the normal path writes. ------ */
   @media (prefers-reduced-motion: reduce) {
-    .phase-1,
-    .clutter-layer,
-    .thought-layer {
-      display: none !important;
-    }
-
-    .opening-stage::after {
-      display: none !important;
-    }
-
-    .landing-layer {
-      opacity: 1 !important;
-      pointer-events: auto !important;
-    }
-
-    .hera-logo {
-      opacity: 1 !important;
-      animation: hera-logo-pulse 2.4s ease-in-out infinite !important;
-    }
-
-    .hera-wordmark,
-    .landing-line {
-      opacity: 1 !important;
-      transform: none !important;
+    .chat-layer,
+    .rain-layer,
+    .thought-layer,
+    .pain-layer,
+    .hera-layer,
+    .msg-row,
+    .thinking-row,
+    .rw,
+    .pain-line,
+    .hera-final,
+    .fake-cursor,
+    .composer-caret {
+      transition: none !important;
       animation: none !important;
     }
 
-    .landing-line {
-      display: block !important;
+    .rw {
+      opacity: 0 !important;
     }
 
-    .lead-line {
+    .rain-col-inner {
+      transform: none !important;
+    }
+
+    .rain-layer {
+      position: relative;
+      flex-wrap: wrap;
+      align-content: center;
+      gap: 4px;
+      overflow: hidden;
+    }
+
+    .rain-col {
+      position: relative;
+      left: auto !important;
+    }
+
+    .fake-cursor {
       display: none !important;
+    }
+
+    .chat-layer,
+    .rain-layer,
+    .thought-layer,
+    .pain-layer,
+    .hera-layer {
+      opacity: 0;
+    }
+
+    .msg-row,
+    .thinking-row {
+      opacity: 0;
+    }
+
+    #pain-line-2 {
+      opacity: 1 !important;
+    }
+
+    .hera-promise {
+      display: none !important;
+    }
+
+    .hera-final {
+      opacity: 1 !important;
+    }
+
+    /* Layer visibility per discrete scene ---------------------------- */
+    .opening-stage[data-scene='composer'] .chat-layer,
+    .opening-stage[data-scene='sent'] .chat-layer,
+    .opening-stage[data-scene='thinking'] .chat-layer,
+    .opening-stage[data-scene='answer'] .chat-layer,
+    .opening-stage[data-scene='rain-static'] .chat-layer {
+      opacity: 1;
+    }
+
+    .opening-stage[data-scene='sent'] .msg-row,
+    .opening-stage[data-scene='thinking'] .msg-row,
+    .opening-stage[data-scene='answer'] .msg-row,
+    .opening-stage[data-scene='rain-static'] .msg-row {
+      opacity: 1;
+      transform: none !important;
+    }
+
+    .opening-stage[data-scene='thinking'] .thinking-row {
+      opacity: 1;
+    }
+
+    .opening-stage[data-scene='rain-static'] .rain-layer {
+      opacity: 1;
+    }
+
+    /* The verbose response is only "present in full" from the answer state
+       onward — showing it during composer/sent/thinking would collapse the
+       discrete states into one frame. */
+    .opening-stage[data-scene='answer'] .rw,
+    .opening-stage[data-scene='rain-static'] .rw {
+      opacity: 1 !important;
+    }
+
+    .opening-stage[data-scene='thoughts'] .thought-layer,
+    .opening-stage[data-scene='pain'] .pain-layer,
+    .opening-stage[data-scene='hera'] .hera-layer {
+      opacity: 1;
     }
   }
 </style>
 
-<script>
-  const section = document.getElementById('opening-sequence');
-  const leadSuffix = document.getElementById('lead-suffix');
+<script define:vars={{ totalWords, revealBoundary, message: MESSAGE, thoughtsData: thoughts, promisesData: promises }}>
+  const stage = document.getElementById('opening-stage');
+  const track = document.getElementById('opening-track');
+  const chatLayer = document.getElementById('chat-layer');
+  const rainLayer = document.getElementById('rain-layer');
+  const thoughtLayer = document.getElementById('thought-layer');
+  const painLayer = document.getElementById('pain-layer');
+  const heraLayer = document.getElementById('hera-layer');
+  const composerTyped = document.getElementById('composer-typed');
+  const composerCaret = document.getElementById('composer-caret');
+  const composerInput = document.getElementById('composer-input');
+  const composerSend = document.getElementById('composer-send');
+  const fakeCursor = document.getElementById('fake-cursor');
+  const msgUser = document.getElementById('msg-user');
+  const thinkingRow = document.getElementById('thinking-row');
+  const painLine1 = document.getElementById('pain-line-1');
+  const painLine2 = document.getElementById('pain-line-2');
+  const thoughtBubble = document.getElementById('thought-bubble');
+  const heraPromise = document.getElementById('hera-promise');
+  const heraFinal = document.getElementById('hera-final');
+  const scrollCue = document.getElementById('opening-scroll-cue');
+  const wordSpans = Array.from(document.querySelectorAll('#answer-row .rw'));
 
-  const suffixes = [
-    'remembers the project.',
-    'keeps the work moving.',
-    'knows where the work lives.',
-    'keeps decisions attached.',
-    'asks when the decision is yours.',
-  ];
+  // Repair note, 2026-08-28: the cursor travel target is measured from the
+  // real Send button's bounding box, not a hardcoded viewport percentage —
+  // a fixed "left:92%" landed well off the button at some widths. Measured
+  // once on load and re-measured on resize so it stays correct at every
+  // breakpoint, including the 375/430px mobile widths.
+  let cursorStartPt = { x: 0, y: 0 };
+  let cursorTargetPt = { x: 0, y: 0 };
+
+  const measureCursorTargets = () => {
+    const stageRect = stage.getBoundingClientRect();
+    const inputRect = composerInput.getBoundingClientRect();
+    const sendRect = composerSend.getBoundingClientRect();
+    cursorStartPt = {
+      x: inputRect.right - stageRect.left - 20,
+      y: inputRect.top + inputRect.height / 2 - stageRect.top,
+    };
+    cursorTargetPt = {
+      x: sendRect.left + sendRect.width / 2 - stageRect.left,
+      y: sendRect.top + sendRect.height / 2 - stageRect.top,
+    };
+  };
+
+  const rainCols = Array.from(document.querySelectorAll('.rain-col')).map((el) => {
+    const inner = el.querySelector('.rain-col-inner');
+    const heightPx = inner ? parseFloat(inner.style.getPropertyValue('--col-height')) || 600 : 600;
+    return {
+      el,
+      inner,
+      activate: parseFloat(el.getAttribute('data-activate') || '0.33'),
+      speed: parseFloat(el.getAttribute('data-speed') || '1'),
+      offset: parseFloat(el.getAttribute('data-offset') || '0'),
+      height: heightPx,
+    };
+  });
+
+  const THOUGHTS = thoughtsData;
+  const PROMISES = promisesData;
+
+  const P = {
+    emptyEnd: 0.06,
+    typeEnd: 0.12,
+    cursorEnd: 0.145,
+    clickEnd: 0.155,
+    bubbleEnd: 0.18,
+    thinkEnd: 0.21,
+    sentEnd: 0.3,
+    rainStart: 0.33,
+    answerEnd: 0.6,
+    clear1Start: 0.6,
+    clear1End: 0.65,
+    thoughtsStart: 0.65,
+    thoughtsEnd: 0.83,
+    painStart: 0.83,
+    painMid: 0.87,
+    painEnd: 0.93,
+    clear2End: 0.95,
+  };
+
+  const clamp01 = (x) => Math.min(1, Math.max(0, x));
+  const lerp = (a, b, t) => a + (b - a) * t;
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const setStage = (stage: string) => {
-    if (section) section.dataset.stage = stage;
+  let lastRevealed = -1;
+  const setRevealed = (count) => {
+    if (count === lastRevealed) return;
+    wordSpans.forEach((el, i) => {
+      el.classList.toggle('is-shown', i < count);
+    });
+    lastRevealed = count;
   };
 
-  const swapSuffix = (index: number) => {
-    if (!leadSuffix) return;
-    leadSuffix.classList.add('is-swapping');
-    window.setTimeout(() => {
-      leadSuffix.textContent = suffixes[index] ?? '';
-      leadSuffix.classList.remove('is-swapping');
-    }, 260);
+  const sceneName = (p) => {
+    if (p < P.emptyEnd) return 'empty';
+    if (p < P.typeEnd) return 'typing';
+    if (p < P.cursorEnd) return 'cursor';
+    if (p < P.clickEnd) return 'click';
+    if (p < P.bubbleEnd) return 'bubble';
+    if (p < P.thinkEnd) return 'thinking';
+    if (p < P.sentEnd) return 'sentences';
+    if (p < P.answerEnd) return 'answer';
+    if (p < P.clear1End) return 'clear1';
+    if (p < P.thoughtsEnd) return 'thoughts';
+    if (p < P.painEnd) return 'pain';
+    if (p < P.clear2End) return 'clear2';
+    return 'hera';
   };
 
-  if (reduced) {
-    setStage('resolved');
-  } else {
-    setStage('opening');
+  // ---- Normal (motion-enabled) path --------------------------------------
+  const updateComposer = (p) => {
+    const typeT = clamp01((p - P.emptyEnd) / (P.typeEnd - P.emptyEnd));
+    const chars = p < P.emptyEnd ? 0 : Math.floor(typeT * message.length);
+    const shown = p >= P.clickEnd ? '' : message.slice(0, chars);
+    if (composerTyped.textContent !== shown) composerTyped.textContent = shown;
+    composerCaret.style.opacity = p >= P.emptyEnd && p < P.bubbleEnd ? '1' : '0';
 
-    const at = (ms: number, fn: () => void) => window.setTimeout(fn, ms);
+    if (p >= P.typeEnd && p < P.clickEnd) {
+      const curT = clamp01((p - P.typeEnd) / (P.cursorEnd - P.typeEnd));
+      fakeCursor.style.opacity = '1';
+      fakeCursor.style.left = `${lerp(cursorStartPt.x, cursorTargetPt.x, curT)}px`;
+      fakeCursor.style.top = `${lerp(cursorStartPt.y, cursorTargetPt.y, curT)}px`;
+      // "On the button" starts as soon as travel finishes (curT reaches 1 at
+      // P.cursorEnd), so the press state only ever fires while the cursor is
+      // actually resting on the measured Send target, not in empty space.
+      composerSend.classList.toggle('is-pressed', p >= P.cursorEnd);
+    } else {
+      fakeCursor.style.opacity = '0';
+      if (p < P.typeEnd) composerSend.classList.remove('is-pressed');
+    }
+  };
 
-    at(5450, () => setStage('breaking'));
-    at(6150, () => setStage('clearing'));
-    at(6700, () => setStage('reveal'));
+  const updateBubble = (p) => {
+    const t = clamp01((p - P.clickEnd) / (P.bubbleEnd - P.clickEnd));
+    const op = p < P.clickEnd ? 0 : t;
+    msgUser.style.opacity = String(op);
+    msgUser.style.transform = `translateY(${lerp(8, 0, t)}px)`;
+  };
 
-    at(8300, () => swapSuffix(1));
-    at(9850, () => swapSuffix(2));
-    at(11400, () => swapSuffix(3));
-    at(12950, () => swapSuffix(4));
-    at(14500, () => setStage('resolved'));
-  }
+  const updateThinking = (p) => {
+    let op = 0;
+    if (p >= P.bubbleEnd && p < P.thinkEnd) {
+      op = clamp01((p - P.bubbleEnd) / (P.thinkEnd - P.bubbleEnd));
+    } else if (p >= P.thinkEnd && p < P.thinkEnd + 0.02) {
+      op = clamp01(1 - (p - P.thinkEnd) / 0.02);
+    }
+    thinkingRow.style.opacity = String(op);
+  };
+
+  const updateAnswer = (p) => {
+    let count;
+    if (p < P.thinkEnd) {
+      count = 0;
+    } else if (p < P.sentEnd) {
+      const t = clamp01((p - P.thinkEnd) / (P.sentEnd - P.thinkEnd));
+      count = Math.round(lerp(0, revealBoundary, t));
+    } else if (p < P.answerEnd) {
+      const t = clamp01((p - P.sentEnd) / (P.answerEnd - P.sentEnd));
+      count = Math.round(lerp(revealBoundary, totalWords, t));
+    } else {
+      count = totalWords;
+    }
+    setRevealed(count);
+  };
+
+  const updateChatFade = (p) => {
+    const fade = p < P.clear1Start ? 1 : clamp01(1 - (p - P.clear1Start) / (P.clear1End - P.clear1Start));
+    chatLayer.style.opacity = String(fade);
+    chatLayer.style.pointerEvents = 'none';
+  };
+
+  // Repair note, 2026-08-28: each column's own travel duration is deliberately
+  // decoupled from the P.answerEnd scene boundary (that boundary is locked and
+  // untouched). Columns now activate in a tight band (0.33-0.417) and each
+  // travels for this fixed duration, so most of the 14 streams are mid-transit
+  // simultaneously across a wide, sustained window — the dense "blizzard"
+  // plateau the packet calls for — rather than a handful of columns finishing
+  // their travel just as the next ones are still arriving. The shared opacity
+  // fade at P.clear1Start/P.clear1End still owns when the rain actually
+  // disappears, regardless of exactly where a column's translate3d has
+  // reached, so nothing here can leak visible files past the fade.
+  const RAIN_TRAVEL_DURATION = 0.34;
+
+  const updateRain = (p) => {
+    const active = p >= P.rainStart && p < P.clear2End;
+    const clearFade = p < P.clear1Start ? 1 : clamp01(1 - (p - P.clear1Start) / (P.clear1End - P.clear1Start));
+    rainLayer.style.opacity = active ? String(clearFade) : '0';
+    if (!active) return;
+    rainCols.forEach((col) => {
+      const localT = clamp01((p - col.activate) / RAIN_TRAVEL_DURATION);
+      const enter = -(col.height + 150 + Math.abs(col.offset));
+      // Exit distance scales with the column's own (now much longer) length so a
+      // 14-file stream still fully clears the viewport by the time it fades,
+      // instead of leaving a visible tail hanging mid-screen.
+      const exit = (col.height + 900) * col.speed;
+      const y = lerp(enter, exit, localT);
+      col.el.style.opacity = p >= col.activate ? '1' : '0';
+      col.inner.style.transform = `translate3d(0, ${y}px, 0)`;
+    });
+  };
+
+  const updateThoughts = (p) => {
+    if (p < P.thoughtsStart || p >= P.thoughtsEnd) {
+      thoughtLayer.style.opacity = '0';
+      return;
+    }
+    const range = P.thoughtsEnd - P.thoughtsStart;
+    const bucket = range / THOUGHTS.length;
+    const rel = p - P.thoughtsStart;
+    const idx = Math.min(THOUGHTS.length - 1, Math.floor(rel / bucket));
+    const localT = (rel - idx * bucket) / bucket;
+    let op;
+    if (localT < 0.2) op = localT / 0.2;
+    else if (localT > 0.8) op = (1 - localT) / 0.2;
+    else op = 1;
+    thoughtLayer.style.opacity = String(clamp01(op));
+    thoughtLayer.dataset.thoughtIndex = String(idx);
+    const isUrgent = idx === THOUGHTS.length - 1;
+    thoughtBubble.classList.toggle('is-urgent', isUrgent);
+    const text = THOUGHTS[idx];
+    if (thoughtBubble.textContent !== text) thoughtBubble.textContent = text;
+  };
+
+  const updatePain = (p) => {
+    if (p < P.painStart || p >= P.clear2End) {
+      painLayer.style.opacity = '0';
+      return;
+    }
+    let op = 1;
+    if (p < P.painStart + 0.02) op = (p - P.painStart) / 0.02;
+    else if (p >= P.painEnd) op = clamp01(1 - (p - P.painEnd) / (P.clear2End - P.painEnd));
+    painLayer.style.opacity = String(clamp01(op));
+    painLine1.style.opacity = '1';
+    painLine2.style.opacity = String(clamp01((p - P.painMid) / 0.03));
+  };
+
+  const heraChunk = (0.05) / 6;
+  const updateHera = (p) => {
+    if (p < P.clear2End) {
+      heraLayer.style.opacity = '0';
+      scrollCue.style.opacity = '0';
+      return;
+    }
+    const introOp = clamp01((p - P.clear2End) / 0.01);
+    heraLayer.style.opacity = String(introOp);
+    scrollCue.style.opacity = String(introOp);
+
+    const rel = p - P.clear2End;
+    const chunkIdx = Math.min(5, Math.floor(rel / heraChunk));
+    if (chunkIdx < 5) {
+      const text = PROMISES[chunkIdx];
+      if (heraPromise.textContent !== text) heraPromise.textContent = text;
+      heraPromise.style.opacity = '1';
+      heraFinal.style.opacity = '0';
+    } else {
+      heraPromise.style.opacity = '0';
+      heraFinal.style.opacity = '1';
+    }
+  };
+
+  const updateAll = (p) => {
+    stage.style.setProperty('--p', p.toFixed(4));
+    stage.dataset.scene = sceneName(p);
+    updateComposer(p);
+    updateBubble(p);
+    updateThinking(p);
+    updateAnswer(p);
+    updateChatFade(p);
+    updateRain(p);
+    updateThoughts(p);
+    updatePain(p);
+    updateHera(p);
+  };
+
+  // ---- Reduced-motion path: discrete states, no falling motion ----------
+  const rmBoundaries = [0, P.clickEnd, P.bubbleEnd, P.thinkEnd, P.rainStart, P.thoughtsStart, P.painStart, P.clear2End];
+  const rmScenes = ['composer', 'sent', 'thinking', 'answer', 'rain-static', 'thoughts', 'pain', 'hera'];
+
+  const rmSceneIndex = (p) => {
+    let idx = 0;
+    for (let i = 0; i < rmBoundaries.length; i += 1) {
+      if (p >= rmBoundaries[i]) idx = i;
+    }
+    return idx;
+  };
+
+  const updateReducedAll = (p) => {
+    stage.style.setProperty('--p', p.toFixed(4));
+    const idx = rmSceneIndex(p);
+    stage.dataset.scene = rmScenes[idx];
+
+    composerTyped.textContent = idx >= 1 ? message : '';
+    setRevealed(idx >= 3 ? totalWords : 0);
+
+    if (idx === 5) {
+      const bucket = (P.painStart - P.thoughtsStart) / THOUGHTS.length;
+      const rel = p - P.thoughtsStart;
+      const ti = Math.min(THOUGHTS.length - 1, Math.floor(rel / bucket));
+      thoughtBubble.textContent = THOUGHTS[ti];
+      thoughtBubble.classList.toggle('is-urgent', ti === THOUGHTS.length - 1);
+    }
+  };
+
+  // ---- Scroll -> p, throttled with rAF -----------------------------------
+  let trackTop = 0;
+  let trackHeight = 0;
+  let viewportHeight = 0;
+  let ticking = false;
+
+  const measure = () => {
+    const rect = track.getBoundingClientRect();
+    trackTop = Math.round(rect.top + window.scrollY);
+    trackHeight = track.offsetHeight;
+    viewportHeight = window.innerHeight;
+  };
+
+  const computeP = () => {
+    const scrollable = Math.max(1, trackHeight - viewportHeight);
+    return clamp01((window.scrollY - trackTop) / scrollable);
+  };
+
+  const run = reduced ? updateReducedAll : updateAll;
+
+  const frame = () => {
+    ticking = false;
+    run(computeP());
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(frame);
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => {
+    measure();
+    measureCursorTargets();
+    onScroll();
+  });
+
+  measure();
+  measureCursorTargets();
+  run(computeP());
 </script>

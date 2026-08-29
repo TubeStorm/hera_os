@@ -6,11 +6,34 @@
 
 **A broken Claude Browser tool is never a portfolio defect, and must never be recorded as one.** If the embedded pane stops actually driving the page — clicks report success but nothing on screen changes, navigation silently no-ops, the pane never loads — that is a tooling problem. Switch transport and keep going. Do not spend the session diagnosing Anthropic's tool, and do not leave a slice open because of it.
 
+## Transport fallback is a workflow law (added 2026-08-28)
+
+**Maximum time spent diagnosing a broken browser transport: 3 minutes, total, per slice.**
+
+1. Attempt the preferred embedded browser **once**, using the one-minute preflight below.
+2. If it cannot reliably click, scroll, render, or capture the real page — abandon that transport immediately.
+3. Move directly to **Playwright Chromium**, or the next proven real-browser transport.
+4. Once a reliable transport is found, use it for the **remainder of that slice** unless it also fails. Do not keep switching back to try to resurrect the preferred pane.
+
+A browser-tool failure is **not** a product defect and must never be recorded as one. **Do not lower the proof standard because the transport changed.**
+
+For scroll-driven or animated experiences specifically, **Playwright is an approved first-class verification method** and should be *preferred* over spending build allowance trying to revive an unreliable embedded pane. `page.evaluate("window.scrollTo({top: N, behavior: 'instant'})")` hits exact story checkpoints deterministically, which wheel gestures in the embedded pane cannot do reliably.
+
+### Playwright is available in this environment — verified 2026-08-28
+
+It is the **Python** package, not an npm devDependency. That is why earlier sessions wrongly concluded none was installed.
+
+```bash
+python -c "from playwright.sync_api import sync_playwright"
+```
+
+Chromium **148.0.7778.96** launches headless with no extra install. `browser.new_context(reduced_motion="reduce")` genuinely emulates `prefers-reduced-motion`, so **reduced motion is a verifiable criterion — there is no longer an excuse for reporting it unverified.** Working references already in this repo: `tests/e2e/capture_verification_screenshots.py` and `tests/e2e/capture_ea_v2_proofs.py`.
+
 ## Order of transport preference
 
-1. **Claude Browser pane** (`mcp__Claude_Browser__*`) — default, try first.
-2. **Claude in Chrome** (`mcp__claude-in-chrome__*`) — the user's real, logged-in Chrome, if available in the session.
-3. **Playwright, or any other real browser automation available in the environment** — a clean automated Chromium process is equally valid proof.
+1. **Claude Browser pane** (`mcp__Claude_Browser__*`) — try first, once, with the preflight.
+2. **Playwright Chromium** (Python, confirmed working here) — the standing fallback, and the *first* choice for scroll-driven work.
+3. **Claude in Chrome** (`mcp__claude-in-chrome__*`) — the user's real, logged-in Chrome, when a session actually has it.
 
 An automated click from any real browser process against the real running dev server **is** legitimate proof. Nothing here requires a human finger on a mouse — it requires real, user-visible behavior in the real rendered page.
 
