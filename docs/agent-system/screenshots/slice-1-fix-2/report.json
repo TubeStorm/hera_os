@@ -1,0 +1,1361 @@
+{
+  "viewports": {
+    "desktop-1440x900": {
+      "geom": {
+        "trackHeightPx": 19188,
+        "vh": 900,
+        "scrollablePx": 18288,
+        "rainStartP": 0.0482
+      },
+      "navTopUnscrolled": 16,
+      "navTopScrolled": 16,
+      "navInsetStable": true,
+      "navLabels": [
+        "Deep Dive",
+        "Ubisoft Work",
+        "About",
+        "Lineage",
+        "Contact"
+      ],
+      "arrival": {
+        "cueBottom": 864,
+        "cueFullyInViewport": true,
+        "cueOpacity": "1",
+        "stageTop": 0,
+        "stageBottom": 900,
+        "stageFillsViewport": true,
+        "bubbleVisible": true,
+        "bubbleFontPx": "15px",
+        "thinkingOpacity": "1",
+        "cueText": "Scroll down \u2193",
+        "greyCardCount": 0
+      },
+      "curtain": {
+        "columns": 20,
+        "viewportWidth": 1440,
+        "topBandY20": {
+          "coveredToPx": 1440,
+          "maxGapPx": 0
+        },
+        "topBandY80": {
+          "coveredToPx": 1440,
+          "maxGapPx": 0
+        },
+        "bandY160": {
+          "coveredToPx": 1440,
+          "maxGapPx": 0
+        },
+        "minDepthPct": 27,
+        "maxDepthPct": 46,
+        "meanDepthPct": 36.5,
+        "jaggedRangePct": 19,
+        "distinctBottomEdges": 20,
+        "rainLayerOpacity": "1",
+        "anyTruncatedFilename": false
+      },
+      "stack": {
+        "total": 8,
+        "visibleCount": 8,
+        "opacities": [
+          0.41,
+          0.49,
+          0.57,
+          0.66,
+          0.74,
+          0.83,
+          0.92,
+          1
+        ],
+        "frontWidthPx": 518,
+        "frontWidthPctOfViewport": 36,
+        "anyClippedLeft": false,
+        "anyClippedTop": false,
+        "anyClippedBottom": false,
+        "anyOverflowingText": false,
+        "fontSize": "43.2px",
+        "distinctOffsets": 8
+      },
+      "scale": {
+        "panicCard": "43.2px",
+        "painLine": "43.2px",
+        "promise": "43.2px",
+        "finalLine": "43.2px",
+        "urgentCard": "43.2px"
+      },
+      "slots": {
+        "heraSlotCenters": [
+          {
+            "centerY": 546,
+            "centerX": 720
+          },
+          {
+            "centerY": 546,
+            "centerX": 720
+          },
+          {
+            "centerY": 546,
+            "centerX": 720
+          },
+          {
+            "centerY": 546,
+            "centerX": 720
+          },
+          {
+            "centerY": 546,
+            "centerX": 720
+          },
+          {
+            "centerY": 534,
+            "centerX": 720
+          }
+        ],
+        "painSlotCenters": [
+          {
+            "centerY": 462
+          },
+          {
+            "centerY": 462
+          }
+        ],
+        "brandRowHorizontal": true,
+        "logoLeftOfWord": true,
+        "logoCenterY": 401,
+        "wordCenterY": 401
+      },
+      "anchoredSlots": {
+        "hera": [
+          {
+            "beat": "promise1",
+            "index": 0,
+            "opacity": 1,
+            "centerY": 534,
+            "centerX": 720
+          },
+          {
+            "beat": "promise2",
+            "index": 1,
+            "opacity": 1,
+            "centerY": 534,
+            "centerX": 720
+          },
+          {
+            "beat": "promise3",
+            "index": 2,
+            "opacity": 1,
+            "centerY": 534,
+            "centerX": 720
+          },
+          {
+            "beat": "promise4",
+            "index": 3,
+            "opacity": 1,
+            "centerY": 534,
+            "centerX": 720
+          },
+          {
+            "beat": "promise5",
+            "index": 4,
+            "opacity": 1,
+            "centerY": 534,
+            "centerX": 720
+          },
+          {
+            "beat": "final",
+            "index": 5,
+            "opacity": 1,
+            "centerY": 534,
+            "centerX": 720
+          }
+        ],
+        "pain": [
+          {
+            "beat": "painA",
+            "index": 0,
+            "opacity": 1,
+            "centerY": 450,
+            "centerX": 720
+          },
+          {
+            "beat": "painB",
+            "index": 1,
+            "opacity": 1,
+            "centerY": 450,
+            "centerX": 720
+          }
+        ]
+      },
+      "holds": {
+        "arrival": {
+          "holdPx": 630,
+          "holdVh": 0.7
+        },
+        "response": {
+          "holdPx": 1530,
+          "holdVh": 1.7
+        },
+        "curtain": {
+          "holdPx": 1260,
+          "holdVh": 1.4
+        },
+        "curtainExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "card1": {
+          "holdPx": 549,
+          "holdVh": 0.61
+        },
+        "card2": {
+          "holdPx": 549,
+          "holdVh": 0.61
+        },
+        "card3": {
+          "holdPx": 549,
+          "holdVh": 0.61
+        },
+        "card4": {
+          "holdPx": 549,
+          "holdVh": 0.61
+        },
+        "card5": {
+          "holdPx": 549,
+          "holdVh": 0.61
+        },
+        "card6": {
+          "holdPx": 549,
+          "holdVh": 0.61
+        },
+        "card7": {
+          "holdPx": 549,
+          "holdVh": 0.61
+        },
+        "card8": {
+          "holdPx": 954,
+          "holdVh": 1.06
+        },
+        "stackExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "painA": {
+          "holdPx": 765,
+          "holdVh": 0.85
+        },
+        "painB": {
+          "holdPx": 765,
+          "holdVh": 0.85
+        },
+        "painExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "introducing": {
+          "holdPx": 495,
+          "holdVh": 0.55
+        },
+        "brand": {
+          "holdPx": 540,
+          "holdVh": 0.6
+        },
+        "promise1": {
+          "holdPx": 639,
+          "holdVh": 0.71
+        },
+        "promise2": {
+          "holdPx": 639,
+          "holdVh": 0.71
+        },
+        "promise3": {
+          "holdPx": 639,
+          "holdVh": 0.71
+        },
+        "promise4": {
+          "holdPx": 639,
+          "holdVh": 0.71
+        },
+        "promise5": {
+          "holdPx": 639,
+          "holdVh": 0.71
+        },
+        "final": {
+          "holdPx": 765,
+          "holdVh": 0.85
+        }
+      },
+      "pageErrors": []
+    },
+    "laptop-1366x768": {
+      "geom": {
+        "trackHeightPx": 16374,
+        "vh": 768,
+        "scrollablePx": 15606,
+        "rainStartP": 0.0482
+      },
+      "navTopUnscrolled": 16,
+      "navTopScrolled": 16,
+      "navInsetStable": true,
+      "navLabels": [
+        "Deep Dive",
+        "Ubisoft Work",
+        "About",
+        "Lineage",
+        "Contact"
+      ],
+      "arrival": {
+        "cueBottom": 737,
+        "cueFullyInViewport": true,
+        "cueOpacity": "1",
+        "stageTop": 0,
+        "stageBottom": 768,
+        "stageFillsViewport": true,
+        "bubbleVisible": true,
+        "bubbleFontPx": "15px",
+        "thinkingOpacity": "1",
+        "cueText": "Scroll down \u2193",
+        "greyCardCount": 0
+      },
+      "curtain": {
+        "columns": 20,
+        "viewportWidth": 1366,
+        "topBandY20": {
+          "coveredToPx": 1366,
+          "maxGapPx": 1
+        },
+        "topBandY80": {
+          "coveredToPx": 1366,
+          "maxGapPx": 1
+        },
+        "bandY160": {
+          "coveredToPx": 1366,
+          "maxGapPx": 1
+        },
+        "minDepthPct": 27,
+        "maxDepthPct": 46,
+        "meanDepthPct": 36.5,
+        "jaggedRangePct": 19,
+        "distinctBottomEdges": 20,
+        "rainLayerOpacity": "1",
+        "anyTruncatedFilename": false
+      },
+      "stack": {
+        "total": 8,
+        "visibleCount": 8,
+        "opacities": [
+          0.41,
+          0.49,
+          0.57,
+          0.66,
+          0.74,
+          0.83,
+          0.92,
+          1
+        ],
+        "frontWidthPx": 500,
+        "frontWidthPctOfViewport": 36.6,
+        "anyClippedLeft": false,
+        "anyClippedTop": false,
+        "anyClippedBottom": false,
+        "anyOverflowingText": false,
+        "fontSize": "40.98px",
+        "distinctOffsets": 8
+      },
+      "scale": {
+        "panicCard": "40.98px",
+        "painLine": "40.98px",
+        "promise": "40.98px",
+        "finalLine": "40.98px",
+        "urgentCard": "40.98px"
+      },
+      "slots": {
+        "heraSlotCenters": [
+          {
+            "centerY": 476,
+            "centerX": 683
+          },
+          {
+            "centerY": 476,
+            "centerX": 683
+          },
+          {
+            "centerY": 476,
+            "centerX": 683
+          },
+          {
+            "centerY": 476,
+            "centerX": 683
+          },
+          {
+            "centerY": 476,
+            "centerX": 683
+          },
+          {
+            "centerY": 464,
+            "centerX": 683
+          }
+        ],
+        "painSlotCenters": [
+          {
+            "centerY": 396
+          },
+          {
+            "centerY": 396
+          }
+        ],
+        "brandRowHorizontal": true,
+        "logoLeftOfWord": true,
+        "logoCenterY": 363,
+        "wordCenterY": 363
+      },
+      "anchoredSlots": {
+        "hera": [
+          {
+            "beat": "promise1",
+            "index": 0,
+            "opacity": 1,
+            "centerY": 464,
+            "centerX": 683
+          },
+          {
+            "beat": "promise2",
+            "index": 1,
+            "opacity": 1,
+            "centerY": 464,
+            "centerX": 683
+          },
+          {
+            "beat": "promise3",
+            "index": 2,
+            "opacity": 1,
+            "centerY": 464,
+            "centerX": 683
+          },
+          {
+            "beat": "promise4",
+            "index": 3,
+            "opacity": 1,
+            "centerY": 464,
+            "centerX": 683
+          },
+          {
+            "beat": "promise5",
+            "index": 4,
+            "opacity": 1,
+            "centerY": 464,
+            "centerX": 683
+          },
+          {
+            "beat": "final",
+            "index": 5,
+            "opacity": 1,
+            "centerY": 464,
+            "centerX": 683
+          }
+        ],
+        "pain": [
+          {
+            "beat": "painA",
+            "index": 0,
+            "opacity": 1,
+            "centerY": 384,
+            "centerX": 683
+          },
+          {
+            "beat": "painB",
+            "index": 1,
+            "opacity": 1,
+            "centerY": 384,
+            "centerX": 683
+          }
+        ]
+      },
+      "holds": {
+        "arrival": {
+          "holdPx": 538,
+          "holdVh": 0.7
+        },
+        "response": {
+          "holdPx": 1306,
+          "holdVh": 1.7
+        },
+        "curtain": {
+          "holdPx": 1075,
+          "holdVh": 1.4
+        },
+        "curtainExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "card1": {
+          "holdPx": 468,
+          "holdVh": 0.61
+        },
+        "card2": {
+          "holdPx": 468,
+          "holdVh": 0.61
+        },
+        "card3": {
+          "holdPx": 468,
+          "holdVh": 0.61
+        },
+        "card4": {
+          "holdPx": 468,
+          "holdVh": 0.61
+        },
+        "card5": {
+          "holdPx": 468,
+          "holdVh": 0.61
+        },
+        "card6": {
+          "holdPx": 468,
+          "holdVh": 0.61
+        },
+        "card7": {
+          "holdPx": 468,
+          "holdVh": 0.61
+        },
+        "card8": {
+          "holdPx": 814,
+          "holdVh": 1.06
+        },
+        "stackExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "painA": {
+          "holdPx": 653,
+          "holdVh": 0.85
+        },
+        "painB": {
+          "holdPx": 653,
+          "holdVh": 0.85
+        },
+        "painExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "introducing": {
+          "holdPx": 422,
+          "holdVh": 0.55
+        },
+        "brand": {
+          "holdPx": 461,
+          "holdVh": 0.6
+        },
+        "promise1": {
+          "holdPx": 545,
+          "holdVh": 0.71
+        },
+        "promise2": {
+          "holdPx": 545,
+          "holdVh": 0.71
+        },
+        "promise3": {
+          "holdPx": 545,
+          "holdVh": 0.71
+        },
+        "promise4": {
+          "holdPx": 545,
+          "holdVh": 0.71
+        },
+        "promise5": {
+          "holdPx": 545,
+          "holdVh": 0.71
+        },
+        "final": {
+          "holdPx": 653,
+          "holdVh": 0.85
+        }
+      },
+      "pageErrors": []
+    },
+    "mobile-390x844": {
+      "geom": {
+        "trackHeightPx": 17994,
+        "vh": 844,
+        "scrollablePx": 17150,
+        "rainStartP": 0.0482
+      },
+      "navTopUnscrolled": 16,
+      "navTopScrolled": 16,
+      "navInsetStable": true,
+      "navLabels": [
+        "Deep Dive",
+        "Ubisoft Work",
+        "About",
+        "Lineage",
+        "Contact"
+      ],
+      "arrival": {
+        "cueBottom": 810,
+        "cueFullyInViewport": true,
+        "cueOpacity": "1",
+        "stageTop": 0,
+        "stageBottom": 844,
+        "stageFillsViewport": true,
+        "bubbleVisible": true,
+        "bubbleFontPx": "14px",
+        "thinkingOpacity": "1",
+        "cueText": "Scroll down \u2193",
+        "greyCardCount": 0
+      },
+      "curtain": {
+        "columns": 7,
+        "viewportWidth": 390,
+        "topBandY20": {
+          "coveredToPx": 390,
+          "maxGapPx": 0
+        },
+        "topBandY80": {
+          "coveredToPx": 390,
+          "maxGapPx": 0
+        },
+        "bandY160": {
+          "coveredToPx": 390,
+          "maxGapPx": 0
+        },
+        "minDepthPct": 27,
+        "maxDepthPct": 45,
+        "meanDepthPct": 36.4,
+        "jaggedRangePct": 18,
+        "distinctBottomEdges": 7,
+        "rainLayerOpacity": "1",
+        "anyTruncatedFilename": false
+      },
+      "stack": {
+        "total": 8,
+        "visibleCount": 8,
+        "opacities": [
+          0.41,
+          0.49,
+          0.57,
+          0.66,
+          0.74,
+          0.83,
+          0.92,
+          1
+        ],
+        "frontWidthPx": 335,
+        "frontWidthPctOfViewport": 86,
+        "anyClippedLeft": false,
+        "anyClippedTop": false,
+        "anyClippedBottom": false,
+        "anyOverflowingText": false,
+        "fontSize": "21.84px",
+        "distinctOffsets": 7
+      },
+      "scale": {
+        "panicCard": "21.84px",
+        "painLine": "21.84px",
+        "promise": "21.84px",
+        "finalLine": "21.84px",
+        "urgentCard": "21.84px"
+      },
+      "slots": {
+        "heraSlotCenters": [
+          {
+            "centerY": 492,
+            "centerX": 195
+          },
+          {
+            "centerY": 492,
+            "centerX": 195
+          },
+          {
+            "centerY": 492,
+            "centerX": 195
+          },
+          {
+            "centerY": 492,
+            "centerX": 195
+          },
+          {
+            "centerY": 492,
+            "centerX": 195
+          },
+          {
+            "centerY": 480,
+            "centerX": 195
+          }
+        ],
+        "painSlotCenters": [
+          {
+            "centerY": 434
+          },
+          {
+            "centerY": 434
+          }
+        ],
+        "brandRowHorizontal": true,
+        "logoLeftOfWord": true,
+        "logoCenterY": 399,
+        "wordCenterY": 399
+      },
+      "anchoredSlots": {
+        "hera": [
+          {
+            "beat": "promise1",
+            "index": 0,
+            "opacity": 1,
+            "centerY": 480,
+            "centerX": 195
+          },
+          {
+            "beat": "promise2",
+            "index": 1,
+            "opacity": 1,
+            "centerY": 480,
+            "centerX": 195
+          },
+          {
+            "beat": "promise3",
+            "index": 2,
+            "opacity": 1,
+            "centerY": 480,
+            "centerX": 195
+          },
+          {
+            "beat": "promise4",
+            "index": 3,
+            "opacity": 1,
+            "centerY": 480,
+            "centerX": 195
+          },
+          {
+            "beat": "promise5",
+            "index": 4,
+            "opacity": 1,
+            "centerY": 480,
+            "centerX": 195
+          },
+          {
+            "beat": "final",
+            "index": 5,
+            "opacity": 1,
+            "centerY": 480,
+            "centerX": 195
+          }
+        ],
+        "pain": [
+          {
+            "beat": "painA",
+            "index": 0,
+            "opacity": 1,
+            "centerY": 422,
+            "centerX": 195
+          },
+          {
+            "beat": "painB",
+            "index": 1,
+            "opacity": 1,
+            "centerY": 422,
+            "centerX": 195
+          }
+        ]
+      },
+      "holds": {
+        "arrival": {
+          "holdPx": 591,
+          "holdVh": 0.7
+        },
+        "response": {
+          "holdPx": 1435,
+          "holdVh": 1.7
+        },
+        "curtain": {
+          "holdPx": 1182,
+          "holdVh": 1.4
+        },
+        "curtainExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "card1": {
+          "holdPx": 515,
+          "holdVh": 0.61
+        },
+        "card2": {
+          "holdPx": 515,
+          "holdVh": 0.61
+        },
+        "card3": {
+          "holdPx": 515,
+          "holdVh": 0.61
+        },
+        "card4": {
+          "holdPx": 515,
+          "holdVh": 0.61
+        },
+        "card5": {
+          "holdPx": 515,
+          "holdVh": 0.61
+        },
+        "card6": {
+          "holdPx": 515,
+          "holdVh": 0.61
+        },
+        "card7": {
+          "holdPx": 515,
+          "holdVh": 0.61
+        },
+        "card8": {
+          "holdPx": 895,
+          "holdVh": 1.06
+        },
+        "stackExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "painA": {
+          "holdPx": 717,
+          "holdVh": 0.85
+        },
+        "painB": {
+          "holdPx": 717,
+          "holdVh": 0.85
+        },
+        "painExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "introducing": {
+          "holdPx": 464,
+          "holdVh": 0.55
+        },
+        "brand": {
+          "holdPx": 506,
+          "holdVh": 0.6
+        },
+        "promise1": {
+          "holdPx": 599,
+          "holdVh": 0.71
+        },
+        "promise2": {
+          "holdPx": 599,
+          "holdVh": 0.71
+        },
+        "promise3": {
+          "holdPx": 599,
+          "holdVh": 0.71
+        },
+        "promise4": {
+          "holdPx": 599,
+          "holdVh": 0.71
+        },
+        "promise5": {
+          "holdPx": 599,
+          "holdVh": 0.71
+        },
+        "final": {
+          "holdPx": 717,
+          "holdVh": 0.85
+        }
+      },
+      "pageErrors": []
+    },
+    "mobile-375x812": {
+      "geom": {
+        "trackHeightPx": 17312,
+        "vh": 812,
+        "scrollablePx": 16500,
+        "rainStartP": 0.0482
+      },
+      "navTopUnscrolled": 16,
+      "navTopScrolled": 16,
+      "navInsetStable": true,
+      "navLabels": [
+        "Deep Dive",
+        "Ubisoft Work",
+        "About",
+        "Lineage",
+        "Contact"
+      ],
+      "arrival": {
+        "cueBottom": 780,
+        "cueFullyInViewport": true,
+        "cueOpacity": "1",
+        "stageTop": 0,
+        "stageBottom": 812,
+        "stageFillsViewport": true,
+        "bubbleVisible": true,
+        "bubbleFontPx": "14px",
+        "thinkingOpacity": "1",
+        "cueText": "Scroll down \u2193",
+        "greyCardCount": 0
+      },
+      "curtain": {
+        "columns": 7,
+        "viewportWidth": 375,
+        "topBandY20": {
+          "coveredToPx": 375,
+          "maxGapPx": 0
+        },
+        "topBandY80": {
+          "coveredToPx": 375,
+          "maxGapPx": 0
+        },
+        "bandY160": {
+          "coveredToPx": 375,
+          "maxGapPx": 0
+        },
+        "minDepthPct": 27,
+        "maxDepthPct": 45,
+        "meanDepthPct": 36.4,
+        "jaggedRangePct": 18,
+        "distinctBottomEdges": 7,
+        "rainLayerOpacity": "1",
+        "anyTruncatedFilename": false
+      },
+      "stack": {
+        "total": 8,
+        "visibleCount": 8,
+        "opacities": [
+          0.41,
+          0.49,
+          0.57,
+          0.66,
+          0.74,
+          0.83,
+          0.92,
+          1
+        ],
+        "frontWidthPx": 323,
+        "frontWidthPctOfViewport": 86,
+        "anyClippedLeft": false,
+        "anyClippedTop": false,
+        "anyClippedBottom": false,
+        "anyOverflowingText": false,
+        "fontSize": "21.6px",
+        "distinctOffsets": 8
+      },
+      "scale": {
+        "panicCard": "21.6px",
+        "painLine": "21.6px",
+        "promise": "21.6px",
+        "finalLine": "21.6px",
+        "urgentCard": "21.6px"
+      },
+      "slots": {
+        "heraSlotCenters": [
+          {
+            "centerY": 474,
+            "centerX": 188
+          },
+          {
+            "centerY": 474,
+            "centerX": 188
+          },
+          {
+            "centerY": 474,
+            "centerX": 188
+          },
+          {
+            "centerY": 474,
+            "centerX": 188
+          },
+          {
+            "centerY": 474,
+            "centerX": 188
+          },
+          {
+            "centerY": 462,
+            "centerX": 188
+          }
+        ],
+        "painSlotCenters": [
+          {
+            "centerY": 418
+          },
+          {
+            "centerY": 418
+          }
+        ],
+        "brandRowHorizontal": true,
+        "logoLeftOfWord": true,
+        "logoCenterY": 384,
+        "wordCenterY": 384
+      },
+      "anchoredSlots": {
+        "hera": [
+          {
+            "beat": "promise1",
+            "index": 0,
+            "opacity": 1,
+            "centerY": 462,
+            "centerX": 188
+          },
+          {
+            "beat": "promise2",
+            "index": 1,
+            "opacity": 1,
+            "centerY": 462,
+            "centerX": 188
+          },
+          {
+            "beat": "promise3",
+            "index": 2,
+            "opacity": 1,
+            "centerY": 462,
+            "centerX": 188
+          },
+          {
+            "beat": "promise4",
+            "index": 3,
+            "opacity": 1,
+            "centerY": 462,
+            "centerX": 188
+          },
+          {
+            "beat": "promise5",
+            "index": 4,
+            "opacity": 1,
+            "centerY": 462,
+            "centerX": 188
+          },
+          {
+            "beat": "final",
+            "index": 5,
+            "opacity": 1,
+            "centerY": 462,
+            "centerX": 188
+          }
+        ],
+        "pain": [
+          {
+            "beat": "painA",
+            "index": 0,
+            "opacity": 1,
+            "centerY": 406,
+            "centerX": 188
+          },
+          {
+            "beat": "painB",
+            "index": 1,
+            "opacity": 1,
+            "centerY": 406,
+            "centerX": 188
+          }
+        ]
+      },
+      "holds": {
+        "arrival": {
+          "holdPx": 568,
+          "holdVh": 0.7
+        },
+        "response": {
+          "holdPx": 1380,
+          "holdVh": 1.7
+        },
+        "curtain": {
+          "holdPx": 1137,
+          "holdVh": 1.4
+        },
+        "curtainExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "card1": {
+          "holdPx": 495,
+          "holdVh": 0.61
+        },
+        "card2": {
+          "holdPx": 495,
+          "holdVh": 0.61
+        },
+        "card3": {
+          "holdPx": 495,
+          "holdVh": 0.61
+        },
+        "card4": {
+          "holdPx": 495,
+          "holdVh": 0.61
+        },
+        "card5": {
+          "holdPx": 495,
+          "holdVh": 0.61
+        },
+        "card6": {
+          "holdPx": 495,
+          "holdVh": 0.61
+        },
+        "card7": {
+          "holdPx": 495,
+          "holdVh": 0.61
+        },
+        "card8": {
+          "holdPx": 861,
+          "holdVh": 1.06
+        },
+        "stackExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "painA": {
+          "holdPx": 690,
+          "holdVh": 0.85
+        },
+        "painB": {
+          "holdPx": 690,
+          "holdVh": 0.85
+        },
+        "painExit": {
+          "holdPx": 0,
+          "holdVh": 0.0
+        },
+        "introducing": {
+          "holdPx": 447,
+          "holdVh": 0.55
+        },
+        "brand": {
+          "holdPx": 487,
+          "holdVh": 0.6
+        },
+        "promise1": {
+          "holdPx": 577,
+          "holdVh": 0.71
+        },
+        "promise2": {
+          "holdPx": 577,
+          "holdVh": 0.71
+        },
+        "promise3": {
+          "holdPx": 577,
+          "holdVh": 0.71
+        },
+        "promise4": {
+          "holdPx": 577,
+          "holdVh": 0.71
+        },
+        "promise5": {
+          "holdPx": 577,
+          "holdVh": 0.71
+        },
+        "final": {
+          "holdPx": 690,
+          "holdVh": 0.85
+        }
+      },
+      "pageErrors": []
+    }
+  },
+  "probes": {
+    "wheelOrdinary": {
+      "cadence": "3 notches x 120px = 360px per gesture",
+      "gesturesToReachFinal": 53,
+      "gesturesFullyReadable": {
+        "card1": 3,
+        "card2": 3,
+        "card3": 4,
+        "card4": 4,
+        "card5": 4,
+        "card6": 4,
+        "card7": 4,
+        "card8": 2,
+        "painA": 2,
+        "painB": 3,
+        "eyebrow": 19,
+        "brand": 17,
+        "promise1": 1,
+        "promise2": 1,
+        "promise3": 1,
+        "promise4": 2,
+        "promise5": 2,
+        "final": 5
+      },
+      "everMissed": [],
+      "peakOpacityObserved": {
+        "card1": 1,
+        "card2": 1,
+        "card3": 1,
+        "card4": 1,
+        "card5": 1,
+        "card6": 1,
+        "card7": 1,
+        "card8": 1,
+        "painA": 1,
+        "painB": 1,
+        "eyebrow": 1,
+        "brand": 1,
+        "promise1": 1,
+        "promise2": 1,
+        "promise3": 1,
+        "promise4": 1,
+        "promise5": 1,
+        "final": 1
+      },
+      "minPeakOpacity": 1,
+      "minGesturesAnyBeat": 1
+    },
+    "wheelFast": {
+      "cadence": "6 notches x 120px = 720px per gesture",
+      "gesturesToReachFinal": 28,
+      "gesturesFullyReadable": {
+        "card1": 2,
+        "card2": 2,
+        "card3": 2,
+        "card4": 2,
+        "card5": 2,
+        "card6": 2,
+        "card7": 2,
+        "card8": 1,
+        "painA": 1,
+        "painB": 1,
+        "eyebrow": 11,
+        "brand": 10,
+        "promise1": 0,
+        "promise2": 0,
+        "promise3": 0,
+        "promise4": 1,
+        "promise5": 1,
+        "final": 4
+      },
+      "everMissed": [
+        "promise1",
+        "promise2",
+        "promise3"
+      ],
+      "peakOpacityObserved": {
+        "card1": 1,
+        "card2": 1,
+        "card3": 1,
+        "card4": 1,
+        "card5": 1,
+        "card6": 1,
+        "card7": 0.95,
+        "card8": 1,
+        "painA": 1,
+        "painB": 1,
+        "eyebrow": 1,
+        "brand": 1,
+        "promise1": 0.67,
+        "promise2": 0.33,
+        "promise3": 0.83,
+        "promise4": 1,
+        "promise5": 1,
+        "final": 1
+      },
+      "minPeakOpacity": 0.33,
+      "minGesturesAnyBeat": 0
+    },
+    "reducedMotion": [
+      {
+        "beat": "arrival",
+        "revealedWords": 0,
+        "rainOpacity": "0",
+        "visible": [
+          "Make a small change to the website",
+          "Thinking\u2026"
+        ]
+      },
+      {
+        "beat": "response",
+        "revealedWords": 144,
+        "rainOpacity": "1",
+        "visible": [
+          "Make a small change to the website"
+        ]
+      },
+      {
+        "beat": "curtain",
+        "revealedWords": 157,
+        "rainOpacity": "1",
+        "visible": [
+          "Make a small change to the website"
+        ]
+      },
+      {
+        "beat": "card1",
+        "revealedWords": 157,
+        "rainOpacity": "0",
+        "visible": [
+          "Wait \u2014 explain it like I'm ten."
+        ]
+      },
+      {
+        "beat": "card8",
+        "revealedWords": 157,
+        "rainOpacity": "0",
+        "visible": [
+          "Did I send you the right file?",
+          "Where is task.md?",
+          "Did you write the closeout?",
+          "Which file is current?",
+          "Don't make a new branch.",
+          "Merge the accepted one to main."
+        ]
+      },
+      {
+        "beat": "painA",
+        "revealedWords": 157,
+        "rainOpacity": "0",
+        "visible": [
+          "Your AI finished in 3 minutes."
+        ]
+      },
+      {
+        "beat": "painB",
+        "revealedWords": 157,
+        "rainOpacity": "0",
+        "visible": [
+          "You spent the next 20 digging through 18 new .md files and"
+        ]
+      },
+      {
+        "beat": "introducing",
+        "revealedWords": 157,
+        "rainOpacity": "0",
+        "visible": [
+          "Introducing"
+        ]
+      },
+      {
+        "beat": "brand",
+        "revealedWords": 157,
+        "rainOpacity": "0",
+        "visible": [
+          "Introducing",
+          "HERA"
+        ]
+      },
+      {
+        "beat": "promise1",
+        "revealedWords": 157,
+        "rainOpacity": "0",
+        "visible": [
+          "Introducing",
+          "HERA",
+          "You lead. It remembers what you already said."
+        ]
+      },
+      {
+        "beat": "promise3",
+        "revealedWords": 157,
+        "rainOpacity": "0",
+        "visible": [
+          "Introducing",
+          "HERA",
+          "You lead. It knows where everything went."
+        ]
+      },
+      {
+        "beat": "promise5",
+        "revealedWords": 157,
+        "rainOpacity": "0",
+        "visible": [
+          "Introducing",
+          "HERA",
+          "You lead. It stops when it actually needs you."
+        ]
+      },
+      {
+        "beat": "final",
+        "revealedWords": 157,
+        "rainOpacity": "0",
+        "visible": [
+          "Introducing",
+          "HERA",
+          "Stop managing your AI. Start giving it work."
+        ]
+      }
+    ]
+  }
+}

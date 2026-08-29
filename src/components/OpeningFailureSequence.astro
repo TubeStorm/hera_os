@@ -1,10 +1,24 @@
 ---
 // Homepage opening: a scroll-scrubbed cinematic. Scroll progress (0 -> 1 across a
-// tall pinned track) is the ONLY clock — there is no autoplay, no setTimeout
-// choreography, and no timer cycling copy. A visitor lives through a stupidly
-// small AI request producing an absurdly long answer, buried under a Matrix-style
-// ".md" file rain, then a human panic spiral, the punchline, and only then the
-// HERA reveal. See docs/agent-system/work-packets/active/SLICE-1-REPAIR-SCROLL-CINEMATIC.md.
+// tall pinned track) is the ONLY clock — there is no autoplay and no timer.
+//
+// Re-authored 2026-08-28 per docs/preflights/hera website revamp/Slice 1 fix 2.md.
+// Four structural changes over the previous build:
+//   1. The page arrives ALREADY IN THE STORY — the request is sent, the agent is
+//      thinking, and a "Scroll down" cue is on screen. No blank black arrival, no
+//      fake chat window, composer, caret, Send button, cursor travel or typing.
+//   2. Pacing is budgeted, not guessed. Every beat below declares its enter and
+//      hold distance in VIEWPORT-HEIGHTS OF SCROLL, and the track height is
+//      derived from their sum. That makes "every major statement holds for at
+//      least ~0.5-0.7 viewport-heights" a structural property of this file rather
+//      than something to re-measure by hand.
+//   3. The `.md` curtain DESCENDS from above the top edge instead of falling
+//      past. Each column is long enough that its top always overruns the viewport
+//      top, so the upper band reads as one continuous curtain; only the bottom
+//      endpoint differs per column, which is what makes the lower edge jagged.
+//   4. The human panic beats ACCUMULATE as a physical card pile instead of
+//      swapping one-for-one. Earlier cards never leave; they recede behind the
+//      new front card, so the visitor watches cleanup work pile up.
 import { withBase } from '../data/site';
 
 const logoWebp = withBase('images/hera/logo/hera-logo-1254.webp');
@@ -24,19 +38,123 @@ const answerPara2 =
 const words1: string[] = answerPara1.split(/\s+/);
 const words2: string[] = answerPara2.split(/\s+/);
 const totalWords = words1.length + words2.length;
-// Number of words that make up the first two sentences of paragraph 1 (counted by
-// hand against answerPara1 above) — the reading hold the visitor gets before the
-// rest of the answer keeps unrolling.
-const revealBoundary = 56;
 
-// `.md` rain — 14 columns spanning the full width edge-to-edge (repair note,
-// 2026-08-28: raised from 12 to 14 columns with far more files per column and
-// a tighter vertical pitch, per the Chief's density defect — the previous
-// density read as "a moderate scattering", not a blizzard the response is
-// physically hard to read through). Each column activates at a different
-// scroll threshold (progressive density) and travels at a different speed
-// with a different starting stagger, so the field never reads as a tidy
-// rectangle. Authored, not randomised, so the "uneven bottom edge" is reliable.
+// The curtain is cued off the ACTUAL revealed-word position of the phrase
+// "clicking a variant did change..." rather than an unrelated global percentage,
+// so the paperwork starts while the answer has barely got going. Derived, not
+// hardcoded — if the copy is edited the cue moves with it.
+const cueWordIndex = Math.max(0, words1.indexOf('clicking'));
+
+// Accumulating panic cards. Plain, recognisable AI-management interruptions —
+// deliberately not marketing copy.
+const panicCards = [
+  "Wait — explain it like I'm ten.",
+  'What are you actually saying?',
+  'Did I send you the right file?',
+  'Where is task.md?',
+  'Did you write the closeout?',
+  'Which file is current?',
+  "Don't make a new branch.",
+  'Merge the accepted one to main.',
+];
+
+const promises = [
+  'You lead. It remembers what you already said.',
+  'You lead. It knows what happens next.',
+  'You lead. It knows where everything went.',
+  'You lead. It keeps the work together.',
+  'You lead. It stops when it actually needs you.',
+];
+
+const FINAL_LINE = 'Stop managing your AI. Start giving it work.';
+
+// ---------------------------------------------------------------------------
+// Scroll budget. `enter` and `hold` are in VIEWPORT-HEIGHTS OF SCROLL TRAVEL.
+// The hold is the readable state; the enter is the short transition into it.
+// Every major readable beat holds >= 0.55vh, which at a 900px viewport is
+// ~495px of wheel travel — several ordinary gestures, so no single flick can
+// skip a statement or add three cards at once. Enter windows are deliberately
+// short: in a shared slot the outgoing line fades across the first half and the
+// incoming line across the second, so only one statement is legible at a time.
+//
+// The card and promise beats spend 0.12vh entering and the rest holding — ~85%
+// of each beat is the readable state. That ratio (rather than a longer track)
+// is what keeps fast flicking from catching these lines mid-transition; the
+// measured wheel traversal in the closeout records both cadences.
+// ---------------------------------------------------------------------------
+type Beat = { key: string; enter: number; hold: number };
+
+const BEATS: Beat[] = [
+  // Arrival: request already sent, agent already thinking, cue already visible.
+  { key: 'arrival', enter: 0.0, hold: 0.7 },
+  // Thinking dissolves, the wall of answer unrolls. The curtain starts inside
+  // this beat, at the "clicking a variant" cue word.
+  { key: 'response', enter: 0.3, hold: 1.7 },
+  // The curtain thickens to ~36% viewport depth across the full width.
+  { key: 'curtain', enter: 0.0, hold: 1.4 },
+  // Narrative exit — the story ends the rain, not the falling physics.
+  { key: 'curtainExit', enter: 0.35, hold: 0.0 },
+  // Eight panic cards. Each arrives, then holds while the pile grows behind it.
+  { key: 'card1', enter: 0.12, hold: 0.61 },
+  { key: 'card2', enter: 0.12, hold: 0.61 },
+  { key: 'card3', enter: 0.12, hold: 0.61 },
+  { key: 'card4', enter: 0.12, hold: 0.61 },
+  { key: 'card5', enter: 0.12, hold: 0.61 },
+  { key: 'card6', enter: 0.12, hold: 0.61 },
+  { key: 'card7', enter: 0.12, hold: 0.61 },
+  // The last card's hold is longer: it doubles as the "register the whole pile"
+  // hold before the stack is cleared.
+  { key: 'card8', enter: 0.12, hold: 1.06 },
+  { key: 'stackExit', enter: 0.32, hold: 0.0 },
+  // The two cost statements are the pivot of the whole sequence, and a
+  // double-speed flick (720px) could outrun a 0.65vh hold. 0.85vh survives it.
+  { key: 'painA', enter: 0.22, hold: 0.85 },
+  { key: 'painB', enter: 0.22, hold: 0.85 },
+  { key: 'painExit', enter: 0.28, hold: 0.0 },
+  { key: 'introducing', enter: 0.22, hold: 0.55 },
+  { key: 'brand', enter: 0.25, hold: 0.6 },
+  { key: 'promise1', enter: 0.12, hold: 0.71 },
+  { key: 'promise2', enter: 0.12, hold: 0.71 },
+  { key: 'promise3', enter: 0.12, hold: 0.71 },
+  { key: 'promise4', enter: 0.12, hold: 0.71 },
+  { key: 'promise5', enter: 0.12, hold: 0.71 },
+  { key: 'final', enter: 0.22, hold: 0.85 },
+];
+
+const totalVh = BEATS.reduce((sum, b) => sum + b.enter + b.hold, 0);
+
+// key -> [start, holdStart, end] normalised to 0..1 scroll progress.
+const marks: Record<string, [number, number, number]> = {};
+{
+  let cursor = 0;
+  for (const b of BEATS) {
+    const s = cursor / totalVh;
+    const i = (cursor + b.enter) / totalVh;
+    const e = (cursor + b.enter + b.hold) / totalVh;
+    marks[b.key] = [s, i, e];
+    cursor += b.enter + b.hold;
+  }
+}
+
+// Track height = the scrollable budget plus the one pinned viewport.
+const trackHeightVh = Math.round((totalVh + 1) * 100);
+
+// The curtain begins at the revealed position of the cue word inside the
+// response beat's reveal ramp (which runs the whole beat, enter + hold).
+const rainStart =
+  marks.response[0] + (cueWordIndex / totalWords) * (marks.response[2] - marks.response[0]);
+
+// ---------------------------------------------------------------------------
+// `.md` curtain. 16 authored columns that tile the full width edge to edge
+// (left/width are derived in CSS from --i and --cols, so narrower breakpoints
+// can drop to 10 or 6 columns and STILL tile edge to edge — no horizontal
+// holes at any width). `depth` is the column's final bottom edge as a fraction
+// of viewport height; the spread of depths is what shreds the bottom edge, and
+// their mean (36.4% over all 16, 36.8% over the first 10, 35.3% over the first
+// 6) is the "exit at 35-40% curtain depth" target at every breakpoint.
+// `start`/`span` stagger each column's descent so the field never arrives as
+// one tidy block.
+// ---------------------------------------------------------------------------
 const filenames = [
   'CURRENT-SPRINT.md',
   'handoff.md',
@@ -52,132 +170,172 @@ const filenames = [
   'source-of-truth.md',
 ];
 
-type RainColumn = { left: number; count: number; speed: number; offset: number; activate: number };
+type RainColumn = { depth: number; start: number; span: number };
 
 const rainColumns: RainColumn[] = [
-  { left: 1, count: 9, speed: 1.0, offset: 0, activate: 0.33 },
-  { left: 8.5, count: 7, speed: 0.9, offset: -60, activate: 0.337 },
-  { left: 15.9, count: 10, speed: 1.1, offset: 40, activate: 0.343 },
-  { left: 23.4, count: 8, speed: 0.95, offset: -30, activate: 0.35 },
-  { left: 30.8, count: 11, speed: 1.2, offset: 70, activate: 0.357 },
-  { left: 38.2, count: 7, speed: 0.88, offset: -100, activate: 0.363 },
-  { left: 45.7, count: 10, speed: 1.05, offset: 20, activate: 0.37 },
-  { left: 53.1, count: 8, speed: 1.0, offset: -50, activate: 0.377 },
-  { left: 60.6, count: 9, speed: 0.92, offset: 90, activate: 0.383 },
-  { left: 68.0, count: 7, speed: 1.15, offset: -20, activate: 0.39 },
-  { left: 75.4, count: 10, speed: 0.85, offset: 60, activate: 0.397 },
-  { left: 82.9, count: 8, speed: 1.08, offset: -80, activate: 0.403 },
-  { left: 90.3, count: 9, speed: 0.98, offset: 30, activate: 0.41 },
-  { left: 97.7, count: 7, speed: 1.12, offset: -40, activate: 0.417 },
+  { depth: 0.4, start: 0.0, span: 0.62 },
+  { depth: 0.29, start: 0.1, span: 0.55 },
+  { depth: 0.45, start: 0.04, span: 0.7 },
+  { depth: 0.33, start: 0.16, span: 0.58 },
+  { depth: 0.38, start: 0.07, span: 0.66 },
+  { depth: 0.27, start: 0.21, span: 0.52 },
+  { depth: 0.43, start: 0.02, span: 0.68 },
+  { depth: 0.31, start: 0.13, span: 0.6 },
+  { depth: 0.36, start: 0.19, span: 0.56 },
+  { depth: 0.46, start: 0.05, span: 0.72 },
+  { depth: 0.3, start: 0.24, span: 0.54 },
+  { depth: 0.41, start: 0.09, span: 0.64 },
+  { depth: 0.34, start: 0.15, span: 0.59 },
+  { depth: 0.28, start: 0.27, span: 0.51 },
+  { depth: 0.44, start: 0.11, span: 0.69 },
+  { depth: 0.37, start: 0.22, span: 0.57 },
+  { depth: 0.32, start: 0.3, span: 0.53 },
+  { depth: 0.42, start: 0.06, span: 0.71 },
+  { depth: 0.35, start: 0.18, span: 0.61 },
+  { depth: 0.39, start: 0.26, span: 0.5 },
 ];
 
-const thoughts = [
-  'Did I send the right file?',
-  'Is this source current?',
-  'Where did it save that?',
-  'Wait. What task are we on?',
-  'STOP MAKING NEW BRANCHES.',
-];
+// Long enough that at rest each column's TOP still overruns the viewport top by
+// a wide margin — that overrun is what makes the upper band a continuous
+// curtain instead of a scattering with sky between the streams.
+const FILES_PER_COLUMN = 10;
 
-const promises = [
-  'You lead. It remembers what you already said.',
-  'You lead. It knows what happens next.',
-  'You lead. It knows where everything went.',
-  'You lead. It keeps the work together.',
-  'You lead. It stops when it actually needs you.',
-];
+const config = {
+  marks,
+  rainStart,
+  totalWords,
+  columns: rainColumns,
+  cardCount: panicCards.length,
+  promiseCount: promises.length,
+};
 ---
 
 <section id="opening-sequence" class="opening-sequence">
   <p class="sr-only">
-    Scroll-controlled introduction: you send an AI assistant a small request. It answers with a
-    wall of text while ".md" files rain down and bury the answer. A string of panicked thoughts
-    follows, then a plain statement of the cost: the AI finished in three minutes, you spent the
-    next twenty digging through eighteen new ".md" files and begging it to explain itself. The
-    sequence resolves on the HERA mark and the line "Stop managing your AI. Start giving it work."
+    Scroll-controlled introduction: you have already asked an AI assistant to make a small change to
+    a website, and it is thinking. It answers with a wall of text while ".md" files rain down from
+    the top of the screen and bury the answer. A pile of panicked follow-up questions accumulates,
+    then a plain statement of the cost: the AI finished in three minutes, you spent the next twenty
+    digging through eighteen new ".md" files and begging it to explain itself. The sequence resolves
+    on the HERA mark, five promises, and the line "Stop managing your AI. Start giving it work."
   </p>
 
   <div class="opening-track" id="opening-track">
-    <div class="opening-stage" id="opening-stage" data-scene="empty" aria-hidden="true">
+    <div class="opening-stage" id="opening-stage" aria-hidden="true">
+      <!-- Chat: no window, no card, no composer. The black page IS the canvas. -->
       <div class="chat-layer" id="chat-layer">
-        <div class="chat-window">
-          <div class="chat-body" id="chat-body">
-            <div class="msg-row" id="msg-user">
-              <p class="user-bubble-mini chat-bubble">{MESSAGE}</p>
-            </div>
-            <div class="thinking-row" id="thinking-row">
-              <span class="thinking-dot"></span><span class="thinking-dot"></span><span class="thinking-dot"></span>
-              <span class="thinking-label">Thinking&hellip;</span>
-            </div>
-            <div class="answer-row" id="answer-row" data-total={totalWords} data-boundary={revealBoundary}>
-              <p class="ai-line ai-agent">
-                {words1.map((w, i) => <><span class="rw" data-i={i}>{w}</span>{' '}</>)}
-              </p>
-              <p class="ai-line ai-agent">
-                {words2.map((w, i) => <><span class="rw" data-i={words1.length + i}>{w}</span>{' '}</>)}
-              </p>
-            </div>
+        <div class="chat-column">
+          <div class="msg-row">
+            <p class="user-bubble">{MESSAGE}</p>
           </div>
-          <div class="composer">
-            <div class="composer-input" id="composer-input">
-              <span id="composer-typed"></span><span class="composer-caret" id="composer-caret"></span>
-            </div>
-            <div class="composer-send" id="composer-send" tabindex="-1"><span>Send</span></div>
+          <div class="thinking-row" id="thinking-row">
+            <span class="thinking-dot"></span><span class="thinking-dot"></span><span
+              class="thinking-dot"></span>
+            <span class="thinking-label">Thinking&hellip;</span>
+          </div>
+          <div class="answer-row" id="answer-row">
+            <p class="ai-line">
+              {words1.map((w, i) => <><span class="rw" data-i={i}>{w}</span>{' '}</>)}
+            </p>
+            <p class="ai-line">
+              {words2.map((w, i) => <><span class="rw" data-i={words1.length + i}>{w}</span>{' '}</>)}
+            </p>
           </div>
         </div>
-        <div class="fake-cursor" id="fake-cursor"></div>
       </div>
 
       <div class="rain-layer" id="rain-layer">
-        {rainColumns.map((col, ci) => (
-          <div class="rain-col" data-activate={col.activate} data-speed={col.speed} data-offset={col.offset} style={`left:${col.left}%;`}>
-            <div class="rain-col-inner" style={`--col-height:${col.count * 82}px;`}>
-              {Array.from({ length: col.count }).map((_, ri) => (
-                <div class="rain-file">
-                  <img src={mdIcon} alt="" loading="eager" width="40" height="40" />
-                  <span>{filenames[(ci + ri) % filenames.length]}</span>
-                </div>
-              ))}
+        {
+          rainColumns.map((_col, ci) => (
+            <div class="rain-col" style={`--i:${ci};`}>
+              <div class="rain-col-inner">
+                {Array.from({ length: FILES_PER_COLUMN }).map((__, ri) => (
+                  <div class="rain-file">
+                    <img src={mdIcon} alt="" loading="eager" width="40" height="40" />
+                    <span>{filenames[(ci * 5 + ri * 3) % filenames.length]}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
-      <div class="thought-layer" id="thought-layer">
-        <p class="user-bubble-mini thought-bubble" id="thought-bubble">{thoughts[0]}</p>
+      <!-- Accumulating panic pile. Every card shares one grid cell so the group
+           stays centred; z-index rises with index so each new card lands in
+           front of the pile it joins. -->
+      <div class="panic-layer" id="panic-layer">
+        <div class="panic-stack" id="panic-stack">
+          {
+            panicCards.map((t, i) => (
+              <p
+                class:list={['panic-card', i === panicCards.length - 1 && 'is-urgent']}
+                data-card={i}
+                style={`z-index:${i + 1};`}
+              >
+                {t}
+              </p>
+            ))
+          }
+        </div>
       </div>
 
+      <!-- One stable statement slot: both pain lines are overlaid on the same
+           grid cell, so the second replaces the first without moving. -->
       <div class="pain-layer" id="pain-layer">
-        <p class="pain-line" id="pain-line-1">Your AI finished in 3 minutes.</p>
-        <p class="pain-line" id="pain-line-2">
-          You spent the next 20 digging through 18 new .md files and begging it to explain itself.
-        </p>
+        <div class="statement-slot">
+          <p class="statement" data-slot="0">Your AI finished in 3 minutes.</p>
+          <p class="statement" data-slot="1">
+            You spent the next 20 digging through 18 new .md files and begging it to explain itself.
+          </p>
+        </div>
       </div>
 
       <div class="hera-layer" id="hera-layer">
-        <p class="hera-eyebrow">Introducing</p>
-        <picture>
-          <source srcset={logoWebp} type="image/webp" />
-          <img class="hera-logo" src={logoPng} alt="" width="120" height="120" />
-        </picture>
-        <p class="hera-word">HERA</p>
-        <p class="hera-promise" id="hera-promise"></p>
-        <p class="hera-final" id="hera-final">Stop managing your AI. Start giving it work.</p>
+        <p class="hera-eyebrow" id="hera-eyebrow">Introducing</p>
+        <div class="hera-brand" id="hera-brand">
+          <picture>
+            <source srcset={logoWebp} type="image/webp" />
+            <img class="hera-logo" src={logoPng} alt="" width="120" height="120" />
+          </picture>
+          <span class="hera-word">HERA</span>
+        </div>
+        <!-- The five promises AND the final line share one slot. The final line
+             is the sixth overlaid child, not a separate element elsewhere, so it
+             cannot jump vertically when it replaces promise five. -->
+        <div class="statement-slot hera-slot" id="hera-slot">
+          {promises.map((t, i) => <p class="statement" data-slot={i}>{t}</p>)}
+          <p class="statement is-final" data-slot={promises.length}>{FINAL_LINE}</p>
+        </div>
       </div>
 
-      <div class="opening-scroll-cue scroll-gate" id="opening-scroll-cue"><span>&darr;</span></div>
+      <div class="opening-scroll-cue" id="opening-scroll-cue">
+        <span class="cue-label">Scroll down</span>
+        <span class="cue-arrow">&darr;</span>
+      </div>
     </div>
   </div>
+
+  <script type="application/json" id="opening-config" set:html={JSON.stringify(config)} />
 </section>
 
-<style define:vars={{ revealBoundary, totalWords }}>
+<style define:vars={{ trackHeight: `${trackHeightVh}vh` }}>
+  /* The sticky nav occupies real flow height at the top of the document, which
+     pushed this section down by that much. At scrollY=0 the pinned stage was
+     therefore hanging ~69px below the fold and clipping the "Scroll down" cue —
+     the one thing that must be legible on arrival. Pulling the section up by
+     exactly the header's height starts the cinematic at the true top of the
+     page and lets the floating nav pill sit over the black canvas, which is the
+     intended composition. The fallback below matches the measured desktop
+     header; the script overwrites it with the real value per breakpoint. */
   .opening-sequence {
     position: relative;
+    margin-top: calc(-1 * var(--opening-nav-offset, 4.33rem));
   }
 
   .opening-track {
     position: relative;
-    height: 1200vh;
+    height: var(--trackHeight);
   }
 
   .opening-stage {
@@ -187,11 +345,18 @@ const promises = [
     overflow: hidden;
     background: #000;
     color: #f4f4f2;
+
+    /* ONE cinematic statement scale. Panic cards, both pain lines, all five
+       promises and the final line read from this single source of truth, so the
+       opening stops jumping between unrelated font sizes. The documented
+       exceptions (setup bubble, body-copy response, small eyebrow, big
+       wordmark) are the only sizes authored outside it. */
+    --opening-statement-size: clamp(1.8rem, 3vw, 2.8rem);
   }
 
   .chat-layer,
   .rain-layer,
-  .thought-layer,
+  .panic-layer,
   .pain-layer,
   .hera-layer {
     position: absolute;
@@ -199,51 +364,47 @@ const promises = [
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .rain-layer,
-  .thought-layer,
-  .pain-layer,
-  .hera-layer {
-    opacity: 0;
     pointer-events: none;
   }
 
-  /* Chat window ------------------------------------------------------- */
-  .chat-window {
-    display: flex;
-    flex-direction: column;
-    width: min(600px, 88vw);
-    height: min(560px, 70svh);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 18px;
-    background: rgba(18, 18, 20, 0.72);
-    overflow: hidden;
+  .rain-layer,
+  .panic-layer,
+  .pain-layer,
+  .hera-layer {
+    opacity: 0;
   }
 
-  .chat-body {
-    flex: 1;
-    overflow: hidden;
-    padding: 22px 24px;
+  /* Chat — black canvas, no window chrome ------------------------------ */
+  /* Anchored near the top rather than vertically centred, for two reasons: a
+     real conversation grows downward from the top, and the curtain only
+     descends to ~36% of the viewport — with a centred column the falling files
+     would stop just above the answer instead of burying its opening lines. */
+  .chat-layer {
+    align-items: flex-start;
+    padding-top: clamp(88px, 13vh, 150px);
+  }
+
+  .chat-column {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 18px;
+    width: min(880px, 72vw);
     text-align: left;
   }
 
   .msg-row {
     display: flex;
     justify-content: flex-end;
-    opacity: 0;
-    transform: translateY(8px);
   }
 
-  /* Reused verbatim from the `.user-bubble-mini` geometry in src/pages/index.astro
-     (~line 426). Astro scopes component styles per-file, so that class does not
-     reach into this component's DOM — the values are authored again here rather
-     than imported, per the packet's "reuse the established geometry" instruction. */
-  .user-bubble-mini {
-    padding: 13px 17px;
+  /* The setup, not the punchline — deliberately smaller than the cinematic
+     statement scale. Geometry reuses the established `.user-bubble-mini` shape
+     from src/pages/index.astro (Astro scopes styles per file, so the values are
+     authored again here rather than inherited). */
+  .user-bubble {
+    max-width: 78%;
+    margin: 0;
+    padding: 13px 18px;
     border-radius: 22px 22px 7px 22px;
     background: rgba(244, 241, 234, 0.96);
     color: #090909;
@@ -253,174 +414,113 @@ const promises = [
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
   }
 
-  .chat-bubble {
-    max-width: 80%;
-  }
-
   .thinking-row {
     display: flex;
     align-items: center;
     gap: 6px;
-    opacity: 0;
   }
 
   .thinking-dot {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: rgba(244, 244, 242, 0.6);
     animation: thinkingPulse 1.1s ease-in-out infinite;
   }
 
-  .thinking-dot:nth-child(2) { animation-delay: 0.15s; }
-  .thinking-dot:nth-child(3) { animation-delay: 0.3s; }
+  .thinking-dot:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .thinking-dot:nth-child(3) {
+    animation-delay: 0.3s;
+  }
 
   @keyframes thinkingPulse {
-    0%, 100% { opacity: 0.35; transform: scale(0.85); }
-    50% { opacity: 1; transform: scale(1); }
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: scale(0.85);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   .thinking-label {
-    font-size: 12.5px;
-    color: rgba(244, 244, 242, 0.55);
+    font-size: 14px;
+    color: rgba(244, 244, 242, 0.6);
     margin-left: 2px;
   }
 
+  /* Readable body copy — the answer has to be legible before the curtain
+     starts covering it, so it is body size, not "demo screenshot" size. */
   .answer-row {
-    font-size: 13px;
-    line-height: 1.55;
+    font-size: clamp(1rem, 1.35vw, 1.32rem);
+    line-height: 1.62;
   }
 
-  .ai-line.ai-agent {
-    color: rgba(244, 244, 242, 0.78);
-    margin: 0 0 10px;
+  .ai-line {
+    color: rgba(244, 244, 242, 0.82);
+    margin: 0 0 14px;
+  }
+
+  .ai-line:last-child {
+    margin-bottom: 0;
   }
 
   .rw {
     opacity: 0;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.3s ease;
   }
 
   .rw.is-shown {
     opacity: 1;
   }
 
-  .composer {
-    flex: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  /* .md curtain --------------------------------------------------------- */
+  .rain-layer {
+    --cols: 20;
+    z-index: 3;
   }
 
-  /* min-width:0 overrides the flex default of min-width:auto, which was
-     letting this item refuse to shrink below its nowrap text's intrinsic
-     width and visually overlap the Send button at narrow viewports
-     (BUG-006) instead of actually occupying its shrunk flex-basis. */
-  .composer-input {
-    flex: 1;
-    min-width: 0;
-    min-height: 38px;
-    display: flex;
-    align-items: center;
-    padding: 0 14px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 13.5px;
-    color: rgba(244, 244, 242, 0.9);
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  .composer-caret {
-    display: inline-block;
-    width: 1px;
-    height: 15px;
-    margin-left: 2px;
-    background: rgba(244, 244, 242, 0.85);
-    opacity: 0;
-    animation: caretBlink 1s steps(1) infinite;
-  }
-
-  @keyframes caretBlink {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
-
-  .composer-send {
-    flex: none;
-    display: grid;
-    place-items: center;
-    padding: 9px 16px;
-    border-radius: 999px;
-    background: rgba(244, 244, 242, 0.92);
-    color: #0b0b0c;
-    font-size: 12.5px;
-    font-weight: 600;
-    transform: scale(1);
-    transition: transform 0.12s ease;
-  }
-
-  .composer-send.is-pressed {
-    transform: scale(0.92);
-  }
-
-  /* left/top are written in px at runtime from the Send button's measured
-     bounding box (see measureCursorTargets in the script below) — never
-     hardcoded percentages, so the cursor actually lands on the button at
-     every viewport width. 0/0 here is just a harmless pre-JS default; opacity
-     stays 0 until the cursor scene is active so it never flashes at (0,0). */
-  .fake-cursor {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50% 50% 50% 0;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(-45deg);
-    z-index: 5;
-  }
-
-  /* .md rain ------------------------------------------------------------ */
+  /* left/width derived from --i and --cols so the columns always tile the full
+     width with no gaps, at every breakpoint's column count. */
   .rain-col {
     position: absolute;
     top: 0;
-    z-index: 3;
+    left: calc(var(--i) * (100% / var(--cols)));
+    width: calc(100% / var(--cols));
   }
 
   .rain-col-inner {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    height: var(--col-height);
+    gap: 2px;
     will-change: transform;
   }
 
-  /* Repair note, 2026-08-28: width raised (96 -> 100) and the label allowed to
-     wrap to two lines instead of clipping. A truncated "CURRENT-SPRINT..." is
-     the exact BUG-003-shaped defect the Chief flagged — every filename must be
-     fully readable, no ellipsis, at any width. */
+  /* Tiles are sized as a FRACTION OF THEIR COLUMN and packed with almost no
+     gutter, so the field reads as one mass rather than isolated icons with
+     black sky between them. The near-opaque plate is what makes the curtain
+     actually bury the answer rather than float in front of it. */
   .rain-file {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
-    width: 100px;
+    gap: 2px;
+    padding: 4px 1px;
+    background: rgba(0, 0, 0, 0.9);
   }
 
   .rain-file img {
-    width: 40px;
-    height: 40px;
+    width: 78%;
+    height: auto;
   }
 
+  /* Filenames wrap; they are never truncated at any width. */
   .rain-file span {
-    width: 100px;
-    max-width: 100px;
+    width: 100%;
     white-space: normal;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -431,640 +531,594 @@ const promises = [
     color: rgba(244, 244, 242, 0.85);
   }
 
-  /* Human thoughts -------------------------------------------------------- */
-  .thought-bubble {
-    max-width: 60ch;
-    text-align: center;
-    transition: color 0.2s ease;
+  /* Panic pile ---------------------------------------------------------- */
+  .panic-stack {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: clamp(500px, 36vw, 680px);
+    max-width: 88vw;
   }
 
-  .thought-bubble.is-urgent {
-    background: rgba(214, 69, 69, 0.94);
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-
-  /* The pain, named --------------------------------------------------- */
-  .pain-layer {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-    padding: 0 24px;
-  }
-
-  .pain-line {
-    max-width: 26ch;
-    margin: 0 auto;
-    font-size: clamp(1.5rem, 3.6vw, 2.4rem);
+  .panic-card {
+    grid-area: 1 / 1;
+    margin: 0;
+    width: 100%;
+    padding: 26px 30px;
+    border-radius: 24px 24px 8px 24px;
+    background: #f4f1ea;
+    /* --card-text fades to 0 as a card recedes, so only the front card is
+       readable. A pile of paper shows its edges, not the writing underneath;
+       leaving the text legible on every layer read as a rendering fault. */
+    color: rgba(9, 9, 9, var(--card-text, 1));
+    border: 1px solid rgba(0, 0, 0, 0.34);
+    /* Same cinematic statement scale as the pain lines and HERA promises. */
+    font-size: var(--opening-statement-size);
     font-weight: 600;
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+    text-align: left;
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* Urgency by tone only — identical geometry and identical type scale. */
+  .panic-card.is-urgent {
+    background: #e7cfcb;
+    color: rgba(61, 15, 15, var(--card-text, 1));
+  }
+
+  /* Statement slots ----------------------------------------------------- */
+  /* Every candidate line occupies the SAME grid cell, centred. Swapping which
+     one is opaque cannot move the text, which is what keeps pain A -> pain B
+     and promise 5 -> final line anchored. */
+  .statement-slot {
+    display: grid;
+    place-items: center;
+    width: min(900px, 84vw);
+    padding: 0 8px;
+  }
+
+  .statement-slot > * {
+    grid-area: 1 / 1;
+    margin: 0;
+    opacity: 0;
+    text-align: center;
+  }
+
+  .statement {
+    font-size: var(--opening-statement-size);
+    font-weight: 600;
+    line-height: 1.22;
     letter-spacing: -0.02em;
   }
 
-  #pain-line-2 {
-    opacity: 0;
+  .statement.is-final {
+    color: #fff;
   }
 
   /* HERA reveal --------------------------------------------------------- */
   .hera-layer {
     flex-direction: column;
-    gap: 14px;
+    gap: clamp(14px, 2.2vh, 26px);
     text-align: center;
+    padding: 0 24px;
   }
 
   .hera-eyebrow {
+    margin: 0;
+    opacity: 0;
     font-size: 13px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(244, 244, 242, 0.6);
+    color: rgba(244, 244, 242, 0.62);
+  }
+
+  /* [logo] HERA on ONE horizontal row — logo left, word right. */
+  .hera-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 1.6vw, 24px);
+    opacity: 0;
   }
 
   .hera-logo {
-    width: clamp(72px, 9vw, 108px);
+    width: clamp(58px, 7vw, 96px);
     height: auto;
-    margin: 4px 0;
     animation: hera-logo-pulse 2.4s ease-in-out infinite;
   }
 
   @keyframes hera-logo-pulse {
-    0%, 100% { filter: drop-shadow(0 0 8px rgba(158, 129, 254, 0.58)) drop-shadow(0 0 18px rgba(76, 91, 255, 0.28)); }
-    50% { filter: drop-shadow(0 0 18px rgba(214, 202, 254, 0.88)) drop-shadow(0 0 28px rgba(76, 91, 255, 0.5)); }
+    0%,
+    100% {
+      filter: drop-shadow(0 0 8px rgba(158, 129, 254, 0.58))
+        drop-shadow(0 0 18px rgba(76, 91, 255, 0.28));
+    }
+    50% {
+      filter: drop-shadow(0 0 18px rgba(214, 202, 254, 0.88))
+        drop-shadow(0 0 28px rgba(76, 91, 255, 0.5));
+    }
   }
 
   .hera-word {
-    font-size: clamp(3.2rem, 11vw, 7rem);
+    font-size: clamp(3rem, 8vw, 6rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 0.95;
   }
 
-  .hera-promise,
-  .hera-final {
-    max-width: 32ch;
-    font-size: clamp(1.1rem, 2.4vw, 1.5rem);
-    color: rgba(244, 244, 242, 0.85);
+  .hera-slot {
+    margin-top: clamp(4px, 1.4vh, 18px);
   }
 
-  .hera-final {
-    opacity: 0;
-    font-weight: 600;
-    color: #fff;
-  }
-
+  /* Scroll affordance — unmistakable but quiet, and present at arrival --- */
   .opening-scroll-cue {
     position: absolute;
     left: 50%;
-    bottom: 28px;
+    bottom: clamp(20px, 4vh, 44px);
     transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
     opacity: 0;
     z-index: 20;
   }
 
-  /* Mobile adaptation — same story, simplified density ------------------- */
-  @media (max-width: 640px) {
-    .opening-track {
-      height: 1400vh;
-    }
+  .cue-label {
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244, 244, 242, 0.66);
+  }
 
-    .chat-window {
-      width: 92vw;
-      height: 66svh;
-    }
+  .cue-arrow {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    color: rgba(244, 244, 242, 0.82);
+    animation: cueNudge 1.8s ease-in-out infinite;
+  }
 
-    .chat-body {
-      padding: 16px 16px;
+  @keyframes cueNudge {
+    0%,
+    100% {
+      transform: translateY(-2px);
     }
-
-    .answer-row {
-      font-size: 12px;
+    50% {
+      transform: translateY(4px);
     }
+  }
 
-    .rain-file {
-      width: 70px;
+  /* Laptop / tablet ------------------------------------------------------ */
+  @media (max-width: 900px) {
+    .rain-layer {
+      --cols: 12;
     }
-
-    .rain-file img {
-      width: 26px;
-      height: 26px;
-    }
-
-    .rain-file span {
-      width: 70px;
-      max-width: 70px;
-      font-size: 7.5px;
-      white-space: normal;
-      overflow-wrap: break-word;
-      word-break: break-word;
-    }
-
-    .rain-col-inner {
-      gap: 10px;
-    }
-
-    /* Fewer active columns on narrow screens so the metaphor still reads
-       instead of collapsing into unreadable overlap. */
-    .rain-col:nth-child(3n + 2) {
+    .rain-col:nth-child(n + 13) {
       display: none;
     }
-
-    .pain-line {
-      font-size: clamp(1.2rem, 6.5vw, 1.7rem);
+    .chat-column {
+      width: min(760px, 84vw);
     }
-
-    .hera-word {
-      font-size: clamp(2.6rem, 17vw, 4.5rem);
-    }
-
-    .hera-promise,
-    .hera-final {
-      font-size: 1rem;
-      max-width: 26ch;
+    .panic-stack {
+      width: min(84vw, 560px);
     }
   }
 
-  /* BUG-006 repair, 2026-08-28: at exactly 375px the fully-typed composer
-     sentence ran into the Send pill. Scoped tightly to <=400px so untouched
-     430px (already clean per the live-tester's own evidence) keeps its
-     original sizing. Shrinking font-size/padding here (rather than wrapping
-     to two lines, which would move the composer's height and desync the
-     chat-window layout other scenes rely on) keeps the single-line composer
-     shape intact while giving the full sentence room to fit before the
-     button. measureCursorTargets() re-measures the Send button's real
-     rect on load/resize, so the cursor still lands correctly here too. */
-  @media (max-width: 400px) {
-    .composer {
-      gap: 6px;
-      padding: 12px 12px;
-    }
-
-    .composer-input {
-      padding: 0 10px;
-      font-size: 10.5px;
-    }
-
-    .composer-send {
-      padding: 8px 12px;
-      font-size: 11px;
-    }
-  }
-
-  /* Reduced motion — discrete scroll-controlled states, no falling motion,
-     no parallax. Scoped entirely to this media query so it never competes
-     with the continuous inline-style updates the normal path writes. ------ */
-  @media (prefers-reduced-motion: reduce) {
-    .chat-layer,
-    .rain-layer,
-    .thought-layer,
-    .pain-layer,
-    .hera-layer,
-    .msg-row,
-    .thinking-row,
-    .rw,
-    .pain-line,
-    .hera-final,
-    .fake-cursor,
-    .composer-caret {
-      transition: none !important;
-      animation: none !important;
-    }
-
-    .rw {
-      opacity: 0 !important;
-    }
-
-    .rain-col-inner {
-      transform: none !important;
+  /* Mobile --------------------------------------------------------------- */
+  @media (max-width: 640px) {
+    .opening-stage {
+      --opening-statement-size: clamp(1.35rem, 5.6vw, 1.95rem);
     }
 
     .rain-layer {
-      position: relative;
-      flex-wrap: wrap;
-      align-content: center;
-      gap: 4px;
-      overflow: hidden;
+      --cols: 7;
+    }
+    .rain-col:nth-child(n + 8) {
+      display: none;
     }
 
-    .rain-col {
-      position: relative;
-      left: auto !important;
+    .chat-layer {
+      padding-top: clamp(80px, 11vh, 120px);
     }
 
-    .fake-cursor {
-      display: none !important;
+    .chat-column {
+      width: 88vw;
+      gap: 14px;
     }
 
-    .chat-layer,
-    .rain-layer,
-    .thought-layer,
-    .pain-layer,
-    .hera-layer {
-      opacity: 0;
+    .user-bubble {
+      font-size: 14px;
     }
 
-    .msg-row,
-    .thinking-row {
-      opacity: 0;
+    .answer-row {
+      font-size: 0.95rem;
+      line-height: 1.55;
     }
 
-    #pain-line-2 {
-      opacity: 1 !important;
+    .rain-file {
+      padding: 3px 1px;
+      gap: 1px;
+    }
+    .rain-file span {
+      font-size: 7px;
     }
 
-    .hera-promise {
-      display: none !important;
+    /* 86vw leaves room for the pile's own offsets without clipping. */
+    .panic-stack {
+      width: 86vw;
+      max-width: 86vw;
     }
 
-    .hera-final {
-      opacity: 1 !important;
+    .panic-card {
+      padding: 18px 20px;
+      border-radius: 18px 18px 7px 18px;
     }
 
-    /* Layer visibility per discrete scene ---------------------------- */
-    .opening-stage[data-scene='composer'] .chat-layer,
-    .opening-stage[data-scene='sent'] .chat-layer,
-    .opening-stage[data-scene='thinking'] .chat-layer,
-    .opening-stage[data-scene='answer'] .chat-layer,
-    .opening-stage[data-scene='rain-static'] .chat-layer {
-      opacity: 1;
+    .statement-slot {
+      width: 88vw;
     }
 
-    .opening-stage[data-scene='sent'] .msg-row,
-    .opening-stage[data-scene='thinking'] .msg-row,
-    .opening-stage[data-scene='answer'] .msg-row,
-    .opening-stage[data-scene='rain-static'] .msg-row {
-      opacity: 1;
-      transform: none !important;
+    .hera-word {
+      font-size: clamp(2.6rem, 13vw, 4rem);
     }
 
-    .opening-stage[data-scene='thinking'] .thinking-row {
-      opacity: 1;
+    .hera-logo {
+      width: clamp(46px, 12vw, 68px);
     }
+  }
 
-    .opening-stage[data-scene='rain-static'] .rain-layer {
-      opacity: 1;
-    }
-
-    /* The verbose response is only "present in full" from the answer state
-       onward — showing it during composer/sent/thinking would collapse the
-       discrete states into one frame. */
-    .opening-stage[data-scene='answer'] .rw,
-    .opening-stage[data-scene='rain-static'] .rw {
-      opacity: 1 !important;
-    }
-
-    .opening-stage[data-scene='thoughts'] .thought-layer,
-    .opening-stage[data-scene='pain'] .pain-layer,
-    .opening-stage[data-scene='hera'] .hera-layer {
-      opacity: 1;
+  /* Reduced motion — same story, discrete readable states. The scroll->state
+     mapping is unchanged (so no copy is ever skipped); what changes is that
+     opacities snap instead of crossfading, cards land without travel, and the
+     curtain is placed statically at its resting depth instead of descending. */
+  @media (prefers-reduced-motion: reduce) {
+    .rw,
+    .thinking-dot,
+    .hera-logo,
+    .cue-arrow,
+    .panic-card {
+      transition: none !important;
+      animation: none !important;
     }
   }
 </style>
 
-<script define:vars={{ totalWords, revealBoundary, message: MESSAGE, thoughtsData: thoughts, promisesData: promises }}>
+<script>
+  type Beat = [number, number, number];
+  type Marks = Record<string, Beat>;
+  type RainCfg = { depth: number; start: number; span: number };
+  type Config = {
+    marks: Marks;
+    rainStart: number;
+    totalWords: number;
+    columns: RainCfg[];
+    cardCount: number;
+    promiseCount: number;
+  };
+
   const stage = document.getElementById('opening-stage');
   const track = document.getElementById('opening-track');
-  const chatLayer = document.getElementById('chat-layer');
-  const rainLayer = document.getElementById('rain-layer');
-  const thoughtLayer = document.getElementById('thought-layer');
-  const painLayer = document.getElementById('pain-layer');
-  const heraLayer = document.getElementById('hera-layer');
-  const composerTyped = document.getElementById('composer-typed');
-  const composerCaret = document.getElementById('composer-caret');
-  const composerInput = document.getElementById('composer-input');
-  const composerSend = document.getElementById('composer-send');
-  const fakeCursor = document.getElementById('fake-cursor');
-  const msgUser = document.getElementById('msg-user');
-  const thinkingRow = document.getElementById('thinking-row');
-  const painLine1 = document.getElementById('pain-line-1');
-  const painLine2 = document.getElementById('pain-line-2');
-  const thoughtBubble = document.getElementById('thought-bubble');
-  const heraPromise = document.getElementById('hera-promise');
-  const heraFinal = document.getElementById('hera-final');
-  const scrollCue = document.getElementById('opening-scroll-cue');
-  const wordSpans = Array.from(document.querySelectorAll('#answer-row .rw'));
+  const configEl = document.getElementById('opening-config');
 
-  // Repair note, 2026-08-28: the cursor travel target is measured from the
-  // real Send button's bounding box, not a hardcoded viewport percentage —
-  // a fixed "left:92%" landed well off the button at some widths. Measured
-  // once on load and re-measured on resize so it stays correct at every
-  // breakpoint, including the 375/430px mobile widths.
-  let cursorStartPt = { x: 0, y: 0 };
-  let cursorTargetPt = { x: 0, y: 0 };
+  if (stage && track && configEl && configEl.textContent) {
+    const cfg: Config = JSON.parse(configEl.textContent);
+    const M = cfg.marks;
 
-  const measureCursorTargets = () => {
-    const stageRect = stage.getBoundingClientRect();
-    const inputRect = composerInput.getBoundingClientRect();
-    const sendRect = composerSend.getBoundingClientRect();
-    cursorStartPt = {
-      x: inputRect.right - stageRect.left - 20,
-      y: inputRect.top + inputRect.height / 2 - stageRect.top,
+    const byId = (id: string) => document.getElementById(id) as HTMLElement;
+    const chatLayer = byId('chat-layer');
+    const rainLayer = byId('rain-layer');
+    const panicLayer = byId('panic-layer');
+    const painLayer = byId('pain-layer');
+    const heraLayer = byId('hera-layer');
+    const thinkingRow = byId('thinking-row');
+    const heraEyebrow = byId('hera-eyebrow');
+    const heraBrand = byId('hera-brand');
+    const scrollCue = byId('opening-scroll-cue');
+
+    const wordSpans = Array.from(document.querySelectorAll<HTMLElement>('#answer-row .rw'));
+    const panicEls = Array.from(
+      document.querySelectorAll<HTMLElement>('#panic-stack > .panic-card')
+    );
+    const painEls = Array.from(
+      document.querySelectorAll<HTMLElement>('#pain-layer .statement-slot > *')
+    );
+    const heraEls = Array.from(document.querySelectorAll<HTMLElement>('#hera-slot > *'));
+
+    const rainCols = Array.from(document.querySelectorAll<HTMLElement>('.rain-col')).map(
+      (el, i) => ({
+        inner: el.querySelector<HTMLElement>('.rain-col-inner'),
+        depth: cfg.columns[i].depth,
+        start: cfg.columns[i].start,
+        span: cfg.columns[i].span,
+      })
+    );
+
+    const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x);
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reduced motion keeps the identical scroll->beat mapping and simply snaps,
+    // so the story order and every line survive with animation disabled.
+    const op = (v: number) => (reduced ? (v >= 0.5 ? 1 : 0) : v);
+    const ease = (t: number) => (reduced ? (t >= 0.5 ? 1 : 0) : 1 - (1 - t) * (1 - t));
+
+    // A slot member is opaque across its own hold, fades in over the SECOND half
+    // of its own enter window, and fades out over the FIRST half of the next
+    // beat's enter window. That ordering is what keeps exactly one statement
+    // legible at a time in a shared slot.
+    const slotOpacity = (p: number, beat: Beat, next: Beat | null) => {
+      const s = beat[0];
+      const i = beat[1];
+      if (p < s) return 0;
+      if (p < i) return clamp01((p - (s + (i - s) / 2)) / Math.max(1e-6, (i - s) / 2));
+      if (!next) return 1;
+      const ns = next[0];
+      const ni = next[1];
+      if (p < ns) return 1;
+      const half = Math.max(1e-6, (ni - ns) / 2);
+      if (p < ns + half) return clamp01(1 - (p - ns) / half);
+      return 0;
     };
-    cursorTargetPt = {
-      x: sendRect.left + sendRect.width / 2 - stageRect.left,
-      y: sendRect.top + sendRect.height / 2 - stageRect.top,
+
+    // Fades in over the second half of its enter and then stays — used by the
+    // elements that must remain fixed on screen (Introducing, the brand row).
+    const persistOpacity = (p: number, beat: Beat) => {
+      const s = beat[0];
+      const i = beat[1];
+      if (p < s) return 0;
+      if (p >= i) return 1;
+      return clamp01((p - (s + (i - s) / 2)) / Math.max(1e-6, (i - s) / 2));
     };
-  };
 
-  const rainCols = Array.from(document.querySelectorAll('.rain-col')).map((el) => {
-    const inner = el.querySelector('.rain-col-inner');
-    const heightPx = inner ? parseFloat(inner.style.getPropertyValue('--col-height')) || 600 : 600;
-    return {
-      el,
-      inner,
-      activate: parseFloat(el.getAttribute('data-activate') || '0.33'),
-      speed: parseFloat(el.getAttribute('data-speed') || '1'),
-      offset: parseFloat(el.getAttribute('data-offset') || '0'),
-      height: heightPx,
+    let lastRevealed = -1;
+    const setRevealed = (count: number) => {
+      if (count === lastRevealed) return;
+      wordSpans.forEach((el, i) => el.classList.toggle('is-shown', i < count));
+      lastRevealed = count;
     };
-  });
 
-  const THOUGHTS = thoughtsData;
-  const PROMISES = promisesData;
+    const applySlot = (p: number, els: HTMLElement[], beats: Beat[], tail: Beat | null) => {
+      let maxOp = 0;
+      els.forEach((el, i) => {
+        const next = i + 1 < beats.length ? beats[i + 1] : tail;
+        const o = op(slotOpacity(p, beats[i], next));
+        el.style.opacity = String(o);
+        el.style.transform = reduced ? 'none' : 'translateY(' + ((1 - o) * 12).toFixed(2) + 'px)';
+        if (o > maxOp) maxOp = o;
+      });
+      return maxOp;
+    };
 
-  const P = {
-    emptyEnd: 0.06,
-    typeEnd: 0.12,
-    cursorEnd: 0.145,
-    clickEnd: 0.155,
-    bubbleEnd: 0.18,
-    thinkEnd: 0.21,
-    sentEnd: 0.3,
-    rainStart: 0.33,
-    answerEnd: 0.6,
-    clear1Start: 0.6,
-    clear1End: 0.65,
-    thoughtsStart: 0.65,
-    thoughtsEnd: 0.83,
-    painStart: 0.83,
-    painMid: 0.87,
-    painEnd: 0.93,
-    clear2End: 0.95,
-  };
+    let viewportHeight = window.innerHeight;
 
-  const clamp01 = (x) => Math.min(1, Math.max(0, x));
-  const lerp = (a, b, t) => a + (b - a) * t;
+    const cardBeats: Beat[] = [];
+    for (let i = 1; i <= cfg.cardCount; i += 1) cardBeats.push(M['card' + i]);
+    const painBeats: Beat[] = [M.painA, M.painB];
+    const heraBeats: Beat[] = [
+      M.promise1,
+      M.promise2,
+      M.promise3,
+      M.promise4,
+      M.promise5,
+      M.final,
+    ];
 
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Both the chat and the curtain leave on the same decisive narrative exit.
+    const exitFade = (p: number) =>
+      p < M.curtainExit[0]
+        ? 1
+        : clamp01(1 - (p - M.curtainExit[0]) / Math.max(1e-6, M.curtainExit[2] - M.curtainExit[0]));
 
-  let lastRevealed = -1;
-  const setRevealed = (count) => {
-    if (count === lastRevealed) return;
-    wordSpans.forEach((el, i) => {
-      el.classList.toggle('is-shown', i < count);
+    const updateChat = (p: number) => {
+      chatLayer.style.opacity = String(op(exitFade(p)));
+
+      // "Thinking..." is present at arrival and dissolves as the answer starts.
+      const think =
+        p < M.response[0]
+          ? 1
+          : clamp01(1 - (p - M.response[0]) / Math.max(1e-6, M.response[1] - M.response[0]));
+      thinkingRow.style.opacity = String(op(think));
+
+      const t = clamp01((p - M.response[0]) / Math.max(1e-6, M.response[2] - M.response[0]));
+      setRevealed(Math.round(t * cfg.totalWords));
+    };
+
+    const updateRain = (p: number) => {
+      if (p < cfg.rainStart) {
+        rainLayer.style.opacity = '0';
+        return;
+      }
+      const fade = exitFade(p);
+      rainLayer.style.opacity = String(op(fade));
+      if (fade <= 0) return;
+
+      const span = Math.max(1e-6, M.curtain[2] - cfg.rainStart);
+      const t = clamp01((p - cfg.rainStart) / span);
+
+      rainCols.forEach((col) => {
+        if (!col.inner) return;
+        const h = col.inner.offsetHeight;
+        if (!h) return; // hidden at this breakpoint
+        // Clamped so the column top always overruns the viewport top by >=90px:
+        // that overrun is the "no giant hole at the top" guarantee.
+        const restBottom = Math.min(col.depth * viewportHeight, h - 90);
+        const local = reduced ? 1 : clamp01((t - col.start) / col.span);
+        const eased = 1 - (1 - local) * (1 - local);
+        const y = lerp(-h - 60, restBottom - h, eased);
+        col.inner.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
+      });
+    };
+
+    // Fractional index of the front card. Integer while a card holds; ramps
+    // from i-1 to i across that card's enter window.
+    const frontIndex = (p: number) => {
+      let front = -1;
+      for (let i = 0; i < cardBeats.length; i += 1) {
+        const s = cardBeats[i][0];
+        const h = cardBeats[i][1];
+        if (p >= h) {
+          front = i;
+        } else if (p >= s) {
+          front = i - 1 + ease(clamp01((p - s) / Math.max(1e-6, h - s)));
+          break;
+        } else {
+          break;
+        }
+      }
+      return front;
+    };
+
+    const updatePanic = (p: number) => {
+      if (p < cardBeats[0][0]) {
+        panicLayer.style.opacity = '0';
+        return;
+      }
+      // The pile clears decisively, all at once, into the cost statement.
+      const fade =
+        p < M.stackExit[0]
+          ? 1
+          : clamp01(1 - (p - M.stackExit[0]) / Math.max(1e-6, M.stackExit[2] - M.stackExit[0]));
+      panicLayer.style.opacity = String(op(fade));
+      if (fade <= 0) return;
+
+      // Offsets are trimmed on narrow screens so an 86vw card cannot be pushed
+      // off the left edge as the pile deepens.
+      const narrow = window.innerWidth <= 640;
+      const stepX = narrow ? 3 : 7;
+      const stepY = narrow ? 12 : 16;
+
+      const front = frontIndex(p);
+      panicEls.forEach((el, i) => {
+        const rel = front - i;
+        if (rel <= -1) {
+          // Not yet dealt onto the pile.
+          el.style.opacity = '0';
+          el.style.transform = 'translate3d(0,46px,0) scale(0.96)';
+          el.style.setProperty('--card-text', '0');
+          return;
+        }
+        if (rel < 0) {
+          // Arriving: rises into the front position.
+          const t = rel + 1;
+          el.style.opacity = String(t);
+          el.style.setProperty('--card-text', String(t));
+          el.style.transform =
+            'translate3d(0,' +
+            (46 * (1 - t)).toFixed(1) +
+            'px,0) scale(' +
+            (0.96 + 0.04 * t).toFixed(3) +
+            ')';
+          return;
+        }
+        // Settled, and receding as newer cards land on top. Earlier cards never
+        // disappear — the accumulating pile is the point.
+        const d = reduced ? Math.round(rel) : rel;
+        const dc = d > 7 ? 7 : d;
+        const rot = (i % 2 === 0 ? -1 : 1) * (dc > 2 ? 2 : dc) * 0.9;
+        el.style.opacity = String(Math.max(0.32, 1 - dc * 0.085));
+        el.style.setProperty('--card-text', String(Math.max(0, 1 - dc * 1.4)));
+        el.style.transform =
+          'translate3d(' +
+          (-dc * stepX).toFixed(1) +
+          'px,' +
+          (-dc * stepY).toFixed(1) +
+          'px,0) rotate(' +
+          rot.toFixed(2) +
+          'deg) scale(' +
+          Math.max(0.83, 1 - dc * 0.024).toFixed(3) +
+          ')';
+      });
+    };
+
+    const updateAll = (p: number) => {
+      updateChat(p);
+      updateRain(p);
+      updatePanic(p);
+
+      painLayer.style.opacity = String(applySlot(p, painEls, painBeats, M.painExit));
+
+      const eyebrow = op(persistOpacity(p, M.introducing));
+      const brand = op(persistOpacity(p, M.brand));
+      heraEyebrow.style.opacity = String(eyebrow);
+      heraBrand.style.opacity = String(brand);
+      const promiseMax = applySlot(p, heraEls, heraBeats, null);
+      heraLayer.style.opacity = String(Math.max(eyebrow, brand, promiseMax));
+
+      // The cue is on screen at arrival (so the visitor knows scrolling is the
+      // interaction) and again on the final line (so they know it continues).
+      const cueIn =
+        p < M.response[1]
+          ? clamp01(1 - (p - M.arrival[2]) / Math.max(1e-6, M.response[1] - M.arrival[2]))
+          : 0;
+      const cueOut = persistOpacity(p, M.final);
+      scrollCue.style.opacity = String(op(Math.max(cueIn, cueOut)));
+    };
+
+    let trackTop = 0;
+    let trackHeight = 0;
+    let ticking = false;
+
+    // Exact per-breakpoint value for the negative top margin explained in the
+    // stylesheet. Measured rather than hardcoded because the pill's height moves
+    // with the font and the breakpoint.
+    const section = document.getElementById('opening-sequence');
+    const header = document.querySelector('header');
+    const applyNavOffset = () => {
+      if (!section || !header) return;
+      const h = header.getBoundingClientRect().height;
+      if (h > 0) section.style.setProperty('--opening-nav-offset', h + 'px');
+    };
+
+    const measure = () => {
+      const rect = track.getBoundingClientRect();
+      trackTop = Math.round(rect.top + window.scrollY);
+      trackHeight = track.offsetHeight;
+      viewportHeight = window.innerHeight;
+    };
+
+    const computeP = () =>
+      clamp01((window.scrollY - trackTop) / Math.max(1, trackHeight - viewportHeight));
+
+    const frame = () => {
+      ticking = false;
+      updateAll(computeP());
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(frame);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      applyNavOffset();
+      measure();
+      onScroll();
     });
-    lastRevealed = count;
-  };
-
-  const sceneName = (p) => {
-    if (p < P.emptyEnd) return 'empty';
-    if (p < P.typeEnd) return 'typing';
-    if (p < P.cursorEnd) return 'cursor';
-    if (p < P.clickEnd) return 'click';
-    if (p < P.bubbleEnd) return 'bubble';
-    if (p < P.thinkEnd) return 'thinking';
-    if (p < P.sentEnd) return 'sentences';
-    if (p < P.answerEnd) return 'answer';
-    if (p < P.clear1End) return 'clear1';
-    if (p < P.thoughtsEnd) return 'thoughts';
-    if (p < P.painEnd) return 'pain';
-    if (p < P.clear2End) return 'clear2';
-    return 'hera';
-  };
-
-  // ---- Normal (motion-enabled) path --------------------------------------
-  const updateComposer = (p) => {
-    const typeT = clamp01((p - P.emptyEnd) / (P.typeEnd - P.emptyEnd));
-    const chars = p < P.emptyEnd ? 0 : Math.floor(typeT * message.length);
-    const shown = p >= P.clickEnd ? '' : message.slice(0, chars);
-    if (composerTyped.textContent !== shown) composerTyped.textContent = shown;
-    composerCaret.style.opacity = p >= P.emptyEnd && p < P.bubbleEnd ? '1' : '0';
-
-    if (p >= P.typeEnd && p < P.clickEnd) {
-      const curT = clamp01((p - P.typeEnd) / (P.cursorEnd - P.typeEnd));
-      fakeCursor.style.opacity = '1';
-      fakeCursor.style.left = `${lerp(cursorStartPt.x, cursorTargetPt.x, curT)}px`;
-      fakeCursor.style.top = `${lerp(cursorStartPt.y, cursorTargetPt.y, curT)}px`;
-      // "On the button" starts as soon as travel finishes (curT reaches 1 at
-      // P.cursorEnd), so the press state only ever fires while the cursor is
-      // actually resting on the measured Send target, not in empty space.
-      composerSend.classList.toggle('is-pressed', p >= P.cursorEnd);
-    } else {
-      fakeCursor.style.opacity = '0';
-      if (p < P.typeEnd) composerSend.classList.remove('is-pressed');
-    }
-  };
-
-  const updateBubble = (p) => {
-    const t = clamp01((p - P.clickEnd) / (P.bubbleEnd - P.clickEnd));
-    const op = p < P.clickEnd ? 0 : t;
-    msgUser.style.opacity = String(op);
-    msgUser.style.transform = `translateY(${lerp(8, 0, t)}px)`;
-  };
-
-  const updateThinking = (p) => {
-    let op = 0;
-    if (p >= P.bubbleEnd && p < P.thinkEnd) {
-      op = clamp01((p - P.bubbleEnd) / (P.thinkEnd - P.bubbleEnd));
-    } else if (p >= P.thinkEnd && p < P.thinkEnd + 0.02) {
-      op = clamp01(1 - (p - P.thinkEnd) / 0.02);
-    }
-    thinkingRow.style.opacity = String(op);
-  };
-
-  const updateAnswer = (p) => {
-    let count;
-    if (p < P.thinkEnd) {
-      count = 0;
-    } else if (p < P.sentEnd) {
-      const t = clamp01((p - P.thinkEnd) / (P.sentEnd - P.thinkEnd));
-      count = Math.round(lerp(0, revealBoundary, t));
-    } else if (p < P.answerEnd) {
-      const t = clamp01((p - P.sentEnd) / (P.answerEnd - P.sentEnd));
-      count = Math.round(lerp(revealBoundary, totalWords, t));
-    } else {
-      count = totalWords;
-    }
-    setRevealed(count);
-  };
-
-  const updateChatFade = (p) => {
-    const fade = p < P.clear1Start ? 1 : clamp01(1 - (p - P.clear1Start) / (P.clear1End - P.clear1Start));
-    chatLayer.style.opacity = String(fade);
-    chatLayer.style.pointerEvents = 'none';
-  };
-
-  // Repair note, 2026-08-28: each column's own travel duration is deliberately
-  // decoupled from the P.answerEnd scene boundary (that boundary is locked and
-  // untouched). Columns now activate in a tight band (0.33-0.417) and each
-  // travels for this fixed duration, so most of the 14 streams are mid-transit
-  // simultaneously across a wide, sustained window — the dense "blizzard"
-  // plateau the packet calls for — rather than a handful of columns finishing
-  // their travel just as the next ones are still arriving. The shared opacity
-  // fade at P.clear1Start/P.clear1End still owns when the rain actually
-  // disappears, regardless of exactly where a column's translate3d has
-  // reached, so nothing here can leak visible files past the fade.
-  const RAIN_TRAVEL_DURATION = 0.34;
-
-  const updateRain = (p) => {
-    const active = p >= P.rainStart && p < P.clear2End;
-    const clearFade = p < P.clear1Start ? 1 : clamp01(1 - (p - P.clear1Start) / (P.clear1End - P.clear1Start));
-    rainLayer.style.opacity = active ? String(clearFade) : '0';
-    if (!active) return;
-    rainCols.forEach((col) => {
-      const localT = clamp01((p - col.activate) / RAIN_TRAVEL_DURATION);
-      const enter = -(col.height + 150 + Math.abs(col.offset));
-      // Exit distance scales with the column's own (now much longer) length so a
-      // 14-file stream still fully clears the viewport by the time it fades,
-      // instead of leaving a visible tail hanging mid-screen.
-      const exit = (col.height + 900) * col.speed;
-      const y = lerp(enter, exit, localT);
-      col.el.style.opacity = p >= col.activate ? '1' : '0';
-      col.inner.style.transform = `translate3d(0, ${y}px, 0)`;
+    // Webfont swap changes the pill's height after first paint.
+    window.addEventListener('load', () => {
+      applyNavOffset();
+      measure();
+      onScroll();
     });
-  };
 
-  const updateThoughts = (p) => {
-    if (p < P.thoughtsStart || p >= P.thoughtsEnd) {
-      thoughtLayer.style.opacity = '0';
-      return;
-    }
-    const range = P.thoughtsEnd - P.thoughtsStart;
-    const bucket = range / THOUGHTS.length;
-    const rel = p - P.thoughtsStart;
-    const idx = Math.min(THOUGHTS.length - 1, Math.floor(rel / bucket));
-    const localT = (rel - idx * bucket) / bucket;
-    let op;
-    if (localT < 0.2) op = localT / 0.2;
-    else if (localT > 0.8) op = (1 - localT) / 0.2;
-    else op = 1;
-    thoughtLayer.style.opacity = String(clamp01(op));
-    thoughtLayer.dataset.thoughtIndex = String(idx);
-    const isUrgent = idx === THOUGHTS.length - 1;
-    thoughtBubble.classList.toggle('is-urgent', isUrgent);
-    const text = THOUGHTS[idx];
-    if (thoughtBubble.textContent !== text) thoughtBubble.textContent = text;
-  };
-
-  const updatePain = (p) => {
-    if (p < P.painStart || p >= P.clear2End) {
-      painLayer.style.opacity = '0';
-      return;
-    }
-    let op = 1;
-    if (p < P.painStart + 0.02) op = (p - P.painStart) / 0.02;
-    else if (p >= P.painEnd) op = clamp01(1 - (p - P.painEnd) / (P.clear2End - P.painEnd));
-    painLayer.style.opacity = String(clamp01(op));
-    painLine1.style.opacity = '1';
-    painLine2.style.opacity = String(clamp01((p - P.painMid) / 0.03));
-  };
-
-  const heraChunk = (0.05) / 6;
-  const updateHera = (p) => {
-    if (p < P.clear2End) {
-      heraLayer.style.opacity = '0';
-      scrollCue.style.opacity = '0';
-      return;
-    }
-    const introOp = clamp01((p - P.clear2End) / 0.01);
-    heraLayer.style.opacity = String(introOp);
-    scrollCue.style.opacity = String(introOp);
-
-    const rel = p - P.clear2End;
-    const chunkIdx = Math.min(5, Math.floor(rel / heraChunk));
-    if (chunkIdx < 5) {
-      const text = PROMISES[chunkIdx];
-      if (heraPromise.textContent !== text) heraPromise.textContent = text;
-      heraPromise.style.opacity = '1';
-      heraFinal.style.opacity = '0';
-    } else {
-      heraPromise.style.opacity = '0';
-      heraFinal.style.opacity = '1';
-    }
-  };
-
-  const updateAll = (p) => {
-    stage.style.setProperty('--p', p.toFixed(4));
-    stage.dataset.scene = sceneName(p);
-    updateComposer(p);
-    updateBubble(p);
-    updateThinking(p);
-    updateAnswer(p);
-    updateChatFade(p);
-    updateRain(p);
-    updateThoughts(p);
-    updatePain(p);
-    updateHera(p);
-  };
-
-  // ---- Reduced-motion path: discrete states, no falling motion ----------
-  const rmBoundaries = [0, P.clickEnd, P.bubbleEnd, P.thinkEnd, P.rainStart, P.thoughtsStart, P.painStart, P.clear2End];
-  const rmScenes = ['composer', 'sent', 'thinking', 'answer', 'rain-static', 'thoughts', 'pain', 'hera'];
-
-  const rmSceneIndex = (p) => {
-    let idx = 0;
-    for (let i = 0; i < rmBoundaries.length; i += 1) {
-      if (p >= rmBoundaries[i]) idx = i;
-    }
-    return idx;
-  };
-
-  const updateReducedAll = (p) => {
-    stage.style.setProperty('--p', p.toFixed(4));
-    const idx = rmSceneIndex(p);
-    stage.dataset.scene = rmScenes[idx];
-
-    composerTyped.textContent = idx >= 1 ? message : '';
-    setRevealed(idx >= 3 ? totalWords : 0);
-
-    if (idx === 5) {
-      const bucket = (P.painStart - P.thoughtsStart) / THOUGHTS.length;
-      const rel = p - P.thoughtsStart;
-      const ti = Math.min(THOUGHTS.length - 1, Math.floor(rel / bucket));
-      thoughtBubble.textContent = THOUGHTS[ti];
-      thoughtBubble.classList.toggle('is-urgent', ti === THOUGHTS.length - 1);
-    }
-  };
-
-  // ---- Scroll -> p, throttled with rAF -----------------------------------
-  let trackTop = 0;
-  let trackHeight = 0;
-  let viewportHeight = 0;
-  let ticking = false;
-
-  const measure = () => {
-    const rect = track.getBoundingClientRect();
-    trackTop = Math.round(rect.top + window.scrollY);
-    trackHeight = track.offsetHeight;
-    viewportHeight = window.innerHeight;
-  };
-
-  const computeP = () => {
-    const scrollable = Math.max(1, trackHeight - viewportHeight);
-    return clamp01((window.scrollY - trackTop) / scrollable);
-  };
-
-  const run = reduced ? updateReducedAll : updateAll;
-
-  const frame = () => {
-    ticking = false;
-    run(computeP());
-  };
-
-  const onScroll = () => {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(frame);
-    }
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => {
+    applyNavOffset();
     measure();
-    measureCursorTargets();
-    onScroll();
-  });
+    updateAll(computeP());
 
-  measure();
-  measureCursorTargets();
-  run(computeP());
+    // Exposed only for automated verification (Playwright checkpoint capture);
+    // nothing in the page itself reads it.
+    (window as unknown as Record<string, unknown>).__openingMarks = {
+      marks: M,
+      rainStart: cfg.rainStart,
+    };
+  }
 </script>

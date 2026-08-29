@@ -81,11 +81,11 @@ export const resumeAsset = {
   path: 'resume/Favour-Diokpo-Resume.pdf',
 };
 
-// Live navigation — 6-item portfolio nav activated 2026-08-06 (portfolio-week1).
-// All routes are verified Astro pages. "About" and "Ubisoft Work" were
-// previously disconnected stubs; they are now linked without page changes.
+// Live navigation — 5-item portfolio nav. All routes are verified Astro pages.
+// Home is NOT listed here: the left-hand "[logo] HERA OS" brand in Nav.astro is
+// the Home link, so a separate "HERA OS" destination showed the same label
+// twice in one pill (removed 2026-08-28).
 export const nav = [
-  { label: 'HERA OS', href: '' },
   { label: 'Deep Dive', href: 'work/hera/' },
   { label: 'Ubisoft Work', href: 'work/enterprise-tools/' },
   { label: 'About', href: 'about/' },

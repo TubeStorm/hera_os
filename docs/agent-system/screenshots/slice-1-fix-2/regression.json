@@ -1,0 +1,167 @@
+{
+  "(home)": {
+    "navTopUnscrolled": 16,
+    "navTopScrolled": 16,
+    "navInsetStable": true,
+    "title": "Favour Diokpo \u2014 Product Designer \u2014 AI systems & internal tools",
+    "navItems": [
+      "Deep Dive",
+      "Ubisoft Work",
+      "About",
+      "Lineage",
+      "Contact"
+    ],
+    "mainHasContent": true,
+    "h1": null,
+    "docHeight": 22041,
+    "navLinksScrollable": {
+      "clientW": 945,
+      "scrollW": 945
+    },
+    "errors": []
+  },
+  "work/hera/": {
+    "navTopUnscrolled": 16,
+    "navTopScrolled": 16,
+    "navInsetStable": true,
+    "title": "Deep Dive \u2014 Favour Diokpo",
+    "navItems": [
+      "Deep Dive",
+      "Ubisoft Work",
+      "About",
+      "Lineage",
+      "Contact"
+    ],
+    "mainHasContent": true,
+    "h1": "From a messy thought to finished workwithout losing the idea along the way.",
+    "docHeight": 7912,
+    "navLinksScrollable": {
+      "clientW": 945,
+      "scrollW": 945
+    },
+    "errors": []
+  },
+  "work/enterprise-tools/": {
+    "navTopUnscrolled": 16,
+    "navTopScrolled": 16,
+    "navInsetStable": true,
+    "title": "Enterprise Systems at Ubisoft \u2014 Favour Diokpo",
+    "navItems": [
+      "Deep Dive",
+      "Ubisoft Work",
+      "About",
+      "Lineage",
+      "Contact"
+    ],
+    "mainHasContent": true,
+    "h1": "Enterprise Systems at Ubisoft \u2014 three workstreams in planning, approvals, and governance",
+    "docHeight": 5539,
+    "navLinksScrollable": {
+      "clientW": 945,
+      "scrollW": 945
+    },
+    "errors": []
+  },
+  "about/": {
+    "navTopUnscrolled": 16,
+    "navTopScrolled": 16,
+    "navInsetStable": true,
+    "title": "About Favour Diokpo \u2014 Favour Diokpo",
+    "navItems": [
+      "Deep Dive",
+      "Ubisoft Work",
+      "About",
+      "Lineage",
+      "Contact"
+    ],
+    "mainHasContent": true,
+    "h1": "\nI turn messy product problems into systems people can actually trust.\n",
+    "docHeight": 6620,
+    "navLinksScrollable": {
+      "clientW": 945,
+      "scrollW": 945
+    },
+    "errors": []
+  },
+  "work/lineage/": {
+    "navTopUnscrolled": 16,
+    "navTopScrolled": 16,
+    "navInsetStable": true,
+    "title": "The Long Build \u2014 Favour Diokpo",
+    "navItems": [
+      "Deep Dive",
+      "Ubisoft Work",
+      "About",
+      "Lineage",
+      "Contact"
+    ],
+    "mainHasContent": true,
+    "h1": "The Long Build",
+    "docHeight": 18092,
+    "navLinksScrollable": {
+      "clientW": 945,
+      "scrollW": 945
+    },
+    "errors": [
+      "console:Failed to load resource: the server responded with a status of 404 (File not found)"
+    ]
+  },
+  "contact/": {
+    "navTopUnscrolled": 16,
+    "navTopScrolled": 16,
+    "navInsetStable": true,
+    "title": "Contact \u2014 Favour Diokpo",
+    "navItems": [
+      "Deep Dive",
+      "Ubisoft Work",
+      "About",
+      "Lineage",
+      "Contact"
+    ],
+    "mainHasContent": false,
+    "h1": null,
+    "docHeight": 900,
+    "navLinksScrollable": {
+      "clientW": 945,
+      "scrollW": 945
+    },
+    "errors": []
+  },
+  "work/": {
+    "navTopUnscrolled": 16,
+    "navTopScrolled": 16,
+    "navInsetStable": true,
+    "title": "Work \u2014 Favour Diokpo",
+    "navItems": [
+      "Deep Dive",
+      "Ubisoft Work",
+      "About",
+      "Lineage",
+      "Contact"
+    ],
+    "mainHasContent": true,
+    "h1": null,
+    "docHeight": 2140,
+    "navLinksScrollable": {
+      "clientW": 945,
+      "scrollW": 945
+    },
+    "errors": []
+  },
+  "_homepageBehaviour": {
+    "openingTrackPx": 19188,
+    "videoGate": {
+      "exists": true,
+      "visible": true,
+      "inViewport": true,
+      "classes": "scroll-gate is-visible"
+    },
+    "gateClicked": true,
+    "scrollBeforeClick": 19188,
+    "scrollAfterClick": 19775,
+    "gateAdvancedPage": true,
+    "upwardEscapeFrom6000ReachedY": 18956,
+    "upwardEscapeWorks": false,
+    "errors": []
+  }
+}

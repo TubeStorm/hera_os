@@ -8,10 +8,16 @@ const isActive = (href: string) => {
 };
 ---
 
-<header class="sticky top-0 z-50">
+<!-- The top inset lives on the STICKY element itself (pt-4 on the header), not
+     as a margin on the inner nav. A margin there collapsed out through the
+     header and moved the header box in flow, so once the header stuck at
+     top:0 the pill went flush with the viewport edge. Padding is part of the
+     sticky box and cannot collapse, so the pill floats at the same distance
+     from the top before and during scroll. -->
+<header class="sticky top-0 z-50 pt-4">
   <div class="container-page">
     <nav
-      class="mt-4 flex items-center justify-between rounded-pill border border-line bg-[color:var(--surface)]/80 px-4 py-2.5 backdrop-blur-xl sm:px-5"
+      class="flex items-center justify-between rounded-pill border border-line bg-[color:var(--surface)]/80 px-4 py-2.5 backdrop-blur-xl sm:px-5"
       aria-label="Primary"
     >
       <a href={withBase('')} class="group flex shrink-0 items-center gap-2.5 pl-1 text-sm font-semibold tracking-tight">

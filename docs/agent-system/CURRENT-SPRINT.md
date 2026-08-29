@@ -24,7 +24,7 @@ Scope is deliberately narrow: install the operating system, define the two new p
 |---|---|---|
 | 0 | **Public release split** — hide Ubisoft work, new resume, deploy to main | ✅ CLOSED 2026-08-19 |
 | 0b | HERA Early Access Public Release (EA-V2-PUBLIC) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
-| 0c | **HERA homepage revamp — Slice 1** (opening cinematic + first HERA reveal; see `docs/preflights/hera website revamp/`) | ❌ REJECTED BY FAVOUR 2026-08-28 → 🟡 REPAIR IN PROGRESS (scroll-controlled rebuild) |
+| 0c | **HERA homepage revamp — Slice 1** (opening cinematic + first HERA reveal; see `docs/preflights/hera website revamp/`) | 🟡 RE-AUTHORED + VERIFIED — WAITING FOR FAVOUR REVIEW (Fix 2, 2026-08-29) |
 | 1 | Install and prove persistent agent operating system | ✅ FAVOUR ACCEPTED / CLOSED |
 | 2 | Audit portfolio-relevant repository and content truth | ✅ FAVOUR ACCEPTED / CLOSED |
 | 3 | Define About page architecture | ✅ FAVOUR ACCEPTED / CLOSED |
@@ -42,17 +42,24 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 ## Current active work
 
-**HERA homepage revamp — Slice 1 REPAIR: scroll-controlled opening cinematic** (updated 2026-08-28) — 🟡 IN PROGRESS.
+**HERA homepage revamp — Slice 1 FIX 2: opening scroll story re-authored** (updated 2026-08-29) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR VISUAL REVIEW.
 
-Favour reviewed the first build and rejected the interaction concept. It was not a CSS defect — the page was built faithfully to the wrong idea. It played itself on a timer the moment the page loaded, and it told the visitor the point ("Your AI finished in 3 minutes.") before they had experienced anything.
+Favour reviewed the scroll-controlled rebuild and sent a second fix document. The interaction concept was right; the composition and the pacing were not. Five things were wrong: the visitor landed on near-blank black with no idea that scrolling was the interaction; the opening still carried a fake grey chat window with a composer, Send button and cursor animation that added weight without meaning; the `.md` curtain was sparse with big holes of empty sky instead of an overwhelming full-width mass; important statements could be skipped by one ordinary wheel gesture; and the HERA reveal stacked the logo above the word and let the final line jump to a different position.
 
-The replacement makes **scroll the timeline, not the trigger**. The visitor lands on what looks like an ordinary empty AI chat and scrolls at their own pace through: a two-word request → an absurdly long answer → `.md` files raining down in Matrix-style columns and physically burying that answer while it is still being written → five increasingly panicked thoughts, one at a time → *then* the line that names the pain → and only then, HERA. Stop scrolling and everything freezes. Scroll back and it rewinds.
+The re-author fixes all of it. The page now **arrives inside the story** — request already sent, agent already thinking, a quiet "Scroll down" cue on screen. The chat chrome is deleted outright and the conversation sits on the black page at proper reading size. The curtain descends from above the top edge as a continuous full-width mass with a ragged bottom, and exits once it has taken about a third of the screen. Mid-build Favour replaced the panic beat: instead of one thought bubble swapping for the next, **eight message cards now pile up like physical paper**, earlier cards staying visible behind the new front card — accumulating cleanup burden, not a carousel. Panic cards, both cost statements, all five promises and the closing line now share one measured type size, and the promises and the final line occupy one pixel-identical slot beneath a fixed `[logo] HERA` row.
 
-Two things were locked this round: the cinematic canvas is **always black** regardless of the visitor's light/dark setting, and the permanent final line is **"Stop managing your AI. Start giving it work."** (Favour's fix document contradicted itself; she confirmed this version.)
+The pacing is now **budgeted as data**: every beat declares its enter and hold in viewport-heights and the track height is derived from their sum, so "every statement holds for at least half a screen of scrolling" is a structural property of the file rather than a hand-measurement. Proven by actually scrolling: a real mouse-wheel traversal at ordinary cadence (53 gestures) reached **all 18 major beats at full opacity** — nothing skipped, no feathering needed.
 
-Packet: `docs/agent-system/work-packets/active/SLICE-1-REPAIR-SCROLL-CINEMATIC.md`
-Waypoint: `docs/agent-system/WAYPOINT-2026-08-28_SLICE-1-REPAIR.md`
-Original (superseded, not overwritten) closeout: `docs/closeout/2026-08-28_SLICE-1-OPENING-FAILURE-SEQUENCE_CLOSEOUT.md`
+Also repaired: the nav pill now keeps a permanent 16px inset from the top of the viewport instead of creeping flush during scroll, and the duplicate `HERA OS` destination is gone from the right-hand links.
+
+Four defects were found and fixed inside this cycle (arrival cue clipped below the fold, curtain reading as scattered icons, curtain resting above the answer instead of burying it, and the card pile showing every card's text at once). Build passes and `npm run check` holds at exactly the 122-error baseline.
+
+**Three questions are waiting on Favour** (all in the closeout): the opening is ~21 screen-heights long, which is a direct consequence of nineteen beats each needing a real reading hold; the arrival screen has a lot of empty black below the message; and very fast flicking can catch promises 1–3 mid-fade.
+
+Closeout: `docs/closeout/2026-08-29_SLICE-1-FIX-2_CLOSEOUT.md`
+Packet (closed): `docs/agent-system/work-packets/closed/SLICE-1-FIX-2-OPENING-SCROLL-STORY.md`
+Evidence: `docs/agent-system/screenshots/slice-1-fix-2/`
+Previous (superseded, not overwritten) closeouts: `docs/closeout/2026-08-28_SLICE-1-REPAIR-SCROLL-CINEMATIC_CLOSEOUT.md`, `docs/closeout/2026-08-28_SLICE-1-OPENING-FAILURE-SEQUENCE_CLOSEOUT.md`
 
 **HERA Early Access Public Release (EA-V2-PUBLIC)** (updated 2026-08-26) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
@@ -82,9 +89,9 @@ Closeout: `docs/closeout/2026-08-07_SECTION-01-ANIMATION-FOUNDATION_CLOSEOUT.md`
 
 ## Immediate next step
 
-**Finish and independently verify the Slice 1 repair, then hand Favour a link.**
+**Favour reviews the re-authored homepage opening.**
 
-The rebuilt opening exists and scrolls correctly; three visual defects are being repaired (the fake cursor missing the Send button, filenames truncating with an ellipsis in the rain, and the rain not yet dense enough to genuinely bury the AI's answer). Independent verification and a live top-to-bottom watch follow. Favour is not asked to review until that is done.
+Scroll it slowly, top to bottom, with your own hand on the wheel — then scroll back up. Judge whether you immediately know to scroll, whether the file curtain feels overwhelming *fast* rather than slowly filling forever, whether the card pile reads as accumulating burden, and whether the HERA reveal lands in order. Three things need your decision: the opening's total length (~21 screens), the empty black below the message on the arrival screen, and whether fast flicking past promises 1–3 matters. The closeout lists the exact questions.
 
 Separately, whenever convenient: **Favour reviews Slide 1 on the About page.**
 
@@ -101,7 +108,7 @@ Once Slide 1 is approved we build Slides 2–5 using the same shell.
 
 ## Blockers / decisions required from Favour
 
-**1. HERA homepage opening sequence review** — gates Slice 2 of the homepage revamp (do not start it until this is reviewed, per the slice's own instruction). Currently being repaired; not ready for review yet.
+**1. HERA homepage opening sequence review** — gates Slice 2 of the homepage revamp (do not start it until this is reviewed, per the slice's own instruction). Re-authored per Fix 2 and independently verified 2026-08-29; **ready for review now**.
 
 **2. About page visual review** — Required before Slice 3 begins.
 See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check and what to tell us.
@@ -121,4 +128,4 @@ See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check 
 - Slice 2 (About page): committed 2026-08-06 (hash `374017c`)
 - Workflow repair (this update): 2026-08-07
 
-*Last updated: 2026-08-28 — Slice 1 rejected by Favour on interaction concept and re-opened as a scroll-controlled rebuild. Also adopted four new workflow laws (worker resumption on addendums, context reuse as cost accounting, intentional model routing, browser transport fallback) into OPERATING-CONTRACT §R/§F2/§M and BROWSER-TESTING-PROTOCOL.*
+*Last updated: 2026-08-29 — Slice 1 opening re-authored per Favour's Fix 2 document (no blank arrival, chat chrome deleted, continuous `.md` curtain, accumulating panic card pile, one cinematic type scale, anchored promise/final slot, budgeted scroll pacing, permanent nav inset, duplicate HERA OS removed). Verified in a real browser at four viewports plus reduced motion, and by real mouse-wheel traversal. Waiting for Favour's visual review.*
