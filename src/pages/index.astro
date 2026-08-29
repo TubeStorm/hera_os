@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MediaFrame from '../components/MediaFrame.astro';
+import OpeningFailureSequence from '../components/OpeningFailureSequence.astro';
 import { withBase, contact } from '../data/site';
 import { heraMedia } from '../data/lineage';
 
@@ -35,34 +36,7 @@ const discoveries = [
 ---
 
 <BaseLayout description="HERA turns messy founder thinking into an executable AI roadmap.">
-  <section id="hero-section" class="flex min-h-[92vh] flex-col items-center justify-center text-center">
-    <div class="container-prose animate-rise">
-      <p class="eyebrow justify-center">HERA OS</p>
-      <h1 class="mt-6 text-display font-semibold tracking-tightest">
-        Messy founder thinking, turned into an executable AI roadmap.
-      </h1>
-    </div>
-    <button id="hero-next" class="scroll-gate hero-gate is-visible animate-rise" style="animation-delay: 400ms" type="button" aria-label="Continue to the problem">
-      <span>↓</span>
-    </button>
-  </section>
-
-  <section id="lit-section" class="relative" style="height: 240vh">
-    <div class="sticky top-0 flex h-screen items-center justify-center">
-      <div class="lit-gate-stack">
-        <p id="lit-text" class="container-prose text-h2 font-semibold leading-snug sm:text-h1">
-          AI builds faster than you can think now. Pieces of your product appear in minutes, scattered across chats you will never find again.
-
-          Generation stopped being the bottleneck.
-
-          Keeping the work coherent is.
-        </p>
-        <button id="lit-next" class="scroll-gate" type="button" aria-label="Continue to the HERA demo">
-          <span>↓</span>
-        </button>
-      </div>
-    </div>
-  </section>
+  <OpeningFailureSequence />
 
   <section id="video-section" class="section gate-screen video-screen">
     <div class="video-gate-stack">
@@ -285,22 +259,6 @@ const discoveries = [
     overscroll-behavior-y: none;
   }
 
-  #lit-text :global(.w) {
-    color: var(--faint);
-    opacity: 0.25;
-    transition: color 0.25s linear, opacity 0.25s linear;
-  }
-
-  #lit-text :global(.w.near) {
-    color: var(--faint);
-    opacity: 1;
-  }
-
-  #lit-text :global(.w.lit) {
-    color: var(--ink);
-    opacity: 1;
-  }
-
   .gate-screen {
     position: relative;
     min-height: 100vh;
@@ -313,19 +271,11 @@ const discoveries = [
     padding-block: 0;
   }
 
-  .lit-gate-stack,
   .video-gate-stack {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .lit-gate-stack {
-    gap: clamp(26px, 4vh, 48px);
-  }
-
-  .video-gate-stack {
     gap: clamp(16px, 2.6vh, 28px);
   }
 
@@ -345,10 +295,6 @@ const discoveries = [
     pointer-events: none;
     transform: translateY(8px);
     transition: opacity 0.3s ease, transform 0.38s cubic-bezier(.2,.82,.2,1);
-  }
-
-  .hero-gate {
-    margin-top: clamp(28px, 5vh, 52px);
   }
 
   .scroll-gate.is-visible {
@@ -1094,8 +1040,6 @@ const discoveries = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    #lit-text :global(.w),
-    #lit-text :global(.w.near),
     .loop-step {
       opacity: 1 !important;
       color: var(--ink) !important;
@@ -1115,11 +1059,6 @@ const discoveries = [
 
 <script>
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const heroSection = document.getElementById('hero-section');
-  const heroNext = document.getElementById('hero-next');
-  const litSection = document.getElementById('lit-section');
-  const litText = document.getElementById('lit-text');
-  const litNext = document.getElementById('lit-next');
   const videoSection = document.getElementById('video-section');
   const videoNext = document.getElementById('video-next');
   const loopSection = document.getElementById('loop-section');
@@ -1129,8 +1068,7 @@ const discoveries = [
   const reviewChip = document.getElementById('review-chip');
   const steps = Array.from(document.querySelectorAll('.loop-step'));
 
-  let words = [];
-  let mode = 'hero';
+  let mode = 'intro';
   let loopIndex = 0;
   let transitionRunning = false;
   let wheelTotal = 0;
@@ -1140,16 +1078,10 @@ const discoveries = [
   let approvalReady = false;
   let hardLockY = null;
   let enforcingLock = false;
-
-  if (litText) {
-    const parts = (litText.textContent ?? '').trim().split(/\s+/);
-    litText.innerHTML = parts.map((word) => `<span class="w">${word}</span>`).join(' ');
-    words = Array.from(litText.querySelectorAll('.w'));
-  }
+  let lastScrollY = window.scrollY;
 
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   const sectionTop = (element) => Math.round(element.getBoundingClientRect().top + window.scrollY);
-  const litEnd = () => sectionTop(litSection) + litSection.offsetHeight - window.innerHeight;
   const loopExitY = () => sectionTop(discoveriesSection ?? loopSection) + 24;
 
   const lockScrollAt = (position) => {
@@ -1158,12 +1090,6 @@ const discoveries = [
 
   const unlockScroll = () => {
     hardLockY = null;
-  };
-
-  const progressIn = (element) => {
-    const rect = element.getBoundingClientRect();
-    const total = rect.height - window.innerHeight;
-    return total <= 0 ? 0 : clamp(-rect.top / total, 0, 1);
   };
 
   const easeInOut = (value) => value < 0.5
@@ -1258,52 +1184,8 @@ const discoveries = [
     }
   };
 
-  const updateLit = () => {
-    if (!litSection || !words.length) return;
-    const progress = progressIn(litSection);
-    const lit = Math.round(progress * 1.15 * words.length);
-    const nearWindow = Math.ceil(words.length * 0.25);
-
-    words.forEach((word, index) => {
-      word.classList.toggle('lit', index < lit);
-      word.classList.toggle('near', index >= lit && index < lit + nearWindow);
-    });
-
-    const atGate = window.scrollY >= litEnd() - 2;
-    if (mode === 'lit-scroll' && atGate) {
-      mode = 'lit-gate';
-      lockScrollAt(litEnd());
-    }
-    if (mode === 'lit-gate' && window.scrollY < litEnd() - 20) {
-      mode = 'lit-scroll';
-      unlockScroll();
-    }
-    litNext?.classList.toggle('is-visible', mode === 'lit-gate');
-  };
-
-  const goToHero = async () => {
-    mode = 'hero';
-    await scrollToPosition(sectionTop(heroSection), 680);
-    lockScrollAt(sectionTop(heroSection));
-  };
-
-  const goToLitStart = async () => {
-    mode = 'lit-scroll';
-    unlockScroll();
-    litNext?.classList.remove('is-visible');
-    await scrollToPosition(sectionTop(litSection), 720);
-  };
-
-  const goToLitGate = async () => {
-    mode = 'lit-gate';
-    litNext?.classList.add('is-visible');
-    await scrollToPosition(litEnd(), 700);
-    lockScrollAt(litEnd());
-  };
-
   const goToVideo = async () => {
     mode = 'video';
-    litNext?.classList.remove('is-visible');
     await scrollToPosition(sectionTop(videoSection), 760);
     lockScrollAt(sectionTop(videoSection));
   };
@@ -1335,7 +1217,20 @@ const discoveries = [
   };
 
   window.addEventListener('scroll', () => {
-    updateLit();
+    const y = window.scrollY;
+    const videoTop = sectionTop(videoSection);
+
+    // Only arm the video lock when the visitor actually crosses into it from
+    // above (lastScrollY was still short of the threshold). A visitor who
+    // just unlocked out of 'video' mode is typically resting AT videoTop —
+    // checking "currently >= threshold" alone would immediately re-trap them
+    // on their very next scroll-up tick.
+    if (mode === 'intro' && !transitionRunning && lastScrollY < videoTop - 2 && y >= videoTop - 2) {
+      mode = 'video';
+      lockScrollAt(videoTop);
+      window.scrollTo(0, videoTop);
+    }
+    lastScrollY = window.scrollY;
 
     if (
       !transitionRunning &&
@@ -1361,6 +1256,10 @@ const discoveries = [
 
     const y = window.scrollY;
 
+    if (mode === 'intro') {
+      return;
+    }
+
     if (mode === 'free') {
       if (event.deltaY < 0 && y <= loopExitY()) {
         event.preventDefault();
@@ -1369,39 +1268,12 @@ const discoveries = [
       return;
     }
 
-    if (mode === 'hero') {
-      if (event.deltaY > 0) event.preventDefault();
-      return;
-    }
-
-    if (mode === 'lit-scroll') {
-      if (event.deltaY > 0 && y + event.deltaY >= litEnd() - 2) {
-        event.preventDefault();
-        mode = 'lit-gate';
-        litNext?.classList.add('is-visible');
-        lockScrollAt(litEnd());
-        window.scrollTo(0, litEnd());
-      } else if (event.deltaY < 0 && y <= sectionTop(litSection) + 2) {
-        mode = 'hero';
-      }
-      return;
-    }
-
-    if (mode === 'lit-gate') {
-      event.preventDefault();
-      if (event.deltaY < 0) {
-        mode = 'lit-scroll';
-        unlockScroll();
-        litNext?.classList.remove('is-visible');
-        const releaseDistance = clamp(Math.abs(event.deltaY) * 1.4, 28, 96);
-        window.scrollTo(0, litEnd() - releaseDistance);
-      }
-      return;
-    }
-
     if (mode === 'video') {
       event.preventDefault();
-      if (event.deltaY < -16) goToLitGate();
+      if (event.deltaY < -16) {
+        mode = 'intro';
+        unlockScroll();
+      }
       return;
     }
 
@@ -1425,10 +1297,11 @@ const discoveries = [
     const endY = event.changedTouches[0]?.clientY ?? touchStartY;
     const delta = touchStartY - endY;
 
-    if (mode === 'hero' && delta > 35) return;
-
     if (mode === 'video') {
-      if (delta < -35) goToLitGate();
+      if (delta < -35) {
+        mode = 'intro';
+        unlockScroll();
+      }
       return;
     }
 
@@ -1442,22 +1315,13 @@ const discoveries = [
     }
   }, { passive: true });
 
-  heroNext?.addEventListener('click', goToLitStart);
-  litNext?.addEventListener('click', goToVideo);
   videoNext?.addEventListener('click', () => goToLoop(0));
 
   const initialiseModeFromPosition = () => {
     const y = window.scrollY;
-    if (y < sectionTop(litSection) - 2) {
-      mode = 'hero';
-      lockScrollAt(sectionTop(heroSection));
-    } else if (y < litEnd() - 2) {
-      mode = 'lit-scroll';
+    if (y < sectionTop(videoSection) - 2) {
+      mode = 'intro';
       unlockScroll();
-    } else if (y < sectionTop(videoSection) - 2) {
-      mode = 'lit-gate';
-      litNext?.classList.add('is-visible');
-      lockScrollAt(litEnd());
     } else if (y < sectionTop(loopSection) - 2) {
       mode = 'video';
       lockScrollAt(sectionTop(videoSection));
@@ -1473,13 +1337,11 @@ const discoveries = [
   initialiseModeFromPosition();
 
   if (reduced) {
-    words.forEach((word) => word.classList.add('lit'));
     steps.forEach((step) => step.classList.add('active'));
     flowStage.dataset.step = '7';
     flowStage.classList.add('is-approved');
     if (reviewChip) reviewChip.textContent = 'Approved';
   } else {
     setLoopState(0);
-    updateLit();
   }
 </script>

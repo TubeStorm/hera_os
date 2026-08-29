@@ -77,6 +77,8 @@ The coordinator and all subagents must operate exclusively within the primary re
 
 For animated, interactive, or highly visual portfolio work, the coordinator, builder, and verifier must first read `DESIGN-EXECUTION-STANDARD.md`. Its timeline, invariant-layout, production-reference, pause/reduced-motion, and rendered-proof requirements belong in the work packet rather than being left for taste-based repair after implementation.
 
+A builder's mandatory first read is `docs/agent-system/CHEAT-SHEET.md` — verified ports, commands, paths, and prior mistakes. Grepping for something already written there is wasted allowance. At completion, the builder updates it with anything new, or confirms with one dated line that nothing changed.
+
 A builder receives a **work packet** containing:
 
 - **Objective** — what must exist when done
@@ -116,6 +118,18 @@ The verifier **does not edit production code**.
 Failures are returned as a numbered defect list: criterion, observed behavior, expected behavior, relevant file/line.
 
 **Honesty rule:** The verifier must distinguish between source/build inspection and rendered-browser visual verification. If a browser was not opened, it must say so. File inspection does not substitute for visual proof.
+
+Any real defect the verifier finds is logged in `docs/agent-system/BUGS.md`, even one repaired in the same cycle — the sheet is the durable record.
+
+---
+
+## F2. Live-testing discipline
+
+For any animated, interactive, or highly visual public page, verification alone is not enough — a **live tester** watches the actual built sequence like a first-time visitor would: scrolls, clicks, resizes, checks reduced-motion, checks refresh/replay. It does not read source and cannot repair anything it finds.
+
+The live tester watches the whole sequence over time, not a screenshot of the end state. Pacing, overlap, and timing defects are exactly what this role exists to catch.
+
+**Tooling.** Whenever any role — coordinator, builder, verifier, or live tester — needs to drive a browser or capture screenshots, follow `docs/agent-system/BROWSER-TESTING-PROTOCOL.md` first. In short: if the embedded Claude Browser pane stops actually driving the page, switch transport (Claude in Chrome, then Playwright/other real browser automation) rather than spending the session diagnosing Anthropic's tool or reporting a tooling failure as a product defect. Every screenshot must be opened and actually checked against its claim before being used as evidence — retry up to three times per check, then report the residual honestly and move on.
 
 ---
 
@@ -243,6 +257,10 @@ The closeout must be understandable without reading the chat transcript.
 Human-facing result comes **before** technical receipt. Do not bury the outcome beneath logs.
 
 Be honest: if a browser was not opened, say so. Do not convert source inspection into visual proof.
+
+**A retrospective is required before the closeout is written**, not after. In 3–6 bullet points: what took longer than expected and why, what the packet/waypoint should have said but didn't, any workflow doc (this contract, the cheat sheet, the design standard) that should change as a result, and anything a future Chief should not have to re-learn. This goes in the closeout's Retrospective section — see `CLOSEOUT-TEMPLATE.md`. A closeout without one is incomplete.
+
+**Bugs and cheat sheets must both be touched before close.** Confirm `docs/agent-system/BUGS.md` reflects every real defect found this slice (even fixed ones), and `docs/agent-system/CHEAT-SHEET.md` has either a new entry or a dated confirmation that nothing needed adding. Neither file may go stale silently — an unchanged file with no dated confirmation reads as "nobody checked," not as "nothing to report."
 
 ---
 

@@ -67,6 +67,21 @@ What does this close unlock? What is the immediate next step?
 
 ---
 
+## Retrospective
+
+Written before this closeout, not after. 3–6 bullets:
+- What took longer than expected, and why?
+- What should the work packet or waypoint have said that it didn't?
+- Does any workflow doc (`OPERATING-CONTRACT.md`, `CHEAT-SHEET.md`, `DESIGN-EXECUTION-STANDARD.md`, `BROWSER-TESTING-PROTOCOL.md`) need a correction as a result?
+- Anything a future Chief/builder/verifier should not have to re-learn?
+
+## Bugs & cheat sheet touched?
+
+- `docs/agent-system/BUGS.md`: [rows added / confirmed nothing new, with date]
+- `docs/agent-system/CHEAT-SHEET.md`: [entry added / confirmed nothing new, with date]
+
+---
+
 ## Project records updated
 
 List every living document updated as part of this close:

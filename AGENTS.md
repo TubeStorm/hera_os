@@ -58,6 +58,16 @@ Defined in `.agents/agents/`. Use only when work is genuinely separable:
 
 Do not create a coordinator subagent. The main conversation **is** the coordinator.
 
+## Claude Code subagents
+
+Defined in `.claude/agents/` — same roles, ported for the Claude Code runtime, plus a live-testing role the Antigravity set doesn't have:
+
+- `portfolio-builder` — implements one bounded approved packet
+- `portfolio-verifier` — independent acceptance check, source + browser
+- `portfolio-live-tester` — watches the rendered, animated sequence like a first-time visitor; cannot read source or repair anything
+
+Before driving any browser or capturing evidence, every role reads `docs/agent-system/BROWSER-TESTING-PROTOCOL.md`. Every build/verify/live-test cycle touches `docs/agent-system/CHEAT-SHEET.md` and `docs/agent-system/BUGS.md` before close, and every closeout includes a retrospective — see `OPERATING-CONTRACT.md` §F2 and §M.
+
 ---
 
 ## Claude Code adapter

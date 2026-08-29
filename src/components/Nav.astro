@@ -1,5 +1,5 @@
 ---
-import { nav, site, withBase } from '../data/site';
+import { nav, withBase } from '../data/site';
 const current = Astro.url.pathname.replace(/\/$/, '');
 const isActive = (href: string) => {
   const target = withBase(href).replace(/\/$/, '');
@@ -14,18 +14,27 @@ const isActive = (href: string) => {
       class="mt-4 flex items-center justify-between rounded-pill border border-line bg-[color:var(--surface)]/80 px-4 py-2.5 backdrop-blur-xl sm:px-5"
       aria-label="Primary"
     >
-      <a href={withBase('')} class="group flex items-center gap-2.5 pl-1 text-sm font-semibold tracking-tight">
-        <span class="grid h-7 w-7 place-items-center rounded-lg bg-ink text-[13px] font-bold text-paper">F</span>
-        <span class="hidden sm:inline">{site.name}</span>
+      <a href={withBase('')} class="group flex shrink-0 items-center gap-2.5 pl-1 text-sm font-semibold tracking-tight">
+        <picture class="block shrink-0">
+          <source srcset={withBase('images/hera/logo/hera-logo-1254.webp')} type="image/webp" />
+          <img
+            src={withBase('images/hera/logo/hera-logo-1254.png')}
+            alt="HERA OS"
+            width="28"
+            height="28"
+            class="h-7 w-7 shrink-0 rounded-lg bg-[#0c0c10] object-contain p-1"
+          />
+        </picture>
+        <span class="hidden sm:inline">HERA OS</span>
       </a>
 
-      <div class="flex items-center gap-1">
+      <div class="nav-links flex min-w-0 flex-1 items-center justify-start gap-1 overflow-x-auto sm:justify-end">
         {
           nav.map((item) => (
             <a
               href={withBase(item.href)}
               class:list={[
-                'rounded-pill px-3 py-1.5 text-sm transition-colors duration-200',
+                'shrink-0 whitespace-nowrap rounded-pill px-3 py-1.5 text-sm transition-colors duration-200',
                 isActive(item.href) ? 'text-ink' : 'text-muted hover:text-ink',
               ]}
               aria-current={isActive(item.href) ? 'page' : undefined}
@@ -38,3 +47,18 @@ const isActive = (href: string) => {
     </nav>
   </div>
 </header>
+
+<style>
+  /* Mobile: too many nav destinations to fit one row without wrapping or
+     clipping (e.g. "Ubisoft Work" + "Contact" at once). Scroll horizontally
+     inside the pill rather than wrapping labels to two lines or letting
+     later items run off-canvas. Scrollbar hidden for a clean pill edge. */
+  .nav-links {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+</style>

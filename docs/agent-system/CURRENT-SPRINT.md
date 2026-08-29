@@ -22,11 +22,9 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 | # | Step | Status |
 |---|---|---|
-<<<<<<< Updated upstream
 | 0 | **Public release split** — hide Ubisoft work, new resume, deploy to main | ✅ CLOSED 2026-08-19 |
-=======
-| 0 | HERA Early Access Public Release (EA-V2-PUBLIC) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
->>>>>>> Stashed changes
+| 0b | HERA Early Access Public Release (EA-V2-PUBLIC) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
+| 0c | **HERA homepage revamp — Slice 1** (opening failure sequence + first HERA reveal; see `docs/preflights/hera website revamp/`) | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 1 | Install and prove persistent agent operating system | ✅ FAVOUR ACCEPTED / CLOSED |
 | 2 | Audit portfolio-relevant repository and content truth | ✅ FAVOUR ACCEPTED / CLOSED |
 | 3 | Define About page architecture | ✅ FAVOUR ACCEPTED / CLOSED |
@@ -44,9 +42,15 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 ## Current active work
 
+**HERA homepage revamp — Slice 1: opening failure sequence** (updated 2026-08-28) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
+
+The homepage now opens with an animated sequence: an AI finishes fast, `.md` files pile up, panicked human thoughts surface over the clutter, it hits a visual breaking point, then clears decisively into the real HERA logo and a cycling "You lead..." statement landing on "You lead. HERA keeps up." Nav brand also fixed to show the real HERA logo + "HERA OS" instead of Favour's name. Built, independently verified (verifier + live tester), two confirmed mobile defects repaired and re-verified. One item stayed genuinely unverified in-browser this session (`prefers-reduced-motion` — no available tool could emulate it; code implements it correctly using an already-trusted pattern).
+
+Closeout: `docs/closeout/2026-08-28_SLICE-1-OPENING-FAILURE-SEQUENCE_CLOSEOUT.md`
+
 **HERA Early Access Public Release (EA-V2-PUBLIC)** (updated 2026-08-26) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
-The enhanced HERA Early Access signup funnel has been released to `main` and verified live on GitHub Pages ([https://TubeStorm.github.io/hera_os/](https://TubeStorm.github.io/hera_os/)). Features include discovery dropdown, deterministic HERA alias generator, inline pixel agent preview on confirmation, and labeled footer agents (`Iris` in gold and visitor alias in subtle white). All changes maintain 100% isolation from WIP Ubisoft and About page materials.
+The enhanced HERA Early Access signup funnel has been released to `main` and verified live on GitHub Pages ([https://TubeStorm.github.io/hera_os/](https://TubeStorm.github.io/hera_os/)). Features include discovery dropdown, deterministic HERA alias generator, inline pixel agent preview on confirmation, and labeled footer agents (`Iris` in gold and visitor alias in subtle white). All changes maintain 100% isolation from WIP Ubisoft and About page materials. **Note (found 2026-08-28):** this funnel exists on `main` but not yet on `portfolio-week1` — the two branches haven't converged, so `portfolio-week1` currently has no Early Access funnel at all. Worth a decision from Favour on when/whether to bring it over.
 
 Closeout: `docs/closeout/2026-08-26_EA-V2-PUBLIC_CLOSEOUT.md`
 
@@ -72,9 +76,13 @@ Closeout: `docs/closeout/2026-08-07_SECTION-01-ANIMATION-FOUNDATION_CLOSEOUT.md`
 
 ## Immediate next step
 
-**Favour reviews Slide 1 on the About page.**
+**Favour reviews the new HERA homepage opening sequence.**
 
-Dev server is ready. Open: **http://localhost:4323/hera_os/about/** and scroll to Section 01.
+Dev server is ready. Open: **http://localhost:4321/hera_os/** and watch the sequence load-to-landing, then scroll past it into the existing demo section, then refresh and watch it again.
+
+See `docs/closeout/2026-08-28_SLICE-1-OPENING-FAILURE-SEQUENCE_CLOSEOUT.md` for the exact questions to judge (pacing, the adaptive-theme vs. always-black canvas call, whether "HERA OS" reads right as the homepage brand).
+
+Separately, whenever convenient: **Favour reviews Slide 1 on the About page.**
 
 Check:
 1. The parent "How do you find the real problem?" heading is visually dominant
@@ -83,16 +91,20 @@ Check:
 4. Nothing overlaps, no borders visible on the canvas
 5. Click the → arrow to confirm slides 2–4 still work
 
-Tell us what you see. Once Slide 1 is approved we build Slides 2–5 using the same shell.
+Once Slide 1 is approved we build Slides 2–5 using the same shell.
 
 ---
 
 ## Blockers / decisions required from Favour
 
-**1. About page visual review** — Required before Slice 3 begins.
+**1. HERA homepage opening sequence review** — gates Slice 2 of the homepage revamp (do not start it until this is reviewed, per the slice's own instruction).
+
+**2. About page visual review** — Required before Slice 3 begins.
 See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check and what to tell us.
 
-**2. Ubisoft Work (Slice 3)** — No additional decisions needed from Favour before build begins, but the Slice 2 review is the gate.
+**3. Ubisoft Work (Slice 3)** — No additional decisions needed from Favour before build begins, but the Slice 2 review is the gate.
+
+**4. Early Access branch convergence** — `main` has the shipped Early Access funnel; `portfolio-week1` doesn't yet. When/whether to bring them together is Favour's call.
 
 ---
 
@@ -105,4 +117,4 @@ See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check 
 - Slice 2 (About page): committed 2026-08-06 (hash `374017c`)
 - Workflow repair (this update): 2026-08-07
 
-*Last updated: 2026-08-10 — Slide 2 context story and shared design-execution workflow built and browser-checked; waiting for Favour visual review.*
+*Last updated: 2026-08-28 — HERA homepage revamp Slice 1 (opening failure sequence) built, independently verified, two mobile defects repaired and re-verified; waiting for Favour review. Also fixed a stale unresolved merge-conflict in this file's own sprint table (see BUGS.md BUG-001).*

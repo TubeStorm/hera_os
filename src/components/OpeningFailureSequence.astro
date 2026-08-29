@@ -1,0 +1,561 @@
+---
+// Homepage opening: an animated failure sequence dramatizing "the AI finished
+// fast, but the work around it is where things actually break," clearing into
+// the first real HERA reveal. Autoplays once per page load; replays on refresh.
+// See docs/agent-system/work-packets/active/SLICE-1-OPENING-FAILURE-SEQUENCE.md.
+import { withBase } from '../data/site';
+
+const logoWebp = withBase('images/hera/logo/hera-logo-1254.webp');
+const logoPng = withBase('images/hera/logo/hera-logo-1254.png');
+const mdIcon = withBase('images/ui/md-file-icon.png');
+
+// Phase 2 — filenames + stagger. One is nothing, then another, then suddenly
+// too much shit. Delays accelerate (gaps shrink) to sell the "multiplying" feel.
+const files: { name: string; left: number; top: number; rot: number; delay: number }[] = [
+  { name: 'CURRENT-SPRINT.md', left: 9, top: 20, rot: -6, delay: 1900 },
+  { name: 'handoff.md', left: 79, top: 15, rot: 5, delay: 2700 },
+  { name: 'task-03-notes.md', left: 15, top: 62, rot: 4, delay: 3350 },
+  { name: 'decision-log.md', left: 83, top: 58, rot: -5, delay: 3900 },
+  { name: 'research.md', left: 34, top: 80, rot: -3, delay: 4380 },
+  { name: 'FINAL-final-v2.md', left: 60, top: 82, rot: 6, delay: 4780 },
+  { name: 'handoff-latest-REAL.md', left: 47, top: 11, rot: -4, delay: 5100 },
+  { name: 'fix-notes-final-final.md', left: 25, top: 42, rot: 3, delay: 5360 },
+];
+
+// Phase 3 — human thoughts fighting for attention over the clutter. Escalating.
+// `essential` lines survive the mobile-adapted (lower-density) layout.
+const thoughts: { text: string; left: number; top: number; delay: number; essential?: boolean; urgent?: boolean }[] = [
+  { text: 'Did I give it the right file?', left: 50, top: 28, delay: 3000, essential: true },
+  { text: 'Where did it save that?', left: 28, top: 50, delay: 3700 },
+  { text: 'Wait. We already did this.', left: 70, top: 47, delay: 4300, essential: true },
+  { text: 'Which task are we on?', left: 50, top: 66, delay: 4800 },
+  { text: 'STOP MAKING NEW BRANCHES.', left: 50, top: 87, delay: 5200, essential: true, urgent: true },
+];
+
+// Phase 5 — one evolving statement, fixed prefix, cycling suffix.
+const suffixes = [
+  'remembers the project.',
+  'keeps the work moving.',
+  'knows where the work lives.',
+  'keeps decisions attached.',
+  'asks when the decision is yours.',
+];
+---
+
+<section id="opening-sequence" class="opening-sequence" data-stage="opening">
+  <p class="sr-only">
+    Animated introduction: an AI finishes a task in three minutes, then documents, half-finished
+    decisions, and questions pile up around it. The sequence resolves on the HERA mark and the line
+    "You lead. HERA keeps up."
+  </p>
+
+  <div class="opening-stage container-page">
+    <div class="phase-1">
+      <p class="eyebrow justify-center animate-rise">HERA OS</p>
+      <p class="opening-line animate-rise text-display font-semibold tracking-tightest" style="animation-delay:120ms">
+        Your AI finished in 3 minutes.
+      </p>
+
+      <div class="ai-response-card card animate-rise" style="animation-delay:520ms" aria-hidden="true">
+        <p class="ai-role">USER</p>
+        <p class="ai-line ai-user">Make a small website change</p>
+        <p class="ai-role">AGENT</p>
+        <p class="ai-line ai-agent">
+          Better - but for a reason worth naming. Your instinct was right and the diagnosis was more
+          literal than a layout preference: clicking a variant did change the answer, but the answer
+          was rendered below the fold behind a collapse, and re-rendering the pane threw away its
+          scroll position, so the screen snapped to the top. Two separate faults producing one
+          feeling of "nothing responded." The scroll reset was a straight bug - panes now keep their
+          own scrollTop across a render, so clicking a tile no longer moves the page at all. That fix
+          alone was worth it.
+        </p>
+        <p class="ai-line ai-agent">
+          The column is the other half. Selection has to change something at eye level, and it now
+          does: the detail column sits beside the viewer, never scrolls away, never collapses, and
+          fades on change so the swap is visible. The variant grid is where your cursor is; the
+          answer is one glance right of the image it describes.
+        </p>
+        <p class="ai-role">USER</p>
+        <p class="ai-line ai-user">😨 or 🫩</p>
+      </div>
+    </div>
+
+    <div class="clutter-layer" aria-hidden="true">
+      {files.map((file, i) => (
+        <div
+          class="md-file"
+          data-file={i + 1}
+          style={`--x:${file.left}%; --y:${file.top}%; --r:${file.rot}deg; animation-delay:${file.delay}ms;`}
+        >
+          <img src={mdIcon} alt="" loading="eager" />
+          <span>{file.name}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="thought-layer" aria-hidden="true">
+      {thoughts.map((thought, i) => (
+        <p
+          class:list={['human-thought', thought.urgent && 'is-urgent']}
+          data-thought={i + 1}
+          data-essential={thought.essential ? 'true' : 'false'}
+          style={`--x:${thought.left}%; --y:${thought.top}%; animation-delay:${thought.delay}ms;`}
+        >
+          {thought.text}
+        </p>
+      ))}
+    </div>
+
+    <div class="landing-layer">
+      <picture>
+        <source srcset={logoWebp} type="image/webp" />
+        <img class="hera-logo" src={logoPng} alt="HERA" width="120" height="120" />
+      </picture>
+      <p class="hera-wordmark"># HERA</p>
+      <p class="lead-line text-h2 font-semibold">
+        <span class="lead-prefix">You lead. It</span>{' '}<span id="lead-suffix" class="lead-suffix">{suffixes[0]}</span>
+      </p>
+      <p id="landing-line" class="landing-line text-h2 font-semibold">You lead. HERA keeps up.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .opening-sequence {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .opening-stage {
+    position: relative;
+    display: flex;
+    min-height: clamp(560px, 92svh, 920px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .opening-stage::after {
+    content: '';
+    position: absolute;
+    inset: -4%;
+    z-index: 9;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(ellipse at center, transparent 42%, rgba(0, 0, 0, 0.4) 100%);
+    transition: opacity 0.35s ease;
+  }
+
+  #opening-sequence[data-stage='breaking'] .opening-stage::after {
+    opacity: 1;
+  }
+
+  #opening-sequence[data-stage='breaking'] .opening-stage {
+    animation: openingShake 0.6s ease-in-out;
+  }
+
+  @keyframes openingShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-3px) rotate(-0.15deg); }
+    40% { transform: translateX(3px) rotate(0.15deg); }
+    60% { transform: translateX(-2px); }
+    80% { transform: translateX(2px); }
+  }
+
+  /* Phase 1 --------------------------------------------------------- */
+  .phase-1 {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(20px, 3vh, 32px);
+  }
+
+  .opening-line {
+    max-width: 18ch;
+  }
+
+  .ai-response-card {
+    width: min(560px, 84vw);
+    max-height: 260px;
+    overflow: hidden;
+    padding: 20px 22px;
+    text-align: left;
+    -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+  }
+
+  .ai-role {
+    margin-top: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--faint);
+  }
+
+  .ai-role:first-child {
+    margin-top: 0;
+  }
+
+  .ai-line {
+    margin-top: 4px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .ai-user {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .ai-agent {
+    color: var(--muted);
+  }
+
+  /* Phase 2 — the mess ------------------------------------------------ */
+  .clutter-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .md-file {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    display: flex;
+    width: 108px;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-14px) scale(0.9) rotate(var(--r, 0deg));
+    animation: clutterDrop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes clutterDrop {
+    0% { opacity: 0; transform: translate(-50%, -50%) translateY(-14px) scale(0.9) rotate(var(--r, 0deg)); }
+    60% { opacity: 1; transform: translate(-50%, -50%) translateY(3px) scale(1.04) rotate(var(--r, 0deg)); }
+    100% { opacity: 1; transform: translate(-50%, -50%) translateY(0) scale(1) rotate(var(--r, 0deg)); }
+  }
+
+  .md-file img {
+    width: 34px;
+    height: 34px;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+  }
+
+  .md-file span {
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 3px 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 10px;
+    color: var(--muted);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Phase 3 — human thoughts ------------------------------------------ */
+  .thought-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    pointer-events: none;
+  }
+
+  .human-thought {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    max-width: 30ch;
+    transform: translate(-50%, -50%) translateY(6px) scale(0.92);
+    opacity: 0;
+    animation: thoughtPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+  }
+
+  .human-thought.is-urgent {
+    font-size: 20px;
+    color: #d64545;
+  }
+
+  @keyframes thoughtPop {
+    from { opacity: 0; transform: translate(-50%, -50%) translateY(6px) scale(0.92); }
+    to { opacity: 1; transform: translate(-50%, -50%) translateY(0) scale(1); }
+  }
+
+  /* Phase 4/5 — clearing ------------------------------------------------ */
+  #opening-sequence[data-stage='clearing'] .phase-1,
+  #opening-sequence[data-stage='clearing'] .clutter-layer,
+  #opening-sequence[data-stage='clearing'] .thought-layer,
+  #opening-sequence[data-stage='reveal'] .phase-1,
+  #opening-sequence[data-stage='reveal'] .clutter-layer,
+  #opening-sequence[data-stage='reveal'] .thought-layer,
+  #opening-sequence[data-stage='resolved'] .phase-1,
+  #opening-sequence[data-stage='resolved'] .clutter-layer,
+  #opening-sequence[data-stage='resolved'] .thought-layer {
+    opacity: 0;
+    transform: scale(0.94) translateY(-18px);
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Phase 5 — HERA reveal ------------------------------------------------ */
+  .landing-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #opening-sequence[data-stage='reveal'] .landing-layer,
+  #opening-sequence[data-stage='resolved'] .landing-layer {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .hera-logo {
+    width: clamp(64px, 9vw, 96px);
+    height: auto;
+    opacity: 0;
+  }
+
+  #opening-sequence[data-stage='reveal'] .hera-logo,
+  #opening-sequence[data-stage='resolved'] .hera-logo {
+    animation:
+      logoReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both,
+      hera-logo-pulse 2.4s ease-in-out 0.7s infinite;
+  }
+
+  @keyframes hera-logo-pulse {
+    0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px rgba(158, 129, 254, 0.58)) drop-shadow(0 0 18px rgba(76, 91, 255, 0.28)); }
+    50% { opacity: 0.78; filter: drop-shadow(0 0 18px rgba(214, 202, 254, 0.88)) drop-shadow(0 0 28px rgba(76, 91, 255, 0.5)); }
+  }
+
+  @keyframes logoReveal {
+    from { opacity: 0; transform: scale(0.75); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .hera-wordmark {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    opacity: 0;
+  }
+
+  #opening-sequence[data-stage='reveal'] .hera-wordmark,
+  #opening-sequence[data-stage='resolved'] .hera-wordmark {
+    animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .lead-line,
+  .landing-line {
+    opacity: 0;
+  }
+
+  #opening-sequence[data-stage='reveal'] .lead-line {
+    animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both;
+  }
+
+  #opening-sequence[data-stage='resolved'] .lead-line {
+    display: none;
+  }
+
+  .lead-suffix {
+    display: inline-block;
+    transition: opacity 0.26s ease;
+  }
+
+  .lead-suffix.is-swapping {
+    opacity: 0;
+  }
+
+  .landing-line {
+    display: none;
+  }
+
+  #opening-sequence[data-stage='resolved'] .landing-line {
+    display: block;
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Mobile adaptation — authored, not a shrunk desktop layout ---------- */
+  @media (max-width: 640px) {
+    .opening-stage {
+      min-height: clamp(600px, 100svh, 760px);
+    }
+
+    .opening-line {
+      max-width: 14ch;
+      font-size: clamp(1.9rem, 9vw, 2.6rem);
+    }
+
+    .ai-response-card {
+      width: 90vw;
+      max-height: 200px;
+      padding: 16px 18px;
+    }
+
+    /* Files and thoughts occupy only the empty band above the headline and
+       below the AI card — the card runs edge-to-edge at this width, so
+       there is no clear space beside it, only above and below it. */
+    .md-file {
+      width: 92px;
+    }
+
+    .md-file img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .md-file span {
+      font-size: 9px;
+      line-height: 1.2;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      word-break: break-word;
+    }
+
+    .md-file[data-file='1'] { left: 18%; top: 7%; }
+    .md-file[data-file='2'] { left: 80%; top: 6%; }
+    .md-file[data-file='3'] { left: 20%; top: 82%; }
+    .md-file[data-file='4'] { left: 78%; top: 81%; }
+    .md-file[data-file='5'] { left: 50%; top: 13%; }
+    .md-file[data-file='6'],
+    .md-file[data-file='7'],
+    .md-file[data-file='8'] {
+      display: none;
+    }
+
+    .human-thought {
+      max-width: 20ch;
+      font-size: 13px;
+    }
+
+    .human-thought.is-urgent {
+      font-size: 16px;
+    }
+
+    .human-thought[data-essential='false'] {
+      display: none;
+    }
+
+    .human-thought[data-thought='1'] { left: 50%; top: 22%; }
+    .human-thought[data-thought='3'] { left: 50%; top: 90%; }
+    .human-thought[data-thought='5'] { left: 50%; top: 95%; }
+
+    .lead-line,
+    .landing-line {
+      font-size: 1.2rem;
+      max-width: 22ch;
+    }
+  }
+
+  /* Reduced motion — coherent landing state, no escalation ------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .phase-1,
+    .clutter-layer,
+    .thought-layer {
+      display: none !important;
+    }
+
+    .opening-stage::after {
+      display: none !important;
+    }
+
+    .landing-layer {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    .hera-logo {
+      opacity: 1 !important;
+      animation: hera-logo-pulse 2.4s ease-in-out infinite !important;
+    }
+
+    .hera-wordmark,
+    .landing-line {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
+
+    .landing-line {
+      display: block !important;
+    }
+
+    .lead-line {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  const section = document.getElementById('opening-sequence');
+  const leadSuffix = document.getElementById('lead-suffix');
+
+  const suffixes = [
+    'remembers the project.',
+    'keeps the work moving.',
+    'knows where the work lives.',
+    'keeps decisions attached.',
+    'asks when the decision is yours.',
+  ];
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const setStage = (stage: string) => {
+    if (section) section.dataset.stage = stage;
+  };
+
+  const swapSuffix = (index: number) => {
+    if (!leadSuffix) return;
+    leadSuffix.classList.add('is-swapping');
+    window.setTimeout(() => {
+      leadSuffix.textContent = suffixes[index] ?? '';
+      leadSuffix.classList.remove('is-swapping');
+    }, 260);
+  };
+
+  if (reduced) {
+    setStage('resolved');
+  } else {
+    setStage('opening');
+
+    const at = (ms: number, fn: () => void) => window.setTimeout(fn, ms);
+
+    at(5450, () => setStage('breaking'));
+    at(6150, () => setStage('clearing'));
+    at(6700, () => setStage('reveal'));
+
+    at(8300, () => swapSuffix(1));
+    at(9850, () => swapSuffix(2));
+    at(11400, () => swapSuffix(3));
+    at(12950, () => swapSuffix(4));
+    at(14500, () => setStage('resolved'));
+  }
+</script>
