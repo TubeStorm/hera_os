@@ -1,6 +1,6 @@
-> **STATUS:** 🟡 IN PROGRESS
+> **STATUS:** 🟡 DONE — BUILT + VERIFIED, WAITING FOR FAVOUR REVIEW
 > **Date:** 2026-08-28
-> **Reason:** Chief Coordinator started the Slice 1 repair. Active packet: `docs/agent-system/work-packets/active/SLICE-1-REPAIR-SCROLL-CINEMATIC.md`.
+> **Reason:** Repair implemented, independently verified (22/22 acceptance criteria in a real browser), and live-tested. Four defects found and repaired; one Blocker filed by the live tester was independently refuted as intentional pre-existing behaviour. Packet closed to `docs/agent-system/work-packets/closed/SLICE-1-REPAIR-SCROLL-CINEMATIC.md`; closeout at `docs/closeout/2026-08-28_SLICE-1-REPAIR-SCROLL-CINEMATIC_CLOSEOUT.md`. Not accepted until Favour reviews.
 > **Resolved ambiguity:** the doc contradicted itself on the final locked line. Favour confirmed 2026-08-28 — the final resting line is **"Stop managing your AI. Start giving it work."**, superseding "You lead. HERA keeps up." in the Scene 8 landing paragraph and in the acceptance test.
 
 

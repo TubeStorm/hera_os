@@ -79,3 +79,40 @@ If you cannot save evidence within your role's own tools, say so plainly in your
 ## Where evidence lives
 
 Archive human-facing screenshot sets under `docs/agent-system/screenshots/<slug>/` (see `screenshots/early-access-v2/` for the existing naming pattern: numbered, descriptive filenames). Reference the folder path in your report rather than pasting images inline.
+
+---
+
+## Lessons that became rules (Slice 1 repair, 2026-08-28)
+
+### Before filing a "stuck / trapped / broken" defect, exhaust the visible affordances
+
+A live tester filed a **Blocker** — "universal scroll trap, visitors can never reach the bottom of the page" — reproduced across five viewports with up to 78,000px of wheel delta. It was not a defect. It was the homepage's own intentional `#video-section` gate: in that mode every wheel event is deliberately cancelled and the only forward exit is **clicking the visible ↓ button**, which the tester never clicked. Past that, `#loop-section` advances one stage per gesture behind a ~560ms throttle, so wheel ticks fired faster than the throttle are swallowed and read as "stuck".
+
+Therefore, before recording any stuck/trapped/unreachable defect:
+
+1. **Try every visible on-screen affordance in that state** — buttons, arrows, cues, links. A gate with a visible control is a design decision, not a trap.
+2. **Drive input at human pace.** Many gated sections throttle gestures (here, ~560ms). A burst of programmatic ticks is not a human scrolling; it tests the throttle, not the page.
+3. **Check whether the behaviour predates the slice** before attributing it to it. Read `git log`/the diff for the file that owns the behaviour.
+4. **The Chief must independently reproduce any Blocker before it stands.** A Blocker that survives into a closeout unreproduced is a process failure.
+
+That the tester *concluded the page was broken* is still real signal about first-time-visitor comprehension — record it as a **UX question for Favour**, not as a defect. Both things can be true.
+
+### Quantitative claims must carry their method
+
+The builder measured `.md`-rain coverage over the AI response at **83.6%**; the verifier's independent grid-sampling script measured **72.7%** on the same frame. Neither was dishonest — the sampling densities and bounding-box selections differed.
+
+- Any number used as acceptance evidence must state **how it was measured**.
+- When two roles disagree, **record both numbers and the disagreement**, and let the **human/visual verdict on the actual rendered frame** decide the criterion.
+- Never let a single unreconciled figure enter the cheat sheet or a closeout as fact.
+
+### Judge continuous motion with continuous input
+
+The live tester reported the `.md` rain "reads as a dense static-feeling grid rather than continuously falling streams" — while sampling it with discrete `scrollTo` jumps. The verifier independently confirmed the transforms change continuously and monotonically with scroll progress.
+
+For scroll-scrubbed work: **discrete position jumps are valid for capturing a specific frame, and invalid for judging whether motion feels continuous.** Any perceptual claim about pacing, flow, or "does it feel like it's moving" must come from real, continuous wheel input.
+
+### Verify a capability is absent before recording it absent
+
+Three consecutive sessions recorded `prefers-reduced-motion` as unverifiable and "no Playwright installed in this repo." Playwright was installed the whole time — as the **Python** package rather than an npm devDependency, so `package.json` and `node_modules` checks both came up empty and nobody ran the one-line import. One command would have saved three sessions of hedged, unproven acceptance criteria.
+
+**A capability is "unavailable" only after you have actually tried to use it.** Absence from the obvious manifest is not proof.

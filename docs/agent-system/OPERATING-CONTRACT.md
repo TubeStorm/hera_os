@@ -121,6 +121,8 @@ Failures are returned as a numbered defect list: criterion, observed behavior, e
 
 Any real defect the verifier finds is logged in `docs/agent-system/BUGS.md`, even one repaired in the same cycle — the sheet is the durable record.
 
+**Blockers must be independently reproduced by the Chief before they stand** (added 2026-08-28). A Blocker asserts the work cannot ship. Before it is recorded as one, the Chief reproduces it personally. In this slice a live tester filed a Blocker — "universal scroll trap" — that turned out to be the homepage's own intentional gate with a visible ↓ button the tester never clicked; three minutes of independent testing refuted it. An unreproduced Blocker carried into a closeout is a process failure, and a false Blocker filed against a working page is as damaging as a missed defect. When a Blocker is refuted, **correct the BUGS.md entry rather than deleting it** — the refutation is itself durable knowledge — and consider whether the tester's *misreading* is real signal about first-time-visitor comprehension worth surfacing to Favour as a UX question.
+
 ---
 
 ## F2. Live-testing discipline

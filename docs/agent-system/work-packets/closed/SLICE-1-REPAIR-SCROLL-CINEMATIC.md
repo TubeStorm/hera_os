@@ -1,6 +1,10 @@
 # WORK PACKET — Slice 1 REPAIR: scroll-controlled opening cinematic
 
-> **STATUS:** 🟡 IN PROGRESS
+> **FINAL STATUS:** 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW
+> **Closed:** 2026-08-28
+> **Closeout:** `docs/closeout/2026-08-28_SLICE-1-REPAIR-SCROLL-CINEMATIC_CLOSEOUT.md`
+> **Favour accepted?** No — awaiting her visual review. Built, independently verified (22/22), live-tested; 4 defects found and repaired; 1 false Blocker refuted.
+>
 > **Date opened:** 2026-08-28
 > **Type:** Repair / revision of an already-built, agent-verified, **Favour-rejected** slice.
 > **Source instruction:** `docs/preflights/hera website revamp/Slice 1 fix 1.md` (read it in full — it is the specification of record; this packet operationalises it and does not replace it)
