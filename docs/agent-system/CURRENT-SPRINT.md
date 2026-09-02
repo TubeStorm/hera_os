@@ -37,12 +37,19 @@ Scope is deliberately narrow: install the operating system, define the two new p
 | 7 | Polish Ubisoft Work page (Slice 3) / **Gallery Foundation** | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 7b | RPM Story Architecture (Slice 8) | ✅ FAVOUR ACCEPTED / CLOSED |
 | 7c | **RPM Chapter 01 Evidence + Editorial Pass (Slice 9)** | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
+| 7d | **RPM Chapter 02 Evidence + Editorial Pass (Slice 12)** | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 8 | Verify all pages & build output (Slice 4) | ⬜ NOT STARTED |
 | 9 | Favour review, merge to main and publish (Slice 5) | ⬜ NOT STARTED |
 
 ---
 
 ## Current active work
+
+**RPM Chapter 02 Evidence + Editorial Pass (Slice 12)** (2026-09-02) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
+
+The second chapter of the RPM case study (`/rpm/changing-need/`) has been implemented in the private `favour-private-work` repository. The narrative was condensed into 7 tight beats focusing on capacity changes, continuity over time, and the semantic difference between Split and Duplicate. High-value evidence for Need Overrides and Split toast feedback was sourced and added. Five custom HTML/Tailwind diagrams were built to cleanly explain scenarios (like the 100%→50%→20% capacity timeline and early-departure states) without cluttering the page with UI. Desktop, mobile, and production builds successfully verified. Both repositories synchronized and pushed to GitHub.
+
+Closeout: `docs/closeout/2026-09-02_SLICE-12-RPM-CHAPTER-02_CLOSEOUT.md`
 
 **Reconcile HERA and Restore Production Parity (Slice 11A)** (2026-09-02) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
