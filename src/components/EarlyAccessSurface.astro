@@ -1,0 +1,764 @@
+---
+// src/components/EarlyAccessSurface.astro
+// Minimal, visually restrained early-access floating surface & persistent launcher for HERA OS.
+---
+
+<!-- Persistent Launcher Widget (Fixed bottom-right) -->
+<button
+  id="ea-launcher"
+  type="button"
+  aria-haspopup="dialog"
+  aria-expanded="false"
+  aria-controls="ea-panel"
+  aria-label="Early access sign up launcher"
+  data-early-access-trigger="launcher"
+  class="fixed bottom-5 right-5 z-40 inline-flex items-center gap-1.5 rounded-pill bg-ink px-4 py-2 text-xs font-medium text-paper shadow-md transition duration-300 ease-smooth hover:opacity-90 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+>
+  <span id="ea-launcher-label">Early access ✦</span>
+</button>
+
+<!-- Floating Early Access Surface Panel (Zero dark backdrop curtain) -->
+<div
+  id="ea-panel"
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="ea-title"
+  aria-describedby="ea-desc"
+  aria-hidden="true"
+  tabindex="-1"
+  data-open="false"
+  class="fixed bottom-16 right-5 sm:bottom-20 sm:right-6 z-50 w-[calc(100vw-2.5rem)] sm:w-[380px] rounded-card border border-line bg-surface p-5 sm:p-6 shadow-lift transition-all duration-300 ease-smooth opacity-0 pointer-events-none translate-y-3 scale-[0.98] data-[open=true]:opacity-100 data-[open=true]:pointer-events-auto data-[open=true]:translate-y-0 data-[open=true]:scale-100"
+>
+  <!-- Screen reader description -->
+  <span id="ea-desc" class="sr-only">HERA OS early access sign up form</span>
+
+  <!-- Header Bar: Title + Info Tooltip + Close Button -->
+  <div class="flex items-center justify-between">
+    <div class="relative flex items-center gap-2">
+      <h2 id="ea-title" class="text-base font-semibold tracking-tight text-ink">
+        Want in?
+      </h2>
+
+      <!-- Info Tooltip Trigger (ⓘ) -->
+      <button
+        id="ea-info-btn"
+        type="button"
+        aria-label="Privacy information"
+        aria-expanded="false"
+        aria-controls="ea-info-popover"
+        aria-describedby="ea-info-popover"
+        class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-line text-[10px] font-medium text-faint transition-colors hover:border-ink hover:text-ink focus:outline-none focus-visible:ring-1 focus-visible:ring-ink"
+      >
+        ⓘ
+      </button>
+
+      <!-- Info Tooltip Popover (Hidden by default, revealed on interaction) -->
+      <div
+        id="ea-info-popover"
+        role="tooltip"
+        aria-hidden="true"
+        class="absolute left-0 top-6 z-20 hidden w-64 rounded-lg border border-line bg-surface p-3 text-[11px] leading-relaxed text-muted shadow-card transition-opacity duration-200"
+      >
+        Early invites and occasional HERA updates. No spam. Leave whenever you want.
+      </div>
+    </div>
+
+    <!-- Subtle Close Button -->
+    <button
+      id="ea-close-btn"
+      type="button"
+      aria-label="Close early access form"
+      class="inline-flex h-6 w-6 items-center justify-center rounded-full text-faint transition-colors hover:bg-line/40 hover:text-ink focus:outline-none focus-visible:ring-1 focus-visible:ring-ink text-xs"
+    >
+      ✕
+    </button>
+  </div>
+
+  <!-- Form Container -->
+  <div id="ea-form-container" class="mt-4">
+    <form id="ea-form" class="space-y-3.5" novalidate>
+      <!-- Hidden Source Field for Referral Tracking -->
+      <input type="hidden" name="_source" value="hera-early-access" />
+
+      <!-- Email Field (Required) -->
+      <div>
+        <label for="ea-email" class="block text-xs font-medium text-ink">
+          Email <span class="text-accent" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="ea-email"
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          placeholder="you@domain.com"
+          class="mt-1 block w-full rounded-lg border border-line bg-paper px-3 py-2 text-xs text-ink placeholder:text-faint transition duration-200 ease-smooth focus:border-ink focus:outline-none"
+        />
+        <p id="ea-email-error" class="mt-1 hidden text-[11px] text-red-500" role="alert" aria-live="polite">
+          Please enter a valid email address.
+        </p>
+      </div>
+
+      <!-- Name Field (Optional) -->
+      <div>
+        <label for="ea-name" class="block text-xs font-medium text-ink">
+          Name <span class="font-normal text-faint">(optional)</span>
+        </label>
+        <input
+          id="ea-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          placeholder="Your name"
+          class="mt-1 block w-full rounded-lg border border-line bg-paper px-3 py-2 text-xs text-ink placeholder:text-faint transition duration-200 ease-smooth focus:border-ink focus:outline-none"
+        />
+      </div>
+
+      <!-- Use Case Field (Optional Textarea) -->
+      <div>
+        <label for="ea-use-case" class="block text-xs font-medium text-ink">
+          What would you use HERA for? <span class="font-normal text-faint">(optional)</span>
+        </label>
+        <textarea
+          id="ea-use-case"
+          name="use_case"
+          rows="2"
+          placeholder="e.g. Planning multi-agent product workflows..."
+          class="mt-1 block w-full resize-none rounded-lg border border-line bg-paper px-3 py-2 text-xs text-ink placeholder:text-faint transition duration-200 ease-smooth focus:border-ink focus:outline-none"
+        ></textarea>
+      </div>
+
+      <!-- Discovery Source Dropdown (Optional) -->
+      <div>
+        <label for="ea-how-heard" class="block text-xs font-medium text-ink">
+          How did you find HERA? <span class="font-normal text-faint">(optional)</span>
+        </label>
+        <select
+          id="ea-how-heard"
+          name="how_heard"
+          class="mt-1 block w-full rounded-lg border border-line bg-paper px-3 py-2 text-xs text-ink transition duration-200 ease-smooth focus:border-ink focus:outline-none"
+        >
+          <option value="">Choose one…</option>
+          <option value="LinkedIn">LinkedIn</option>
+          <option value="Reddit">Reddit</option>
+          <option value="X / Twitter">X / Twitter</option>
+          <option value="GitHub">GitHub</option>
+          <option value="Search">Search</option>
+          <option value="Friend / word of mouth">Friend / word of mouth</option>
+          <option value="Article / blog">Article / blog</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- Conditional "Other" Input Field (Optional) -->
+      <div id="ea-how-heard-other-container" class="hidden">
+        <label for="ea-how-heard-other" class="block text-xs font-medium text-ink">
+          Where did you find HERA? <span class="font-normal text-faint">(optional)</span>
+        </label>
+        <input
+          id="ea-how-heard-other"
+          name="how_heard_other"
+          type="text"
+          placeholder="e.g. Substack, Discord..."
+          class="mt-1 block w-full rounded-lg border border-line bg-paper px-3 py-2 text-xs text-ink placeholder:text-faint transition duration-200 ease-smooth focus:border-ink focus:outline-none"
+        />
+      </div>
+
+      <!-- Early Tester Checkbox -->
+      <div class="pt-0.5">
+        <label class="flex cursor-pointer items-start gap-2.5">
+          <input
+            id="ea-early-tester"
+            name="early_tester"
+            type="checkbox"
+            class="mt-0.5 h-3.5 w-3.5 rounded border border-line bg-paper text-ink accent-ink focus:ring-0 focus:outline-none"
+          />
+          <span class="select-none text-xs leading-tight text-muted">
+            I'm down to test unfinished things
+          </span>
+        </label>
+      </div>
+
+      <!-- Backend Error Notification Banner -->
+      <div
+        id="ea-error-banner"
+        class="hidden rounded-lg border border-red-500/20 bg-red-500/10 p-2.5 text-xs text-red-600 dark:text-red-400"
+        role="alert"
+        aria-live="assertive"
+      >
+        Something went wrong. Try again?
+      </div>
+
+      <!-- Submit Button -->
+      <div class="pt-1">
+        <button
+          id="ea-submit-btn"
+          type="submit"
+          class="btn-primary inline-flex w-full items-center justify-center gap-2 rounded-pill py-2.5 text-xs font-medium transition duration-300 ease-smooth hover:opacity-90 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          <span id="ea-submit-text">Count me in</span>
+          <svg
+            id="ea-spinner"
+            class="hidden h-3.5 w-3.5 animate-spin text-paper"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Success View (Phased Reveal Sequence) -->
+  <div id="ea-success-view" class="hidden py-6 text-center" aria-live="polite">
+    <p id="ea-success-heading" class="text-base font-semibold tracking-tight text-ink">
+      You're in.
+    </p>
+    <p id="ea-success-alias" class="mt-1 font-mono text-xs font-medium text-accent"></p>
+    <canvas id="ea-success-canvas" class="mx-auto my-3 block" width="24" height="30" aria-hidden="true"></canvas>
+    <p id="ea-success-sub" class="mt-2 text-xs leading-relaxed text-muted">
+      You'll find your agent hanging out with Iris at the bottom of the page.
+    </p>
+  </div>
+</div>
+
+<script>
+  // =========================================================================
+  // HERA OS Early Access Client Architecture & State Machine
+  // =========================================================================
+
+  const STORAGE_KEY = 'hera_early_access_signed_up';
+  const ALIAS_KEY = 'hera_ea_alias';
+  const SESSION_AGENT_KEY = 'hera_early_access_session_agent';
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mwlkevkp';
+
+  // 64 curated nature, celestial, signal, and craft nouns for deterministic HERA alias
+  const ALIAS_WORDS = [
+    'Aster', 'Atlas', 'Aura', 'Basalt', 'Beam', 'Birch', 'Bloom', 'Bolt',
+    'Breeze', 'Cedar', 'Cinder', 'Cirrus', 'Cliff', 'Clove', 'Crest', 'Drift',
+    'Dune', 'Echo', 'Ember', 'Fern', 'Finch', 'Flint', 'Flora', 'Frost',
+    'Gale', 'Glint', 'Grove', 'Halo', 'Haven', 'Hazel', 'Jade', 'Kite',
+    'Lark', 'Lichen', 'Loom', 'Lotus', 'Lumen', 'Lunar', 'Lynx', 'Meadow',
+    'Mica', 'Mist', 'Moss', 'Nebula', 'Nexus', 'Nova', 'Onyx', 'Orbit',
+    'Orion', 'Peak', 'Pine', 'Pip', 'Prism', 'Pulse', 'Quartz', 'Quill',
+    'Reed', 'Ridge', 'Rift', 'Rune', 'Sage', 'Silk', 'Slate', 'Solar',
+  ];
+  const ALIAS_SEPARATORS = ['-', '_', '+'];
+
+  // Safe Storage Accessors (Failure-proof in Private Browsing / Restricted Storage)
+  const safeStorage = {
+    getLocal(key: string): string | null {
+      try {
+        return window.localStorage.getItem(key);
+      } catch {
+        return null;
+      }
+    },
+    setLocal(key: string, value: string): void {
+      try {
+        window.localStorage.setItem(key, value);
+      } catch {}
+    },
+    getSession(key: string): string | null {
+      try {
+        return window.sessionStorage.getItem(key);
+      } catch {
+        return null;
+      }
+    },
+    setSession(key: string, value: string): void {
+      try {
+        window.sessionStorage.setItem(key, value);
+      } catch {}
+    },
+  };
+
+  // Deterministic 32-bit FNV-1a hash for email-derived alias
+  function hashEmail(email: string): number {
+    const normalized = email.trim().toLowerCase();
+    let hash = 2166136261;
+    for (let i = 0; i < normalized.length; i++) {
+      hash ^= normalized.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+  }
+
+  function generateHeraAlias(email: string): string {
+    const existing = safeStorage.getLocal(ALIAS_KEY) || safeStorage.getSession(ALIAS_KEY);
+    if (existing) return existing;
+
+    const hash = hashEmail(email);
+    const total = ALIAS_WORDS.length * ALIAS_SEPARATORS.length * 100;
+    const index = hash % total;
+
+    const wordIndex = index % ALIAS_WORDS.length;
+    const sepIndex = Math.floor(index / ALIAS_WORDS.length) % ALIAS_SEPARATORS.length;
+    const num = Math.floor(index / (ALIAS_WORDS.length * ALIAS_SEPARATORS.length)) % 100;
+
+    const numStr = String(num).padStart(2, '0');
+    return `${ALIAS_WORDS[wordIndex]}${ALIAS_SEPARATORS[sepIndex]}${numStr}`;
+  }
+
+  // Pixel sprite canvas rendering for success view (Amber Wanderer)
+  function renderSuccessAgentPreview(canvas: HTMLCanvasElement) {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const scale = 3;
+    const spriteW = 8 * scale; // 24px
+    const spriteH = 10 * scale; // 30px
+
+    canvas.width = spriteW * dpr;
+    canvas.height = spriteH * dpr;
+    canvas.style.width = `${spriteW}px`;
+    canvas.style.height = `${spriteH}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.imageSmoothingEnabled = false;
+
+    const TORSO = ['..HHHH..', '.HHHHHH.', '.HSSSSH.', '..SSSS..', '..BBBB..', '.BBBBBB.', '.BBBBBB.'];
+    const LEGS_IDLE = ['..B..B..', '..B..B..', '..B..B..'];
+    const rows = [...TORSO, ...LEGS_IDLE];
+
+    const colors: Record<string, string> = {
+      B: '#d97706', // Visitor agent amber
+      H: '#1e293b', // Slate hair
+      S: '#d9b99b', // Peach skin
+    };
+
+    ctx.clearRect(0, 0, spriteW, spriteH);
+    rows.forEach((row, ry) => {
+      for (let rx = 0; rx < row.length; rx++) {
+        const ch = row[rx];
+        if (ch === '.') continue;
+        ctx.fillStyle = colors[ch] || colors.B;
+        ctx.fillRect(rx * scale, ry * scale, scale, scale);
+      }
+    });
+  }
+
+  // DOM Elements
+  const launcher = document.getElementById('ea-launcher') as HTMLButtonElement | null;
+  const launcherLabel = document.getElementById('ea-launcher-label');
+  const panel = document.getElementById('ea-panel') as HTMLDivElement | null;
+  const closeBtn = document.getElementById('ea-close-btn') as HTMLButtonElement | null;
+  const infoBtn = document.getElementById('ea-info-btn') as HTMLButtonElement | null;
+  const infoPopover = document.getElementById('ea-info-popover') as HTMLDivElement | null;
+  const formContainer = document.getElementById('ea-form-container') as HTMLDivElement | null;
+  const form = document.getElementById('ea-form') as HTMLFormElement | null;
+  const emailInput = document.getElementById('ea-email') as HTMLInputElement | null;
+  const nameInput = document.getElementById('ea-name') as HTMLInputElement | null;
+  const useCaseInput = document.getElementById('ea-use-case') as HTMLTextAreaElement | null;
+  const howHeardSelect = document.getElementById('ea-how-heard') as HTMLSelectElement | null;
+  const howHeardOtherContainer = document.getElementById('ea-how-heard-other-container') as HTMLDivElement | null;
+  const howHeardOtherInput = document.getElementById('ea-how-heard-other') as HTMLInputElement | null;
+  const earlyTesterCheckbox = document.getElementById('ea-early-tester') as HTMLInputElement | null;
+  const emailError = document.getElementById('ea-email-error') as HTMLParagraphElement | null;
+  const errorBanner = document.getElementById('ea-error-banner') as HTMLDivElement | null;
+  const submitBtn = document.getElementById('ea-submit-btn') as HTMLButtonElement | null;
+  const submitText = document.getElementById('ea-submit-text');
+  const spinner = document.getElementById('ea-spinner');
+  const successView = document.getElementById('ea-success-view') as HTMLDivElement | null;
+  const successHeading = document.getElementById('ea-success-heading');
+  const successAlias = document.getElementById('ea-success-alias');
+  const successCanvas = document.getElementById('ea-success-canvas') as HTMLCanvasElement | null;
+
+  let lastActiveElement: HTMLElement | null = null;
+  let autoCloseTimer: ReturnType<typeof setTimeout> | null = null;
+  let tooltipTimeout: ReturnType<typeof setTimeout> | null = null;
+  let suppressFocusTooltip = false;
+
+  // 1. Initial State Hydration from localStorage
+  function syncLauncherState() {
+    const isSignedUp = safeStorage.getLocal(STORAGE_KEY) === 'true';
+    if (launcherLabel) {
+      launcherLabel.textContent = isSignedUp ? "You're on the list ✓" : "Early access ✦";
+    }
+  }
+
+  syncLauncherState();
+
+  // Cross-tab synchronization
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEY) {
+      syncLauncherState();
+    }
+  });
+
+  // 2. Open / Close / Toggle Mechanics
+  function openPanel(triggerEl?: HTMLElement | null) {
+    if (!panel) return;
+    if (autoCloseTimer) {
+      clearTimeout(autoCloseTimer);
+      autoCloseTimer = null;
+    }
+
+    if (triggerEl) {
+      lastActiveElement = triggerEl;
+    } else if (document.activeElement && document.activeElement !== document.body) {
+      lastActiveElement = document.activeElement as HTMLElement;
+    }
+
+    panel.setAttribute('data-open', 'true');
+    panel.setAttribute('aria-hidden', 'false');
+    if (launcher) launcher.setAttribute('aria-expanded', 'true');
+
+    // Auto-focus email input (or close button fallback)
+    setTimeout(() => {
+      if (emailInput && !emailInput.disabled) {
+        emailInput.focus();
+      } else if (closeBtn) {
+        closeBtn.focus();
+      }
+    }, 50);
+  }
+
+  function closePanel() {
+    if (!panel) return;
+    panel.setAttribute('data-open', 'false');
+    panel.setAttribute('aria-hidden', 'true');
+    if (launcher) launcher.setAttribute('aria-expanded', 'false');
+    hideTooltip(true);
+
+    if (lastActiveElement && typeof lastActiveElement.focus === 'function' && document.body.contains(lastActiveElement)) {
+      lastActiveElement.focus();
+    } else if (launcher && typeof launcher.focus === 'function') {
+      launcher.focus();
+    }
+    lastActiveElement = null;
+  }
+
+  function togglePanel() {
+    if (!panel) return;
+    const isOpen = panel.getAttribute('data-open') === 'true';
+    if (isOpen) closePanel();
+    else openPanel(launcher);
+  }
+
+  // 3. Trigger Bindings
+  if (launcher) launcher.addEventListener('click', togglePanel);
+  if (closeBtn) closeBtn.addEventListener('click', closePanel);
+
+  // Document-level event delegation for all [data-early-access-trigger]
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+    const trigger = target.closest('[data-early-access-trigger]') as HTMLElement | null;
+    if (trigger && trigger !== launcher) {
+      e.preventDefault();
+      openPanel(trigger);
+    }
+  });
+
+  // Global event hooks
+  window.addEventListener('hera:open-early-access', (e: Event) => {
+    const customEvent = e as CustomEvent<{ trigger?: HTMLElement }>;
+    openPanel(customEvent.detail?.trigger || null);
+  });
+
+  window.addEventListener('hera:close-early-access', () => {
+    closePanel();
+  });
+
+  // 4. Tooltip / Popover Management
+  function showTooltip() {
+    if (tooltipTimeout) clearTimeout(tooltipTimeout);
+    if (infoPopover) {
+      infoPopover.classList.remove('hidden');
+      infoPopover.setAttribute('aria-hidden', 'false');
+    }
+    if (infoBtn) infoBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function hideTooltip(immediate = false) {
+    if (tooltipTimeout) clearTimeout(tooltipTimeout);
+    const closeFn = () => {
+      if (infoPopover) {
+        infoPopover.classList.add('hidden');
+        infoPopover.setAttribute('aria-hidden', 'true');
+      }
+      if (infoBtn) infoBtn.setAttribute('aria-expanded', 'false');
+    };
+    if (immediate) {
+      closeFn();
+    } else {
+      tooltipTimeout = setTimeout(closeFn, 150);
+    }
+  }
+
+  function isTooltipOpen(): boolean {
+    return Boolean(infoPopover && !infoPopover.classList.contains('hidden'));
+  }
+
+  if (infoBtn) {
+    infoBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isTooltipOpen()) hideTooltip(true);
+      else showTooltip();
+    });
+    infoBtn.addEventListener('mouseenter', () => showTooltip());
+    infoBtn.addEventListener('mouseleave', () => hideTooltip(false));
+    infoBtn.addEventListener('focus', () => {
+      if (!suppressFocusTooltip) {
+        showTooltip();
+      }
+    });
+    infoBtn.addEventListener('blur', () => hideTooltip(false));
+  }
+
+  if (infoPopover) {
+    infoPopover.addEventListener('mouseenter', () => {
+      if (tooltipTimeout) clearTimeout(tooltipTimeout);
+    });
+    infoPopover.addEventListener('mouseleave', () => hideTooltip(false));
+  }
+
+  // 5. Discovery Source "Other" Dynamic Field Toggle (R2)
+  if (howHeardSelect) {
+    howHeardSelect.addEventListener('change', () => {
+      if (howHeardSelect.value === 'Other') {
+        if (howHeardOtherContainer) howHeardOtherContainer.classList.remove('hidden');
+        if (howHeardOtherInput) howHeardOtherInput.focus();
+      } else {
+        if (howHeardOtherContainer) howHeardOtherContainer.classList.add('hidden');
+        if (howHeardOtherInput) howHeardOtherInput.value = '';
+      }
+    });
+  }
+
+  // 6. Escape Key & Non-Modal Click Outside Dismissal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && panel?.getAttribute('data-open') === 'true') {
+      if (isTooltipOpen()) {
+        hideTooltip(true);
+        if (infoBtn) {
+          suppressFocusTooltip = true;
+          infoBtn.focus();
+          suppressFocusTooltip = false;
+        }
+        return;
+      }
+      closePanel();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!panel || panel.getAttribute('data-open') !== 'true') return;
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+
+    if (
+      !panel.contains(target) &&
+      !launcher?.contains(target) &&
+      !target.closest('[data-early-access-trigger]')
+    ) {
+      closePanel();
+    }
+  });
+
+  // 7. Accessible Focus Trapping Inside Dialog
+  panel?.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const focusable = Array.from(
+      panel.querySelectorAll<HTMLElement>(
+        'button:not([disabled]):not([aria-hidden="true"]), input:not([disabled]):not([type="hidden"]):not([aria-hidden="true"]), select:not([disabled]):not([aria-hidden="true"]), textarea:not([disabled]):not([aria-hidden="true"]), [tabindex]:not([tabindex="-1"]):not([disabled])'
+      )
+    ).filter((el) => el.offsetParent !== null || el.getClientRects().length > 0);
+
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  // 8. Input Real-Time Error Clearing
+  emailInput?.addEventListener('input', () => {
+    if (emailError) emailError.classList.add('hidden');
+    emailInput.setAttribute('aria-invalid', 'false');
+    if (errorBanner) errorBanner.classList.add('hidden');
+  });
+
+  // 9. Form Validation & Formspree AJAX Submission
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (emailError) emailError.classList.add('hidden');
+      if (errorBanner) errorBanner.classList.add('hidden');
+
+      const rawEmail = emailInput?.value || '';
+      const email = rawEmail.trim().toLowerCase();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // State: INVALID_EMAIL Check
+      if (!email || !emailRegex.test(email)) {
+        if (emailError) emailError.classList.remove('hidden');
+        if (emailInput) {
+          emailInput.setAttribute('aria-invalid', 'true');
+          emailInput.focus();
+        }
+        return;
+      }
+
+      // State: LOADING
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+      }
+      if (submitText) submitText.textContent = 'Adding you...';
+      if (spinner) spinner.classList.remove('hidden');
+
+      if (emailInput) emailInput.disabled = true;
+      if (nameInput) nameInput.disabled = true;
+      if (useCaseInput) useCaseInput.disabled = true;
+      if (howHeardSelect) howHeardSelect.disabled = true;
+      if (howHeardOtherInput) howHeardOtherInput.disabled = true;
+      if (earlyTesterCheckbox) earlyTesterCheckbox.disabled = true;
+
+      // Deterministic alias generation / retrieval
+      const alias = generateHeraAlias(email);
+
+      // Complete Formspree payload (R8)
+      const payload: {
+        email: string;
+        name?: string;
+        use_case?: string;
+        early_tester: boolean;
+        how_heard?: string;
+        how_heard_other?: string;
+        hera_alias: string;
+        _source: string;
+      } = {
+        email,
+        early_tester: Boolean(earlyTesterCheckbox?.checked),
+        hera_alias: alias,
+        _source: 'hera-early-access',
+      };
+
+      const nameVal = nameInput?.value.trim();
+      if (nameVal) payload.name = nameVal;
+
+      const useCaseVal = useCaseInput?.value.trim();
+      if (useCaseVal) payload.use_case = useCaseVal;
+
+      const howHeardVal = howHeardSelect?.value;
+      if (howHeardVal) {
+        payload.how_heard = howHeardVal;
+        if (howHeardVal === 'Other') {
+          const howHeardOtherVal = howHeardOtherInput?.value.trim();
+          if (howHeardOtherVal) {
+            payload.how_heard_other = howHeardOtherVal;
+          }
+        }
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+      try {
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          // State: SUCCESS
+          safeStorage.setLocal(STORAGE_KEY, 'true');
+          safeStorage.setLocal(ALIAS_KEY, alias);
+          safeStorage.setSession(SESSION_AGENT_KEY, 'true');
+          safeStorage.setSession(ALIAS_KEY, alias);
+          syncLauncherState();
+
+          // Dispatch event to Footer sprite system
+          window.dispatchEvent(
+            new CustomEvent('hera:early-access-success', {
+              bubbles: true,
+              detail: { email, alias, timestamp: Date.now() },
+            })
+          );
+
+          // Transition to Success View (R4)
+          if (formContainer) formContainer.classList.add('hidden');
+          if (successView) {
+            successView.classList.remove('hidden');
+            if (successHeading) {
+              successHeading.textContent = "You're in.";
+            }
+            if (successAlias) {
+              successAlias.textContent = alias;
+            }
+            if (successCanvas) {
+              renderSuccessAgentPreview(successCanvas);
+            }
+          }
+
+          // Graceful auto-close after 2.8 seconds
+          autoCloseTimer = setTimeout(() => {
+            closePanel();
+
+            // Reset form for future clean opens
+            setTimeout(() => {
+              if (form) form.reset();
+              if (howHeardOtherContainer) howHeardOtherContainer.classList.add('hidden');
+              if (emailInput) emailInput.disabled = false;
+              if (nameInput) nameInput.disabled = false;
+              if (useCaseInput) useCaseInput.disabled = false;
+              if (howHeardSelect) howHeardSelect.disabled = false;
+              if (howHeardOtherInput) howHeardOtherInput.disabled = false;
+              if (earlyTesterCheckbox) earlyTesterCheckbox.disabled = false;
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.setAttribute('aria-busy', 'false');
+              }
+              if (submitText) submitText.textContent = 'Count me in';
+              if (spinner) spinner.classList.add('hidden');
+              if (formContainer) formContainer.classList.remove('hidden');
+              if (successView) successView.classList.add('hidden');
+            }, 350);
+          }, 2800);
+        } else {
+          throw new Error(`Formspree error: ${response.status}`);
+        }
+      } catch (err) {
+        clearTimeout(timeoutId);
+
+        // State: ERROR
+        if (errorBanner) errorBanner.classList.remove('hidden');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.setAttribute('aria-busy', 'false');
+        }
+        if (submitText) submitText.textContent = 'Count me in';
+        if (spinner) spinner.classList.add('hidden');
+
+        if (emailInput) emailInput.disabled = false;
+        if (nameInput) nameInput.disabled = false;
+        if (useCaseInput) useCaseInput.disabled = false;
+        if (howHeardSelect) howHeardSelect.disabled = false;
+        if (howHeardOtherInput) howHeardOtherInput.disabled = false;
+        if (earlyTesterCheckbox) earlyTesterCheckbox.disabled = false;
+
+        if (emailInput) emailInput.focus();
+      }
+    });
+  }
+</script>

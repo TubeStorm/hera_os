@@ -29,6 +29,7 @@ const year = new Date().getFullYear();
     const SCALE = 3;
     const SPRITE_W = 8 * SCALE;
 
+    // Extension point (R6): extensible agent structure for multi-agent expansion
     type Agent = {
       x: number;
       dir: 1 | -1;
@@ -38,6 +39,31 @@ const year = new Date().getFullYear();
       skin: string;
       iris: boolean;
       phase: number;
+      isVisitorAgent?: boolean;
+      label?: string;
+      labelColor?: string;
+    };
+
+    const safeStorage = {
+      getLocal(key: string): string | null {
+        try {
+          return window.localStorage.getItem(key);
+        } catch {
+          return null;
+        }
+      },
+      getSession(key: string): string | null {
+        try {
+          return window.sessionStorage.getItem(key);
+        } catch {
+          return null;
+        }
+      },
+      setSession(key: string, value: string): void {
+        try {
+          window.sessionStorage.setItem(key, value);
+        } catch {}
+      },
     };
 
     const css = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -71,8 +97,54 @@ const year = new Date().getFullYear();
         skin: '#d9b99b',
         iris: true,
         phase: 0,
+        label: 'Iris',
+        labelColor: css('--accent') || '#2563eb',
+      });
+
+      // Check for active session visitor agent
+      const isSession = safeStorage.getSession('hera_early_access_session_agent') === 'true';
+      const hasAlias = safeStorage.getSession('hera_ea_alias') || safeStorage.getLocal('hera_ea_alias');
+      if (isSession || hasAlias) {
+        addVisitorAgent();
+      }
+    };
+
+    const addVisitorAgent = (customAlias?: string) => {
+      const alias =
+        customAlias ||
+        safeStorage.getSession('hera_ea_alias') ||
+        safeStorage.getLocal('hera_ea_alias') ||
+        'Visitor';
+
+      const existing = agents.find((a) => a.isVisitorAgent);
+      if (existing) {
+        existing.label = alias;
+        return;
+      }
+      agents.push({
+        x: -SPRITE_W,
+        dir: 1,
+        speed: 18,
+        body: '#d97706',
+        hair: '#1e293b',
+        skin: '#d9b99b',
+        iris: false,
+        phase: Math.random() * 10,
+        isVisitorAgent: true,
+        label: alias,
+        labelColor: css('--muted') || '#62636a',
       });
     };
+
+    window.addEventListener('hera:early-access-success', (e: Event) => {
+      const detail = (e as CustomEvent<{ email?: string; alias?: string }>).detail;
+      const alias = detail?.alias;
+      safeStorage.setSession('hera_early_access_session_agent', 'true');
+      if (alias) {
+        safeStorage.setSession('hera_ea_alias', alias);
+      }
+      addVisitorAgent(alias);
+    });
 
     let mouseX = -9999;
     let mouseInside = false;
@@ -110,6 +182,21 @@ const year = new Date().getFullYear();
           ctx.fillRect(Math.round(a.x) + px * SCALE, Math.round(groundY - (rows.length - ry) * SCALE + bob), SCALE, SCALE);
         }
       });
+
+      // Render direct canvas labels (R5)
+      if (a.iris) {
+        ctx.font = 'bold 9px var(--font-sans, Inter, system-ui, sans-serif)';
+        ctx.fillStyle = a.labelColor || css('--accent') || '#2563eb';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText('Iris', Math.round(a.x + SPRITE_W / 2), Math.round(groundY - 10 * SCALE + bob - 4));
+      } else if (a.isVisitorAgent && a.label) {
+        ctx.font = '8px var(--font-sans, Inter, system-ui, sans-serif)';
+        ctx.fillStyle = a.labelColor || css('--muted') || '#62636a';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(a.label, Math.round(a.x + SPRITE_W / 2), Math.round(groundY - 10 * SCALE + bob - 4));
+      }
     };
 
     let last = performance.now();
