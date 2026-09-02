@@ -87,7 +87,7 @@ export const resumeAsset = {
 // twice in one pill (removed 2026-08-28).
 export const nav = [
   { label: 'Deep Dive', href: 'work/hera/' },
-  { label: 'Ubisoft Work', href: 'work/enterprise-tools/' },
+  { label: 'Ubisoft Work', href: 'work/ubisoft/' },
   { label: 'About', href: 'about/' },
   { label: 'Lineage', href: 'work/lineage/' },
   { label: 'Contact', href: 'contact/' },
@@ -95,9 +95,9 @@ export const nav = [
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Projects — the architecture matches the resume's Selected Projects exactly:
-// HERA OS (flagship) + three separate Ubisoft workstreams. The three Ubisoft
-// projects share one grouped page (enterprise-tools) with per-workstream
-// anchors; they are distinct projects and are always presented that way.
+// HERA OS (flagship) + three separate Ubisoft projects. Each Ubisoft project
+// owns its own route under /work/ubisoft/<slug>/. The gallery at /work/ubisoft/
+// presents the three as an editorial selection, not a grouped case-study dump.
 // ─────────────────────────────────────────────────────────────────────────────
 export type Project = {
   slug: string;
@@ -138,7 +138,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'rpm',
-    href: 'work/enterprise-tools/#rpm',
+    href: 'work/ubisoft/rpm/',
     eyebrow: 'Ubisoft — enterprise systems',
     title: 'RPM — Modal & Ribbon Revamp',
     summary:
@@ -153,7 +153,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'work-arrangement',
-    href: 'work/enterprise-tools/#work-arrangement',
+    href: 'work/ubisoft/work-arrangement/',
     eyebrow: 'Ubisoft — enterprise systems',
     title: 'Work Arrangement — Approval Flows',
     summary:
@@ -167,19 +167,19 @@ export const projects: Project[] = [
     designed: 'Five explicit flows, a required “did you speak with the employee?” checkpoint, and legally-vetted templated messaging.',
   },
   {
-    slug: 'capacity-governance',
-    href: 'work/enterprise-tools/#capacity-governance',
+    slug: 'famous',
+    href: 'work/ubisoft/famous/',
     eyebrow: 'Ubisoft — enterprise systems',
-    title: 'Capacity Governance — Quota Visibility',
+    title: 'Famous — Global Credits Governance',
     summary:
-      'Quota rules that decide hiring were buried three modals deep and easy to misread. I defined a warning-only model that surfaces over-cap teams at the point of decision.',
-    tags: ['Dense data', 'Decision support'],
-    category: 'Governance & data',
+      'The platform that manages game credits for Ubisoft employees worldwide. A genuinely different enterprise problem: global policy consistency, multi-column data systems, and the UX of official recognition at scale.',
+    tags: ['Policy governance', 'Data systems'],
+    category: 'Credits & recognition',
     status: 'Senior UX Specialist',
     year: '2021—Now',
-    proves: 'I can make dense, high-stakes data legible without blocking people’s work.',
-    problem: 'Rules that governed hiring were invisible until someone broke them.',
-    designed: 'A used/buffer/threshold/time-scope quota model that warns instead of blocks, built for large grid datasets.',
+    proves: 'I can design policy-governance interfaces for global, high-stakes data at enterprise scale.',
+    problem: 'Game credits are official, legal, and permanent — and the system managing them had outgrown its original design.',
+    designed: 'Global policy governance flows and multi-column layout systems for a high-stakes credits platform.',
   },
 ];
 
@@ -199,7 +199,7 @@ export const strengths: Strength[] = [
     label: 'Enterprise scale',
     title: 'Ubisoft internal tools',
     body: 'Three workstreams in planning, approvals, and governance for 1,000+ people — diagnosed with a 101-response survey, fixed with systemization.',
-    href: 'work/enterprise-tools/',
+    href: 'work/ubisoft/',
   },
   {
     label: 'Point of view',

@@ -66,7 +66,8 @@ const promises = [
   'You lead. It stops when it actually needs you.',
 ];
 
-const FINAL_LINE = 'Stop managing your AI. Start giving it work.';
+// const FINAL_LINE = 'Stop managing your AI. Start giving it work.';
+
 
 // ---------------------------------------------------------------------------
 // Scroll budget. `enter` and `hold` are in VIEWPORT-HEIGHTS OF SCROLL TRAVEL.
@@ -305,7 +306,10 @@ const config = {
              cannot jump vertically when it replaces promise five. -->
         <div class="statement-slot hera-slot" id="hera-slot">
           {promises.map((t, i) => <p class="statement" data-slot={i}>{t}</p>)}
-          <p class="statement is-final" data-slot={promises.length}>{FINAL_LINE}</p>
+          <p class="statement is-final" data-slot={promises.length}>
+            Stop managing your AI.<br>
+            Start giving it work.
+            </p>
         </div>
       </div>
 

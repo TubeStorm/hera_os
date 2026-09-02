@@ -8,14 +8,14 @@ import { flagship, ubisoftProjects, withBase } from '../../data/site';
 
 <BaseLayout
   title="Work"
-  description="Selected work by Favour Diokpo — HERA OS (flagship AI product) and three enterprise workstreams at Ubisoft."
+  description="Selected work by Favour Diokpo — HERA OS (flagship AI product) and three Ubisoft enterprise projects: RPM, Work Arrangement, and Famous."
 >
   <section class="section">
     <div class="container-page">
       <SectionHeader
         eyebrow="Work"
-        title="One flagship product. Three enterprise workstreams."
-        description="HERA is the product I designed and built. The Ubisoft projects are separate workstreams — planning, approvals, and governance — grouped on one page because they share an environment, not because they're one project."
+        title="One flagship product. Three enterprise projects."
+        description="HERA is the product I designed and built. The Ubisoft projects are separate — planning, approvals, and global credits — each with its own story and its own page."
       />
 
       <!-- Flagship: HERA -->
@@ -61,12 +61,12 @@ import { flagship, ubisoftProjects, withBase } from '../../data/site';
         </div>
       </a>
 
-      <!-- Ubisoft workstreams -->
+      <!-- Ubisoft gallery preview -->
       <div class="mt-16">
         <SectionHeader
           eyebrow="Enterprise systems at Ubisoft"
-          title="Three workstreams, clearly separated."
-          description="Each is its own project with its own problem, research, and design. They live on one grouped page."
+          title="Three projects, each with its own story."
+          description="Staffing, remote-work approvals, and global credits — for 1,000+ internal users. Each project owns its own page."
         />
         <div class="mt-10 grid gap-6 md:grid-cols-3">
           {
@@ -81,18 +81,9 @@ import { flagship, ubisoftProjects, withBase } from '../../data/site';
                   <span class="text-[11px] uppercase tracking-[0.1em] text-faint">{p.category}</span>
                 </div>
                 <h3 class="text-h3 font-semibold tracking-tight">{p.title}</h3>
-                <dl class="grid gap-3 border-t border-line pt-4">
-                  <div>
-                    <dt class="text-[11px] uppercase tracking-[0.1em] text-faint">The problem</dt>
-                    <dd class="mt-1 text-sm leading-relaxed text-muted">{p.problem}</dd>
-                  </div>
-                  <div>
-                    <dt class="text-[11px] uppercase tracking-[0.1em] text-faint">What I designed</dt>
-                    <dd class="mt-1 text-sm leading-relaxed text-muted">{p.designed}</dd>
-                  </div>
-                </dl>
+                <p class="text-sm leading-relaxed text-muted">{p.problem}</p>
                 <span class="mt-auto inline-flex items-center gap-1.5 pt-2 text-sm font-medium text-ink">
-                  Read the workstream
+                  Read case study
                   <svg class="transition-transform duration-300 ease-smooth group-hover:translate-x-1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                 </span>
               </a>

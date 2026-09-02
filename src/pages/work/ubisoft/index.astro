@@ -1,0 +1,148 @@
+﻿---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { ubisoftProjects, withBase } from '../../../data/site';
+
+// Gallery items — each is a fully independent project with its own page.
+const gallery = ubisoftProjects.map((p) => ({
+  ...p,
+  href: withBase(p.href),
+}));
+---
+
+<BaseLayout
+  title="Ubisoft Work"
+  description="Selected professional work at Ubisoft — enterprise systems for staffing, remote-work governance, and global credits, designed for 1,000+ internal users."
+>
+  <section class="section">
+    <div class="container-page">
+
+      <!-- Header -->
+      <header class="reveal mb-20 max-w-2xl">
+        <p class="eyebrow mb-4">Ubisoft — Senior UX Specialist</p>
+        <h1 class="text-h1 font-semibold tracking-tight">
+          Professional work
+        </h1>
+        <p class="mt-5 text-lead text-muted">
+          Enterprise systems for people whose work actually matters — staffing, approvals, recognition. Three projects. Each one is its own problem.
+        </p>
+      </header>
+
+      <!-- Gallery -->
+      <div class="space-y-0 divide-y divide-[color:var(--line)]">
+        {gallery.map((project, i) => (
+          <article class="reveal group py-16 first:pt-0 last:pb-0">
+            <a
+              href={project.href}
+              class="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start"
+              aria-label={`Read case study: ${project.title}`}
+            >
+              <!-- Left: content -->
+              <div class="flex flex-col gap-6">
+
+                <div class="flex items-center gap-4">
+                  <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-faint" aria-hidden="true">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span class="h-px flex-1 bg-[color:var(--line)]" aria-hidden="true" />
+                  <span class="text-[11px] uppercase tracking-[0.12em] text-faint">{project.category}</span>
+                </div>
+
+                <h2 class="max-w-xl text-h2 font-semibold tracking-tight leading-tight transition-colors duration-200 group-hover:text-[color:var(--accent)]">
+                  {project.title}
+                </h2>
+
+                <p class="max-w-lg text-[1rem] leading-relaxed text-muted">
+                  {project.problem}
+                </p>
+
+                <div class="flex flex-wrap gap-2" aria-label="Skill signals">
+                  {project.tags.map((tag) => (
+                    <span class="rounded-pill border border-[color:var(--line)] px-3 py-1 text-xs font-medium text-muted">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <span class="inline-flex items-center gap-2 text-sm font-medium text-[color:var(--accent)] transition-all duration-200 group-hover:gap-3">
+                  Read case study
+                  <svg class="transition-transform duration-300 group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </span>
+              </div>
+
+              <!-- Right: visual -->
+              <div
+                class="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-[color:var(--line)] lg:w-[340px] xl:w-[400px]"
+                style="background: radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--accent) 5%, var(--surface)) 0%, var(--surface) 70%);"
+                role="img"
+                aria-label={`${project.title} — system visual`}
+              >
+                <div class="pointer-events-none absolute inset-0 opacity-[0.25]" style="background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 20px 20px;" aria-hidden="true" />
+
+                {project.slug === 'rpm' && (
+                  <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 px-8" aria-hidden="true">
+                    <div class="w-full max-w-[200px] space-y-2">
+                      {['Position', 'Request', 'Date editor'].map((label, idx) => (
+                        <div class="flex items-center gap-2.5 rounded-lg border border-[color:var(--line)] bg-[color:var(--surface)] px-3 py-2" style={`opacity: ${1 - idx * 0.15}`}>
+                          <span class="h-2 w-2 rounded-full" style="background: var(--accent); opacity: 0.6;" />
+                          <span class="text-[11px] font-medium text-muted">{label}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <span class="rounded-pill border border-[color:var(--line)] bg-[color:var(--surface)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-faint">
+                      40+ → 3 patterns
+                    </span>
+                  </div>
+                )}
+
+                {project.slug === 'work-arrangement' && (
+                  <div class="absolute inset-0 flex items-center justify-center px-8" aria-hidden="true">
+                    <div class="w-full max-w-[220px] space-y-1.5">
+                      {['Employee', 'Manager', 'Director', 'HR committee'].map((role, idx) => (
+                        <div class="flex items-center gap-2">
+                          <span class="h-px flex-1 rounded" style={`background: var(--accent); opacity: ${0.2 + idx * 0.2};`} />
+                          <span class="text-[10px] font-medium text-faint">{role}</span>
+                        </div>
+                      ))}
+                      <div class="mt-3 text-center">
+                        <span class="rounded-pill border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em]" style="color: var(--accent); border-color: color-mix(in srgb, var(--accent) 30%, var(--line));">
+                          5 approval flows
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {project.slug === 'famous' && (
+                  <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 px-8" aria-hidden="true">
+                    <div class="grid grid-cols-3 gap-1.5">
+                      {Array.from({ length: 9 }).map((_, idx) => (
+                        <span class="block rounded border border-[color:var(--line)] bg-[color:var(--surface)]" style={`height: ${14 + (idx % 3) * 6}px; opacity: ${0.4 + (idx % 4) * 0.15};`} />
+                      ))}
+                    </div>
+                    <span class="rounded-pill border border-[color:var(--line)] bg-[color:var(--surface)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-faint">
+                      Global policy
+                    </span>
+                  </div>
+                )}
+
+                <span class="absolute bottom-3 left-3 rounded-pill border border-[color:var(--line)] bg-[color:var(--surface)]/80 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.1em] text-muted backdrop-blur">
+                  {project.year}
+                </span>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <!-- Footer note -->
+      <div class="reveal mt-20 border-t border-[color:var(--line)] pt-10">
+        <p class="max-w-xl text-sm text-muted">
+          Detailed case studies contain internal Ubisoft material. Full walkthroughs are available on request or through the protected portfolio.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
