@@ -1,5 +1,5 @@
 ---
-// Not a footer. A strip of HERA's pixel agents out on a walk — Iris among
+// Not a footer. A strip of HERA's pixel agents out on a walk: Iris among
 // them. Try to catch her; she's faster than you. The only text is the © line.
 import { site } from '../data/site';
 const year = new Date().getFullYear();
@@ -125,7 +125,7 @@ const year = new Date().getFullYear();
       for (const a of agents) {
         if (!reduced) {
           if (a.iris) {
-            // Iris keeps her distance from the cursor — always faster than you.
+            // Iris keeps her distance from the cursor: always faster than you.
             if (mouseInside && Math.abs(mouseX - (a.x + SPRITE_W / 2)) < 130) {
               a.dir = mouseX > a.x + SPRITE_W / 2 ? -1 : 1;
               a.speed = Math.min(a.speed + 300 * dt, 220);

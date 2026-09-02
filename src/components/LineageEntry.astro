@@ -2,7 +2,7 @@
 // One project on the Lineage page.
 //   featured → gets the [>] expander revealing the extra panels
 //   regular  → same block, no expander
-// Media comes from src/data/lineage.ts — video, image, or an honest blank.
+// Media comes from src/data/lineage.ts: video, image, or an honest blank.
 import MediaFrame from './MediaFrame.astro';
 import type { LineageProject } from '../data/lineage';
 
@@ -60,7 +60,7 @@ const expandable = p.tier === 'featured' && p.more && p.more.length > 0;
     )
   }
 
-  <MediaFrame video={p.video} image={p.image} missing={p.missing} caption={p.video || p.image ? `${p.title} — ${p.status}` : undefined} class="mt-6" />
+  <MediaFrame video={p.video} image={p.image} missing={p.missing} caption={p.video || p.image ? `${p.title}: ${p.status}` : undefined} class="mt-6" />
   <p class="mt-3 text-xs text-faint">{p.status}</p>
 </article>
 

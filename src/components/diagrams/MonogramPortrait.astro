@@ -1,6 +1,6 @@
 ---
 // Editorial stand-in for a headshot until a real portrait is supplied
-// (see ASSETS_NEEDED.md). A systems-motif monogram — deliberate, not a blank box.
+// (see ASSETS_NEEDED.md). A systems-motif monogram: deliberate, not a blank box.
 import { site } from '../../data/site';
 const initials = site.name
   .split(' ')
@@ -25,6 +25,6 @@ const initials = site.name
   <div class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center">
     <span class="grid h-16 w-16 place-items-center rounded-2xl bg-ink text-xl font-bold tracking-tight text-paper">{initials}</span>
     <span class="text-sm font-medium text-ink">{site.name}</span>
-    <span class="rounded-pill border border-line bg-[color:var(--surface)] px-2.5 py-1 text-[11px] text-faint">Portrait coming — headshot pending</span>
+    <span class="rounded-pill border border-line bg-[color:var(--surface)] px-2.5 py-1 text-[11px] text-faint">Portrait coming: headshot pending</span>
   </div>
 </div>

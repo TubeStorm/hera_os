@@ -3,7 +3,7 @@
 //  - video   → inline player, click for normal fullscreen playback
 //  - image   → click to zoom on a black backdrop, ✕ (or Esc) to close
 //  - missing → a static blank frame naming the asset that belongs here
-// Captions never render statically — hover only (per design law).
+// Captions never render statically: hover only (per design law).
 import { withBase } from '../data/site';
 
 interface Props {
@@ -52,7 +52,7 @@ const { video, image, missing, caption, aspect = 'aspect-video', class: classNam
 </figure>
 
 <script>
-  // Shared lightbox for zoomable images — created once per page.
+  // Shared lightbox for zoomable images: created once per page.
   function ensureLightbox(): HTMLElement {
     let box = document.getElementById('media-lightbox');
     if (box) return box;

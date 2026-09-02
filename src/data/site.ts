@@ -12,14 +12,14 @@ export function withBase(path: string): string {
 
 export const site = {
   name: 'Favour Diokpo',
-  role: 'Product Designer — AI systems & internal tools',
+  role: 'Product Designer: AI systems & internal tools',
   roles: [
     'AI Product Designer',
     'Product Designer, Internal Tools',
     'Builder of HERA OS',
   ],
   tagline: 'I design systems that make complicated work visible.',
-  location: 'Available for select work — remote & hybrid',
+  location: 'Available for select work (remote & hybrid)',
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -123,14 +123,14 @@ export const projects: Project[] = [
   {
     slug: 'hera',
     href: 'work/hera/',
-    eyebrow: 'Flagship — independent AI product',
+    eyebrow: 'Flagship: independent AI product',
     title: 'HERA OS',
     summary:
       'A local-first, game-inspired AI workspace where agents, tasks, memory, files, and cost are visible parts of an operating system — not hidden chat behavior. Designed and built solo: FastAPI backend, React frontend, Phaser pixel world.',
     tags: ['AI product vision', 'Game-inspired UX', 'Local-first'],
     category: 'AI operating system',
     status: 'In development — 2025→now',
-    year: '2025—Now',
+    year: '2025 to Now',
     proves: 'I can turn a messy emerging technology into a coherent product model — and build it.',
     problem: 'Most AI tools are text boxes attached to invisible machinery. You can’t see what the AI knows, did, spent, or broke.',
     designed: 'The whole product model: rooms and agents, a global assistant, goals and tasks, readable memory, an event ledger, and per-turn cost.',
@@ -139,29 +139,29 @@ export const projects: Project[] = [
   {
     slug: 'rpm',
     href: 'work/ubisoft/rpm/',
-    eyebrow: 'Ubisoft — enterprise systems',
-    title: 'RPM — Modal & Ribbon Revamp',
+    eyebrow: 'Ubisoft: enterprise systems',
+    title: 'RPM',
     summary:
-      'Ubisoft’s main staffing platform had drifted into 40+ inconsistent modals. I ran a 101-response survey plus interviews, then rebuilt the navigation ribbon and the three core modals.',
-    tags: ['Research', 'Design systemization'],
+      'Rebuilding how Ubisoft plans staffing. Experienced planners were being asked to manage two system concepts for one staffing need. I redesigned RPM around one Request-centered model while preserving the legacy Position structure Engineering still needed underneath.',
+    tags: ['Product-model thinking', 'System-wide propagation', 'Research synthesis'],
     category: 'Enterprise planning tools',
     status: 'Senior UX Specialist',
-    year: '2021—Now',
-    proves: 'I can diagnose a trust breakdown with research and fix it with systemization.',
-    problem: 'A prior redesign shipped with no UX research; 1,000+ users were frustrated and the heaviest users trusted the tool least.',
-    designed: 'A 40+ modal audit collapsed into consistent patterns, plus a rebuilt ribbon and the three core modals.',
+    year: '2021 to Now',
+    proves: 'I can redesign foundational product models while preserving legacy engineering constraints.',
+    problem: 'Experienced planners were being asked to manage two system concepts for one staffing need.',
+    designed: 'I redesigned RPM around one Request-centered model while preserving the legacy Position structure Engineering still needed underneath. (Also standardized a 40+ modal audit as supporting work).',
   },
   {
     slug: 'work-arrangement',
     href: 'work/ubisoft/work-arrangement/',
-    eyebrow: 'Ubisoft — enterprise systems',
+    eyebrow: 'Ubisoft: enterprise systems',
     title: 'Work Arrangement — Approval Flows',
     summary:
       'The tool for formally requesting remote work supported only approve/reject; everything else happened over email. I defined five structured approval flows with accountability checkpoints.',
     tags: ['Governance UX', 'Policy constraints'],
     category: 'Approval workflows',
     status: 'Senior UX Specialist',
-    year: '2021—Now',
+    year: '2021 to Now',
     proves: 'I can design humane flows inside hard HR and legal constraints.',
     problem: 'Approve/reject was the only path the tool knew; escalations, corrections, and send-backs lived in email or nowhere.',
     designed: 'Five explicit flows, a required “did you speak with the employee?” checkpoint, and legally-vetted templated messaging.',
@@ -169,14 +169,14 @@ export const projects: Project[] = [
   {
     slug: 'famous',
     href: 'work/ubisoft/famous/',
-    eyebrow: 'Ubisoft — enterprise systems',
+    eyebrow: 'Ubisoft: enterprise systems',
     title: 'Famous — Global Credits Governance',
     summary:
       'The platform that manages game credits for Ubisoft employees worldwide. A genuinely different enterprise problem: global policy consistency, multi-column data systems, and the UX of official recognition at scale.',
     tags: ['Policy governance', 'Data systems'],
     category: 'Credits & recognition',
     status: 'Senior UX Specialist',
-    year: '2021—Now',
+    year: '2021 to Now',
     proves: 'I can design policy-governance interfaces for global, high-stakes data at enterprise scale.',
     problem: 'Game credits are official, legal, and permanent — and the system managing them had outgrown its original design.',
     designed: 'Global policy governance flows and multi-column layout systems for a high-stakes credits platform.',
@@ -249,8 +249,8 @@ export const resume = {
   experience: [
     {
       role: 'Founder & Product Designer',
-      org: 'HERA OS — independent AI product',
-      period: '2025 — Present',
+      org: 'HERA OS: independent AI product',
+      period: '2025 to Present',
       points: [
         'Designed and built the product model for a local-first AI workspace where users work with visible agents, rooms, memory, files, tasks, tools, and cost tracking instead of a single hidden chat thread.',
         'Defined the UX systems for Global Iris (the OS-level assistant), the Composer, Life OS (event ledger and cost), readable memory blocks, task execution with review gates, and the skills/tools catalog.',
@@ -261,7 +261,7 @@ export const resume = {
     {
       role: 'Senior UX Specialist — Internal Tools',
       org: 'Ubisoft, Montréal',
-      period: 'May 2021 — Present',
+      period: 'May 2021 to Present',
       points: [
         'RPM (Resource Planning & Management): ran a 101-response satisfaction survey plus interviews across 1,000+ users to diagnose a trust breakdown in a legacy planning platform.',
         'Audited and standardized 40+ modals; redesigned the navigation ribbon and the three core modals (Position, Request, Advanced Date Editor).',
@@ -272,10 +272,10 @@ export const resume = {
     },
   ],
   selectedProjects: [
-    'HERA OS — local-first AI workspace (independent product, designed and built solo)',
-    'Ubisoft RPM — modal + ribbon revamp (40+ modal audit, 101-response survey)',
-    'Ubisoft Work Arrangement — five structured approval flows for policy-constrained requests',
-    'Ubisoft Capacity Governance — warning-only quota visibility for large datasets',
+    'HERA OS: local-first AI workspace (independent product, designed and built solo)',
+    'Ubisoft RPM: modal + ribbon revamp (40+ modal audit, 101-response survey)',
+    'Ubisoft Work Arrangement: five structured approval flows for policy-constrained requests',
+    'Ubisoft Capacity Governance: warning-only quota visibility for large datasets',
   ],
   // Grouped by category so the resume reads like a system, not a word cloud.
   skillGroups: [
@@ -295,9 +295,9 @@ export const resume = {
   tools: ['Figma', 'Miro', 'Jira / Confluence', 'Tableau / Sheets', 'Basic SQL', 'Spec writing', 'Astro / static sites'],
   // Real details from Favour_Diokpo_Resume_2026.pdf — do not alter without source.
   education: [
-    { school: 'MIT — Professional Program in Applied Data Science', period: '2022 — 2023' },
-    { school: 'Carleton University — Bachelor of Information Technology', period: '2016 — 2020' },
-    { school: 'Algonquin College — Advanced Diploma, IT & Design', period: '2016 — 2020' },
+    { school: 'MIT — Professional Program in Applied Data Science', period: '2022 to 2023' },
+    { school: 'Carleton University — Bachelor of Information Technology', period: '2016 to 2020' },
+    { school: 'Algonquin College — Advanced Diploma, IT & Design', period: '2016 to 2020' },
   ],
   certifications: [
     'IBM AI Product Manager (2026)',

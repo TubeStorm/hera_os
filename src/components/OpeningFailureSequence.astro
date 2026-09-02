@@ -1,10 +1,10 @@
 ---
 // Homepage opening: a scroll-scrubbed cinematic. Scroll progress (0 -> 1 across a
-// tall pinned track) is the ONLY clock — there is no autoplay and no timer.
+// tall pinned track) is the ONLY clock: there is no autoplay and no timer.
 //
 // Re-authored 2026-08-28 per docs/preflights/hera website revamp/Slice 1 fix 2.md.
 // Four structural changes over the previous build:
-//   1. The page arrives ALREADY IN THE STORY — the request is sent, the agent is
+//   1. The page arrives ALREADY IN THE STORY: the request is sent, the agent is
 //      thinking, and a "Scroll down" cue is on screen. No blank black arrival, no
 //      fake chat window, composer, caret, Send button, cursor travel or typing.
 //   2. Pacing is budgeted, not guessed. Every beat below declares its enter and
@@ -27,7 +27,7 @@ const mdIcon = withBase('images/ui/md-file-icon.png');
 
 const MESSAGE = 'Make a small change to the website';
 
-// The long verbose AI answer, reused verbatim from the original build. Kept whole —
+// The long verbose AI answer, reused verbatim from the original build. Kept whole :
 // never clipped, never masked. Split into whitespace-separated words so the client
 // script can reveal it progressively, mapped to scroll position.
 const answerPara1 =
@@ -42,13 +42,13 @@ const totalWords = words1.length + words2.length;
 // The curtain is cued off the ACTUAL revealed-word position of the phrase
 // "clicking a variant did change..." rather than an unrelated global percentage,
 // so the paperwork starts while the answer has barely got going. Derived, not
-// hardcoded — if the copy is edited the cue moves with it.
+// hardcoded: if the copy is edited the cue moves with it.
 const cueWordIndex = Math.max(0, words1.indexOf('clicking'));
 
-// Accumulating panic cards. Plain, recognisable AI-management interruptions —
+// Accumulating panic cards. Plain, recognisable AI-management interruptions :
 // deliberately not marketing copy.
 const panicCards = [
-  "Wait — explain it like I'm ten.",
+  "Wait: explain it like I'm ten.",
   'What are you actually saying?',
   'Did I send you the right file?',
   'Where is task.md?',
@@ -73,12 +73,12 @@ const promises = [
 // Scroll budget. `enter` and `hold` are in VIEWPORT-HEIGHTS OF SCROLL TRAVEL.
 // The hold is the readable state; the enter is the short transition into it.
 // Every major readable beat holds >= 0.55vh, which at a 900px viewport is
-// ~495px of wheel travel — several ordinary gestures, so no single flick can
+// ~495px of wheel travel: several ordinary gestures, so no single flick can
 // skip a statement or add three cards at once. Enter windows are deliberately
 // short: in a shared slot the outgoing line fades across the first half and the
 // incoming line across the second, so only one statement is legible at a time.
 //
-// The card and promise beats spend 0.12vh entering and the rest holding — ~85%
+// The card and promise beats spend 0.12vh entering and the rest holding: ~85%
 // of each beat is the readable state. That ratio (rather than a longer track)
 // is what keeps fast flicking from catching these lines mid-transition; the
 // measured wheel traversal in the closeout records both cadences.
@@ -93,7 +93,7 @@ const BEATS: Beat[] = [
   { key: 'response', enter: 0.3, hold: 1.7 },
   // The curtain thickens to ~36% viewport depth across the full width.
   { key: 'curtain', enter: 0.0, hold: 1.4 },
-  // Narrative exit — the story ends the rain, not the falling physics.
+  // Narrative exit: the story ends the rain, not the falling physics.
   { key: 'curtainExit', enter: 0.35, hold: 0.0 },
   // Eight panic cards. Each arrives, then holds while the pile grows behind it.
   { key: 'card1', enter: 0.12, hold: 0.61 },
@@ -148,7 +148,7 @@ const rainStart =
 // ---------------------------------------------------------------------------
 // `.md` curtain. 16 authored columns that tile the full width edge to edge
 // (left/width are derived in CSS from --i and --cols, so narrower breakpoints
-// can drop to 10 or 6 columns and STILL tile edge to edge — no horizontal
+// can drop to 10 or 6 columns and STILL tile edge to edge: no horizontal
 // holes at any width). `depth` is the column's final bottom edge as a fraction
 // of viewport height; the spread of depths is what shreds the bottom edge, and
 // their mean (36.4% over all 16, 36.8% over the first 10, 35.3% over the first
@@ -197,7 +197,7 @@ const rainColumns: RainColumn[] = [
 ];
 
 // Long enough that at rest each column's TOP still overruns the viewport top by
-// a wide margin — that overrun is what makes the upper band a continuous
+// a wide margin: that overrun is what makes the upper band a continuous
 // curtain instead of a scattering with sky between the streams.
 const FILES_PER_COLUMN = 10;
 
@@ -326,7 +326,7 @@ const config = {
 <style define:vars={{ trackHeight: `${trackHeightVh}vh` }}>
   /* The sticky nav occupies real flow height at the top of the document, which
      pushed this section down by that much. At scrollY=0 the pinned stage was
-     therefore hanging ~69px below the fold and clipping the "Scroll down" cue —
+     therefore hanging ~69px below the fold and clipping the "Scroll down" cue :
      the one thing that must be legible on arrival. Pulling the section up by
      exactly the header's height starts the cinematic at the true top of the
      page and lets the floating nav pill sit over the black canvas, which is the
@@ -378,10 +378,10 @@ const config = {
     opacity: 0;
   }
 
-  /* Chat — black canvas, no window chrome ------------------------------ */
+  /* Chat: black canvas, no window chrome ------------------------------ */
   /* Anchored near the top rather than vertically centred, for two reasons: a
      real conversation grows downward from the top, and the curtain only
-     descends to ~36% of the viewport — with a centred column the falling files
+     descends to ~36% of the viewport: with a centred column the falling files
      would stop just above the answer instead of burying its opening lines. */
   .chat-layer {
     align-items: flex-start;
@@ -401,7 +401,7 @@ const config = {
     justify-content: flex-end;
   }
 
-  /* The setup, not the punchline — deliberately smaller than the cinematic
+  /* The setup, not the punchline: deliberately smaller than the cinematic
      statement scale. Geometry reuses the established `.user-bubble-mini` shape
      from src/pages/index.astro (Astro scopes styles per file, so the values are
      authored again here rather than inherited). */
@@ -457,7 +457,7 @@ const config = {
     margin-left: 2px;
   }
 
-  /* Readable body copy — the answer has to be legible before the curtain
+  /* Readable body copy: the answer has to be legible before the curtain
      starts covering it, so it is body size, not "demo screenshot" size. */
   .answer-row {
     font-size: clamp(1rem, 1.35vw, 1.32rem);
@@ -567,7 +567,7 @@ const config = {
     will-change: transform, opacity;
   }
 
-  /* Urgency by tone only — identical geometry and identical type scale. */
+  /* Urgency by tone only: identical geometry and identical type scale. */
   .panic-card.is-urgent {
     background: #e7cfcb;
     color: rgba(61, 15, 15, var(--card-text, 1));
@@ -619,7 +619,7 @@ const config = {
     color: rgba(244, 244, 242, 0.62);
   }
 
-  /* [logo] HERA on ONE horizontal row — logo left, word right. */
+  /* [logo] HERA on ONE horizontal row: logo left, word right. */
   .hera-brand {
     display: flex;
     align-items: center;
@@ -657,7 +657,7 @@ const config = {
     margin-top: clamp(4px, 1.4vh, 18px);
   }
 
-  /* Scroll affordance — unmistakable but quiet, and present at arrival --- */
+  /* Scroll affordance: unmistakable but quiet, and present at arrival --- */
   .opening-scroll-cue {
     position: absolute;
     left: 50%;
@@ -777,7 +777,7 @@ const config = {
     }
   }
 
-  /* Reduced motion — same story, discrete readable states. The scroll->state
+  /* Reduced motion: same story, discrete readable states. The scroll->state
      mapping is unchanged (so no copy is ever skipped); what changes is that
      opacities snap instead of crossfading, cards land without travel, and the
      curtain is placed statically at its resting depth instead of descending. */
@@ -870,7 +870,7 @@ const config = {
       return 0;
     };
 
-    // Fades in over the second half of its enter and then stays — used by the
+    // Fades in over the second half of its enter and then stays: used by the
     // elements that must remain fixed on screen (Introducing, the brand row).
     const persistOpacity = (p: number, beat: Beat) => {
       const s = beat[0];
@@ -1021,7 +1021,7 @@ const config = {
           return;
         }
         // Settled, and receding as newer cards land on top. Earlier cards never
-        // disappear — the accumulating pile is the point.
+        // disappear: the accumulating pile is the point.
         const d = reduced ? Math.round(rel) : rel;
         const dc = d > 7 ? 7 : d;
         const rot = (i % 2 === 0 ? -1 : 1) * (dc > 2 ? 2 : dc) * 0.9;

@@ -11,10 +11,10 @@ interface Props {
 
 const {
   title,
-  description = 'Favour Diokpo — AI Product Systems Designer. I make AI systems easier to trust, control, and actually use.',
+  description = 'Favour Diokpo: AI Product Systems Designer. I make AI systems easier to trust, control, and actually use.',
 } = Astro.props;
 
-const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.role}`;
+const pageTitle = title ? `${title}: ${site.name}` : `${site.name}: ${site.role}`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 const favicon = withBase('favicon.svg');
 ---

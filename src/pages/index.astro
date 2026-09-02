@@ -930,27 +930,27 @@ const discoveries = [
     to { opacity: 0; transform: scale(1.6); }
   }
 
-  /* 0 — messy thought */
+  /* 0: messy thought */
   .flow-stage[data-step="1"] .thought-a { left: 26%; top: 15%; transform: rotate(-1deg); }
   .flow-stage[data-step="1"] .thought-b { left: 26%; top: 31%; transform: rotate(1deg); }
   .flow-stage[data-step="1"] .thought-c { left: 26%; top: 48%; transform: rotate(-1deg); }
   .flow-stage[data-step="1"] .thought-d { left: 26%; top: 65%; transform: rotate(1deg); }
 
-  /* 2 — Objective */
+  /* 2: Objective */
   .flow-stage[data-step="2"] .thought-a { left: 29%; top: 15%; transform: rotate(-1deg); }
   .flow-stage[data-step="2"] .thought-b { left: 30.5%; top: 17.5%; transform: rotate(.5deg); }
   .flow-stage[data-step="2"] .thought-c { left: 32%; top: 20%; transform: rotate(1.5deg); }
   .flow-stage[data-step="2"] .thought-d { left: 33.5%; top: 22.5%; transform: rotate(2.5deg); }
   .flow-stage[data-step="2"] .objective-flow { opacity: 1; transform: translateY(0); }
 
-  /* 3 — Roadmap */
+  /* 3: Roadmap */
   .flow-stage[data-step="3"] .thought { top: -9%; opacity: .16; }
   .flow-stage[data-step="3"] .objective-flow { opacity: 0; transform: translateY(-100px); }
   .flow-stage[data-step="3"] .roadmap-zone,
   .flow-stage[data-step="4"] .roadmap-zone { opacity: 1; transform: translateY(0); }
   .flow-stage[data-step="3"] .flow-cursor { left: 53%; top: 60%; opacity: 1; }
 
-  /* 4 — Goal. The cursor clicks Plan project before the goal nodes are created. */
+  /* 4: Goal. The cursor clicks Plan project before the goal nodes are created. */
   .flow-stage[data-step="4"] .thought-cloud,
   .flow-stage[data-step="5"] .thought-cloud,
   .flow-stage[data-step="6"] .thought-cloud,
@@ -967,7 +967,7 @@ const discoveries = [
   }
   .flow-stage[data-step="4"].is-plan-clicked .flow-cursor { opacity: 0; }
 
-  /* 5 — Task */
+  /* 5: Task */
   .flow-stage[data-step="5"] .roadmap-zone { opacity: 1; transform: translateY(0); }
   .flow-stage[data-step="5"] .roadmap-first-control { opacity: 0; transform: translate(-50%, -50%) scale(.72); }
   .flow-stage[data-step="5"] .roadmap-nodes { opacity: 1; transform: translateY(0) scale(1); }
@@ -976,11 +976,11 @@ const discoveries = [
   .flow-stage[data-step="5"] .roadmap-zone.is-task-open { opacity: 0; transform: translateY(-25px) scale(.98); }
   .flow-stage[data-step="5"].is-task-open .flow-cursor { opacity: 0; }
 
-  /* 6 — Artifact waiting for review */
+  /* 6: Artifact waiting for review */
   .flow-stage[data-step="6"] .artifact-scene,
   .flow-stage[data-step="7"] .artifact-scene { opacity: 1; transform: translateY(0) scale(1); }
 
-  /* 7 — Approved transformation */
+  /* 7: Approved transformation */
   .flow-stage[data-step="7"] .flow-cursor { left: 78%; top: 77%; opacity: 1; }
   .flow-stage[data-step="7"].is-approved .review-chip {
     background: rgba(174,224,189,.15);
@@ -1222,7 +1222,7 @@ const discoveries = [
 
     // Only arm the video lock when the visitor actually crosses into it from
     // above (lastScrollY was still short of the threshold). A visitor who
-    // just unlocked out of 'video' mode is typically resting AT videoTop —
+    // just unlocked out of 'video' mode is typically resting AT videoTop :
     // checking "currently >= threshold" alone would immediately re-trap them
     // on their very next scroll-up tick.
     if (mode === 'intro' && !transitionRunning && lastScrollY < videoTop - 2 && y >= videoTop - 2) {

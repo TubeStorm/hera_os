@@ -1,5 +1,5 @@
 ---
-// Compact, on-brand cover for a project card — a small system motif per project
+// Compact, on-brand cover for a project card: a small system motif per project
 // instead of an empty screenshot box. Switches on slug.
 interface Props {
   slug: string;
@@ -12,7 +12,7 @@ const { slug, category } = Astro.props;
   class="relative aspect-[16/8] w-full overflow-hidden rounded-xl border border-line"
   style="background: radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--accent) 7%, var(--surface)) 0%, var(--surface) 62%);"
   role="img"
-  aria-label={`${category} — system motif`}
+  aria-label={`${category}: system motif`}
 >
   <div
     class="pointer-events-none absolute inset-0 opacity-[0.3]"
