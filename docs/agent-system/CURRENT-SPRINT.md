@@ -44,6 +44,13 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 ## Current active work
 
+**Reconcile HERA and Restore Production Parity (Slice 11A)** (2026-09-02) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
+
+The `main` branch containing the working HERA Early Access funnel was manually merged into `portfolio-week1`, resolving the git divergence without overwriting or losing any portfolio progress. The "Join early access" navigation link, inline trigger, and popup form now co-exist seamlessly with the newer portfolio structures (About page, Ubisoft Gallery, Re-authored hero). Automated visual verification confirmed the early-access popup opens correctly on local dev. Both branches have been pushed to GitHub.
+
+Closeout: `docs/closeout/2026-09-02_SLICE-11A-RECONCILE-HERA_CLOSEOUT.md`
+
+
 **RPM Chapter 01 Evidence + Editorial Pass (Slice 9)** (2026-09-02) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
 The first chapter of the RPM case study (`/rpm/model/`) in the private `favour-private-work` repository has been fully implemented. High-value evidence (legacy Position/Request UAT screenshots, SQA Request-only screenshot, and the Miro propagation map) were sourced and added. Two conceptual diagrams (Mental Model and Engineering Reality) were custom-built using HTML/Tailwind rather than hunting for screenshots. The narrative pacing was tightened to avoid repetitive case-study-template rhythms, and deliberate placeholders were kept for the Hero, False Start, and final Request screens. Status claim confirmed as "Shipped" per the SQA proof and Numa documentation. Browser-verified at desktop and mobile, and a production build passes perfectly.
@@ -86,6 +93,8 @@ Separately: **Favour reviews the Ubisoft Work gallery at `http://localhost:4323/
 
 Separately: **Favour reviews the re-authored homepage opening.**
 
+Separately: **Favour reviews the reconciled Early Access parity at `http://localhost:4327/hera_os/`** (start dev server with `npm run dev` from the `favour-ai-product-portfolio` repo). Check that the early access popup opens properly and portfolio navigation works.
+
 ---
 
 ## Blockers / decisions required from Favour
@@ -100,7 +109,7 @@ See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check 
 - RPM case study (`/work/ubisoft/rpm/`) is the next build slice — do NOT start until gallery foundation is reviewed.
 - Favour should resend the RPM resources ZIP and Numa evidence ZIP before the RPM case study begins.
 
-**4. Early Access branch convergence** — `main` has the shipped Early Access funnel; `portfolio-week1` doesn't yet. When/whether to bring them together is Favour's call.
+**4. Early Access branch convergence** — ✅ Resolved (2026-09-02). `main` has been merged into `portfolio-week1`, successfully reconciling the early-access funnel with the latest portfolio work. Both branches have been pushed. Waiting for Favour to review.
 
 ---
 
