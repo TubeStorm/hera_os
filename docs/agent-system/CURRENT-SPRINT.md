@@ -35,12 +35,20 @@ Scope is deliberately narrow: install the operating system, define the two new p
 | 6c | About Section 01 Slide 2 context-story and design-workflow repair | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 6d | About Section 01 Slide 5 visual implementation and review repair | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 7 | Polish Ubisoft Work page (Slice 3) / **Gallery Foundation** | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
+| 7b | RPM Story Architecture (Slice 8) | ✅ FAVOUR ACCEPTED / CLOSED |
+| 7c | **RPM Chapter 01 Evidence + Editorial Pass (Slice 9)** | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 8 | Verify all pages & build output (Slice 4) | ⬜ NOT STARTED |
 | 9 | Favour review, merge to main and publish (Slice 5) | ⬜ NOT STARTED |
 
 ---
 
 ## Current active work
+
+**RPM Chapter 01 Evidence + Editorial Pass (Slice 9)** (2026-09-02) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
+
+The first chapter of the RPM case study (`/rpm/model/`) in the private `favour-private-work` repository has been fully implemented. High-value evidence (legacy Position/Request UAT screenshots, SQA Request-only screenshot, and the Miro propagation map) were sourced and added. Two conceptual diagrams (Mental Model and Engineering Reality) were custom-built using HTML/Tailwind rather than hunting for screenshots. The narrative pacing was tightened to avoid repetitive case-study-template rhythms, and deliberate placeholders were kept for the Hero, False Start, and final Request screens. Status claim confirmed as "Shipped" per the SQA proof and Numa documentation. Browser-verified at desktop and mobile, and a production build passes perfectly.
+
+Closeout: `docs/closeout/2026-09-02_SLICE-9-RPM-CHAPTER-01_CLOSEOUT.md`
 
 **Ubisoft Work — Gallery Foundation (Slice 7)** (2026-09-02) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
@@ -60,16 +68,21 @@ Closeout: `docs/closeout/2026-08-29_SLICE-1-FIX-2_CLOSEOUT.md`
 
 ## Immediate next step
 
-**Favour reviews the Ubisoft Work gallery at `http://localhost:4323/hera_os/work/ubisoft/`** (start dev server with `npm run dev` from the repo — it opens at port 4321 or next available).
+**Favour reviews RPM Chapter 01 at `http://localhost:4321/rpm/model/`** (start dev server with `npm run dev` from the `favour-private-work` repository).
 
 Check:
-1. The gallery feels like seeing three pieces in an exhibition, not a case-study grid
-2. Each project card has the right title, problem sentence, skill tags, and CTA
-3. Click each "Read case study →" to confirm it lands on its own page (not the old grouped dump)
-4. Confirm mobile at 390px looks right (single-column)
-5. Confirm the nav "Ubisoft Work" pill is present and correct
+1. Do I understand RPM before product jargon appears?
+2. Do I understand the Position / Request problem visually?
+3. Is the false start memorable?
+4. Is Favour's product decision obvious?
+5. Is the Engineering constraint understandable to a non-engineer?
+6. Does the Miro evidence demonstrate scale without becoming noise?
+7. Does the result feel credible without fake metrics?
+8. Would I keep scrolling?
 
-Once gallery foundation is approved: **resend the RPM resources ZIP and Numa evidence ZIP**, then we begin RPM as its own design project — story architecture first, image shopping list second, then implementation.
+Once Chapter 01 visual language is locked in, we proceed to Chapter 02 and Chapter 03.
+
+Separately: **Favour reviews the Ubisoft Work gallery at `http://localhost:4323/hera_os/work/ubisoft/`** (start dev server with `npm run dev` from the `favour-ai-product-portfolio` repo).
 
 Separately: **Favour reviews the re-authored homepage opening.**
 
@@ -101,4 +114,4 @@ See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check 
 - Workflow repair (2026-08-07)
 - Slice 7 (Ubisoft gallery foundation): committed 2026-09-02 (hash `a45edc0`)
 
-*Last updated: 2026-09-02 — Slice 7 Ubisoft Work gallery foundation built and browser-verified. enterprise-tools grouped page killed; /work/ubisoft/ gallery + 3 individual case shells created; Famous replaces Capacity Governance as 3rd project; all inbound links updated; redirect in place. Waiting for Favour visual review.*
+*Last updated: 2026-09-02 — Slice 9 RPM Chapter 01 case study built and browser-verified in `favour-private-work`. Evidence placed, conceptual diagrams built in-code, editorial pass complete. Waiting for Favour visual review on `http://localhost:4321/rpm/model/`.*
