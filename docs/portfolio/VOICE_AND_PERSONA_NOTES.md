@@ -46,3 +46,29 @@ The rule set used for the re-architecture pass, and the receipts.
 - The Work page card descriptions are functional but not memorable.
 - Contact right column is untouched boilerplate.
 - The HERA "Why it matters for AI products" section could name competitors once the competitor screenshots exist (see docs/References/competitors/SCREENSHOT_BUCKET_LIST.md).
+
+## 2026-09-03 messaging direction: lead the work
+
+Raw lines from Favour:
+- "At least prove it isn't worth anything before you give up on it."
+- "Any idea can be the one."
+- "Stop cleaning up after your agents. Lead the work."
+
+Why this direction matters:
+- The strongest idea is not generic optimism about ideas. It is the shift from being an AI janitor to being the person directing the work.
+- "Stop cleaning up after your agents. Lead the work." is the sharpest product line because it names a real failure mode: AI produces work, then the human spends the rest of the time reconstructing context, fixing drift, chasing outputs, and deciding what happened.
+- "At least prove it isn't worth anything before you give up on it" gives HERA an emotional reason to exist. Ideas should get far enough into reality that a person can judge them on evidence, not abandon them because execution became chaotic.
+- "Any idea can be the one" is emotionally useful but too generic to carry the product by itself. It works better as supporting copy beside the proof/lead-work idea.
+
+Possible hierarchy for future HERA messaging tests:
+1. **Stop cleaning up after your agents. Lead the work.**
+2. HERA keeps the work coherent while agents execute, so you can direct decisions instead of reconstructing what happened.
+3. **At least prove it isn't worth anything before you give up on it.**
+
+Alternative tighter variants worth testing later:
+- "Before you give up on an idea, prove it wasn't worth building."
+- "Your job is to lead the work, not clean up after the AI."
+- "Let agents do the work. Keep the decisions."
+- "Ideas deserve a fair shot at becoming real."
+
+Do not ship these automatically. Treat this section as a messaging bank for the next HERA homepage/deep-dive copy pass and user testing.
