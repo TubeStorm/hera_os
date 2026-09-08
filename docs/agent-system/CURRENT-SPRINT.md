@@ -45,6 +45,12 @@ Scope is deliberately narrow: install the operating system, define the two new p
 
 ## Current active work
 
+**RPM Chapter 02 Visual Replacement + Shared Case Footer (Slice 12B)** (2026-09-08) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
+
+The visual assets for Chapter 02 (`/rpm/changing-need/`) in the private `favour-private-work` repository have been fully integrated. Temporary HTML/Tailwind diagrams were stripped out and replaced by Favour's finalized PNGs and MP4s. A full-screen zoom capability was added to all images natively using the existing `MediaFrame` component. The article-level contact card was extracted from `CaseStudyLayout` and converted into a proper editorial footer in `BaseLayout`, applying to all case pages but cleanly excluding the main `/rpm/` landing route. Mobile and desktop tests pass. Both repositories were synchronized and updated.
+
+Closeout: `docs/closeout/2026-09-08_SLICE-12B-RPM-CHAPTER-02_CLOSEOUT.md`
+
 **RPM Chapter 02 Evidence + Editorial Pass (Slice 12)** (2026-09-02) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
 The second chapter of the RPM case study (`/rpm/changing-need/`) has been implemented in the private `favour-private-work` repository. The narrative was condensed into 7 tight beats focusing on capacity changes, continuity over time, and the semantic difference between Split and Duplicate. High-value evidence for Need Overrides and Split toast feedback was sourced and added. Five custom HTML/Tailwind diagrams were built to cleanly explain scenarios (like the 100%→50%→20% capacity timeline and early-departure states) without cluttering the page with UI. Desktop, mobile, and production builds successfully verified. Both repositories synchronized and pushed to GitHub.
@@ -82,52 +88,40 @@ Closeout: `docs/closeout/2026-08-29_SLICE-1-FIX-2_CLOSEOUT.md`
 
 ## Immediate next step
 
-**Favour reviews RPM Chapter 01 at `http://localhost:4321/rpm/model/`** (start dev server with `npm run dev` from the `favour-private-work` repository).
+**Favour reviews RPM Chapter 02 Visual Updates at `http://localhost:4321/rpm/changing-need/`** (start dev server with `npm run dev` from the `favour-private-work` repository).
 
 Check:
-1. Do I understand RPM before product jargon appears?
-2. Do I understand the Position / Request problem visually?
-3. Is the false start memorable?
-4. Is Favour's product decision obvious?
-5. Is the Engineering constraint understandable to a non-engineer?
-6. Does the Miro evidence demonstrate scale without becoming noise?
-7. Does the result feel credible without fake metrics?
-8. Would I keep scrolling?
+1. Are the visual assets appropriately sized and clear?
+2. Does the image zoom (lightbox) work exactly as expected?
+3. Is the newly styled footer correctly placed and devoid of card treatments?
 
-Once Chapter 01 visual language is locked in, we proceed to Chapter 02 and Chapter 03.
-
-Separately: **Favour reviews the Ubisoft Work gallery at `http://localhost:4323/hera_os/work/ubisoft/`** (start dev server with `npm run dev` from the `favour-ai-product-portfolio` repo).
-
+Separately: **Favour reviews RPM Chapter 01 at `http://localhost:4321/rpm/model/`**
+Separately: **Favour reviews the Ubisoft Work gallery at `http://localhost:4323/hera_os/work/ubisoft/`**
 Separately: **Favour reviews the re-authored homepage opening.**
-
-Separately: **Favour reviews the reconciled Early Access parity at `http://localhost:4327/hera_os/`** (start dev server with `npm run dev` from the `favour-ai-product-portfolio` repo). Check that the early access popup opens properly and portfolio navigation works.
+Separately: **Favour reviews the reconciled Early Access parity at `http://localhost:4327/hera_os/`**
 
 ---
 
 ## Blockers / decisions required from Favour
 
-**1. HERA homepage opening sequence review** — gates Slice 2 of the homepage revamp (do not start it until this is reviewed, per the slice's own instruction). Re-authored per Fix 2 and independently verified 2026-08-29; **ready for review now**.
+**1. RPM Chapter 02 Visual Review** — Built and verified 2026-09-08. Waiting for Favour's visual review on `http://localhost:4321/rpm/changing-need/`. Once approved and the final "Findable after split" asset is supplied, Chapter 03 can begin.
 
-**2. About page visual review** — Required before Slice 3 begins.
-See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check and what to tell us.
+**2. HERA homepage opening sequence review** — gates Slice 2 of the homepage revamp.
 
-**3. Ubisoft Work Gallery Foundation (Slice 7)** — Built and verified 2026-09-02. Waiting for Favour's visual review before RPM case-study work begins. See `docs/closeout/2026-09-02_SLICE-7-UBISOFT-GALLERY-FOUNDATION_CLOSEOUT.md`.
-- Dev server running at `http://localhost:4323/hera_os/work/ubisoft/` when started.
-- RPM case study (`/work/ubisoft/rpm/`) is the next build slice — do NOT start until gallery foundation is reviewed.
-- Favour should resend the RPM resources ZIP and Numa evidence ZIP before the RPM case study begins.
+**3. About page visual review** — Required before Slice 3 begins.
 
-**4. Early Access branch convergence** — ✅ Resolved (2026-09-02). `main` has been merged into `portfolio-week1`, successfully reconciling the early-access funnel with the latest portfolio work. Both branches have been pushed. Waiting for Favour to review.
+**4. Ubisoft Work Gallery Foundation (Slice 7)** — Waiting for Favour's visual review.
+
+**5. Early Access branch convergence** — Waiting for Favour to review.
 
 ---
 
 ## Technical record
 
-**Working branch:** `portfolio-week1`
-**Repository:** `D:\Documents\favour-ai-product-portfolio`
+**Working branch:** `main` (portfolio), `master` (private)
+**Repositories:** `D:\Documents\favour-ai-product-portfolio`, `D:\Documents\favour-private-work`
 **Last meaningful commits:**
-- Slice 1 (nav): committed 2026-08-06
-- Slice 2 (About page): committed 2026-08-06 (hash `374017c`)
-- Workflow repair (2026-08-07)
 - Slice 7 (Ubisoft gallery foundation): committed 2026-09-02 (hash `a45edc0`)
+- Slice 12B (RPM Chapter 02 Visuals): committed 2026-09-08 (hash `ee59b67` on private repo)
 
-*Last updated: 2026-09-02 — Slice 9 RPM Chapter 01 case study built and browser-verified in `favour-private-work`. Evidence placed, conceptual diagrams built in-code, editorial pass complete. Waiting for Favour visual review on `http://localhost:4321/rpm/model/`.*
+*Last updated: 2026-09-08 — Slice 12B RPM Chapter 02 visual replacements and footer layout updates completed and browser-verified in `favour-private-work`. Waiting for Favour visual review on `http://localhost:4321/rpm/changing-need/`.*
