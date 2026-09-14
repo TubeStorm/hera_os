@@ -39,8 +39,8 @@ You can review the updated Chapter 02 of the RPM case study locally with all the
 
 ## What is not finished
 
-- The final visual for `Make the new Request findable after the split` was deferred and left untouched since the final asset is pending.
 - Awaiting Favour's visual review and approval.
+*(Update 2026-09-14: The final split visuals were supplied and integrated as a vertical before/after stack. This is now fully complete.)*
 
 ---
 
