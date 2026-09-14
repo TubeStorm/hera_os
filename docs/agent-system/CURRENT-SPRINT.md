@@ -104,7 +104,7 @@ Separately: **Favour reviews the reconciled Early Access parity at `http://local
 
 ## Blockers / decisions required from Favour
 
-**1. RPM Chapter 02 Visual Review** — Built and verified 2026-09-08. Waiting for Favour's visual review on `http://localhost:4321/rpm/changing-need/`. Once approved and the final "Findable after split" asset is supplied, Chapter 03 can begin.
+**1. RPM Chapter 02 Visual Review** — Built and verified 2026-09-08 (with final split visuals added 2026-09-14). Waiting for Favour's visual review on `http://localhost:4321/rpm/changing-need/`. Once approved, Chapter 03 can begin.
 
 **2. HERA homepage opening sequence review** — gates Slice 2 of the homepage revamp.
 
