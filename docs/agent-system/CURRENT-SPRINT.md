@@ -37,6 +37,7 @@ Scope is deliberately narrow: install the operating system, define the two new p
 | 7 | Polish Ubisoft Work page (Slice 3) / **Gallery Foundation** | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 7b | RPM Story Architecture (Slice 8) | ✅ FAVOUR ACCEPTED / CLOSED |
 | 7c | **RPM Chapter 01 Evidence + Editorial Pass (Slice 9)** | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
+| 7c.2 | **RPM Chapter 01 Interactive Request Prototype (Slice 9B)** | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 7d | **RPM Chapter 02 Evidence + Editorial Pass (Slice 12)** | 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW |
 | 8 | Verify all pages & build output (Slice 4) | ⬜ NOT STARTED |
 | 9 | Favour review, merge to main and publish (Slice 5) | ⬜ NOT STARTED |
@@ -44,6 +45,12 @@ Scope is deliberately narrow: install the operating system, define the two new p
 ---
 
 ## Current active work
+
+**RPM Chapter 01 Interactive Request Modal Prototype (Slice 9B)** (2026-09-15) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
+
+Adapted the Request Modal React prototype from Favour's vault (`8 What changed for the user request_modal.tsx`) and mounted it beneath Section 09 ("The result") in Chapter 01 (`/rpm/model/`). Removed simulation controls, locked the ruleset to Inside Canada (Large Studio), and implemented an auto-cycling 4-second lifecycle loop across all 5 Inside Canada request states (`Created`, `Submitted`, `Unassigned`, `Assigned`, `Rejected`). Added hover-pause to allow users to take manual control to explore fields, tabs, edit mode, and scheduled need overrides, resuming smoothly when the cursor exits. Placed inside a 100% wide breakout container with comfortable side margins, fully verified across 1920x1080 and 1280x800 desktop resolutions. Dev server active on port 4321.
+
+Closeout: `docs/closeout/2026-09-15_SLICE-9B-RPM-CHAPTER-01-INTERACTIVE-PROTOTYPE_CLOSEOUT.md`
 
 **RPM Chapter 02 Visual Replacement + Shared Case Footer (Slice 12B)** (2026-09-08) — 🟡 BUILT + VERIFIED — WAITING FOR FAVOUR REVIEW.
 
@@ -88,14 +95,15 @@ Closeout: `docs/closeout/2026-08-29_SLICE-1-FIX-2_CLOSEOUT.md`
 
 ## Immediate next step
 
-**Favour reviews RPM Chapter 02 Visual Updates at `http://localhost:4321/rpm/changing-need/`** (start dev server with `npm run dev` from the `favour-private-work` repository).
+**Favour reviews RPM Chapter 01 Interactive Prototype at `http://localhost:4321/rpm/model/`** (dev server already active on port 4321).
 
 Check:
-1. Are the visual assets appropriately sized and clear?
-2. Does the image zoom (lightbox) work exactly as expected?
-3. Is the newly styled footer correctly placed and devoid of card treatments?
+1. Is the prototype placement beneath Section 09 ("The result") effective?
+2. Does the width (100% wide with responsive side margins) scale cleanly on your screen?
+3. Does the 4-second auto-cycle pause on hover and resume on mouse leave?
+4. Do the Inside Canada states (`Created`, `Submitted`, `Unassigned`, `Assigned`, `Rejected`) adapt and respond cleanly to clicks?
 
-Separately: **Favour reviews RPM Chapter 01 at `http://localhost:4321/rpm/model/`**
+Separately: **Favour reviews RPM Chapter 02 Visual Updates at `http://localhost:4321/rpm/changing-need/`**
 Separately: **Favour reviews the Ubisoft Work gallery at `http://localhost:4323/hera_os/work/ubisoft/`**
 Separately: **Favour reviews the re-authored homepage opening.**
 Separately: **Favour reviews the reconciled Early Access parity at `http://localhost:4327/hera_os/`**
@@ -104,15 +112,17 @@ Separately: **Favour reviews the reconciled Early Access parity at `http://local
 
 ## Blockers / decisions required from Favour
 
-**1. RPM Chapter 02 Visual Review** — Built and verified 2026-09-08 (with final split visuals added 2026-09-14). Waiting for Favour's visual review on `http://localhost:4321/rpm/changing-need/`. Once approved, Chapter 03 can begin.
+**1. RPM Chapter 01 Interactive Prototype Review** — Built and verified 2026-09-15. Waiting for Favour's visual and interactive review on `http://localhost:4321/rpm/model/`.
 
-**2. HERA homepage opening sequence review** — gates Slice 2 of the homepage revamp.
+**2. RPM Chapter 02 Visual Review** — Built and verified 2026-09-08 (with final split visuals added 2026-09-14). Waiting for Favour's visual review on `http://localhost:4321/rpm/changing-need/`. Once approved, Chapter 03 can begin.
 
-**3. About page visual review** — Required before Slice 3 begins.
+**3. HERA homepage opening sequence review** — gates Slice 2 of the homepage revamp.
 
-**4. Ubisoft Work Gallery Foundation (Slice 7)** — Waiting for Favour's visual review.
+**4. About page visual review** — Required before Slice 3 begins.
 
-**5. Early Access branch convergence** — Waiting for Favour to review.
+**5. Ubisoft Work Gallery Foundation (Slice 7)** — Waiting for Favour's visual review.
+
+**6. Early Access branch convergence** — Waiting for Favour to review.
 
 ---
 
@@ -121,7 +131,8 @@ Separately: **Favour reviews the reconciled Early Access parity at `http://local
 **Working branch:** `main` (portfolio), `master` (private)
 **Repositories:** `D:\Documents\favour-ai-product-portfolio`, `D:\Documents\favour-private-work`
 **Last meaningful commits:**
-- Slice 7 (Ubisoft gallery foundation): committed 2026-09-02 (hash `a45edc0`)
+- Slice 9B (RPM Chapter 01 Interactive Prototype): committed 2026-09-15 (hash `affa101` on private repo)
 - Slice 12B (RPM Chapter 02 Visuals): committed 2026-09-08 (hash `ee59b67` on private repo)
+- Slice 7 (Ubisoft gallery foundation): committed 2026-09-02 (hash `a45edc0`)
 
-*Last updated: 2026-09-08 — Slice 12B RPM Chapter 02 visual replacements and footer layout updates completed and browser-verified in `favour-private-work`. Waiting for Favour visual review on `http://localhost:4321/rpm/changing-need/`.*
+*Last updated: 2026-09-15 — Slice 9B RPM Chapter 01 interactive RequestModal prototype built, browser-verified across desktop viewports, and running on dev server for review on `http://localhost:4321/rpm/model/`.*
