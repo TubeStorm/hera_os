@@ -135,4 +135,4 @@ Separately: **Favour reviews the reconciled Early Access parity at `http://local
 - Slice 12B (RPM Chapter 02 Visuals): committed 2026-09-08 (hash `ee59b67` on private repo)
 - Slice 7 (Ubisoft gallery foundation): committed 2026-09-02 (hash `a45edc0`)
 
-*Last updated: 2026-09-15 — Slice 9B RPM Chapter 01 interactive RequestModal prototype built, browser-verified across desktop viewports, and running on dev server for review on `http://localhost:4321/rpm/model/`.*
+*Last updated: 2026-09-15 — Slice 9B RPM Chapter 01 interactive RequestModal prototype built, browser-verified across desktop viewports, and running on dev server for review on `http://localhost:4321/rpm/model/`. RPM layout standardized: Chapter 1, 2, 3 footers and navigation updated with proper spacing, back buttons, and aligned Next buttons.*
