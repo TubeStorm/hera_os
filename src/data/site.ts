@@ -87,17 +87,12 @@ export const resumeAsset = {
 // twice in one pill (removed 2026-08-28).
 export const nav = [
   { label: 'Deep Dive', href: 'work/hera/' },
-  { label: 'Ubisoft Work', href: 'work/ubisoft/' },
-  { label: 'About', href: 'about/' },
-  { label: 'Lineage', href: 'work/lineage/' },
   { label: 'Contact', href: 'contact/' },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Projects — the architecture matches the resume's Selected Projects exactly:
-// HERA OS (flagship) + three separate Ubisoft projects. Each Ubisoft project
-// owns its own route under /work/ubisoft/<slug>/. The gallery at /work/ubisoft/
-// presents the three as an editorial selection, not a grouped case-study dump.
+// Projects — HERA OS only. The Ubisoft case studies live on the portfolio site,
+// not here, so this site carries the flagship product and nothing else.
 // ─────────────────────────────────────────────────────────────────────────────
 export type Project = {
   slug: string;
@@ -136,55 +131,9 @@ export const projects: Project[] = [
     designed: 'The whole product model: rooms and agents, a global assistant, goals and tasks, readable memory, an event ledger, and per-turn cost.',
     flagship: true,
   },
-  {
-    slug: 'rpm',
-    href: 'work/ubisoft/rpm/',
-    eyebrow: 'Ubisoft: enterprise systems',
-    title: 'RPM',
-    summary:
-      'Rebuilding how Ubisoft plans staffing. Experienced planners were being asked to manage two system concepts for one staffing need. I redesigned RPM around one Request-centered model while preserving the legacy Position structure Engineering still needed underneath.',
-    tags: ['Product-model thinking', 'System-wide propagation', 'Research synthesis'],
-    category: 'Enterprise planning tools',
-    status: 'Senior UX Specialist',
-    year: '2021 to Now',
-    proves: 'I can redesign foundational product models while preserving legacy engineering constraints.',
-    problem: 'Experienced planners were being asked to manage two system concepts for one staffing need.',
-    designed: 'I redesigned RPM around one Request-centered model while preserving the legacy Position structure Engineering still needed underneath. (Also standardized a 40+ modal audit as supporting work).',
-  },
-  {
-    slug: 'work-arrangement',
-    href: 'work/ubisoft/work-arrangement/',
-    eyebrow: 'Ubisoft: enterprise systems',
-    title: 'Work Arrangement — Approval Flows',
-    summary:
-      'The tool for formally requesting remote work supported only approve/reject; everything else happened over email. I defined five structured approval flows with accountability checkpoints.',
-    tags: ['Governance UX', 'Policy constraints'],
-    category: 'Approval workflows',
-    status: 'Senior UX Specialist',
-    year: '2021 to Now',
-    proves: 'I can design humane flows inside hard HR and legal constraints.',
-    problem: 'Approve/reject was the only path the tool knew; escalations, corrections, and send-backs lived in email or nowhere.',
-    designed: 'Five explicit flows, a required “did you speak with the employee?” checkpoint, and legally-vetted templated messaging.',
-  },
-  {
-    slug: 'famous',
-    href: 'work/ubisoft/famous/',
-    eyebrow: 'Ubisoft: enterprise systems',
-    title: 'Famous — Global Credits Governance',
-    summary:
-      'The platform that manages game credits for Ubisoft employees worldwide. A genuinely different enterprise problem: global policy consistency, multi-column data systems, and the UX of official recognition at scale.',
-    tags: ['Policy governance', 'Data systems'],
-    category: 'Credits & recognition',
-    status: 'Senior UX Specialist',
-    year: '2021 to Now',
-    proves: 'I can design policy-governance interfaces for global, high-stakes data at enterprise scale.',
-    problem: 'Game credits are official, legal, and permanent — and the system managing them had outgrown its original design.',
-    designed: 'Global policy governance flows and multi-column layout systems for a high-stakes credits platform.',
-  },
 ];
 
 export const flagship = projects.find((p) => p.flagship)!;
-export const ubisoftProjects = projects.filter((p) => !p.flagship);
 
 // Homepage proof strip — three things the site must prove quickly.
 export type Strength = { label: string; title: string; body: string; href?: string };
@@ -192,20 +141,13 @@ export const strengths: Strength[] = [
   {
     label: 'Flagship product',
     title: 'HERA OS',
-    body: 'A local-first AI workspace I designed and built — rooms, agents, tasks, memory, files, and cost as visible parts of one operating system.',
+    body: 'A local-first AI workspace I designed and built: rooms, agents, tasks, memory, files, and cost as visible parts of one operating system.',
     href: 'work/hera/',
-  },
-  {
-    label: 'Enterprise scale',
-    title: 'Ubisoft internal tools',
-    body: 'Three workstreams in planning, approvals, and governance for 1,000+ people — diagnosed with a 101-response survey, fixed with systemization.',
-    href: 'work/ubisoft/',
   },
   {
     label: 'Point of view',
     title: 'Make the work visible',
     body: 'AI should not feel like invisible magic. It should feel like a place you can understand, enter, and direct.',
-    href: 'about/',
   },
 ];
 

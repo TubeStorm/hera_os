@@ -123,4 +123,8 @@ See `docs/closeout/2026-08-07_SLICE-2-ABOUT-PAGE_CLOSEOUT.md` for what to check 
 - Workflow repair (2026-08-07)
 - Slice 7 (Ubisoft gallery foundation): committed 2026-09-02 (hash `a45edc0`)
 
+<<<<<<< Updated upstream
 *Last updated: 2026-09-02 — Slice 9 RPM Chapter 01 case study built and browser-verified in `favour-private-work`. Evidence placed, conceptual diagrams built in-code, editorial pass complete. Waiting for Favour visual review on `http://localhost:4321/rpm/model/`.*
+=======
+*Last updated: 2026-09-15 — RPM layout standardized. Chapter 1, 2, 3 footers and navigation updated with proper spacing, back buttons, and aligned Next buttons.*
+>>>>>>> Stashed changes
