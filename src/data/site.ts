@@ -73,14 +73,6 @@ export const confirmedContacts: ContactLink[] = Object.values(contact).filter(
   (c) => c.confirmed && c.href
 );
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Resume PDF — availability gate.
-// ─────────────────────────────────────────────────────────────────────────────
-export const resumeAsset = {
-  available: true, // Favour-Diokpo-Resume.pdf (2026) is present in /public/resume/
-  path: 'resume/Favour-Diokpo-Resume.pdf',
-};
-
 // Live navigation — 5-item portfolio nav. All routes are verified Astro pages.
 // Home is NOT listed here: the left-hand "[logo] HERA OS" brand in Nav.astro is
 // the Home link, so a separate "HERA OS" destination showed the same label
