@@ -1,7 +1,7 @@
 ---
 // Contact: the nav already said what this page is. Just the channels.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { contact, resumeAsset, withBase } from '../data/site';
+import { contact } from '../data/site';
 
 const channels = [
   { label: 'Email', href: contact.email.href, display: contact.email.display, external: false },
@@ -26,14 +26,6 @@ const channels = [
               <span class="text-lead font-medium text-ink transition-colors group-hover:text-muted">{c.display}</span>
             </a>
           ))
-        }
-        {
-          resumeAsset.available && (
-            <a href={withBase(resumeAsset.path)} download class="group flex items-baseline justify-between gap-6 py-6">
-              <span class="text-xs uppercase tracking-[0.14em] text-faint">Resume</span>
-              <span class="text-lead font-medium text-ink transition-colors group-hover:text-muted">Download PDF</span>
-            </a>
-          )
         }
       </div>
     </div>
