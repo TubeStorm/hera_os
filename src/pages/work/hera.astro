@@ -3,6 +3,7 @@
 // Claims follow YC-FOUNDER-EVIDENCE-LEDGER: nothing unverified is stated as current.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MediaFrame from '../../components/MediaFrame.astro';
+import HeraStoryCarousel from '../../components/HeraStoryCarousel.astro';
 import { withBase } from '../../data/site';
 import { heraMedia } from '../../data/lineage';
 
@@ -196,6 +197,9 @@ const notYet = ['Public users; moderated founder tests are being scheduled', 'ma
       <MediaFrame video={heraMedia.workedForShot.video} class="reveal mt-8 aspect-[2/1]" />
     </div>
   </section>
+
+  <!-- The HERA story: five-slide carousel moved from the portfolio About page -->
+  <HeraStoryCarousel />
 
   <!-- Current truth -->
   <section class="section border-t border-line">

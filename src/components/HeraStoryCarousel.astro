@@ -1,12 +1,17 @@
 ---
-/* Manual carousel. No scroll-driven state. */
+/* HERA story carousel — moved from the private portfolio's About page
+   (2026-11-19). All five slides, copy, visuals and interactions are
+   unchanged; only the section header became props. Manual carousel. */
+interface Props {
+  id?: string;
+  title?: string;
+}
+const { id = 'hera-story', title = 'How the problem changed the design' } = Astro.props;
 ---
-
-<section id="problem-finding-story" class="section border-t border-line">
+<section id={id} class="section border-t border-line">
   <div class="container-page">
     <div class="reveal max-w-[62rem]">
-      <p class="eyebrow">01</p>
-      <h2 class="mt-4 text-h2 font-semibold tracking-tight">How do you find the real problem?</h2>
+      <h2 class="text-h2 font-semibold tracking-tight">{title}</h2>
       <div class="prose-hera mt-6 max-w-[50rem]">
         <p>
           I usually start by asking one thing:
@@ -14,7 +19,6 @@
         </p>
       </div>
     </div>
-
     <div class="story-carousel reveal" data-story-carousel tabindex="0">
       <button class="nav-arrow prev" type="button" data-prev aria-label="Previous idea" hidden>←</button>
 
